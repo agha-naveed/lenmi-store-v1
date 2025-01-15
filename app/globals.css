@@ -27,3 +27,42 @@
     font-family: 'opensans-extraBold';
     src: url("../public/fonts/OpenSans-ExtraBold.ttf");
 }
+
+
+.login-signup-popup::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0; 
+    height: 0; 
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid rgb(255, 255, 255);
+  }
+  .product-card:hover button {
+    display: flex;
+    opacity: 1;
+  }
+  
+  .transition_1 {
+    transition: 0.08s ease-out;
+  }
+  
+  .transition_2 {
+    transition: 0.2s ease-out;
+  }
+  
+  
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  /* Remove arrows in Firefox */
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+  
