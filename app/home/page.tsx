@@ -1,9 +1,10 @@
 import React from 'react'
 import ProductCard from '../components/ProductCard'
-import Carousel from '../components/Carousel'
-
+import Carousel from '@/components/Carousel'
 
 export default function page() {
+
+
   return (
     <div className='w-full h-full'>
       <Carousel />
