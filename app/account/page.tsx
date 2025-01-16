@@ -13,7 +13,7 @@ interface IFormInputs {
     lastName: string;
     password: string;
     email: string;
-  }
+}
 
 
 export default function Login() {
@@ -45,7 +45,7 @@ export default function Login() {
               
               <h2 className='text-4xl p-6 font-muli-bold text-center'>Login</h2>
               
-              <Form action='/' onSubmit={handleSubmit(onSubmit)} className='grid gap-2 font-muli-regular border border-gray-400 p-5 rounded-md' formMethod='post'>
+              <Form action='' onSubmit={handleSubmit(onSubmit)} className='grid gap-2 font-muli-regular border border-gray-400 p-5 rounded-md' formMethod='post'>
                   
                 <div className='grid'>
                   <label htmlFor="">Email</label>
