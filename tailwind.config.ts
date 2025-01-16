@@ -9,12 +9,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        "opensans-light": ["opensans-light"],
-        "opensans-regular": ["opensans-regular"],
-        "opensans-medium": ["opensans-medium"],
-        "opensans-semibold": ["opensans-semibold"],
-        "opensans-bold": ["opensans-bold"],
-        "opensans-extraBold": ["opensans-extraBold"]
+        opensans: ['var(--font-opensans)']
       },
       colors: {
         orangeClr: "#f08a06",
