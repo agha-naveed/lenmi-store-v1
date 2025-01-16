@@ -1,7 +1,7 @@
 import React from 'react'
-import ProductCard from '../components/ProductCard'
+import ProductCard from '../components/products-cards/ProductCard'
 import Carousel from '@/components/Carousel'
-import TrendingProducts from '../components/TrendingProducts'
+import TrendingProducts from '../components/products-cards/TrendingProducts'
 export default function page() {
 
 
