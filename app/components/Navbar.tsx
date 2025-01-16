@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { FiSearch } from "react-icons/fi";
 import { TiShoppingCart } from "react-icons/ti";
 import { MdOutlineAccountCircle, MdOutlineHelpOutline } from "react-icons/md";
-import logo from '../assets/img/logo.webp'
+import logo from '@/images/logo.webp'
 import { FaBars } from "react-icons/fa6";
 import { GoChecklist } from "react-icons/go";
 import { TbMessageDots } from "react-icons/tb";
