@@ -2,6 +2,14 @@ import type { Metadata } from "next";
 import logo from '@/images/logo.png'
 import Image from "next/image";
 
+
+
+export const metadata: Metadata = {
+  title: "Lenmi Store Online Shopping Platform",
+  description: "Get Whatever you want!",
+};
+
+
 export default function AccountLayout({
   children,
 }: Readonly<{
