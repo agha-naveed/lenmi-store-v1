@@ -16,6 +16,7 @@ export default {
   		},
   		colors: {
   			orangeClr: '#f08a06',
+			lightPeachClr: "rgba(255, 196, 0, 0.151)",
   			lightGray: 'rgb(241, 241, 241)',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',

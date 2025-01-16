@@ -2,8 +2,10 @@ import React from 'react'
 import ProductCard from '../components/products-cards/ProductCard'
 import Carousel from '@/components/Carousel'
 import TrendingProducts from '../components/products-cards/TrendingProducts'
-export default function page() {
+import HorizontalCard from '@/components/products-cards/HorizontalCard'
 
+
+export default function page() {
 
   return (
     <div className='w-full h-auto'>
@@ -11,7 +13,10 @@ export default function page() {
         <Carousel />
       </div>
       <div className="container mx-auto py-5">
-        <TrendingProducts />
+        <div className='flex'>
+          <TrendingProducts />
+          <HorizontalCard />
+        </div>
         
         <div className="flex flex-wrap gap-5">
           <ProductCard />

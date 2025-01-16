@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function TrendingProducts() {
   return (
@@ -15,7 +16,7 @@ export default function TrendingProducts() {
                     
                     <Link href={""}>
                         <div className='w-full h-[260px] rounded-[22px] overflow-hidden'>
-                            <img src="https://www.space-tech.co/cdn/shop/files/LE-30-Lifestyle_c501ee74-78ea-4157-8b02-e723ca8eab44_2048x2048.jpg?v=1735718661" alt="" className='w-full h-full object-cover' />
+                            <Image width={200} height={200} src="https://www.space-tech.co/cdn/shop/files/LE-30-Lifestyle_c501ee74-78ea-4157-8b02-e723ca8eab44_2048x2048.jpg?v=1735718661" alt="" className='w-full h-full object-cover' />
                         </div>
                         <span className='text-black w-full flex gap-[2px] py-2 items-end justify-center font-opensans font-medium'>
                             PKR
@@ -28,7 +29,7 @@ export default function TrendingProducts() {
                         
                         <Link href={""}>
                             <div className='w-full h-[128px] rounded-[20px] overflow-hidden'>
-                                <img src="https://www.space-tech.co/cdn/shop/files/LE-30-Lifestyle_c501ee74-78ea-4157-8b02-e723ca8eab44_2048x2048.jpg?v=1735718661" alt="" className='w-full h-full object-cover' />
+                                <Image width={200} height={200} src="https://www.space-tech.co/cdn/shop/files/LE-30-Lifestyle_c501ee74-78ea-4157-8b02-e723ca8eab44_2048x2048.jpg?v=1735718661" alt="" className='w-full h-full object-cover' />
                             </div>
                             <span className='text-black w-full flex gap-[2px] py-2 items-end justify-center text-[14px] font-opensans font-medium'>
                                 PKR
@@ -39,7 +40,7 @@ export default function TrendingProducts() {
 
                         <Link href={""}>
                             <div className='w-full h-[128px] rounded-[20px] overflow-hidden'>
-                                <img src="https://www.space-tech.co/cdn/shop/files/LE-30-Lifestyle_c501ee74-78ea-4157-8b02-e723ca8eab44_2048x2048.jpg?v=1735718661" alt="" className='w-full h-full object-cover' />
+                                <Image width={200} height={200} src="https://www.space-tech.co/cdn/shop/files/LE-30-Lifestyle_c501ee74-78ea-4157-8b02-e723ca8eab44_2048x2048.jpg?v=1735718661" alt="" className='w-full h-full object-cover' />
                             </div>
                             <span className='text-black w-full flex gap-[2px] py-2 items-end justify-center text-[14px] font-opensans font-medium'>
                                 PKR
