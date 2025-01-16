@@ -1,10 +1,11 @@
+"use client"
 import React, { useInsertionEffect, useState } from 'react'
 import Link from 'next/link';
 import Image from 'next/image';
 import { FiSearch } from "react-icons/fi";
 import { TiShoppingCart } from "react-icons/ti";
 import { MdOutlineAccountCircle, MdOutlineHelpOutline } from "react-icons/md";
-import logo from '@/images/logo.webp'
+import logo from '@/images/logo.png'
 import { FaBars } from "react-icons/fa6";
 import { GoChecklist } from "react-icons/go";
 import { TbMessageDots } from "react-icons/tb";
@@ -39,7 +40,7 @@ export default function Navbar() {
             <div className="container mx-auto">
                 <div className='flex w-full justify-between md:px-0 px-3'>
                     <Link href="/">
-                        <Image decoding='async' className='md:w-40 w-32' src={logo} alt="Lenmi Store Logo" />
+                        <Image decoding='async' className='md:w-40 w-32' src={logo} width={200} height={200} alt="Lenmi Store Logo" />
                     </Link>
                     <div className='md:flex hidden w-1/2'>
                         <input type="text" placeholder='What are you looking for?' className='pl-3 pr-[53px] h-[44px] w-full rounded-md outline-none font-opensans' />
