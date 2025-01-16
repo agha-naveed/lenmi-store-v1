@@ -22,11 +22,11 @@ export default function AccountLayout({
   return (
     <html lang="en">
           <body className={`${opensans.variable} antialiased`}>
-            <div className='md:flex grid w-full min-h-screen h-full'>
+            <div className='flex md:flex-row flex-col md:gap-0 gap-20 w-full min-h-screen h-full'>
               <div className='md:w-1/2 w-full md:min-h-screen h-32 bg-slate-800 grid justify-center content-center'>
                 <Image src={logo} className='w-44' alt="Lenmi Store Logo" />
               </div>
-              <div className="md:w-1/2 w-full p-4">
+              <div className="md:w-full p-4">
                 {children}
               </div>
       
