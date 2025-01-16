@@ -29,7 +29,7 @@ export default function Login() {
         )
 
         if(res.data.error) {
-            alert("Email or Password is Incorrect")
+          alert("Email or Password is Incorrect")
         }
         else {
             setTimeout(() => {
