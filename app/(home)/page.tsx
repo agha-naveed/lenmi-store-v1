@@ -16,9 +16,15 @@ export default function page() {
       <div className="container mx-auto">
         
         <div className='py-5'>
-          <div className='flex'>
+          <div className='flex gap-2 justify-around flex-wrap'>
             <TrendingProducts />
-            <HorizontalCard />
+
+            <div className='grid'>
+              <HorizontalCard />
+              <HorizontalCard />
+            </div>
+
+            <TrendingProducts />
           </div>
           
           <div className="flex flex-wrap gap-5">

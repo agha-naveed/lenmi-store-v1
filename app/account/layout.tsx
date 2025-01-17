@@ -29,11 +29,7 @@ export default function AccountLayout({
               <div className="md:w-full p-4">
                 {children}
               </div>
-      
             </div>
-
-            {children}
-            
           </body>
     </html>
   );

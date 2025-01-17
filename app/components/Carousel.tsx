@@ -27,13 +27,13 @@ export default function CarouselWithImages() {
       <CarouselContent className='w-[100vw]'>
         {images.map((image, index) => (
           <CarouselItem key={index}>
-            <div className="p-1 w-[98.9vw]">
+            <div className="p-1 home-carousel  w-[98.9vw]">
               <Card>
                 <CardContent className="flex h-[300px] w-full aspect-square object-cover items-center justify-center !p-0">
                   <img 
                     src={image}
                     alt={`Image ${index + 1}`} 
-                    className="object-cover w-full h-full rounded-lg" 
+                    className="object-cover w-[1500px] h-full rounded-lg" 
                   />
                 </CardContent>
               </Card>
