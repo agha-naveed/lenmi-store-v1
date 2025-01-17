@@ -54,7 +54,7 @@ export default function Navbar() {
                                 <MdOutlineAccountCircle className='account text-[38px]' title='Account' />
                                 <div className='grid content-center leading-[17px]'>
                                     <span className='text-[13px] font-opensans'>Welcome</span>
-                                    <span className='font-opensans text-[14px]'>asd{/* {message.first_name ?? "Login / Signup"} */}</span>
+                                    <span className='font-opensans font-semibold text-[14px]'>asd{/* {message.first_name ?? "Login / Signup"} */}</span>
                                 </div>
                             </div>
                             
@@ -104,9 +104,9 @@ export default function Navbar() {
                                 <TiShoppingCart className='cursor-pointer text-[38px]' title='Cart' />
                                 <div className='grid content-center leading-[17px]'>
                                     <span className='text-[12.5px] text-black font-opensans  bg-white rounded-xl w-[26px] h-[14px] text-center'>
-                                        <p className='relative top-[-2px]'>0</p>
+                                        <p className='relative top-[-2px] font-opensans font-bold'>0</p>
                                     </span>
-                                    <span className='font-opensans  text-[14px]'>Cart</span>
+                                    <span className='font-opensans font-semibold text-[14px]'>Cart</span>
                                 </div>
                             </div>
                         </div>
@@ -115,8 +115,8 @@ export default function Navbar() {
                 </div>
 
 
-                <div className='md:hidden flex py-5 px-3'>
-                    <FaBars className='text-white text-[38px] relative left-1' />
+                <div className='md:hidden flex py-5 px-3 items-center'>
+                    <FaBars className='text-white text-[34px] relative left-1' />
                     <div className='flex w-full'>
                         <input type="text" placeholder='What are you looking for?' className='relative left-7 pl-3 pr-[53px] h-[44px] w-full rounded-md outline-none font-opensans ' />
                         <FiSearch title='Search' className='text-xl cursor-pointer p-2 top-[2px] rounded-md w-11 h-10 text-white bg-slate-800 relative -left-4' />
