@@ -21,10 +21,13 @@ export default function page() {
 
             <div className='grid gap-2'>
               <HorizontalCard />
-              <HorizontalCard />
+              <span className='sm:block hidden'>
+                <HorizontalCard />
+              </span>
             </div>
-
-            <TrendingProducts />
+            <span className='sm:block hidden'>
+              <TrendingProducts />
+            </span>
           </div>
           
           <div className="flex flex-wrap gap-5">

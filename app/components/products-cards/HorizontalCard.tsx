@@ -4,7 +4,7 @@ import React from 'react'
 
 export default function HorizontalCard() {
     return (
-        <div className='sm:w-[500px] w-fit h-[300px] bg-lightPeachClr rounded-[22px] sm:p-8 p-4 flex flex-col gap-5'>
+        <div className='sm:w-[500px] sm:h-fit w-fit h-[260px] bg-lightPeachClr rounded-[22px] sm:p-8 p-5 flex flex-col gap-5'>
             <div className='text-start w-full tracking-[-1px]'>
                 <h5 className='text-[18px] text-left w-full font-opensans font-semibold text-slate-800'>Hot Deals</h5>
                 <h3 className='text-2xl text-left w-full font-opensans font-bold text-orangeC'>3 from <span className='text-orangeClr'> US $2.99</span></h3>
