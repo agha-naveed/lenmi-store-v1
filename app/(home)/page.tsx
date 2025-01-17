@@ -19,7 +19,7 @@ export default function page() {
           <div className='flex gap-2 justify-around flex-wrap'>
             <TrendingProducts />
 
-            <div className='grid'>
+            <div className='grid gap-2'>
               <HorizontalCard />
               <HorizontalCard />
             </div>
