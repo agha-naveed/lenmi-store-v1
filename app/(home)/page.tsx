@@ -12,16 +12,20 @@ export default function page() {
       <div className='md:block hidden'>
         <Carousel />
       </div>
-      <div className="container mx-auto py-5">
-        <div className='flex'>
-          <TrendingProducts />
-          <HorizontalCard />
-        </div>
+
+      <div className="container mx-auto">
         
-        <div className="flex flex-wrap gap-5">
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
+        <div className='py-5'>
+          <div className='flex'>
+            <TrendingProducts />
+            <HorizontalCard />
+          </div>
+          
+          <div className="flex flex-wrap gap-5">
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+          </div>
         </div>
       </div>
     </div>
