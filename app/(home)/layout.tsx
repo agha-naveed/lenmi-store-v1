@@ -13,18 +13,18 @@ export const metadata: Metadata = {
   description: "Get Whatever you want!",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+export default function RootLayout(props: {
   children: React.ReactNode;
-}>) {
+  modal: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <body
         className={`${opensans.variable} antialiased`}
       >
         <Navbar />
-        {children}
+        {props.children}
+        {props.modal}
       </body>
     </html>
   );
