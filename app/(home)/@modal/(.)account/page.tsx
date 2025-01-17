@@ -6,6 +6,7 @@ import axios from 'axios'
 import Link from 'next/link'
 import { IoMdCloseCircle } from "react-icons/io"
 import { useRouter } from 'next/navigation'
+import Form from 'next/form'
 
 interface IFormInputs {
   firstName: string;
@@ -48,7 +49,7 @@ export default function Login() {
             <IoMdCloseCircle title='Close' className='text-[26px] cursor-pointer' />
           </button>
 
-          <form onSubmit={() => handleSubmit(onSubmit)} className='grid bg-white gap-2 font-muli-regular border border-gray-400 pt-10 p-5 rounded-md'>
+          <Form action={""} onSubmit={() => handleSubmit(onSubmit)} className='grid bg-white gap-2 font-muli-regular border border-gray-400 pt-10 p-5 rounded-md'>
             <h2 className='text-3xl font-opensans text-center font-semibold'>Login</h2>
 
             <div className='grid'>
@@ -84,7 +85,7 @@ export default function Login() {
               Create an account?{" "}
               <Link href="/account/signup" className='text-red-900 hover:underline'>Signup</Link>
             </p>
-          </form>
+          </Form>
         </div>
       </div>
   )
