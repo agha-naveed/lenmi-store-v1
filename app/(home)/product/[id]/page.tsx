@@ -9,6 +9,7 @@ import Link from 'next/link';
 
 export default function page() {
 
+  const [quantity, setQuantity] = useState(1)
   const [zoom, setZoom] = useState<number>(1);
   const [offset, setOffset] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 
@@ -31,6 +32,7 @@ export default function page() {
     setZoom(1);
     setOffset({ x: 0, y: 0 });
   };
+
 
   return (
     <section className='container mx-auto grid grid-auto-auto py-10 justify-between'>
@@ -133,9 +135,9 @@ export default function page() {
         <div className='px-4 py-3'>
           <span className='font-bold'>Quantity</span>
           <div>
-            <button className='px-1 py-[6px] w-9 text-[22px]'>-</button>
-            <input className='p-1 font-medium text-center' type="number" placeholder='1' min={1} max={10} />
-            <button className='p-[6px] w-9 text-[22px]'>+</button>
+            <button className='px-1 py-[6px] w-9 text-[22px]' onClick={() => quantity > 1 ? setQuantity(quantity - 1) : null}>-</button>
+            <input className='p-1 font-medium text-center' type="number" placeholder='1' readOnly value={quantity} min={1} max={10} />
+            <button className='p-[6px] w-9 text-[22px]' onClick={() => setQuantity(quantity + 1)}>+</button>
           </div>
         </div>
         <div className='grid p-4 gap-2'>
