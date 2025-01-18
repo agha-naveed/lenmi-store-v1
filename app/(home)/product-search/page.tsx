@@ -3,13 +3,20 @@
 import React from 'react'
 import { FaRegStar } from "react-icons/fa";
 import ProductCard from '@/app/components/products-cards/ProductCard';
+import { CiFilter } from "react-icons/ci";
+
 
 export default function page() {
   return (
     <div>
         <div className="container mx-auto py-3 md:flex grid gap-14 font-opensans">
             
-            <aside className='p-3 md:w-[250px] w-full flex flex-row md:flex-col relative z-20'>
+            <button className='md:hidden flex gap-1'>
+                <CiFilter className='text-2xl' />
+                <span>Filter</span>
+            </button>
+
+            <aside className='p-3 md:w-[250px] w-full md:h-auto min-h-screen flex flex-col md:relative fixed bg-white z-20'>
 
                 <div className='grid gap-1 py-5 border-t-2'>
                     <span className='font-semibold'>Category</span>

@@ -9,8 +9,7 @@ import logo from '@/images/logo.png'
 import { FaBars } from "react-icons/fa6";
 import { GoChecklist } from "react-icons/go";
 import { TbMessageDots } from "react-icons/tb";
-import { IoSettingsOutline } from "react-icons/io5";
-import axios from 'axios';
+import { IoSettingsOutline } from "react-icons/io5"
 
 
 export default function Navbar() {
