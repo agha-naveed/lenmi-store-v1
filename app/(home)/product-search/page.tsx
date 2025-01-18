@@ -12,13 +12,16 @@ export default function page() {
     <div>
         <div className="container mx-auto py-3 md:flex grid gap-14 font-opensans">
             
-            <button className='md:hidden flex gap-1'>
+            <button onClick={() => setToggleFilter(!toggleFilter)} className='md:hidden flex gap-1'>
                 <CiFilter className='text-2xl' />
                 <span>Filter</span>
             </button>
+            
 
-            <aside className='p-3 md:w-[250px] w-full md:h-auto min-h-screen flex flex-col md:relative fixed top-0 bg-white z-30'>
-                <IoMdCloseCircle className='absolute right-2 md:hidden block text-3xl' />
+                <aside className={`p-3 md:w-[250px] w-full md:h-auto transition-all ${toggleFilter ? "left-0" : "left-[-100%]"}  min-h-screen flex flex-col md:relative md:left-0 fixed top-0 bg-white z-30`}>
+                
+                <IoMdCloseCircle onClick={() => setToggleFilter(!toggleFilter)} className='absolute right-2 md:hidden block text-3xl' />
+                
                 <div className='grid gap-1 py-5 border-t-2'>
                     <span className='font-semibold'>Category</span>
                     <select name="" id="" className='bg-transparent cursor-pointer border-none outline-none text-gray-600 text-[14px]'>
@@ -103,7 +106,8 @@ export default function page() {
                     </div>
                 </div>
 
-            </aside>
+                </aside>
+                
 
             <main>
                 <div className='product-search-items flex flex-wrap'>
