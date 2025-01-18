@@ -12,35 +12,32 @@ export default function page() {
   const [zoom, setZoom] = useState<number>(1);
   const [offset, setOffset] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 
-  const imageRef = useRef<HTMLImageElement>(null); // Reference to the image element
+  const imageRef = useRef<HTMLImageElement>(null);
 
 
   const handleMouseMove = (event: any) => {
-    if (!imageRef.current) return; // Check if the image is referenced
+    if (!imageRef.current) return;
 
-    const rect = imageRef.current.getBoundingClientRect(); // Get the image bounds
-    const mouseX = event.clientX - rect.left; // Mouse X relative to the image
-    const mouseY = event.clientY - rect.top; // Mouse Y relative to the image
+    const rect = imageRef.current.getBoundingClientRect();
+    const mouseX = event.clientX - rect.left;
+    const mouseY = event.clientY - rect.top;
+    const zoomLevel = 1.3;
 
-    // Calculate zoom level based on mouse position
-    const zoomLevel = 1 + (mouseX + mouseY) / 500; // Adjust 500 for zoom sensitivity
-
-    // Set the new zoom level and offsets for centering the zoom
     setZoom(zoomLevel);
     setOffset({ x: mouseX, y: mouseY });
   };
 
   const handleMouseLeave = () => {
-    setZoom(1); // Reset zoom when the mouse leaves the image
-    setOffset({ x: 0, y: 0 }); // Reset offset
+    setZoom(1);
+    setOffset({ x: 0, y: 0 });
   };
 
   return (
     <section className='container mx-auto grid grid-auto-auto py-10 justify-between'>
       <div className='flex w-full gap-1'>
         
-        <div onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}   className='w-[400px] h-[400px] p-3 overflow-hidden'>
-          <Image ref={imageRef} src="https://m.media-amazon.com/images/I/71zwwEe2nLL._AC_SL1500_.jpg" alt='Jacket' style={{transform: `scale($zoom)`, transformOrigin: `${offset.x}px ${offset.y}px`, transition: 'tranform 0.1s ease-out'}} width={200} height={200} className='w-full h-full object-contain' />
+        <div onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} className='w-[400px] h-[400px] p-3 overflow-hidden cursor-pointer'>
+          <Image ref={imageRef} src="https://m.media-amazon.com/images/I/71zwwEe2nLL._AC_SL1500_.jpg" alt='Jacket' style={{transform: `scale(${zoom})`, transformOrigin: `${offset.x}px ${offset.y}px`, transition: 'tranform 0.2s ease-out'}} width={200} height={200} className='w-full h-full object-contain' />
         </div>
 
         <div className='w-fit p-6 h-auto'>
@@ -50,7 +47,7 @@ export default function page() {
             <div className='flex gap-3'>
               <div className='flex gap-1 items-center'>
                 <span>Rating:</span>
-                <span className='flex text-orange-500'>
+                <span className='flex text-orangeClr'>
                   <GoStarFill />
                   <GoStarFill />
                   <GoStarFill />
