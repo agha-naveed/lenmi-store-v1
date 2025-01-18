@@ -114,7 +114,7 @@ export default function page() {
         </div>
         <div className='grid px-4 gap-2'>
           <button className='h-11 bg-slate-800 transition-all hover:bg-slate-900 text-white font-bold rounded-3xl'>Buy Now</button>
-          <button className='h-11 bg-slate-300 text-slate-800 transition-all hover:bg-slate-800 hover:text-slate-300 font-bold rounded-3xl'>Add to cart</button>
+          <button className='h-11 bg-slate-300 text-slate-800 transition-all hover:border hover:border-slate-800 hover:bg-transparent font-bold rounded-3xl'>Add to cart</button>
         </div>
 
       </div>
