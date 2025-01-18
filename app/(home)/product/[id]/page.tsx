@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import { GoStarFill } from "react-icons/go";
 import { MdLocationOn } from "react-icons/md";
+import Link from 'next/link';
 
 export default function page() {
   return (
@@ -67,7 +68,7 @@ export default function page() {
       </div>
 
 
-      <div className='font-opensans w-[300px] border border-black rounded-lg'>
+      <div className='font-opensans w-[320px] border border-black rounded-lg'>
         <div className='flex items-center justify-between  py-3 px-4'>
           <span className='font-semibold text-[15px]'>Ship to</span>
           <span className='flex gap-[2px] items-center font-medium text-[15px]'>
@@ -76,8 +77,19 @@ export default function page() {
           </span>
         </div>
 
-        <div className='w-full text-center h-20 bg-gradient-to-t from-transparent to-lightPeachClr'>
+        <div className='w-full text-center p-2 h-20 bg-gradient-to-t from-transparent to-lightPeachClr'>
           <span className='text-[15px] font-bold tracking-[-1px]'>Lenmi Store Commitment</span>
+        </div>
+
+        <div className='px-6'>
+          <Link href={""} className='grid'>
+            <span className='font-bold text-[15px] tracking-[-1px]'>
+              Free Shipping
+            </span>
+            <span className='text-gray-600'>
+              Delivery: <span className='text-black font-bold'>Aug 29 - Sep 04</span>
+            </span>
+          </Link>
         </div>
       </div>
     </section>
