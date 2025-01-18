@@ -1,6 +1,9 @@
 "use client";
 import * as React from 'react';
 import Autoplay from 'embla-carousel-autoplay';
+import slide_1 from '@/images/slide_1.jpg'
+import slide_2 from '@/images/slide_2.jpg'
+import slide_3 from '@/images/slide_3.jpg'
 
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -10,12 +13,11 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import Image from 'next/image';
 
 
 const images = [
-  "https://www.hamzastore.pk/images/banners/62e90d4aa42f5.webp",
-  "https://www.hamzastore.pk/images/banners/652d20b21c058.webp",
-  "https://www.hamzastore.pk/images/banners/62e90d4aa4ffb.webp"
+  slide_1, slide_2, slide_3
 ];
 
 export default function CarouselWithImages() {
@@ -30,7 +32,7 @@ export default function CarouselWithImages() {
             <div className="p-1 home-carousel  w-[98.9vw]">
               <Card>
                 <CardContent className="flex h-[300px] w-full aspect-square object-cover items-center justify-center !p-0">
-                  <img 
+                  <Image 
                     src={image}
                     alt={`Image ${index + 1}`} 
                     className="object-cover w-[1500px] h-full rounded-lg" 

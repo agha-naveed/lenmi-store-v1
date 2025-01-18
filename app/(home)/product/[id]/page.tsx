@@ -97,7 +97,6 @@ export default function page() {
 
       </div>
 
-
       <div className='font-opensans xl:w-[370px] md:w-fit h-fit border border-black rounded-lg'>
 
         <div className='flex items-center justify-between sm:w-full w-[80%] py-3 px-4'>
@@ -154,6 +153,7 @@ export default function page() {
         </div>
 
       </div>
+
     </section>
   )
 }
