@@ -35,10 +35,11 @@ export default function page() {
 
 
   return (
-    <section className='container mx-auto grid grid-auto-auto py-10 justify-between'>
+    <section className='container mx-auto lg:grid lg:grid-cols-[auto_auto] grid-col-[auto] py-10 justify-between'>
+
       <div className='flex w-full gap-1'>
         
-        <div onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} className='w-[400px] h-[400px] p-3 overflow-hidden cursor-pointer'>
+        <div onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} className='w-[400px] h-[400px] p-3 overflow-hidden cursor-pointer border border-gray-400 rounded-xl'>
           <Image ref={imageRef} src="https://m.media-amazon.com/images/I/71zwwEe2nLL._AC_SL1500_.jpg" alt='Jacket' style={{transform: `scale(${zoom})`, transformOrigin: `${offset.x}px ${offset.y}px`, transition: 'tranform 0.2s ease-out'}} width={200} height={200} className='w-full h-full object-contain' />
         </div>
 

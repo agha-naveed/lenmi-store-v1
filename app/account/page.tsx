@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
-import axios from 'axios';
 import Form from 'next/form'
 import Link from 'next/link';
 import { redirect } from 'next/navigation'
@@ -24,18 +23,18 @@ export default function Login() {
 
 
     const onSubmit = async (data: IFormInputs) => {
-        const res = await axios.post("http://localhost:3000/api/user-login", data,
-            { withCredentials: true }
-        )
+        // const res = await axios.post("http://localhost:3000/api/user-login", data,
+        //     { withCredentials: true }
+        // )
 
-        if(res.data.error) {
-          alert("Email or Password is Incorrect")
-        }
-        else {
-            setTimeout(() => {
-                redirect("/")
-            }, 1000)
-        }
+        // if(res.data.error) {
+        //   alert("Email or Password is Incorrect")
+        // }
+        // else {
+        //     setTimeout(() => {
+        //         redirect("/")
+        //     }, 1000)
+        // }
     }
     
 

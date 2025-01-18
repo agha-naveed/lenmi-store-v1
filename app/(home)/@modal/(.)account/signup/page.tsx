@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import axios from 'axios'
 import Form from 'next/form'
 import { IoMdCloseCircle } from "react-icons/io"
 import { useRouter } from 'next/navigation'
@@ -25,22 +24,22 @@ export default function Login() {
 
 
   const onSubmit = async (data: IFormInputs) => {
-    try {
-      const res = await axios.post("http://localhost:3000/api/user-login", data, {
-        withCredentials: true
-      })
+    // try {
+    //   const res = await axios.post("http://localhost:3000/api/user-login", data, {
+    //     withCredentials: true
+    //   })
 
-      if (res.data.error) {
-        alert("Email or Password is Incorrect")
-      } else {
-        setTimeout(() => {
-          router.push("/")
-        }, 1000)
-      }
-    } catch (error) {
-      console.error("Error during login:", error)
-      alert("An error occurred. Please try again.")
-    }
+    //   if (res.data.error) {
+    //     alert("Email or Password is Incorrect")
+    //   } else {
+    //     setTimeout(() => {
+    //       router.push("/")
+    //     }, 1000)
+    //   }
+    // } catch (error) {
+    //   console.error("Error during login:", error)
+    //   alert("An error occurred. Please try again.")
+    // }
   }
 
     function restrictSigns(e:any): void {

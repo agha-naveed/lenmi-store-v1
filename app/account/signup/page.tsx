@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
-import axios from 'axios';
 import Form from 'next/form'
 import Link from 'next/link';
 import { redirect } from 'next/navigation'
