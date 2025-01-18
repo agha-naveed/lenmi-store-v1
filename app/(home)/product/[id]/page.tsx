@@ -1,10 +1,11 @@
 import React from 'react'
 import Image from 'next/image'
 import { GoStarFill } from "react-icons/go";
+import { MdLocationOn } from "react-icons/md";
 
 export default function page() {
   return (
-    <section className='container mx-auto'>
+    <section className='container mx-auto flex'>
       <div className='flex gap-1'>
         
         <div className='w-[400px] h-[400px] p-3 overflow-hidden'>
@@ -63,6 +64,21 @@ export default function page() {
 
         </div>
 
+      </div>
+
+
+      <div className='font-opensans w-[300px] border border-black rounded-lg'>
+        <div className='flex items-center justify-between  py-3 px-4'>
+          <span className='font-semibold text-[15px]'>Ship to</span>
+          <span className='flex gap-[2px] items-center font-medium text-[15px]'>
+            <MdLocationOn />
+            Pakistan
+          </span>
+        </div>
+
+        <div className='w-full text-center h-20 bg-gradient-to-t from-transparent to-lightPeachClr'>
+          <span className='text-[15px] font-bold tracking-[-1px]'>Lenmi Store Commitment</span>
+        </div>
       </div>
     </section>
   )
