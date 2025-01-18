@@ -8,7 +8,7 @@ import Link from 'next/link';
 export default function page() {
   return (
     <section className='container mx-auto flex'>
-      <div className='flex gap-1'>
+      <div className='flex w-full gap-1'>
         
         <div className='w-[400px] h-[400px] p-3 overflow-hidden'>
           <Image src="https://m.media-amazon.com/images/I/71zwwEe2nLL._AC_SL1500_.jpg" alt='Jacket' width={200} height={200} className='w-full h-full object-contain' />

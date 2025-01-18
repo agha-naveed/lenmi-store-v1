@@ -2,6 +2,11 @@
   "name": "lenmi-store-v1",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name": "Syed Naveed Abbas",
+    "email": "naveedabs31@gmail.com",
+    "github": "https://github.com/agha-naveed"
+  },
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
@@ -11,7 +16,6 @@
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.1",
-    "axios": "^1.7.9",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "embla-carousel-autoplay": "^8.5.2",
