@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { FaStar } from "react-icons/fa";
 
 export default function page() {
   return (
@@ -28,10 +29,67 @@ export default function page() {
 
                 <div className='grid gap-1 py-5 border-t-2'>
                     <span className='font-semibold'>Price</span>
-                    <div className='text-gray-600 flex gap-2 cursor-pointer text-[14px] w-fit'>
-                        <input type="number" className='border border-gray-600 rounded-md w-20 p-2' min={0} placeholder='Min' />
-                        <span className='text-xl content-center'>-</span>
-                        <input type="number" className='border border-gray-600 rounded-md w-20 p-2' min={0} placeholder='Max' />
+                    <div className='text-gray-600 flex gap-2 cursor-pointer font-medium mt-1 text-[14px] w-fit'>
+                        <input type="number" className='border border-gray-600 rounded-md w-20 px-2 py-[6px]' min={0} placeholder='Min' />
+                        <span className='text-xl content-center text-gray-600'>-</span>
+                        <input type="number" className='border border-gray-600 rounded-md w-20 px-2 py-[6px]' min={0} placeholder='Max' />
+                    </div>
+                </div>
+
+                <div className='grid gap-1 py-5 border-t-2'>
+                    <span className='font-semibold'>Rating</span>
+                    <div className='text-black flex gap-1 cursor-pointer font-medium text-[14px] w-fit'>
+                        <FaStar />
+                        <FaStar />
+                        <FaStar />
+                        <FaStar />
+                        <FaStar />
+                    </div>
+                </div>
+
+                <div className='grid gap-1 py-5 border-t-2'>
+                    <span className='font-semibold'>Warranty Type</span>
+                    <div className='mt-1'>
+                        <div className='text-gray-600 flex cursor-pointer text-[14px] w-fit'>
+                            <input type="checkbox" id='no-warranty' />
+                            <label htmlFor='no-warranty' className='ml-2 cursor-pointer'>No Warranty</label>
+                        </div>
+
+                        <div className='text-gray-600 flex cursor-pointer text-[14px] w-fit'>
+                            <input type="checkbox" id='seller-warranty' />
+                            <label htmlFor='seller-warranty' className='ml-2 cursor-pointer'>Seller Warranty</label>
+                        </div>
+
+                        <div className='text-gray-600 flex cursor-pointer text-[14px] w-fit'>
+                            <input type="checkbox" id='brand-warranty' />
+                            <label htmlFor='brand-warranty' className='ml-2 cursor-pointer'>Brand Warranty</label>
+                        </div>
+
+                        <div className='text-gray-600 flex cursor-pointer text-[14px] w-fit'>
+                            <input type="checkbox" id='local-seller-warranty' />
+                            <label htmlFor='local-seller-warranty' className='ml-2 cursor-pointer'>Local Seller Warranty</label>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div className='grid gap-1 py-5 border-t-2'>
+                    <span className='font-semibold'>Color Family</span>
+                    <div className='mt-1'>
+                        <div className='text-gray-600 flex cursor-pointer text-[14px] w-fit'>
+                            <input type="checkbox" id='black-color' />
+                            <label htmlFor='black-color' className='ml-2 cursor-pointer'>Black</label>
+                        </div>
+
+                        <div className='text-gray-600 flex cursor-pointer text-[14px] w-fit'>
+                            <input type="checkbox" id='white-color' />
+                            <label htmlFor='white-color' className='ml-2 cursor-pointer'>White</label>
+                        </div>
+
+                        <div className='text-gray-600 flex cursor-pointer text-[14px] w-fit'>
+                            <input type="checkbox" id='multi-color' />
+                            <label htmlFor='multi-color' className='ml-2 cursor-pointer'>Multicolor</label>
+                        </div>
                     </div>
                 </div>
 
