@@ -37,13 +37,13 @@ export default function page() {
   return (
     <section className='container mx-auto grid xl:grid-cols-[auto_auto] grid-col-[auto] py-10 xl:justify-between justify-center justify-items-center gap-5'>
 
-      <div className='md:flex grid border xl:border-transparent rounded-xl border-black xl:w-full w-fit h-fit xl:gap-5 gap-3'>
+      <div className='md:flex grid sm:border xl:border-transparent pt-3 rounded-xl md:border-black md:w-full w-fit h-fit xl:gap-5 gap-3 justify-items-center'>
         
-        <div onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} className='w-[400px] h-[400px] p-3 overflow-hidden cursor-pointer border border-gray-400 rounded-xl'>
+        <div onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} className='md:w-[400px] md:h-[400px] w-[300px] h-[300px] p-3 overflow-hidden cursor-pointer border border-gray-400 rounded-xl'>
           <Image ref={imageRef} src="https://m.media-amazon.com/images/I/71zwwEe2nLL._AC_SL1500_.jpg" alt='Jacket' style={{transform: `scale(${zoom})`, transformOrigin: `${offset.x}px ${offset.y}px`, transition: 'tranform 0.2s ease-out'}} width={200} height={200} className='w-full h-full object-contain' />
         </div>
 
-        <div className='w-fit p-6 h-auto'>
+        <div className='w-fit sm:p-6 p-2 h-auto'>
           <h2 className='font-opensans font-semibold text-2xl'>Mens Cotton Jacket</h2>
           
           <div className='mt-3 mb-5 flex flex-col gap-1'>
@@ -98,8 +98,9 @@ export default function page() {
       </div>
 
 
-      <div className='font-opensans w-[370px] h-fit border border-black rounded-lg'>
-        <div className='flex items-center justify-between  py-3 px-4'>
+      <div className='font-opensans xl:w-[370px] md:w-fit h-fit border border-black rounded-lg'>
+
+        <div className='flex items-center justify-between sm:w-full w-[80%] py-3 px-4'>
           <span className='font-semibold text-[15px]'>Ship to</span>
           <span className='flex gap-[2px] items-center font-medium text-[15px]'>
             <MdLocationOn />
@@ -107,8 +108,8 @@ export default function page() {
           </span>
         </div>
 
-        <div className='md:flex'>
-          <div>
+        <div className='xl:grid md:flex md:w-full sm:w-[400px] w-[300px]'>
+          <div className='w-full'>
             <div className='w-full text-center p-2 h-14 bg-gradient-to-t from-transparent to-lightPeachClr'>
               <span className='text-[15px] font-bold tracking-[-1px]'>Lenmi Store Commitment</span>
             </div>
@@ -136,7 +137,7 @@ export default function page() {
             </div>
           </div>
 
-          <div>
+          <div className='w-full'>
             <div className='px-4 py-3'>
               <span className='font-bold'>Quantity</span>
               <div>
