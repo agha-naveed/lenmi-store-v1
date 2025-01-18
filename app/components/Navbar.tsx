@@ -35,7 +35,7 @@ export default function Navbar() {
     // }, [])
 
     return (
-        <div className='w-full md:h-[130px] h-[135px] bg-slate-800 py-3'>
+        <div className='w-full md:h-[130px] h-[135px] relative z-30 bg-slate-800 py-3'>
             <div className="container mx-auto">
                 <div className='flex w-full justify-between md:px-0 px-3'>
                     <Link href="/">

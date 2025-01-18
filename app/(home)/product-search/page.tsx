@@ -1,12 +1,13 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import { FaRegStar } from "react-icons/fa";
 import ProductCard from '@/app/components/products-cards/ProductCard';
 import { CiFilter } from "react-icons/ci";
-
+import { IoMdCloseCircle } from "react-icons/io"
 
 export default function page() {
+    const [toggleFilter, setToggleFilter] = useState(false)
   return (
     <div>
         <div className="container mx-auto py-3 md:flex grid gap-14 font-opensans">
@@ -16,8 +17,8 @@ export default function page() {
                 <span>Filter</span>
             </button>
 
-            <aside className='p-3 md:w-[250px] w-full md:h-auto min-h-screen flex flex-col md:relative fixed bg-white z-20'>
-
+            <aside className='p-3 md:w-[250px] w-full md:h-auto min-h-screen flex flex-col md:relative fixed top-0 bg-white z-30'>
+                <IoMdCloseCircle className='absolute right-2 md:hidden block text-3xl' />
                 <div className='grid gap-1 py-5 border-t-2'>
                     <span className='font-semibold'>Category</span>
                     <select name="" id="" className='bg-transparent cursor-pointer border-none outline-none text-gray-600 text-[14px]'>
