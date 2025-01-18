@@ -34,10 +34,12 @@ export default function ProductCard() {
 
         </div>
 
-        <button className='bg-slate-800 text-white hidden justify-center group items-center h-9 w-full rounded-md mt-1 relative overflow-hidden'>
-            <span className='absolute left-[50%] -translate-x-[50%] group-hover:-left-[50%] transition-all'>Add to Cart</span>
-            <FaCartPlus className='absolute -right-[50%] group-hover:right-[50%] translate-x-[50%] transition-all' />
-        </button>
+        <div className='relative pt-2'>
+            <button className='bg-slate-800 text-white absolute top-[2px] left-[50%] -translate-x-[50%] hidden justify-center group items-center h-9 w-full rounded-md z-20 overflow-hidden'>
+                <span className='absolute left-[50%] -translate-x-[50%] group-hover:-left-[50%] transition-all'>Add to Cart</span>
+                <FaCartPlus className='absolute -right-[50%] group-hover:right-[50%] translate-x-[50%] transition-all' />
+            </button>
+        </div>
     </div>
   )
 }

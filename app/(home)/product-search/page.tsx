@@ -1,13 +1,15 @@
 'use client'
 
 import React from 'react'
-import { FaStar } from "react-icons/fa";
+import { FaRegStar } from "react-icons/fa";
+import ProductCard from '@/app/components/products-cards/ProductCard';
 
 export default function page() {
   return (
     <div>
-        <div className="container mx-auto py-3 font-opensans">
-            <aside className='p-3 w-[250px]'>
+        <div className="container mx-auto py-3 md:flex grid gap-14 font-opensans">
+            
+            <aside className='p-3 md:w-[250px] w-full flex flex-row md:flex-col relative z-20'>
 
                 <div className='grid gap-1 py-5 border-t-2'>
                     <span className='font-semibold'>Category</span>
@@ -38,12 +40,12 @@ export default function page() {
 
                 <div className='grid gap-1 py-5 border-t-2'>
                     <span className='font-semibold'>Rating</span>
-                    <div className='text-black flex gap-1 cursor-pointer font-medium text-[14px] w-fit'>
-                        <FaStar />
-                        <FaStar />
-                        <FaStar />
-                        <FaStar />
-                        <FaStar />
+                    <div className='text-gray-600 flex gap-1 cursor-pointer font-medium text-[14px] w-fit'>
+                        <FaRegStar />
+                        <FaRegStar />
+                        <FaRegStar />
+                        <FaRegStar />
+                        <FaRegStar />
                     </div>
                 </div>
 
@@ -94,6 +96,24 @@ export default function page() {
                 </div>
 
             </aside>
+
+            <main>
+                <div className='product-search-items flex flex-wrap'>
+                    <ProductCard />
+                    <ProductCard />
+                    <ProductCard />
+                    <ProductCard />
+                    <ProductCard />
+                    <ProductCard />
+                    <ProductCard />
+                    <ProductCard />
+                    <ProductCard />
+                    <ProductCard />
+                    <ProductCard />
+                    <ProductCard />
+                </div>
+            </main>
+
         </div>
     </div>
   )

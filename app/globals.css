@@ -37,9 +37,13 @@ input[type="number"]::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
-.grid-auto-auto {
-  grid-template-columns: auto auto;
+
+.product-search-items {
+  row-gap: 20px;
+  column-gap: 28px;
 }
+
+
 @layer base {
 :root {
       --background: 0 0% 100%;
@@ -102,11 +106,5 @@ input[type="number"] {
   }
   body {
     @apply bg-background text-foreground;
-  }
-}
-
-@media only screen and (max-width: 1024px) {
-  .grid-auto-auto {
-    grid-template-columns: auto;
   }
 }
