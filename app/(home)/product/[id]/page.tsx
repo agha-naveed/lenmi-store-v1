@@ -7,34 +7,58 @@ export default function page() {
     <section className='container mx-auto'>
       <div className='flex gap-1'>
         
-        <div className='w-[400px] h-[400px] border border-black p-3 overflow-hidden'>
+        <div className='w-[400px] h-[400px] p-3 overflow-hidden'>
           <Image src="https://m.media-amazon.com/images/I/71zwwEe2nLL._AC_SL1500_.jpg" alt='Jacket' width={200} height={200} className='w-full h-full object-contain' />
         </div>
 
-        <div className='w-[90%] p-3 h-auto border border-black'>
+        <div className='w-[90%] p-6 h-auto'>
           <h2 className='font-opensans font-semibold text-2xl'>Mens Cotton Jacket</h2>
           
-          <div className='mt-3 mb-5'>
-            <div className='flex gap-1 items-center'>
-              <span>Rating:</span>
-              <span className='flex'>
-                <GoStarFill />
-                <GoStarFill />
-                <GoStarFill />
-                <GoStarFill />
-                <GoStarFill />
-              </span>
+          <div className='mt-3 mb-5 flex flex-col gap-1'>
+            <div className='flex gap-3'>
+              <div className='flex gap-1 items-center'>
+                <span>Rating:</span>
+                <span className='flex text-orange-500'>
+                  <GoStarFill />
+                  <GoStarFill />
+                  <GoStarFill />
+                  <GoStarFill />
+                  <GoStarFill />
+                </span>
+              </div>
+              <div>|</div>
+              <div className='font-opensans'>
+                10000+ Sold
+              </div>
             </div>
 
             <div className='flex gap-1 font-opensans items-center'>
               Category:
-              <span className='font-semibold'>Men's Clothing</span>
+              <span className='font-semibold text-orange-500'>Men's Clothing</span>
             </div>
           </div>
 
-          <div className='flex gap-[6px] items-end'>
+          <div className='flex gap-[6px] my-2 items-end'>
             <span className='font-opensans font-bold text-[32px]'>PKR 55.99</span>
             <span className='text-gray-700 line-through relative bottom-[6px]'>PKR 999</span>
+          </div>
+
+          <div className='grid'>
+            <span className='my-2'>Color: Black</span>
+            <div className='flex gap-1'>
+              <div className='w-[70px] h-[70px] cursor-pointer border p-[3px]'>
+                <Image src="https://m.media-amazon.com/images/I/71zwwEe2nLL._AC_SL1500_.jpg" alt='Jacket' width={200} height={200} className='w-full h-full object-contain' />
+              </div>
+              <div className='w-[70px] h-[70px] cursor-pointer border border-gray-300 p-[3px]'>
+                <Image src="https://m.media-amazon.com/images/I/71zwwEe2nLL._AC_SL1500_.jpg" alt='Jacket' width={200} height={200} className='w-full h-full object-contain' />
+              </div>
+              <div className='w-[70px] h-[70px] cursor-pointer border border-gray-300 p-[3px]'>
+                <Image src="https://m.media-amazon.com/images/I/71zwwEe2nLL._AC_SL1500_.jpg" alt='Jacket' width={200} height={200} className='w-full h-full object-contain' />
+              </div>
+              <div className='w-[70px] h-[70px] cursor-pointer border border-gray-300 p-[3px]'>
+                <Image src="https://m.media-amazon.com/images/I/71zwwEe2nLL._AC_SL1500_.jpg" alt='Jacket' width={200} height={200} className='w-full h-full object-contain' />
+              </div>
+            </div>
           </div>
 
         </div>
