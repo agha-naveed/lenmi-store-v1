@@ -82,8 +82,8 @@ export default function page() {
           <span className='text-[15px] font-bold tracking-[-1px]'>Lenmi Store Commitment</span>
         </div>
 
-        <div className='px-6 grid gap-4 bg-red-600'>
-          <Link href={""} className='flex justify-between items-center' title='Delivery Details'>
+        <div className='grid gap-1'>
+          <Link href={""} className='flex px-6 bg-red-600 justify-between items-center py-4' title='Delivery Details'>
             <div className='grid gap-1'>
               <span className='font-bold text-[15px] text-black tracking-[-1px]'>
                 Free Shipping
@@ -95,7 +95,7 @@ export default function page() {
             <span><IoIosArrowForward /></span>
           </Link>
 
-          <div className='grid gap-1 bg-orange-600'>
+          <div className='grid gap-1 px-6 bg-orange-600'>
             <h5 className='text-black font-bold text-[16px] tracking-[-1px]'>Security & Privacy</h5>
             <p className='text-gray-600 font-normal text-[12px] text-justify'>Safe payments: we do not share your personal details with any third parties without your consent. Secure personal details: We protect your privacy and keep your personal details safe and secure.</p>
           </div>
