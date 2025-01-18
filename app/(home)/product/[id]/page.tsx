@@ -69,7 +69,7 @@ export default function page() {
       </div>
 
 
-      <div className='font-opensans w-[320px] border border-black rounded-lg'>
+      <div className='font-opensans w-[340px] border border-black rounded-lg'>
         <div className='flex items-center justify-between  py-3 px-4'>
           <span className='font-semibold text-[15px]'>Ship to</span>
           <span className='flex gap-[2px] items-center font-medium text-[15px]'>
@@ -107,10 +107,14 @@ export default function page() {
         <div className='px-4 py-3'>
           <span className='font-bold'>Quantity</span>
           <div>
-            <button className='border border-black w-7'>-</button>
-            <input className='border border-black' type="number" min={1} max={10} />
-            <span className='border border-black w-7'>+</span>
+            <button className='px-1 py-[6px] w-9 text-[22px]'>-</button>
+            <input className='p-1 font-medium text-center' type="number" placeholder='1' min={1} max={10} />
+            <button className='p-[6px] w-9 text-[22px]'>+</button>
           </div>
+        </div>
+        <div className='grid px-4 gap-2'>
+          <button className='h-11 bg-slate-800 transition-all hover:bg-slate-900 text-white font-bold rounded-3xl'>Buy Now</button>
+          <button className='h-11 bg-slate-300 text-slate-800 transition-all hover:bg-slate-800 hover:text-slate-300 font-bold rounded-3xl'>Add to cart</button>
         </div>
 
       </div>
