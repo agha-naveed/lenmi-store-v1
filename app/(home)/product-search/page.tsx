@@ -25,6 +25,16 @@ export default function page() {
                         <label htmlFor='overseas-check' className='ml-2 cursor-pointer'>Overseas</label>
                     </div>
                 </div>
+
+                <div className='grid gap-1 py-5 border-t-2'>
+                    <span className='font-semibold'>Price</span>
+                    <div className='text-gray-600 flex gap-2 cursor-pointer text-[14px] w-fit'>
+                        <input type="number" className='border border-gray-600 rounded-md w-20 p-2' min={0} placeholder='Min' />
+                        <span className='text-xl content-center'>-</span>
+                        <input type="number" className='border border-gray-600 rounded-md w-20 p-2' min={0} placeholder='Max' />
+                    </div>
+                </div>
+
             </aside>
         </div>
     </div>
