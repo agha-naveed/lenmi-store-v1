@@ -104,6 +104,14 @@ export default function page() {
           </div>
         </div>
 
+        <div className='px-4 py-3'>
+          <span className='font-bold'>Quantity</span>
+          <div>
+            <button className='border border-black w-7'>-</button>
+            <input className='border border-black' type="number" min={1} max={10} />
+            <span className='border border-black w-7'>+</span>
+          </div>
+        </div>
 
       </div>
     </section>
