@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import React from 'react'
 
 export default function page() {
@@ -12,8 +13,18 @@ export default function page() {
             </div>
 
             <div className='w-full h-full'>
-                <div>
-
+                <div className='bg-white p-5 rounded-2xl shadow-xl'>
+                    <div className='flex font-semibold'>
+                        <h4>Products</h4>
+                        <h4>Price</h4>
+                        <h4>Quantity</h4>
+                        <h4>Total Price</h4>
+                    </div>
+                    <div>
+                        <div>
+                            <Image src="https://sm.ign.com/t/ign_in/gallery/p/pokemon-le/pokemon-lets-go-pikachu-and-pokemon-lsets-go-eevee-screenshot_bg4p.1080.jpg" alt='pikachu' width={100} height={100} />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
