@@ -43,6 +43,12 @@ input[type="number"] {
   column-gap: 28px;
 }
 
+@media only screen and (max-width: 768px) {
+  .product-search-items {
+    column-gap: 8px;
+  }
+}
+
 
 @layer base {
 :root {
