@@ -99,7 +99,7 @@ export default function Navbar() {
 
                         <div className="relative group">
 
-                            <div className='flex gap-[6px] cursor-pointer h-fit'>
+                            <Link href={'/cart'} className='flex gap-[6px] cursor-pointer h-fit'>
                                 <TiShoppingCart className='cursor-pointer text-[38px]' title='Cart' />
                                 <div className='grid content-center leading-[17px]'>
                                     <span className='text-[12.5px] text-black font-opensans  bg-white rounded-xl w-[26px] h-[14px] text-center'>
@@ -107,7 +107,7 @@ export default function Navbar() {
                                     </span>
                                     <span className='font-opensans font-semibold text-[14px]'>Cart</span>
                                 </div>
-                            </div>
+                            </Link>
                         </div>
 
                     </div>
