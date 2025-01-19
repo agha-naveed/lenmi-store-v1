@@ -9,7 +9,7 @@ import { IoMdCloseCircle } from "react-icons/io"
 export default function page() {
     const [toggleFilter, setToggleFilter] = useState(false)
   return (
-    <div>
+    <>
         <div className="container mx-auto py-3 md:flex grid md:gap-14 gap-5 font-opensans">
             
             <button onClick={() => setToggleFilter(!toggleFilter)} className='md:hidden w-fit text-white px-4 py-2 rounded-3xl bg-slate-800 flex gap-1 ml-2'>
@@ -18,8 +18,8 @@ export default function page() {
             </button>
             
 
-            <aside className={`p-3 md:w-[250px] sm:w-[70%] w-full md:h-auto transition-all ${toggleFilter ? "left-0" : "left-[-100%]"} md:shadow-none shadow-xl shadow-black min-h-screen flex flex-col md:relative md:left-0 pointer-events-none fixed top-0 bg-white z-30`}>
-            
+            <aside className={`p-3 md:w-[250px] sm:w-[70%] w-full md:h-auto transition-all ${toggleFilter ? "left-0" : "left-[-100%]"} md:shadow-none shadow-xl shadow-black min-h-screen flex flex-col md:relative md:left-0 fixed top-0 bg-white z-30 select-none`}>
+
                 <IoMdCloseCircle onClick={() => setToggleFilter(!toggleFilter)} className='absolute right-2 md:hidden block text-3xl' />
                 
                 <div className='grid gap-1 py-5 border-t-2'>
@@ -128,6 +128,6 @@ export default function page() {
             </main>
 
         </div>
-    </div>
+    </>
   )
 }

@@ -42,7 +42,7 @@ export default function Login() {
   }
 
   return (
-      <div className='w-full min-h-screen fixed top-0 left-0 backdrop-blur-[10px] bg-black/40 grid justify-center content-center'>
+      <div className='w-full min-h-screen fixed top-0 left-0 backdrop-blur-[10px] bg-black/40 grid justify-center content-center z-[200]'>
         <div className='w-fit min-h-fit rounded-2xl relative shadow-2xl'>
           <button onClick={() => router.back()} className='w-fit h-fit absolute z-10 top-6 right-6'>
             <IoMdCloseCircle title='Close' className='text-[26px] cursor-pointer' />
@@ -80,10 +80,6 @@ export default function Login() {
               Login
             </button>
 
-            <p className='pt-2 text-[17px]' title='Click to signup'>
-              Create an account?{" "}
-              <Link href="/account/signup" className='text-red-900 hover:underline'>Signup</Link>
-            </p>
           </Form>
         </div>
       </div>

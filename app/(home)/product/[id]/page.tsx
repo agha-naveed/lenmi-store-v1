@@ -140,7 +140,7 @@ export default function page() {
             <div className='px-4 py-3'>
               <span className='font-bold'>Quantity</span>
               <div>
-                <button className='px-1 py-[6px] w-9 text-[22px]' onClick={() => quantity > 1 ? setQuantity(quantity - 1) : null}>-</button>
+                <button className={`px-1 py-[6px] w-9 text-[22px] ${quantity == 1 ? "text-gray-400" : "text-black"}`} onClick={() => quantity > 1 ? setQuantity(quantity - 1) : null}>-</button>
                 <input className='p-1 font-medium text-center' type="number" placeholder='1' readOnly value={quantity} min={1} max={10} />
                 <button className='p-[6px] w-9 text-[22px]' onClick={() => setQuantity(quantity + 1)}>+</button>
               </div>
