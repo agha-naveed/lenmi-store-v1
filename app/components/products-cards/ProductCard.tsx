@@ -5,8 +5,8 @@ import { FaStar, FaCartPlus } from "react-icons/fa";
 export default function ProductCard() {
   return (
     <div className='product-card w-fit'>
-        <div className='bg-white border border-gray-400 rounded-lg w-52 h-[310px] p-2 grid gap-3'>
-            <div className='w-[190px] select-none h-[170px] group transition_2 rounded-lg overflow-hidden border relative cursor-pointer'>
+        <div className='bg-white border border-gray-400 rounded-lg sm:w-52 w-[178px] sm:h-[310px] p-2 grid gap-3'>
+            <div className='sm:w-[190px] w-[160px] sm:h-[170px] h-[140px] select-none group transition_2 rounded-lg overflow-hidden border relative cursor-pointer'>
                 <img src="https://typeshop.pk/wp-content/uploads/2024/09/749789-product-0-i-638518506623874710_06458751-c09a-4dec-b82f-416beff7e94f.webp" className='w-full h-full object-cover absolute transition_2 opacity-100 group-hover:opacity-0' alt="" />
                 <img src="https://img.drz.lazcdn.com/static/pk/p/7b2a2355148607d8c12d443afbae210b.jpg_720x720q80.jpg_.webp" className='w-full h-full object-cover transition_2  group-hover:opacity-100 opacity-0 absolute' alt="" />
             </div>
