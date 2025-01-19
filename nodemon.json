@@ -1,6 +1,0 @@
-{
-    "watch": ["app/api", "pages", "components", "lib"],
-    "ext": "js,jsx,ts,tsx,json",
-    "ignore": [".next", "node_modules"],
-    "exec": "node app/api/index.js"
-}
