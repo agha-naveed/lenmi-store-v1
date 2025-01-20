@@ -3,7 +3,7 @@ import ProductCard from '../components/products-cards/ProductCard'
 import Carousel from '@/components/Carousel'
 import TrendingProducts from '../components/products-cards/TrendingProducts'
 import HorizontalCard from '@/components/products-cards/HorizontalCard'
-
+import CategoriesDesign from '../components/CategoriesDesign'
 
 export default function page() {
 
@@ -28,6 +28,10 @@ export default function page() {
             <span className='sm:block hidden'>
               <TrendingProducts />
             </span>
+          </div>
+
+          <div>
+            <CategoriesDesign />
           </div>
           
           <div className="flex flex-wrap gap-5">
