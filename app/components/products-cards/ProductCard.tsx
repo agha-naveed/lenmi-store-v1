@@ -4,7 +4,7 @@ import { FaStar, FaCartPlus } from "react-icons/fa";
 
 export default function ProductCard() {
   return (
-    <div className='product-card w-fit'>
+    <div className='product-card w-fit transition-all'>
         <div className='bg-white border border-gray-400 rounded-lg sm:w-52 w-[156px] sm:h-[310px] p-2 grid gap-3'>
             <div className='sm:w-[190px] w-[140px] sm:h-[170px] h-[120px] select-none group transition_2 rounded-lg overflow-hidden border relative cursor-pointer'>
                 <img src="https://typeshop.pk/wp-content/uploads/2024/09/749789-product-0-i-638518506623874710_06458751-c09a-4dec-b82f-416beff7e94f.webp" className='w-full h-full object-cover absolute transition_2 opacity-100 group-hover:opacity-0' alt="" />
@@ -35,7 +35,7 @@ export default function ProductCard() {
         </div>
 
         <div className='relative pt-2'>
-            <button className='bg-slate-800 text-white absolute top-[2px] left-[50%] -translate-x-[50%] hidden justify-center group items-center h-9 w-full rounded-md z-20 overflow-hidden'>
+            <button className='bg-slate-800 text-white absolute top-[2px] left-[50%] -translate-x-[50%] hidden justify-center group items-center h-9 w-full rounded-md z-20 overflow-hidden  shadow-custom-light'>
                 <span className='w-full absolute left-[50%] -translate-x-[50%] group-hover:-left-[50%] transition-all'>Add to Cart</span>
                 <FaCartPlus className='absolute -right-[50%] group-hover:right-[50%] translate-x-[50%] transition-all' />
             </button>

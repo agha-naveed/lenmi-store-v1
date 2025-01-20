@@ -9,6 +9,9 @@ export default {
   ],
   theme: {
   	extend: {
+		boxShadow: {
+			'custom-light': '1px 10px 15px rgba(43, 43, 43, 0.438)',
+		},
   		fontFamily: {
   			opensans: [
   				'var(--font-opensans)'
