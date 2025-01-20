@@ -55,10 +55,10 @@ export default function page() {
                                                 <p className='text-gray-600  content-center'>10000+ sold</p>
                                             </span>
 
-                                            <span className='md:hidden block'>
+                                            <span className='md:hidden block mt-1'>
                                                 <h5 className='font-medium'>
-                                                    <span className='text-[14px]'> Price: </span>
-                                                    <span className='font-bold text-orangeClr'>$99.00</span>
+                                                    <span className='text-[15px]'> Price: </span>
+                                                    <span className='font-bold text-[17px] text-orangeClr'>$99.00</span>
                                                 </h5>
                                             </span>
                                         </span>
