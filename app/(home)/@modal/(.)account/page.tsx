@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import { redirect } from 'next/navigation'
 import { IoMdCloseCircle } from "react-icons/io"
 import { useRouter } from 'next/navigation'
-import Form from 'next/form'
+
 
 
 interface IFormInputs {
@@ -13,33 +13,31 @@ interface IFormInputs {
   password: string;
 }
 
-
 export default function Login() {
+
   const router = useRouter()
   
       const { register, handleSubmit, formState: { errors } } = useForm<IFormInputs>();
       
-      const [message, setMessage] = useState("")
   
   
       const onSubmit = async (data: IFormInputs) => {
-          // const res = await fetch("http://localhost:3000/account/api", {
-          //   method: "POST",
-          //   body: JSON.stringify(data),
-          //   credentials: "include"
-          // })
+          const res = await fetch("http://localhost:3000/account/api", {
+            method: "POST",
+            body: JSON.stringify(data),
+            credentials: "include"
+          })
 
-          // console.log("this is response"+res)
-  
-  
-          // if(res.ok) {
-          //   setMessage(await res.json())
-          //   redirect("/")
-          // }
-          // else {
-          //   setMessage("error")
-          //   alert("Error")
-          // }
+          
+          if(res.ok) {
+            setTimeout(() => {
+              router.back()
+              redirect("/")
+            }, 800)
+          }
+          else {
+            alert("Error")
+          }
       }
 
   return (
@@ -49,7 +47,7 @@ export default function Login() {
             <IoMdCloseCircle title='Close' className='text-[26px] cursor-pointer' />
           </button>
 
-          <Form action={"/"} onSubmit={() => (onSubmit)} className='grid bg-white gap-2 font-muli-regular border border-gray-400 pt-10 p-5 rounded-md'>
+          <form onSubmit={handleSubmit(onSubmit)} className='grid bg-white gap-2 font-muli-regular border border-gray-400 pt-10 p-5 rounded-md'>
             <h2 className='text-3xl font-opensans text-center font-semibold'>Login</h2>
 
             <div className='grid'>
@@ -81,7 +79,7 @@ export default function Login() {
               Login
             </button>
 
-          </Form>
+          </form>
         </div>
       </div>
   )

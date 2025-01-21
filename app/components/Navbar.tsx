@@ -11,6 +11,7 @@ import { GoChecklist } from "react-icons/go";
 import { TbMessageDots } from "react-icons/tb";
 import { IoSettingsOutline } from "react-icons/io5"
 
+
 interface ApiResponse {
     first_name: string;
     last_name: string;
@@ -19,8 +20,11 @@ interface ApiResponse {
 
 
 export default function Navbar() {
-    const [message, setMessage] = useState<ApiResponse | null>(null);
     
+
+    const [message, setMessage] = useState<ApiResponse | null>(null);
+
+
     useInsertionEffect(() => {
 
         const getData = async () => {
@@ -41,6 +45,7 @@ export default function Navbar() {
 
         getData()
     }, [])
+    
 
     return (
         <div className='w-full md:h-[130px] h-[135px] relative z-30 bg-slate-800 py-3'>

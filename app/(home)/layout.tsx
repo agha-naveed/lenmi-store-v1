@@ -4,6 +4,7 @@ import "../globals.css";
 import Navbar from '@/components/Navbar'
 import { Suspense } from "react";
 
+
 const opensans = Open_Sans({
   variable: "--font-opensans",
   subsets: ["latin"],
