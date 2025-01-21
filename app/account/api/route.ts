@@ -24,7 +24,6 @@ export async function POST(req: NextRequest) {
             else {
                 return NextResponse.json({error: "error"}, { status: 401 })
             }
-            
         }
         else return NextResponse.json({error: "error"}, { status: 404 })
     } catch(e) {
@@ -38,7 +37,12 @@ export async function GET(req: NextRequest) {
     await dbConnection()
     
     const cookie = await cookies()
-
     
-
+    if(cookie) {
+        let datafromCookie_DB = await User.findOne({email: cookie.get("email")?.value})
+        return NextResponse.json(datafromCookie_DB)
+    }
+    else {
+        return NextResponse.json(null)
+    }
 }
