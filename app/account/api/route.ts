@@ -9,13 +9,6 @@ export async function POST(req: NextRequest) {
     await dbConnection()
     const {email, password} : {email: string, password: string} = await req.json()
 
-
-    // let isExist = await User.aggregate([{
-    //     $match: {email}
-    //     },
-    //     {$limit: 1}
-    // ])
-
     let isExist = await User.findOne({email})
 
     const cookie = await cookies()
@@ -37,4 +30,15 @@ export async function POST(req: NextRequest) {
     } catch(e) {
         return NextResponse.json({ error: "Server error" }, { status: 500 })
     }
+}
+
+
+export async function GET(req: NextRequest) {
+    
+    await dbConnection()
+    
+    const cookie = await cookies()
+
+    
+
 }

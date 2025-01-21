@@ -15,24 +15,20 @@ import { IoSettingsOutline } from "react-icons/io5"
 export default function Navbar() {
     const [message, setMessage] = useState('')
     
-    // useInsertionEffect(() => {
+    useInsertionEffect(() => {
 
-    //     const getData = async () => {
-    //         let fetchData = await axios.get("http://localhost:3000/api/user-login", {
-    //             withCredentials: true,
-    //         })
-
-    //         if(fetchData.data.error) {
-    //             setMessage(false)
-    //         }
-    //         else {
-    //             setMessage(fetchData.data)
-    //         }
+        const getData = async () => {
+            let fetchData = await fetch("http://localhost:3000/api/user-login", {
+                method: "GET",
+                credentials: "include"
+            })
             
-    //     }
+            
+            
+        }
 
-    //     getData()
-    // }, [])
+        getData()
+    }, [])
 
     return (
         <div className='w-full md:h-[130px] h-[135px] relative z-30 bg-slate-800 py-3'>
