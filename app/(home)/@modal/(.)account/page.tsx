@@ -18,8 +18,6 @@ export default function Login() {
   const router = useRouter()
   
       const { register, handleSubmit, formState: { errors } } = useForm<IFormInputs>();
-      
-  
   
       const onSubmit = async (data: IFormInputs) => {
           const res = await fetch("http://localhost:3000/account/api", {
@@ -30,9 +28,9 @@ export default function Login() {
 
           
           if(res.ok) {
+            router.back()
             setTimeout(() => {
-              router.back()
-              redirect("/")
+              window.location.reload()
             }, 800)
           }
           else {
