@@ -5,7 +5,6 @@ import { useForm } from 'react-hook-form';
 import Form from 'next/form'
 import Link from 'next/link';
 import { redirect } from 'next/navigation'
-import axios from 'axios';
 
 export default function Signup() {
     
@@ -39,9 +38,7 @@ export default function Signup() {
 
         
         if(message != "error") {
-            setTimeout(() => {
-                redirect("/account")
-            }, 1000)
+            redirect("/account")
         }
         else {
             alert("Invalid Email or Password")
