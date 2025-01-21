@@ -1,8 +1,13 @@
-import dbConnection from "@/lib/dbConnection";
-import { NextRequest, NextResponse } from "next/server";
+import dbConnection from '@/lib/dbConnection'
+import User from '@/lib/model/user'
+import { NextRequest, NextResponse } from 'next/server';
+import bcrypt from 'bcrypt'
 
-export async function GET(request: NextRequest) {
-    
-    let a = await dbConnection()
-    return NextResponse.json({msg: "done"})
+export async function POST(req: NextRequest) {
+    const {email, password} : {email: string, password: string} = await req.json()
+
+    let isExist = await User.findOne({email})   
+    if(isExist) {
+        
+    }
 }

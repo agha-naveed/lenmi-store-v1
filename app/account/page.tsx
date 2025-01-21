@@ -8,10 +8,8 @@ import { redirect } from 'next/navigation'
 
 
 interface IFormInputs {
-    firstName: string;
-    lastName: string;
-    password: string;
     email: string;
+    password: string;
 }
 
 
@@ -19,22 +17,25 @@ export default function Login() {
 
     const { register, handleSubmit, formState: { errors } } = useForm<IFormInputs>();
     
-    
+    const [message, setMessage] = useState("")
 
 
     const onSubmit = async (data: IFormInputs) => {
-        // const res = await axios.post("http://localhost:3000/api/user-login", data,
-        //     { withCredentials: true }
-        // )
+        const res = await fetch("http://localhost:3000/api/user-login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+          credentials: "include"
+        })
 
-        // if(res.data.error) {
-        //   alert("Email or Password is Incorrect")
-        // }
-        // else {
-        //     setTimeout(() => {
-        //         redirect("/")
-        //     }, 1000)
-        // }
+        if(res.ok) {
+          setMessage(await res.json())
+        }
+        else {
+          setMessage("error")
+        }
     }
     
 
