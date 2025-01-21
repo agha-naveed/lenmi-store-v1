@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
 import Form from 'next/form'
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { redirect } from 'next/navigation';
 
 
 interface IFormInputs {
@@ -28,15 +28,15 @@ export default function Login() {
         })
         console.log("this is response"+res)
 
-        // const router = useRouter()
 
-        // if(res.ok) {
-        //   setMessage(res)
-        //   // router.push("/")
-        // }
-        // else {
-        //   setMessage("error")
-        // }
+        if(res.ok) {
+          setMessage(await res.json())
+          redirect("/")
+        }
+        else {
+          setMessage("error")
+          alert("Error")
+        }
     }
     
 
