@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
 import Form from 'next/form'
 import Link from 'next/link';
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation';
 
 
 interface IFormInputs {
@@ -23,20 +23,20 @@ export default function Login() {
     const onSubmit = async (data: IFormInputs) => {
         const res = await fetch("http://localhost:3000/account/api", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
           body: JSON.stringify(data),
           credentials: "include"
         })
-        console.log(res)
-        if(res.ok) {
-          
-          setMessage(await res.json())
-        }
-        else {
-          setMessage("error")
-        }
+        console.log("this is response"+res)
+
+        // const router = useRouter()
+
+        // if(res.ok) {
+        //   setMessage(res)
+        //   // router.push("/")
+        // }
+        // else {
+        //   setMessage("error")
+        // }
     }
     
 
