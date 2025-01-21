@@ -11,7 +11,6 @@ import { GoChecklist } from "react-icons/go";
 import { TbMessageDots } from "react-icons/tb";
 import { IoSettingsOutline } from "react-icons/io5"
 
-
 interface ApiResponse {
     first_name: string;
     last_name: string;

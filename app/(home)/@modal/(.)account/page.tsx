@@ -2,44 +2,45 @@
 
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import Link from 'next/link'
+import { redirect } from 'next/navigation'
 import { IoMdCloseCircle } from "react-icons/io"
 import { useRouter } from 'next/navigation'
 import Form from 'next/form'
 
+
 interface IFormInputs {
-  firstName: string;
-  lastName: string;
-  password: string;
   email: string;
+  password: string;
 }
+
 
 export default function Login() {
   const router = useRouter()
   
-  const { register, handleSubmit, formState: { errors } } = useForm<IFormInputs>()
+      const { register, handleSubmit, formState: { errors } } = useForm<IFormInputs>();
+      
+      const [message, setMessage] = useState("")
+  
+  
+      const onSubmit = async (data: IFormInputs) => {
+          // const res = await fetch("http://localhost:3000/account/api", {
+          //   method: "POST",
+          //   body: JSON.stringify(data),
+          //   credentials: "include"
+          // })
 
-  const [isOpen, setIsOpen] = useState(true)
-
-
-  const onSubmit = async (data: IFormInputs) => {
-    // try {
-    //   const res = await axios.post("http://localhost:3000/api/user-login", data, {
-    //     withCredentials: true
-    //   })
-
-    //   if (res.data.error) {
-    //     alert("Email or Password is Incorrect")
-    //   } else {
-    //     setTimeout(() => {
-    //       router.push("/")
-    //     }, 1000)
-    //   }
-    // } catch (error) {
-    //   console.error("Error during login:", error)
-    //   alert("An error occurred. Please try again.")
-    // }
-  }
+          // console.log("this is response"+res)
+  
+  
+          // if(res.ok) {
+          //   setMessage(await res.json())
+          //   redirect("/")
+          // }
+          // else {
+          //   setMessage("error")
+          //   alert("Error")
+          // }
+      }
 
   return (
       <div className='w-full min-h-screen fixed top-0 left-0 backdrop-blur-[10px] bg-black/40 grid justify-center content-center z-[200]'>

@@ -12,7 +12,6 @@ const opensans = Open_Sans({
 export const metadata: Metadata = {
   title: "Lenmi Store Online Shopping Platform",
   description: "Get Whatever you want!",
-  themeColor: "#ffffff"
 };
 
 export default function RootLayout(props: {
