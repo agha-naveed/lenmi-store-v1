@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import Form from 'next/form'
 import Link from 'next/link';
 import { redirect } from 'next/navigation'
+import axios from 'axios';
 
 export default function Signup() {
     
@@ -17,26 +18,27 @@ export default function Signup() {
         first_name: string;
         last_name: string;
         phone_number: number;
-        password: string;
         email: string,
+        password: string;
         account_type: string
     }
 
 
     const onSubmit = async (data: IFormInputs) => {
-    //     const res = await axios.post("http://localhost:3000/api/user-signup", data)
-
-    //     setMessage(res.data)
         
-    //     if(res.data.error) {
-    //         alert("Error!")
-    //     }
+        const res = await axios.post("/account/signup/api", data)
 
-    //     else {
-    //         setTimeout(() => {
-    //             redirect("/account")
-    //         }, 1000)
-    //     }
+        setMessage(res.data)
+        
+        if(res.data.error) {
+            alert("Error!")
+        }
+
+        else {
+            setTimeout(() => {
+                redirect("/account")
+            }, 1000)
+        }
     }
 
     function restrictSigns(e:any): void {
