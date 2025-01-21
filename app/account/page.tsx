@@ -21,7 +21,7 @@ export default function Login() {
 
 
     const onSubmit = async (data: IFormInputs) => {
-        const res = await fetch("http://localhost:3000/api/user-login", {
+        const res = await fetch("http://localhost:3000/account/api", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -29,8 +29,9 @@ export default function Login() {
           body: JSON.stringify(data),
           credentials: "include"
         })
-
+        console.log(res)
         if(res.ok) {
+          
           setMessage(await res.json())
         }
         else {
