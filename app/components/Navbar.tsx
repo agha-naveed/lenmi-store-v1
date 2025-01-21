@@ -18,6 +18,7 @@ interface ApiResponse {
     account_type: string;
 }
 
+
 export default function Navbar() {
     const [message, setMessage] = useState<ApiResponse | null>(null);
     

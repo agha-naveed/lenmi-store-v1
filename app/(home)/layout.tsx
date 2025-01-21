@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import "../globals.css";
 import Navbar from '@/components/Navbar'
+import { Suspense } from "react";
 
 const opensans = Open_Sans({
   variable: "--font-opensans",
@@ -23,9 +24,11 @@ export default function RootLayout(props: {
       <body
         className={`${opensans.variable} antialiased`}
       >
-        <Navbar />
-        {props.children}
-        {props.modal}
+        <Suspense fallback={"<h1>Loading</h1>"}>
+          <Navbar />
+          {props.children}
+          {props.modal}
+        </Suspense>
       </body>
     </html>
   );
