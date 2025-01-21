@@ -49,7 +49,7 @@ export default function Login() {
             <IoMdCloseCircle title='Close' className='text-[26px] cursor-pointer' />
           </button>
 
-          <Form action={""} onSubmit={() => handleSubmit(onSubmit)} className='grid bg-white gap-2 font-muli-regular border border-gray-400 pt-10 p-5 rounded-md'>
+          <Form action={"/"} onSubmit={() => (onSubmit)} className='grid bg-white gap-2 font-muli-regular border border-gray-400 pt-10 p-5 rounded-md'>
             <h2 className='text-3xl font-opensans text-center font-semibold'>Login</h2>
 
             <div className='grid'>
