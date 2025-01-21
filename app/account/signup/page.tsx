@@ -26,19 +26,27 @@ export default function Signup() {
 
     const onSubmit = async (data: IFormInputs) => {
         
-        const res = await axios.post("/account/signup/api", data)
-
-        setMessage(res.data)
-        
-        if(res.data.error) {
-            alert("Error!")
+        const res = await fetch("http://localhost:3000/account/signup/api", {
+            method: "POST",
+            body: JSON.stringify(data)
+        })
+        if(res.ok) {
+            setMessage(await res.json())
+        }
+        else {
+            setMessage("error")
         }
 
-        else {
+        
+        if(message != "error") {
             setTimeout(() => {
                 redirect("/account")
             }, 1000)
         }
+        else {
+            alert("Invalid Email or Password")
+        }
+
     }
 
     function restrictSigns(e:any): void {

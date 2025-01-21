@@ -4,7 +4,7 @@ const URI = 'mongodb://127.0.0.1:27017/lenmi-store';
 
 let isConnected = false;
 
-export default async function dbConnection(): Promise<void> {
+export default async function dbConnection(): Promise<any> {
   if (isConnected) {
     console.log('Already connected to MongoDB');
     return;
