@@ -113,3 +113,36 @@ input[type="number"] {
     @apply bg-background text-foreground;
   }
 }
+
+.loader-div {
+  background-color: orange;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  position: relative;
+}
+.loader-div::before {
+  content: "";
+  display: block;
+  width: 150px;
+  height: 200px;
+  position: absolute;
+  bottom: 50%;
+  transform: translateY(50%);
+  right: -5px;
+  clip-path: polygon(100% 0, 100% 100%, 0 51%);
+  z-index: 30;
+  background-color: white;
+  animation: loader 0.4s alternate infinite;
+}
+
+@keyframes loader {
+  0% {
+    width: 150px;
+    height: 200px;
+  }
+  100% {
+    width: 150px;
+    height: 0;
+  }
+}
