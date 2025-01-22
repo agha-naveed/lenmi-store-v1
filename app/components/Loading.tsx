@@ -1,11 +1,20 @@
 import React from 'react'
-import loader from '@/images/loader2.gif'
-import Image from "next/image";
 
-export default function Loader() {
+export default function MyLoader() {
   return (
-    <div className='w-full h-screen flex justify-center items-center'>
-        <Image src={loader} alt='Loader' width={200} height={200} />
+    <div className='w-full h-screen flex flex-col justify-center items-center'>
+        
+      <div className='flex items-center'>
+        <div className="pacman"></div>
+        <div className='dots'>
+          <div className="dot"></div>
+          <div className="dot"></div>
+          <div className="dot"></div>
+          <div className="dot"></div>
+        </div>
+      </div>
+      <p className='font-opensans font-semibold mt-2 text-[22px] tracking-[-1px]'>Loading...</p>
+
     </div>
   )
 }
