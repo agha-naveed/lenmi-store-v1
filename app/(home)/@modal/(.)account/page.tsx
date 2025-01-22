@@ -63,8 +63,8 @@ export default function Login() {
               <input
                 type="password"
                 className='w-[300px] h-9 px-2 rounded-md border border-gray-300'
-                {...register("password", { required: "Password is required" })}
-              />
+                {...register("password", { required: "Password is required" })} />
+                
               {errors.password && <span className='text-red-500'>{errors.password.message}</span>}
             </div>
 

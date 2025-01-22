@@ -114,35 +114,27 @@ input[type="number"] {
   }
 }
 
-.loader-div {
-  background-color: orange;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  position: relative;
-}
-.loader-div::before {
-  content: "";
-  display: block;
-  width: 150px;
-  height: 200px;
-  position: absolute;
-  bottom: 50%;
-  transform: translateY(50%);
-  right: -5px;
-  clip-path: polygon(100% 0, 100% 100%, 0 51%);
-  z-index: 30;
-  background-color: white;
-  animation: loader 0.4s alternate infinite;
+.pacman {
+  display: flex;
+  /* flex-direction: column; */
 }
 
-@keyframes loader {
-  0% {
-    width: 150px;
-    height: 200px;
-  }
-  100% {
-    width: 150px;
-    height: 0;
-  }
+.pacman::before {
+  content: "";
+  display: block;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  background-color: orangered;
+}
+.pacman::after {
+  content: "";
+  display: block;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+  width: 50px;
+  height: 50px;
+  background-color: orangered;
 }
