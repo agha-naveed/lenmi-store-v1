@@ -24,6 +24,8 @@ export default function Navbar() {
 
     const [message, setMessage] = useState<ApiResponse | null>(null);
 
+    const [logOut, setLogOut] = useState(false)
+
 
     useInsertionEffect(() => {
 
@@ -35,7 +37,6 @@ export default function Navbar() {
 
             if(fetchData.ok == true) {
                 let data = await fetchData.json()
-                console.log("fetch data done")
                 setMessage(data)
             }
             else {
@@ -43,15 +44,24 @@ export default function Navbar() {
             }
         }
 
-        getData()
-    }, [])
+        async function logout() {
+            let loggingOut = await fetch("http://localhost:3000/account/api", {
+                method: "PATCH",
+                credentials: "include"
+            })
+        }
 
-    async function logout() {
-        let loggingOut = await fetch("http://localhost:3000/account/api", {
-            method: "PATCH",
-            credentials: "include"
-        })
-    }
+        if(!logOut)
+            getData()
+
+        if(logOut) {
+            setMessage(null)
+            logout()
+        }
+
+    }, [logOut])
+    
+    
     
 
     return (
@@ -99,7 +109,7 @@ export default function Navbar() {
                                                 <li className='p-[10px] rounded-lg hover:bg-gray-200 cursor-pointer transition-all flex items-center gap-2 text-[16px]'>
                                                     <MdOutlineHelpOutline className='text-[18px]' />Help & Support
                                                 </li>
-                                                <li onClick={() => logout()} className='p-[10px] rounded-lg hover:bg-gray-200 cursor-pointer transition-all flex items-center gap-2 text-[16px]'>
+                                                <li onClick={() => setLogOut(!logOut)} className='p-[10px] rounded-lg hover:bg-gray-200 cursor-pointer transition-all flex items-center gap-2 text-[16px]'>
                                                     <LuLogOut className='text-[18px]' />Logout
                                                 </li>
                                                 
