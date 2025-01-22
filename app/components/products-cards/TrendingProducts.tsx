@@ -16,7 +16,7 @@ export default function TrendingProducts() {
                     
                     <Link href={""} className='justify-items-center w-fit'>
                         <div className='sm:w-full sm:h-[260px] w-fit h-[200px] rounded-[22px] overflow-hidden'>
-                            <Image width={200} height={200} src="https://www.space-tech.co/cdn/shop/files/LE-30-Lifestyle_c501ee74-78ea-4157-8b02-e723ca8eab44_2048x2048.jpg?v=1735718661" alt="" className='w-full h-full object-cover' />
+                            <Image  width={200} height={200} src="https://www.space-tech.co/cdn/shop/files/LE-30-Lifestyle_c501ee74-78ea-4157-8b02-e723ca8eab44_2048x2048.jpg?v=1735718661" alt="" className='w-full h-full object-cover' />
                         </div>
                         <span className='text-black w-full flex gap-[2px] py-2 items-end justify-center font-opensans font-medium'>
                             PKR

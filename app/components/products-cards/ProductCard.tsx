@@ -1,14 +1,15 @@
 import React from 'react'
 import Link from 'next/link';
 import { FaStar, FaCartPlus } from "react-icons/fa";
+import Image from 'next/image';
 
 export default function ProductCard() {
   return (
     <div className='product-card w-fit transition-all'>
         <div className='bg-white border border-gray-400 rounded-lg sm:w-52 w-[156px] sm:h-[310px] p-2 grid gap-3'>
             <div className='sm:w-[190px] w-[140px] sm:h-[170px] h-[120px] select-none group transition_2 rounded-lg overflow-hidden border relative cursor-pointer'>
-                <img src="https://typeshop.pk/wp-content/uploads/2024/09/749789-product-0-i-638518506623874710_06458751-c09a-4dec-b82f-416beff7e94f.webp" className='w-full h-full object-cover absolute transition_2 opacity-100 group-hover:opacity-0' alt="" />
-                <img src="https://img.drz.lazcdn.com/static/pk/p/7b2a2355148607d8c12d443afbae210b.jpg_720x720q80.jpg_.webp" className='w-full h-full object-cover transition_2  group-hover:opacity-100 opacity-0 absolute' alt="" />
+                <Image src="https://mrlaptop.pk/wp-content/uploads/2024/11/s-l400.jpg" className='w-full h-full object-cover absolute transition_2 opacity-100 group-hover:opacity-0' alt="" width={200} height={200}/>
+                <Image src="https://img.drz.lazcdn.com/static/pk/p/7b2a2355148607d8c12d443afbae210b.jpg_720x720q80.jpg_.webp" className='w-full h-full object-cover transition_2  group-hover:opacity-100 opacity-0 absolute' alt="" width={200} height={200}/>
             </div>
 
             <div className='select-none'>

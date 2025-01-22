@@ -35,7 +35,7 @@ export default function CarouselWithImages() {
                   <Image 
                     src={image}
                     alt={`Image ${index + 1}`} 
-                    className="object-cover w-[1500px] h-full rounded-lg" 
+                    className="object-cover w-[1500px] h-full rounded-lg" placeholder='blur'
                   />
                 </CardContent>
               </Card>
