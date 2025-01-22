@@ -26,8 +26,10 @@ export default function RootLayout(props: {
       >
         <Suspense fallback={<Loader />}>
           <Navbar />
-          {props.children}
-          {props.modal}
+          <Suspense fallback={<Loader />}>
+            {props.children}
+            {props.modal}
+          </Suspense>
         </Suspense>
       </body>
     </html>
