@@ -125,7 +125,7 @@ input[type="number"] {
   position: relative;
   width: 44px;
   height: 22px;
-  background-color: rgb(30 41 59 / var(--tw-bg-opacity, 1));
+  background-color: white;
   z-index: 20;
 }
 .pacman::before {
@@ -164,7 +164,7 @@ input[type="number"] {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background-color: black;
+  background-color: white;
   animation: eating-dots 0.6s both infinite;
 }
 
