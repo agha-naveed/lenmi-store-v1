@@ -116,25 +116,39 @@ input[type="number"] {
 
 .pacman {
   display: flex;
-  /* flex-direction: column; */
+  flex-direction: column;
 }
 
-.pacman::before {
+.pacman::before, .pacman::after {
   content: "";
   display: block;
-  border-top-left-radius: 50%;
-  border-top-right-radius: 50%;
   position: relative;
   width: 50px;
-  height: 50px;
+  height: 25px;
   background-color: orangered;
 }
+.pacman::before {
+  border-radius: 50px 50px 0 0;
+  animation: loader-up 0.4s alternate infinite;
+}
 .pacman::after {
-  content: "";
-  display: block;
-  border-bottom-left-radius: 50%;
-  border-bottom-right-radius: 50%;
-  width: 50px;
-  height: 50px;
-  background-color: orangered;
+  border-radius: 0 0 50px 50px;
+  animation: loader-down 0.4s alternate infinite;
+}
+@keyframes loader-up {
+  0% {
+    transform: rotate(-22deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes loader-down {
+  0% {
+    transform: rotate(22deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
