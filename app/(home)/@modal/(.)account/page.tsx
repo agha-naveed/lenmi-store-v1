@@ -25,7 +25,6 @@ export default function Login() {
             body: JSON.stringify(data),
             credentials: "include"
           })
-
           
           if(res.ok) {
             router.back()
