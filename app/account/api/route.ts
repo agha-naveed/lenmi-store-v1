@@ -46,3 +46,14 @@ export async function GET(req: NextRequest) {
         return NextResponse.json(null)
     }
 }
+
+
+
+export async function PATCH(req: NextRequest) {
+    
+    const cookie = await cookies()
+    cookie.delete("email")
+    window.location.reload()
+
+    return Response.json({message: "done"})
+}

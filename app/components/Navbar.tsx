@@ -5,12 +5,12 @@ import Image from 'next/image';
 import { FiSearch } from "react-icons/fi";
 import { TiShoppingCart } from "react-icons/ti";
 import { MdOutlineAccountCircle, MdOutlineHelpOutline } from "react-icons/md";
+import { LuLogOut } from "react-icons/lu";
 import logo from '@/images/logo.png'
 import { FaBars } from "react-icons/fa6";
 import { GoChecklist } from "react-icons/go";
 import { TbMessageDots } from "react-icons/tb";
 import { IoSettingsOutline } from "react-icons/io5"
-
 
 interface ApiResponse {
     first_name: string;
@@ -45,6 +45,13 @@ export default function Navbar() {
 
         getData()
     }, [])
+
+    async function logout() {
+        let loggingOut = await fetch("http://localhost:3000/account/api", {
+            method: "PATCH",
+            credentials: "include"
+        })
+    }
     
 
     return (
@@ -92,6 +99,10 @@ export default function Navbar() {
                                                 <li className='p-[10px] rounded-lg hover:bg-gray-200 cursor-pointer transition-all flex items-center gap-2 text-[16px]'>
                                                     <MdOutlineHelpOutline className='text-[18px]' />Help & Support
                                                 </li>
+                                                <li onClick={() => logout()} className='p-[10px] rounded-lg hover:bg-gray-200 cursor-pointer transition-all flex items-center gap-2 text-[16px]'>
+                                                    <LuLogOut className='text-[18px]' />Logout
+                                                </li>
+                                                
                                             </ul>
                                         </div>
                                     </div>
