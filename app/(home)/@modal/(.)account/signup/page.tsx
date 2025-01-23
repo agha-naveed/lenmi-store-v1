@@ -2,9 +2,9 @@
 
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import Form from 'next/form'
 import { IoMdCloseCircle } from "react-icons/io"
 import { useRouter } from 'next/navigation'
+import axios from 'axios'
 
 interface IFormInputs {
     first_name: string;
@@ -20,26 +20,21 @@ export default function Login() {
   
   const { register, handleSubmit, formState: { errors } } = useForm<IFormInputs>()
 
-  const [isOpen, setIsOpen] = useState(true)
 
 
   const onSubmit = async (data: IFormInputs) => {
-    // try {
-    //   const res = await axios.post("http://localhost:3000/api/user-login", data, {
-    //     withCredentials: true
-    //   })
+    const res = await axios.post("http://localhost:3000/account/signup/api", data, {
+        withCredentials: true
+    })
 
-    //   if (res.data.error) {
-    //     alert("Email or Password is Incorrect")
-    //   } else {
-    //     setTimeout(() => {
-    //       router.push("/")
-    //     }, 1000)
-    //   }
-    // } catch (error) {
-    //   console.error("Error during login:", error)
-    //   alert("An error occurred. Please try again.")
-    // }
+    if (res.status == 201) {
+        setTimeout(() => {
+            router.back()
+        }, 1000)
+    }
+    else {
+        alert("Email or Password is Incorrect")
+    }
   }
 
     function restrictSigns(e:any): void {
@@ -56,7 +51,7 @@ export default function Login() {
             <IoMdCloseCircle title='Close' className='text-[26px] cursor-pointer' />
           </button>
 
-          <Form action={''} onSubmit={handleSubmit(onSubmit)} className='grid bg-white gap-2 font-muli-regular border border-gray-400 pt-10 p-5 rounded-md' formMethod='POST'>
+          <form onSubmit={handleSubmit(onSubmit)} className='grid bg-white gap-2 font-muli-regular border border-gray-400 pt-10 p-5 rounded-md' method='POST'>
             <h2 className='text-3xl font-opensans text-center font-semibold'>Signup</h2>
 
                 <div className='flex gap-2'>
@@ -98,7 +93,7 @@ export default function Login() {
 
                 <button type='submit' title='Sign up!' className='w-full h-10 transition-all rounded-md border font-muli-semibold bg-slate-800 hover:bg-slate-900 text-white '>Sign up!</button>
 
-            </Form>
+            </form>
 
         </div>
       </div>

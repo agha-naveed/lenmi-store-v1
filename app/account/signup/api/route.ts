@@ -15,22 +15,27 @@ export async function POST(request: NextRequest) {
 
     await dbConnection();
 
+    try {
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
 
-    bcrypt.genSalt(10, async function(err, salt) {
-        bcrypt.hash(password, salt, async function(err, hash) {
-            await User.insertMany([
-                {
-                    first_name, last_name, phone_number, email, password: hash, account_type
-                }
-            ])
-            .then((res) => NextResponse.json(res))
-            .catch(() => {
-                return NextResponse.json({
-                    error: "Duplicate Email is not Allowed!"
-                })
-            })
-        });
-    });
+        const newUser = await User.insertMany([
+            {
+                first_name,
+                last_name,
+                phone_number,
+                email,
+                password: hashedPassword,
+                account_type,
+            }
+        ]);
 
-    
+        return NextResponse.json(newUser, { status: 201 });
+    }
+    catch (error) {
+        console.error(error);
+        return NextResponse.json({
+            error: "Duplicate Email is not Allowed!"
+        }, { status: 405 });
+    }
 }
