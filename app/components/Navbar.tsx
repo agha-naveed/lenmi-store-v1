@@ -80,7 +80,7 @@ export default function Navbar() {
                             <div className='flex gap-[6px] cursor-pointer h-fit'>
                                 <MdOutlineAccountCircle className='account text-[38px]' title='Account' />
                                 <div className='grid content-center leading-[17px]'>
-                                    <span className='text-[13px] font-opensans'>Welcome</span>
+                                    <span className='text-[13px] font-opensans font-medium'>Welcome</span>
                                     <span className='font-opensans font-semibold text-[14px]'>{message?.first_name ?? "Login / Signup"}</span>
                                 </div>
                             </div>
@@ -90,10 +90,10 @@ export default function Navbar() {
                                     message != null ? 
                                     <div>
                                         <div>
-                                            <p className='font-opensans leading-[1.2] p-2 grid text-[14px]'>Welcome: <span className='text-[16px]'> {message.first_name} {message.last_name}</span></p>
+                                            <p className='font-opensans font-medium leading-[1.2] p-2 grid text-[14px]'>Welcome: <span className='text-[16px]'> {message.first_name} {message.last_name}</span></p>
                                         </div>
 
-                                        <div className='font-opensans'>
+                                        <div className='font-opensans font-medium'>
                                             <ul className='grid'>
                                                 <li className='p-[10px] rounded-lg hover:bg-gray-200 cursor-pointer transition-all flex items-center gap-2 text-[16px]'>
                                                     <GoChecklist className='text-[18px]' />Orders
@@ -115,7 +115,7 @@ export default function Navbar() {
                                         </div>
                                     </div>
                                     :
-                                    <div className="grid font-opensans gap-1">
+                                    <div className="grid font-opensans font-medium gap-1">
                                         <button>
                                             <Link href="/account" className='flex rounded-[10px] justify-center items-center w-full h-[40px] bg-slate-800 transition-all hover:bg-white hover:text-black hover:border border-black text-white'> Login</Link>
                                         </button>
@@ -137,7 +137,7 @@ export default function Navbar() {
                                     <span className='text-[12.5px] text-black font-opensans  bg-white rounded-xl w-[26px] h-[14px] text-center'>
                                         <p className='relative top-[-2px] font-opensans font-bold'>0</p>
                                     </span>
-                                    <span className='font-opensans font-semibold text-[14px]'>Cart</span>
+                                    <span className='font-opensans font-medium text-[14px]'>Cart</span>
                                 </div>
                             </Link>
                         </div>
@@ -154,7 +154,7 @@ export default function Navbar() {
                     </div>
                 </div>
 
-                <nav className='content-center md:block hidden font-opensans '>
+                <nav className='content-center md:block hidden font-opensans font-medium'>
                     <ul className='text-white flex w-full justify-center p-3 gap-2'>
                         <li className='flex'>
                             <Link href={"/"} className='py-2 px-4 transition-all underline-offset-0 hover:underline  hover:underline-offset-8'>Home</Link>
