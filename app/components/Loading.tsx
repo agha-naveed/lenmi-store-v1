@@ -13,7 +13,7 @@ export default function MyLoader() {
           <div className="dot"></div>
         </div>
       </div>
-      <p className='font-opensans font-semibold mt-2 text-[22px] text-white tracking-[-1px]'>Loading...</p>
+      <p className='font-opensans font-medium mt-2 text-[22px] text-white tracking-[-1px]'>Loading...</p>
 
     </div>
   )

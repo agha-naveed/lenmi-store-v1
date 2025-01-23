@@ -10,7 +10,7 @@
 @font-face {
   font-family: 'opensans';
   src: url(../public/font/OpenSans-Regular.ttf) format('truetype');
-  font-weight: normal;
+  font-weight: 300;
 }
 @font-face {
   font-family: 'opensans';

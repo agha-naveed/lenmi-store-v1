@@ -59,18 +59,16 @@ export default function Navbar() {
 
     }, [logOut])
     
-    
-    
 
     return (
         <div className='w-full md:h-[130px] h-[135px] relative z-30 bg-slate-800 py-3'>
             <div className="container mx-auto">
                 <div className='flex w-full justify-between md:px-0 px-3'>
                     <Link href="/">
-                        <Image decoding='async' className='md:w-40 w-32' src={logo} width={200} height={200} alt="Lenmi Store Logo" />
+                        <Image decoding='async' className='md:w-40 sm:w-32 w-28' src={logo} width={200} height={200} alt="Lenmi Store Logo" />
                     </Link>
                     <div className='md:flex hidden w-1/2'>
-                        <input type="text" placeholder='What are you looking for?' className='pl-3 pr-[53px] h-[44px] w-full rounded-md outline-none font-opensans' />
+                        <input type="text" placeholder='What are you looking for?' className='pl-3 pr-[53px] h-[44px] w-full rounded-md outline-none font-opensans font-medium' />
                         <FiSearch title='Search' className='text-xl cursor-pointer p-2 top-[2px] rounded-md w-11 h-10 text-white bg-slate-800 relative -left-11' />
                     </div>
 
@@ -149,7 +147,7 @@ export default function Navbar() {
                 <div className='md:hidden flex py-5 px-3 items-center'>
                     <FaBars className='text-white text-[34px] relative left-1' />
                     <div className='flex w-full'>
-                        <input type="text" placeholder='What are you looking for?' className='relative left-7 pl-3 pr-[53px] h-[44px] w-full rounded-md outline-none font-opensans ' />
+                        <input type="text" placeholder='What are you looking for?' className='relative left-7 pl-3 pr-[53px] h-[44px] w-full rounded-md outline-none font-opensans  font-medium' />
                         <FiSearch title='Search' className='text-xl cursor-pointer p-2 top-[2px] rounded-md w-11 h-10 text-white bg-slate-800 relative -left-4' />
                     </div>
                 </div>
