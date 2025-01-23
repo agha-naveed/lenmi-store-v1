@@ -5,12 +5,12 @@
 @font-face {
   font-family: 'opensans';
   src: url(../public/font/OpenSans-Light.ttf) format('truetype');
-  font-weight: 100;
+  font-weight: 100 200;
 }
 @font-face {
   font-family: 'opensans';
   src: url(../public/font/OpenSans-Regular.ttf) format('truetype');
-  font-weight: 300;
+  font-weight: 300 400;
 }
 @font-face {
   font-family: 'opensans';
@@ -20,17 +20,17 @@
 @font-face {
   font-family: 'opensans';
   src: url(../public/font/OpenSans-SemiBold.ttf) format('truetype');
-  font-weight: 700;
+  font-weight: 600;
 }
 @font-face {
   font-family: 'opensans';
   src: url(../public/font/OpenSans-Bold.ttf) format('truetype');
-  font-weight: bold;
+  font-weight: 700;
 }
 @font-face {
   font-family: 'opensans';
   src: url(../public/font/OpenSans-ExtraBold.ttf) format('truetype');
-  font-weight: bolder;
+  font-weight: 900;
 }
 
 .login-signup-popup::before {
