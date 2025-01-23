@@ -22,11 +22,10 @@ interface ApiResponse {
 
 export default function Navbar() {
     
-
+    
     const [message, setMessage] = useState<ApiResponse | null>(null);
 
     const [logOut, setLogOut] = useState(false)
-    // const [logIn, setLogIn] = useState(false)
 
 
     useEffect(() => {
@@ -52,7 +51,6 @@ export default function Navbar() {
         if(logOut == true) {
             async function logout() {
                 await axios.patch("http://localhost:3000/account/api")
-                    // setLogIn(false)
                     setMessage(null)
             }
 

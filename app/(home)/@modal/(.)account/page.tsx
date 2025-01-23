@@ -6,14 +6,13 @@ import { IoMdCloseCircle } from "react-icons/io"
 import { useRouter } from 'next/navigation'
 
 
-
 interface IFormInputs {
   email: string;
   password: string;
 }
 
 export default function Login() {
-
+  
   const router = useRouter()
   const [error, setError] = useState("")
       const { register, handleSubmit, formState: { errors } } = useForm<IFormInputs>();
