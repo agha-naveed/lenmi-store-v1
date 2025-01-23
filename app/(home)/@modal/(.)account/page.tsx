@@ -15,7 +15,7 @@ interface IFormInputs {
 export default function Login() {
 
   const router = useRouter()
-  
+  const [error, setError] = useState("")
       const { register, handleSubmit, formState: { errors } } = useForm<IFormInputs>();
   
       const onSubmit = async (data: IFormInputs) => {
@@ -32,7 +32,7 @@ export default function Login() {
             }, 800)
           }
           else {
-            alert("Error")
+            setError("Invalid Email or Password")
           }
       }
 
@@ -64,9 +64,9 @@ export default function Login() {
                 className='w-[300px] h-9 px-2 rounded-md border border-gray-300'
                 {...register("password", { required: "Password is required" })} />
                 
-              {errors.password && <span className='text-red-500'>{errors.password.message}</span>}
+              {error ? <span className='text-red-600 '>* {error}</span> : ""}
             </div>
-
+            
             <button
               type='submit'
               title='Login'
