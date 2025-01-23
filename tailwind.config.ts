@@ -13,9 +13,7 @@ export default {
 			'custom-light': '1px 10px 15px rgba(43, 43, 43, 0.438)',
 		},
   		fontFamily: {
-  			opensans: [
-  				'var(--font-opensans)'
-  			]
+  			opensans: ['opensans']
   		},
   		colors: {
   			orangeClr: '#f08a06',

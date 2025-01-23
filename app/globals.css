@@ -2,6 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'opensans';
+  src: url(../public/font/OpenSans-Light.ttf) format('truetype');
+  font-weight: 100;
+}
+@font-face {
+  font-family: 'opensans';
+  src: url(../public/font/OpenSans-Regular.ttf) format('truetype');
+  font-weight: normal;
+}
+@font-face {
+  font-family: 'opensans';
+  src: url(../public/font/OpenSans-Medium.ttf) format('truetype');
+  font-weight: 500;
+}
+@font-face {
+  font-family: 'opensans';
+  src: url(../public/font/OpenSans-SemiBold.ttf) format('truetype');
+  font-weight: 700;
+}
+@font-face {
+  font-family: 'opensans';
+  src: url(../public/font/OpenSans-Bold.ttf) format('truetype');
+  font-weight: bold;
+}
+@font-face {
+  font-family: 'opensans';
+  src: url(../public/font/OpenSans-ExtraBold.ttf) format('truetype');
+  font-weight: bolder;
+}
+
 .login-signup-popup::before {
   content: '';
   position: absolute;
