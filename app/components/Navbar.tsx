@@ -11,6 +11,7 @@ import { FaBars } from "react-icons/fa6";
 import { GoChecklist } from "react-icons/go";
 import { TbMessageDots } from "react-icons/tb";
 import { IoSettingsOutline } from "react-icons/io5"
+import { RxDashboard } from "react-icons/rx";
 import axios from 'axios';
 
 interface ApiResponse {
@@ -93,6 +94,10 @@ export default function Navbar() {
 
                                         <div className='font-opensans font-medium'>
                                             <ul className='grid'>
+                                            
+                                                <li className='p-[10px] rounded-lg hover:bg-gray-200 cursor-pointer transition-all flex items-center gap-2 text-[16px]'>
+                                                    <RxDashboard className='text-[18px]' />Dashboard
+                                                </li>
                                                 <li className='p-[10px] rounded-lg hover:bg-gray-200 cursor-pointer transition-all flex items-center gap-2 text-[16px]'>
                                                     <GoChecklist className='text-[18px]' />Orders
                                                 </li>

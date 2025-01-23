@@ -11,6 +11,7 @@ export default function Signup() {
     const { register, handleSubmit, formState: { errors } } = useForm<IFormInputs>();
     
     let [message, setMessage] = useState("")
+    let [emailError, setEmailError] = useState("")
 
 
     interface IFormInputs {
@@ -25,26 +26,32 @@ export default function Signup() {
 
     const onSubmit = async (data: IFormInputs) => {
         
-        const res = await fetch("http://localhost:3000/account/signup/api", {
-            method: "POST",
-            body: JSON.stringify(data)
-        })
-        if(res.ok) {
-            setMessage(await res.json())
+        if(data.email.includes(".com") || data.email.includes(".net") || data.email.includes(".org")) {
+            setEmailError("")
+            const res = await fetch("http://localhost:3000/account/signup/api", {
+                method: "POST",
+                body: JSON.stringify(data)
+            })
+            if(res.ok) {
+                setMessage(await res.json())
+            }
+            else {
+                setMessage("error")
+            }
+
+            
+            if(message != "error") {
+                redirect("/account")
+            }
+            else {
+                alert("Invalid Email or Password")
+            }
         }
         else {
-            setMessage("error")
+            setEmailError("Not Valid Email...")
         }
-
-        
-        if(message != "error") {
-            redirect("/account")
-        }
-        else {
-            alert("Invalid Email or Password")
-        }
-
     }
+    
 
     function restrictSigns(e:any): void {
         const char = e.key;
@@ -77,6 +84,7 @@ export default function Signup() {
                     <div className='grid'>
                         <label htmlFor="">Email</label>
                         <input type="email" placeholder='e.g: abc@xyz.com' className='h-9 px-2 rounded-md border border-gray-300' required {...register("email")} />
+                        {<span className='text-red-600 text-[15px]'> {emailError} </span>}
                     </div>
                     <div className='grid'>
                         <label htmlFor="">Password</label>
