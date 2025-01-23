@@ -1,5 +1,5 @@
 "use client"
-import React, { useInsertionEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link';
 import Image from 'next/image';
 import { FiSearch } from "react-icons/fi";
@@ -11,6 +11,7 @@ import { FaBars } from "react-icons/fa6";
 import { GoChecklist } from "react-icons/go";
 import { TbMessageDots } from "react-icons/tb";
 import { IoSettingsOutline } from "react-icons/io5"
+import axios from 'axios';
 
 interface ApiResponse {
     first_name: string;
@@ -27,35 +28,32 @@ export default function Navbar() {
     const [logOut, setLogOut] = useState(false)
 
 
-    useInsertionEffect(() => {
+    useEffect(() => {
+        
+        if(logOut == false) {
+            const getData = async () => {
+                
+                let fetchData = await axios.get("http://localhost:3000/account/api", {
+                    withCredentials: true
+                })
 
-        const getData = async () => {
-            let fetchData = await fetch("http://localhost:3000/account/api", {
-                method: "GET",
-                credentials: "include"
-            })
-
-            if(fetchData.ok == true) {
-                let data = await fetchData.json()
-                setMessage(data)
+                if(fetchData != null) {
+                    let Data = await fetchData.data
+                    setMessage(Data)
+                }
+                else {
+                    setMessage(null)
+                }
             }
-            else {
+            getData()
+        }
+
+        if(logOut == true) {
+            async function logout() {
+                await axios.patch("http://localhost:3000/account/api")
                 setMessage(null)
             }
-        }
 
-        async function logout() {
-            let loggingOut = await fetch("http://localhost:3000/account/api", {
-                method: "PATCH",
-                credentials: "include"
-            })
-        }
-
-        if(!logOut)
-            getData()
-
-        if(logOut) {
-            setMessage(null)
             logout()
         }
 

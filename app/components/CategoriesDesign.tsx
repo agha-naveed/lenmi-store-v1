@@ -12,13 +12,13 @@ import Link from 'next/link'
 
 export default function CategoriesDesign() {
   return (
-        <div className='flex container mx-auto py-10 font-opensans'>
+        <div className='flex md:flex-row flex-col container mx-auto py-10 font-opensans'>
             
-            <div className='w-full h-auto flex justify-center items-center bg-slate-800'>
+            <div className='w-full md:h-auto h-[100px] flex justify-center items-center bg-slate-800'>
                 <span className='font-semibold text-3xl text-white'>Categories</span>
             </div>
 
-            <div className='w-fit h-full text-white flex flex-wrap justify-end gap-[11px]'>
+            <div className='w-fit h-full text-white flex flex-wrap md:justify-end justify-center gap-[11px]'>
                 <Link href={""} className='bg-zinc-200 w-72 h-36 flex overflow-hidden transition-all cursor-pointer hover:bg-gray-300 hover:scale-105 relative text-black hover:shadow-custom-light group'>
                     <span className='flex text-[19px] font-semibold pt-5 pl-5'>Home & Garden</span>
                     <div className='content-center relative'>
