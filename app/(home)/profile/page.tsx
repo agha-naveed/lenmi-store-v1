@@ -76,28 +76,28 @@ export default function page() {
 
       <div className='border-r-2 h-full'></div>
       
-      <Form action={""} onSubmit={handleSubmit(onSubmit)} className='grid gap-2 font-muli-regular p-5 rounded-md' formMethod='POST'>
-        <div className='flex content-center justify-between'>
+      <Form action={""} onSubmit={handleSubmit(onSubmit)} className='grid gap-2 font-muli-regular md:p-5 rounded-md' formMethod='POST'>
+        <div className='md:flex grid content-center justify-between'>
             <label htmlFor="">First Name</label>
-            <input type="text" className='h-9 px-2 rounded-md border border-gray-300 w-[300px]' required {...register("first_name")} />
+            <input type="text" className='h-9 px-2 rounded-md border border-gray-300 md:w-[300px]' required {...register("first_name")} />
         </div>
-        <div className='flex content-center justify-between'>
+        <div className='md:flex grid content-center justify-between'>
             <label htmlFor="">Last Name</label>
-            <input type="text" className='h-9 px-2 rounded-md border border-gray-300 w-[300px]' required {...register("last_name")} />
+            <input type="text" className='h-9 px-2 rounded-md border border-gray-300 md:w-[300px]' required {...register("last_name")} />
         </div>
           
-          <div className='flex content-center justify-between gap-10'>
+          <div className='md:flex grid content-center justify-between md:gap-10'>
               <label htmlFor="">Phone Number</label>
-              <input type="number" onKeyDown={(e) => restrictSigns(e)}  className='h-9 w-[300px] px-2 rounded-md border border-gray-300' required {...register("phone_number", {min: 11})} />
+              <input type="number" onKeyDown={(e) => restrictSigns(e)}  className='h-9 md:w-[300px] px-2 rounded-md border border-gray-300' required {...register("phone_number", {min: 11})} />
           </div>
-          <div className='flex content-center justify-between'>
+          <div className='md:flex grid content-center justify-between'>
               <label htmlFor="">Email</label>
-              <input type="email" placeholder='e.g: abc@xyz.com' className='h-9 px-2 rounded-md border border-gray-300 w-[300px]' required {...register("email")} />
+              <input type="email" placeholder='e.g: abc@xyz.com' className='h-9 px-2 rounded-md border border-gray-300 md:w-[300px]' required {...register("email")} />
               {emailError ? <span className='text-red-600 text-[15px]'> {emailError} </span> : ""}
           </div>
-          <div className='flex content-center justify-between'>
+          <div className='md:flex grid content-center justify-between'>
               <label htmlFor="">Password</label>
-              <input type="password" className='h-9 px-2 rounded-md border border-gray-300 w-[300px]' required {...register("password")} />
+              <input type="password" className='h-9 px-2 rounded-md border border-gray-300 md:w-[300px]' required {...register("password")} />
           </div>
 
           <button type='submit' title='Sign up!' className='w-fit px-5 h-10 transition-all rounded-md border font-muli-semibold bg-slate-800 hover:bg-slate-900 text-white '>Update</button>

@@ -66,7 +66,7 @@ export default function Navbar() {
             <div className="container mx-auto">
                 <div className='flex w-full justify-between md:px-0 px-3'>
                     <Link href="/">
-                        <Image decoding='async' className='md:w-40 sm:w-32 w-28' src={logo} width={200} height={200} alt="Lenmi Store Logo" />
+                        <Image decoding='async' className='md:w-[140px] sm:w-32 w-28' src={logo} width={200} height={200} alt="Lenmi Store Logo" />
                     </Link>
                     <div className='md:flex hidden w-1/2'>
                         <input type="text" placeholder='What are you looking for?' className='pl-3 pr-[53px] h-[44px] w-full rounded-md outline-none font-opensans font-medium' />
