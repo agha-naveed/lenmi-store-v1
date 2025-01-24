@@ -7,10 +7,9 @@ export default function Layout(props: {
     children: React.ReactNode;
   }) {
   return (
-    <div>
+    <div className='container mx-auto flex py-5 gap-5'>
         <Suspense fallback={<Loader />}>
             <DashboardMenu />
-            asdas
             {props.children}
         </Suspense>
     </div>
