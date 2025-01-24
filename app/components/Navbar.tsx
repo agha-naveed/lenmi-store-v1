@@ -96,7 +96,7 @@ export default function Navbar() {
                                             <ul className='grid'>
                                             
                                                 <li>
-                                                    <Link href={"/dashboard"} className='p-[10px] rounded-lg hover:bg-gray-200 cursor-pointer transition-all flex items-center gap-2 text-[16px]'>
+                                                    <Link href={"/profile"} className='p-[10px] rounded-lg hover:bg-gray-200 cursor-pointer transition-all flex items-center gap-2 text-[16px]'>
                                                         <RxDashboard className='text-[18px]' />
                                                         Dashboard
                                                     </Link>
