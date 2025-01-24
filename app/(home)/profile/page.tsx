@@ -62,7 +62,7 @@ export default function page() {
       }
 
   return (
-    <div className='font-opensans px-2 gap-10 flex w-full'>
+    <div className='font-opensans px-2 lg:gap-10 flex lg:flex-row gap-2 items-center flex-col w-full justify-center'>
       
       <div className='w-[200px] justify-items-center grid gap-2 content-start px-1'>
         <div className='w-[135px] h-[135px] rounded-full overflow-hidden border-2 p-1'>
