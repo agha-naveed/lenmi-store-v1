@@ -17,13 +17,13 @@ export default function RootLayout(props: {
   return (
     <html lang="en">
       <body>
-        <Suspense fallback={<Loader />}>
-          <Navbar />
           <Suspense fallback={<Loader />}>
-            {props.children}
-            {props.modal}
+            <Navbar />
+            <Suspense fallback={<Loader />}>
+              {props.children}
+              {props.modal}
+            </Suspense>
           </Suspense>
-        </Suspense>
       </body>
     </html>
   );

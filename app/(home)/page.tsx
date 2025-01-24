@@ -6,7 +6,6 @@ import HorizontalCard from '@/components/products-cards/HorizontalCard'
 import CategoriesDesign from '../components/CategoriesDesign'
 
 export default function page() {
-
   return (
     <div className='w-full h-auto'>
       <div className='md:block hidden'>

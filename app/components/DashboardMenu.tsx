@@ -9,16 +9,16 @@ export default function DashboardMenu() {
   const [activeMenu, setActiveMenu] = useState("/")
 
   return (
-    <div className='font-opensans grid border-r-2 pr-1 w-56'>
-      <Link href={'/profile'} onClick={() => setActiveMenu("/")} className={`${activeMenu === "/" ? "bg-gray-200" : ""} flex gap-2 p-3 border-t transition-all hover:bg-gray-100 cursor-pointer`} title='Manage Account'>
+    <div className='font-opensans flex flex-col border-r-2 pr-1 w-56'>
+      <Link href={'/profile'} onClick={() => setActiveMenu("/")} className={`${activeMenu === "/" ? "bg-gray-200" : ""} h-[60px] flex gap-2 w-full px-3 items-center border-t transition-all hover:bg-gray-100 cursor-pointer`} title='Manage Account'>
         <VscAccount className='text-[25px]' />
         <span>Manage Account</span>
       </Link>
-      <Link href={"/profile/order-history"} onClick={() => setActiveMenu("order-history")} className={`${activeMenu === "order-history" ? "bg-gray-200" : ""} flex gap-2 p-3 border-t transition-all hover:bg-gray-100 cursor-pointer`} title='Order history'>
+      <Link href={"/profile/order-history"} onClick={() => setActiveMenu("order-history")} className={`${activeMenu === "order-history" ? "bg-gray-200" : ""} h-[60px] flex gap-2 w-full px-3 items-center border-t transition-all hover:bg-gray-100 cursor-pointer`} title='Order history'>
         <AiOutlineHistory className='text-[25px]' />
         <span>Order History</span>
       </Link>
-
+    
     </div>
   )
 }
