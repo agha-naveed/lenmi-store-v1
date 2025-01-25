@@ -3,16 +3,36 @@ import React, { useInsertionEffect, useState } from "react";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import defaultPic from "@/images/account/default-pic.jpg";
-import { redirect } from "next/navigation";
 import axios from "axios";
 import Form from "next/form";
 
 export default function page() {
+  const [message, setMessage] = useState<APIData>({
+    first_name: "",
+    last_name: "",
+    phone_number: 0,
+    email: "",
+    password: "",
+    account_type: "",
+  });
+
+  const [emailError, setEmailError] = useState("");
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IFormInputs>();
+    setValue,
+    reset,
+  } = useForm<IFormInputs>({
+    defaultValues: {
+      first_name: message.first_name,
+      last_name: message.last_name,
+      phone_number: message.phone_number,
+      email: message.email,
+      account_type: message.account_type,
+    },
+  });
 
   interface IFormInputs {
     first_name: string;
@@ -22,6 +42,7 @@ export default function page() {
     password: string;
     account_type: string;
   }
+
   interface APIData {
     first_name: string;
     last_name: string;
@@ -31,17 +52,6 @@ export default function page() {
     account_type: string;
   }
 
-  let [message, setMessage] = useState<APIData>({
-    first_name: "",
-    last_name: "",
-    phone_number: 0,
-    email: "",
-    password: "",
-    account_type: "",
-  });
-
-  let [emailError, setEmailError] = useState("");
-
   useInsertionEffect(() => {
     const getData = async () => {
       const res = await axios.get("http://localhost:3000/profile/api", {
@@ -50,17 +60,19 @@ export default function page() {
 
       if (res.data != "error") {
         setMessage(res.data);
-        console.log(res.data);
+        reset({
+          first_name: res.data.first_name,
+          last_name: res.data.last_name,
+          phone_number: res.data.phone_number,
+          email: res.data.email,
+          account_type: res.data.account_type,
+        });
       } else {
         alert("Something went wrong!");
       }
     };
     getData();
-  }, []);
-  
-
-  
-
+  }, [reset]);
 
   function restrictSigns(e: any): void {
     const char = e.key;
@@ -114,7 +126,6 @@ export default function page() {
           <input
             type="text"
             className="h-9 px-2 rounded-md border border-gray-300 md:w-[300px]"
-            value={message?.first_name}
             required
             {...register("first_name")}
           />
@@ -124,7 +135,6 @@ export default function page() {
           <input
             type="text"
             className="h-9 px-2 rounded-md border border-gray-300 md:w-[300px]"
-            value={message?.last_name}
             required
             {...register("last_name")}
           />
@@ -133,10 +143,9 @@ export default function page() {
         <div className="md:flex grid content-center justify-between md:gap-10">
           <label htmlFor="">Phone Number</label>
           <input
-            type="number" 
+            type="number"
             onKeyDown={(e) => restrictSigns(e)}
             className="h-9 md:w-[300px] px-2 rounded-md border border-gray-300"
-            value={message?.phone_number}
             required
             {...register("phone_number", { min: 11 })}
           />
@@ -147,7 +156,6 @@ export default function page() {
             type="email"
             placeholder="e.g: abc@xyz.com"
             className="h-9 px-2 rounded-md border border-gray-300 md:w-[300px]"
-            value={message?.email}
             required
             {...register("email")}
           />
