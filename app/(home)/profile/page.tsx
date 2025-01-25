@@ -20,30 +20,44 @@ export default function page() {
     password: string;
     account_type: string
   }
+  interface APIData {
+    first_name: string;
+    last_name: string;
+    phone_number: number;
+    email: string,
+    password: string;
+    account_type: string
+  }
   
   
-      let [message, setMessage] = useState("")
-      let [emailError, setEmailError] = useState("")
+    let [message, setMessage] = useState<APIData>({
+      first_name: '',
+      last_name: '',
+      phone_number: 0,
+      email: '',
+      password: '',
+      account_type: ''
+    });
+    
+    let [emailError, setEmailError] = useState("")
 
       useInsertionEffect(() => {
 
-        // if(data.email.includes(".com") || data.email.includes(".net") || data.email.includes(".org")) {
-            // setEmailError("")
-            const res = await axios.get("http://localhost:3000/profile/api", {
-              withCredentials: true
-            })
-            
-            if(res.data != "error") {
-                setMessage(res.data)
-                console.log(res.data)
-            }
-            else {
-                alert("Something went wrong!")
-            }
-        // }
-        // else {
-        //     setEmailError("Not Valid Email...")
-        // }
+          const getData = async () => {
+              const res = await axios.get("http://localhost:3000/profile/api", {
+                withCredentials: true
+              })
+              
+              if(res.data != "error") {
+                  setMessage(res.data)
+                  console.log(res.data)
+              }
+              else {
+                  alert("Something went wrong!")
+              }
+        }
+        getData()
+      }, [])
 
       
   
@@ -72,24 +86,24 @@ export default function page() {
       </div>
 
       <div className='border-r-2 h-full'></div>
-      
-      <Form action={""} onSubmit={handleSubmit(onSubmit)} className='grid gap-2 font-muli-regular md:p-5 rounded-md' formMethod='POST'>
+      {/* onSubmit={handleSubmit(onSubmit)} */}
+      <Form action={""} className='grid gap-2 font-muli-regular md:p-5 rounded-md' formMethod='POST'>
         <div className='md:flex grid content-center justify-between'>
             <label htmlFor="">First Name</label>
-            <input type="text" className='h-9 px-2 rounded-md border border-gray-300 md:w-[300px]' value={"asd"} required {...register("first_name")} />
+            <input type="text" className='h-9 px-2 rounded-md border border-gray-300 md:w-[300px]' value={message?.first_name} required {...register("first_name")} />
         </div>
         <div className='md:flex grid content-center justify-between'>
             <label htmlFor="">Last Name</label>
-            <input type="text" className='h-9 px-2 rounded-md border border-gray-300 md:w-[300px]' required {...register("last_name")} />
+            <input type="text" className='h-9 px-2 rounded-md border border-gray-300 md:w-[300px]' value={message?.last_name} required {...register("last_name")} />
         </div>
           
           <div className='md:flex grid content-center justify-between md:gap-10'>
               <label htmlFor="">Phone Number</label>
-              <input type="number" onKeyDown={(e) => restrictSigns(e)}  className='h-9 md:w-[300px] px-2 rounded-md border border-gray-300' required {...register("phone_number", {min: 11})} />
+              <input type="number" onKeyDown={(e) => restrictSigns(e)}  className='h-9 md:w-[300px] px-2 rounded-md border border-gray-300' value={message?.phone_number} required {...register("phone_number", {min: 11})} />
           </div>
           <div className='md:flex grid content-center justify-between'>
               <label htmlFor="">Email</label>
-              <input type="email" placeholder='e.g: abc@xyz.com' className='h-9 px-2 rounded-md border border-gray-300 md:w-[300px]' required {...register("email")} />
+              <input type="email" placeholder='e.g: abc@xyz.com' className='h-9 px-2 rounded-md border border-gray-300 md:w-[300px]' value={message?.email} required {...register("email")} />
               {emailError ? <span className='text-red-600 text-[15px]'> {emailError} </span> : ""}
           </div>
           <div className='md:flex grid content-center justify-between'>
