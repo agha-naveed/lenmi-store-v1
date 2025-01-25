@@ -66,10 +66,14 @@ export default function page() {
       
       <div className='w-[200px] justify-items-center grid gap-5 content-start px-1'>
         <div className='w-[135px] h-[135px] rounded-full overflow-hidden border-2 p-1'>
-          <Image src={defaultPic} className='rounded-full' alt='Default Profile picture' />
+          <Image src={defaultPic} placeholder='blur' className='rounded-full' alt='Default Profile picture' />
         </div>
         <div className='flex flex-col gap-1'>
-          <button className='bg-slate-800 hover:bg-slate-900 transition-all text-white text-[15px] py-[6px] px-4 rounded-[8px] h-[42px]'>Upload Picture</button>
+          <div className='grid text-center'>
+            <label htmlFor="fileToUpload" className='bg-slate-800 hover:bg-slate-900 transition-all text-white text-[15px] py-[6px] px-4 rounded-[8px] h-[42px] cursor-pointer content-center'>Upload Picture</label>
+            <input type="file" name="fileToUpload" id='fileToUpload' className='hidden' />
+          </div>
+
           <button className='bg-slate-800 hover:bg-slate-900 transition-all text-white text-[15px] py-[6px] px-4 rounded-[8px] h-[42px]'>Remove Picture</button>
         </div>
       </div>
