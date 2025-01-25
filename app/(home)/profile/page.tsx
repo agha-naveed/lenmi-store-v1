@@ -15,6 +15,7 @@ export default function page() {
     password: "",
     account_type: "",
   });
+  const [update, setUpdate] = useState("")
 
   const [emailError, setEmailError] = useState("");
 
@@ -66,7 +67,7 @@ export default function page() {
           phone_number: res.data.phone_number,
           email: res.data.email,
           account_type: res.data.account_type,
-        });
+        });``
       } else {
         alert("Something went wrong!");
       }
@@ -80,6 +81,24 @@ export default function page() {
       e.preventDefault();
     }
   }
+
+  const onSubmit = async (data: IFormInputs) => {
+      const res = await axios.patch("http://localhost:3000/profile/api", data, {
+        withCredentials: true
+      })
+      
+      console.log("this is response"+res)
+
+
+      // if(res.ok) {
+      //   setUpdate(await res.json())
+      //   // redirect("/")
+      // }
+      // else {
+      //   setUpdate("error")
+      //   alert("Error")
+      // }
+    }
 
   return (
     <div className="font-opensans px-2 lg:gap-10 flex lg:flex-row gap-2 items-center flex-col w-full justify-center">
@@ -115,8 +134,8 @@ export default function page() {
       </div>
 
       <div className="border-r-2 h-full"></div>
-      {/* onSubmit={handleSubmit(onSubmit)} */}
-      <Form
+      
+      <Form onSubmit={handleSubmit(onSubmit)}
         action={""}
         className="grid gap-2 font-muli-regular md:p-5 rounded-md"
         formMethod="POST"
@@ -183,6 +202,7 @@ export default function page() {
           Update
         </button>
       </Form>
+      
     </div>
   );
 }
