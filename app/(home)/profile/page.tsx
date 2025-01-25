@@ -41,7 +41,7 @@ export default function page() {
   });
 
   let [emailError, setEmailError] = useState("");
-  let [inputValue, setInputValue] = useState("")
+
   useInsertionEffect(() => {
     const getData = async () => {
       const res = await axios.get("http://localhost:3000/profile/api", {
@@ -50,7 +50,6 @@ export default function page() {
 
       if (res.data != "error") {
         setMessage(res.data);
-        setInputValue(res.data);
         console.log(res.data);
       } else {
         alert("Something went wrong!");
@@ -60,10 +59,12 @@ export default function page() {
   }, []);
   
 
+  
+
 
   function restrictSigns(e: any): void {
     const char = e.key;
-    if (char === "+" || char === "-" || char === "e") {
+    if (char === "+" || char === "-") {
       e.preventDefault();
     }
   }
