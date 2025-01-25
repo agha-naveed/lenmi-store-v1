@@ -43,9 +43,8 @@ export async function GET(req: NextRequest) {
         return NextResponse.json(datafromCookie_DB)
     }
     else {
-        return NextResponse.json(null)
+        return NextResponse.json({message: "error"})
     }
-    
 }
 
 

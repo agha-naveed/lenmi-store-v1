@@ -1,5 +1,5 @@
 'use client'
-import React, {useState} from 'react'
+import React, {useInsertionEffect, useState} from 'react'
 import Image from 'next/image'
 import { useForm } from 'react-hook-form';
 import defaultPic from '@/images/account/default-pic.jpg'
@@ -25,33 +25,26 @@ export default function page() {
       let [message, setMessage] = useState("")
       let [emailError, setEmailError] = useState("")
 
-  const onSubmit = async (data: IFormInputs) => {
-          
-          if(data.email.includes(".com") || data.email.includes(".net") || data.email.includes(".org")) {
-              setEmailError("")
-              const res = await axios.patch("http://localhost:3000/account/signup/api", {
-                  method: "POST",
-                  body: JSON.stringify(data)
-              })
-              // if(res.ok) {
-              //     setMessage(await res.json())
-              // }
-              // else {
-              //     setMessage("error")
-              // }
-  
-              
-              if(message != "error") {
-                  redirect("/account")
-              }
-              else {
-                  alert("Invalid Email or Password")
-              }
-          }
-          else {
-              setEmailError("Not Valid Email...")
-          }
-      }
+      useInsertionEffect(() => {
+
+        // if(data.email.includes(".com") || data.email.includes(".net") || data.email.includes(".org")) {
+            // setEmailError("")
+            const res = await axios.get("http://localhost:3000/profile/api", {
+              withCredentials: true
+            })
+            
+            if(res.data != "error") {
+                setMessage(res.data)
+                console.log(res.data)
+            }
+            else {
+                alert("Something went wrong!")
+            }
+        // }
+        // else {
+        //     setEmailError("Not Valid Email...")
+        // }
+
       
   
       function restrictSigns(e:any): void {
@@ -83,7 +76,7 @@ export default function page() {
       <Form action={""} onSubmit={handleSubmit(onSubmit)} className='grid gap-2 font-muli-regular md:p-5 rounded-md' formMethod='POST'>
         <div className='md:flex grid content-center justify-between'>
             <label htmlFor="">First Name</label>
-            <input type="text" className='h-9 px-2 rounded-md border border-gray-300 md:w-[300px]' required {...register("first_name")} />
+            <input type="text" className='h-9 px-2 rounded-md border border-gray-300 md:w-[300px]' value={"asd"} required {...register("first_name")} />
         </div>
         <div className='md:flex grid content-center justify-between'>
             <label htmlFor="">Last Name</label>
