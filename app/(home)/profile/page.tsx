@@ -1,5 +1,5 @@
 "use client";
-import React, { useInsertionEffect, useState } from "react";
+import React, { useInsertionEffect, useState, ChangeEvent, useEffect } from "react";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import defaultPic from "@/images/account/default-pic.jpg";
@@ -8,7 +8,7 @@ import Form from "next/form";
 
 export default function page() {
 
-
+  const [image, setImage] = useState<File | null>(null)
   const [message, setMessage] = useState<APIData>({
     first_name: "",
     last_name: "",
@@ -16,8 +16,9 @@ export default function page() {
     email: "",
     password: "",
     account_type: "",
-    profile_pic: ""
+    profile_pic: null
   });
+
   const [update, setUpdate] = useState("")
 
   const [emailError, setEmailError] = useState("");
@@ -45,7 +46,7 @@ export default function page() {
     email: string;
     password: string;
     account_type: string;
-    profile_pic: string;
+    profile_pic: File | null;
   }
 
   interface APIData {
@@ -55,7 +56,7 @@ export default function page() {
     email: string;
     password: string;
     account_type: string;
-    profile_pic: string;
+    profile_pic: File | null;
   }
 
   useInsertionEffect(() => {
@@ -78,6 +79,7 @@ export default function page() {
       }
     };
     getData();
+
   }, [reset]);
 
   function restrictSigns(e: any): void {
@@ -86,13 +88,21 @@ export default function page() {
       e.preventDefault();
     }
   }
+  
+
 
   const onSubmit = async (data: IFormInputs) => {
-      const res = await axios.patch("http://localhost:3000/profile/api", data, {
+      // data['profile_pic'] = image
+
+      let myData = data
+      myData['profile_pic'] = image
+
+      const res = await axios.post("http://localhost:3000/profile/api", myData, {
         withCredentials: true
       })
       
-      console.log("this is response"+res)
+      console.log("this is response" + res.data)
+
 
 
       // if(res.ok) {
@@ -134,7 +144,7 @@ export default function page() {
                 type="file"
                 id="fileToUpload"
                 accept="image/*" className="hidden"
-                {...register("profile_pic")}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {e.target?.files?.[0] ? setImage(e.target?.files?.[0]) : setImage(null)}}
               />
             </div>
 
@@ -184,6 +194,7 @@ export default function page() {
               className="h-9 px-2 rounded-md border border-gray-300 md:w-[300px]"
               required
               {...register("email")}
+              readOnly
             />
             {emailError ? (
               <span className="text-red-600 text-[15px]"> {emailError} </span>
@@ -203,7 +214,7 @@ export default function page() {
 
           <button
             type="submit"
-            title="Sign up!"
+            title="Update Details"
             className="w-fit px-5 h-10 transition-all rounded-md border font-muli-semibold bg-slate-800 hover:bg-slate-900 text-white "
           >
             Update
