@@ -2,7 +2,8 @@
 import React, { useInsertionEffect, useState, ChangeEvent, useEffect } from "react";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
-import defaultPic from "@/images/account/default-pic.jpg";
+import defaultPic from "@/images/jethalal.jpeg";
+// import defaultPic from "@/images/account/default-pic.jpg";
 import axios from "axios";
 import Form from "next/form";
 
@@ -128,7 +129,7 @@ export default function page() {
             <Image
               src={defaultPic}
               placeholder="blur"
-              className="rounded-full"
+              className="rounded-full h-full w-full object-cover"
               alt="Default Profile picture"
             />
           </div>

@@ -22,7 +22,8 @@ export async function POST(req: NextRequest) {
             first_name,
             last_name,
             phone_number,
-            profile_pic
+            profile_pic,
+            password
         }
     })
 
