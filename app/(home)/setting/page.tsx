@@ -68,7 +68,6 @@ export default function page() {
       });
 
       if(res.data == null) {
-        console.log("Some errrrrror")
         redirect("/")
       }
       if (res.data != "error") {
@@ -79,7 +78,7 @@ export default function page() {
           phone_number: res.data.phone_number,
           email: res.data.email,
           account_type: res.data.account_type,
-        });``
+        });
       } else {
         alert("Something went wrong!");
       }
@@ -112,8 +111,8 @@ export default function page() {
         alert("Successfully Updated")
 
         if(res.data.password == "true") {
-          // window.location.reload()
           setTimeout(() => {
+            alert("You have been logged out")
             redirect("/account")
           }, 600)
         }
@@ -124,14 +123,6 @@ export default function page() {
       }
 
 
-      // if(res.ok) {
-      //   setUpdate(await res.json())
-      //   // redirect("/")
-      // }
-      // else {
-      //   setUpdate("error")
-      //   alert("Error")
-      // }
     }
 
   return (
