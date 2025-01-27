@@ -108,6 +108,20 @@ export default function page() {
       })
       console.log("this is response" + res.data)
 
+      if(res.data.message == 'ok') {
+        alert("Successfully Updated")
+
+        if(res.data.password == "true") {
+          window.location.reload()
+          setTimeout(() => {
+            redirect("/account")
+          }, 600)
+        }
+      }
+
+      else {
+        alert("Some Error Occurred!")
+      }
 
 
       // if(res.ok) {

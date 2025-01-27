@@ -1,8 +1,9 @@
-import dbConnection from '@/lib/dbConnection'
-import User from '@/lib/model/user'
+import dbConnection from '@/lib/database/dbConnection'
+import User from '@/lib/database/model/user'
 import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcrypt'
 import { cookies } from 'next/headers';
+
 
 export async function POST(req: NextRequest) {
     
@@ -17,37 +18,40 @@ export async function POST(req: NextRequest) {
     } = await req.json()
 
 
-    await User.updateOne({email}, {
-        $set: {
-            first_name,
-            last_name,
-            phone_number,
-            profile_pic,
-            password
-        }
-    })
 
-
+    const cookie = await cookies()    
+    const userData = await User.findOne({email});
+    let result = await bcrypt.compare(password, userData.password)
     
-    // const cookie = await cookies()
+    if(!result) {
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);        
 
-    // try {
-    //     if(isExist) {
-    //         let result = await bcrypt.compare(password, isExist.password)
+        await User.updateOne({email}, {
+            $set: {
+                first_name,
+                last_name,
+                phone_number,
+                profile_pic,
+                password: hashedPassword
+            }
+        })
+        
+        cookie.delete("email")
 
-    //         if(result) {
-    //             cookie.set("email", email, {secure: true, httpOnly: true})
-    //             return NextResponse.json(isExist)
-    //         }
-    //         else {
-    //             return NextResponse.json({error: "error"}, { status: 401 })
-    //         }
-    //     }
-    //     else return NextResponse.json({error: "error"}, { status: 404 })
-    // } catch(e) {
-    
-        return NextResponse.json({ message: "ok" })
-    // }
+        return NextResponse.json({message: "ok", password: "true"})
+    }
+
+    else {
+        await User.updateOne({email}, {
+            $set: {
+                first_name,
+                last_name,
+                phone_number,
+            }
+        })
+        return NextResponse.json({message: "ok", password: "false"})
+    }
 }
 
 

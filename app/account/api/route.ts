@@ -1,5 +1,5 @@
-import dbConnection from '@/lib/dbConnection'
-import User from '@/lib/model/user'
+import dbConnection from '@/lib/database/dbConnection'
+import User from '@/lib/database/model/user'
 import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcrypt'
 import { cookies } from 'next/headers';
