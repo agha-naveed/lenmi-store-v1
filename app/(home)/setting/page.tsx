@@ -112,7 +112,7 @@ export default function page() {
         alert("Successfully Updated")
 
         if(res.data.password == "true") {
-          window.location.reload()
+          // window.location.reload()
           setTimeout(() => {
             redirect("/account")
           }, 600)
