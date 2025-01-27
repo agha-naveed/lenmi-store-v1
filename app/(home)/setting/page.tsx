@@ -6,6 +6,7 @@ import defaultPic from "@/images/jethalal.jpeg";
 // import defaultPic from "@/images/account/default-pic.jpg";
 import axios from "axios";
 import Form from "next/form";
+import { redirect } from "next/navigation";
 
 export default function page() {
 
@@ -62,10 +63,14 @@ export default function page() {
 
   useInsertionEffect(() => {
     const getData = async () => {
-      const res = await axios.get("http://localhost:3000/profile/api", {
+      const res = await axios.get("http://localhost:3000/setting/api", {
         withCredentials: true,
       });
 
+      if(res.data == null) {
+        console.log("Some errrrrror")
+        redirect("/")
+      }
       if (res.data != "error") {
         setMessage(res.data);
         reset({
@@ -98,10 +103,9 @@ export default function page() {
       let myData = data
       myData['profile_pic'] = image
 
-      const res = await axios.post("http://localhost:3000/profile/api", myData, {
+      const res = await axios.post("http://localhost:3000/setting/api", myData, {
         withCredentials: true
       })
-      
       console.log("this is response" + res.data)
 
 
