@@ -121,8 +121,6 @@ export default function page() {
       else {
         alert("Some Error Occurred!")
       }
-
-
     }
 
   return (

@@ -169,7 +169,7 @@ export default function Navbar() {
                         {
                             message?.account_type == 'business' ?
                             <li className='flex'>
-                                <Link href={"/"} className='py-2 px-4 transition-all underline-offset-0 hover:underline  hover:underline-offset-8'>Sell</Link>
+                                <Link href={"/add-product"} className='py-2 px-4 transition-all underline-offset-0 hover:underline  hover:underline-offset-8'>Sell</Link>
                             </li>
                             :
                             ""
