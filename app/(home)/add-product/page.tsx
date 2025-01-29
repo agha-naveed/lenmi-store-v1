@@ -63,6 +63,9 @@ export default function page() {
                             )
                         })
                     }
+                    <div className='flex justify-center items-center w-[120px] h-[120px] border border-gray-500 rounded-lg overflow-hidden relative'>
+                        <span className='text-gray-600'>Photo</span>
+                    </div>
                 </div>
 
                 <div className='font-opensans'>
