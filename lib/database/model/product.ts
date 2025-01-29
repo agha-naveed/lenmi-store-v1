@@ -7,7 +7,7 @@ interface IProduct extends Document {
     description?: string;
     category: string;
     rating: number;
-    color: string;
+    color: [string];
     sold: number;
     imgURL : string[];
     stock: number;
@@ -30,5 +30,31 @@ const productSchema = new Schema<IProduct>({
     description: {
         type: String
     },
-
+    category: {
+        type: String,
+        required: true
+    },
+    rating: {
+        type: Number
+    },
+    color: {
+        type: [String],
+        required: true
+    },
+    sold: {
+        type: Number
+    },
+    imgURL: {
+        type: [String],
+        required: true
+    },
+    stock: {
+        type: Number,
+        required: true
+    }
 })
+
+
+const Product = mongoose.models.Product || mongoose.model<IProduct>('Product', productSchema);
+
+export default Product;

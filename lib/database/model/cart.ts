@@ -1,11 +1,25 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
-interface IUser extends Document {
-    user: string;
-    last_name: string;
-    phone_number: number;
-    email: string;
-    password: string;
-    account_type: 'personal' | 'business';
-    profile_pic: Buffer
+interface ICartItem {
+    productId: Schema.Types.ObjectId;
+    quantity: number;
 }
+  
+interface ICart extends Document {
+    userId: string;
+    items: ICartItem[];
+}
+  
+const cartItemSchema = new Schema<ICartItem>({
+    productId: { type: Schema.Types.ObjectId, ref: 'Product', required: true },
+    quantity: { type: Number, required: true },
+});
+  
+const cartSchema = new Schema<ICart>({
+    userId: { type: String, required: true },
+    items: [cartItemSchema],
+});
+  
+const Cart = mongoose.models.Cart || mongoose.model<ICart>('Cart', cartSchema);
+  
+export default Cart;
