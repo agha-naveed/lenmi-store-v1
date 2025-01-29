@@ -1,6 +1,6 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
-interface IUser extends Document {
+interface IProduct extends Document {
     userId: Schema.Types.ObjectId;
     name: string;
     price: number;
@@ -13,3 +13,22 @@ interface IUser extends Document {
     stock: number;
 }
 
+const productSchema = new Schema<IProduct>({
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    name: {
+        type: String,
+        required: true
+    },
+    price: {
+        type: Number,
+        required: true
+    },
+    description: {
+        type: String
+    },
+
+})
