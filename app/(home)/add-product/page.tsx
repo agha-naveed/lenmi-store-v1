@@ -1,6 +1,7 @@
 'use client'
 import Image from 'next/image';
 import React, { useState, ChangeEvent, useEffect } from 'react'
+import ReactDOM from 'react-dom';
 import { MdAddPhotoAlternate } from "react-icons/md";
 import img from '@/images/jethalal.jpeg'
 import { useForm } from 'react-hook-form';
@@ -8,6 +9,7 @@ import Form from 'next/form';
 import { IoCloseCircle } from "react-icons/io5";
 
 export default function page() {
+   
 
     interface IFormInputs {
         first_name: string;
@@ -64,14 +66,14 @@ export default function page() {
                         })
                     }
                     <div className='flex justify-center items-center w-[120px] h-[120px] border border-gray-500 rounded-lg overflow-hidden relative'>
-                        <span className='text-gray-600'>Photo</span>
+                        <span className='text-gray-600 select-none'>Photo</span>
                     </div>
                 </div>
 
                 <div className='font-opensans'>
-                    <div className='flex'>
+                    <div className='flex bg-orange-500'>
                         <div className='grid'>
-                            <label htmlFor="" className='text-[15px] font-medium'>Product Name</label>
+                            <label htmlFor="" className='text-[15px] w-[500px] font-medium'>Product Name</label>
                             <input type="text" className='border' />
                         </div>
                         <div className='grid'>
@@ -82,6 +84,7 @@ export default function page() {
                             </select>
                         </div>
                     </div>
+
                 </div>
             </Form>
         </div>
