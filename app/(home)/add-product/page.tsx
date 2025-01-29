@@ -22,6 +22,16 @@ export default function page() {
      
     const { register, handleSubmit, formState: { errors } } = useForm<IFormInputs>();
 
+    const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file) {
+          setSelectedImage((prevImages) => [...prevImages, URL.createObjectURL(file)]);
+        }
+      };
+    
+    const handleRemoveImage = (imageUrl: string) => {
+        setSelectedImage((prevImages) => prevImages.filter(image => image !== imageUrl));
+    };
 
     return (
         <div className='container mx-auto'>
@@ -35,40 +45,24 @@ export default function page() {
                         <input type="file" accept='image/*'
                          id='upload-product-pic' disabled={selectedImage.length == 3 ? true : false}
                          className='hidden'
-                         onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                            const file = event.target.files?.[0];
-                            if(file) {
-                                setSelectedImage((prevImages) => [...prevImages, URL.createObjectURL(file)]);
-                            }
-                         }}
+                         onChange={handleImageChange}
                          />
                     </div>
-                    <div className='flex justify-center items-center w-[120px] h-[120px] border border-gray-500 rounded-lg overflow-hidden'>
+
                     {
-                        selectedImage[0] ? 
-                        <>
-                            <Image src={selectedImage[0]} alt='' width={300} height={300} className='w-full h-full object-cover' />
-                            <IoCloseCircle className='' />
-                        </>
-                        : null
+                        selectedImage.map((imgs, index) => {
+                            return (
+                                    <div key={`${imgs} - ${index}`} className='flex justify-center items-center w-[120px] h-[120px] border border-gray-500 rounded-lg overflow-hidden relative'>
+                                    { 
+                                        <>
+                                            <Image src={imgs} alt='' width={300} height={300} className='w-full h-full object-cover' />
+                                            <IoCloseCircle className='absolute w-5 h-5 top-0 right-0 z-20 cursor-pointer' onClick={() => handleRemoveImage(imgs)} />
+                                        </>
+                                    }
+                                    </div>
+                            )
+                        })
                     }
-                    </div>
-                    <div className='flex justify-center items-center w-[120px] h-[120px] border border-gray-500 rounded-lg overflow-hidden'>
-                    {
-                        selectedImage[1] ? 
-                        <>
-                            <Image src={selectedImage[1]} alt='' width={300} height={300} className='w-full h-full object-cover' />
-                        </>
-                        : null
-                    }
-                    </div>
-                    <div className='flex justify-center items-center w-[120px] h-[120px] border border-gray-500 rounded-lg'>
-                    {
-                        selectedImage[2] ? 
-                        <Image src={selectedImage[2]} alt='' width={300} height={300} className='w-full h-full object-cover' />
-                        : null
-                    }
-                    </div>
                 </div>
 
                 <div className='font-opensans'>
