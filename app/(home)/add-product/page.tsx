@@ -38,15 +38,16 @@ export default function page() {
 
     return (
         <div className='container mx-auto'>
-            <Form action={""} formMethod='POST'>
-                <div className='flex gap-3 shadow-lg shadow-gray-400 rounded-lg w-fit p-5'>
+            <Form action={""} formMethod='POST' className='grid gap-10'>
+
+                <div className='flex gap-3 shadow-md shadow-gray-400 rounded-lg w-fit p-5'>
                     
                     <div title='Upload Picture'>
                         <label htmlFor="upload-product-pic" className='cursor-pointer flex justify-center items-center w-[120px] h-[120px] border border-dashed border-gray-500 rounded-lg'>
                             <MdAddPhotoAlternate className='text-4xl text-gray-500' />
                         </label>
                         <input type="file" accept='image/*'
-                         id='upload-product-pic' disabled={selectedImage.length == 3 ? true : false}
+                         id='upload-product-pic' disabled={selectedImage.length == 5 ? true : false}
                          className='hidden'
                          onChange={handleImageChange}
                          />
@@ -71,13 +72,13 @@ export default function page() {
                     </div>
                 </div>
 
-                <div className='font-opensans'>
-                    <div className='flex'>
-                        <div className='grid gap-1'>
+                <div className='font-opensans grid gap-4 w-fit'>
+                    <div className='flex gap-3'>
+                        <div className='grid gap-2'>
                             <label htmlFor="" className='w-[500px] font-medium'>Product Name</label>
                             <input type="text" className='border py-2 px-3' />
                         </div>
-                        <div className='grid gap-1'>
+                        <div className='grid gap-2'>
                             <label htmlFor="" className='font-medium'>Category</label>
                             <select name="" id="" className='py-2 px-3 w-40'>
                                 <option value="">-- select --</option>
@@ -85,7 +86,10 @@ export default function page() {
                             </select>
                         </div>
                     </div>
-                    <RichTextEditor />
+                    <div className='grid gap-2'>
+                        <label htmlFor="" className='font-medium'>Description</label>
+                        <RichTextEditor />
+                    </div>
                 </div>
             </Form>
         </div>

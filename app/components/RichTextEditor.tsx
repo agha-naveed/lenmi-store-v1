@@ -99,14 +99,6 @@ const RichTextEditor = () => {
         {/* Divider */}
         <div className="h-6 w-px bg-gray-300 my-1" />
 
-        {/* Bullet List Button */}
-        <button
-          type="button"
-          onClick={() => handleFormat('insertUnorderedList')}
-          className="px-3 py-1 hover:bg-gray-100 rounded"
-        >
-          • List
-        </button>
       </div>
 
       {/* Editor Area */}
