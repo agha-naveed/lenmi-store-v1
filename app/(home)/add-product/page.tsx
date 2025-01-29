@@ -7,6 +7,7 @@ import img from '@/images/jethalal.jpeg'
 import { useForm } from 'react-hook-form';
 import Form from 'next/form';
 import { IoCloseCircle } from "react-icons/io5";
+import RichTextEditor from '@/app/components/RichTextEditor';
 
 export default function page() {
    
@@ -71,20 +72,20 @@ export default function page() {
                 </div>
 
                 <div className='font-opensans'>
-                    <div className='flex bg-orange-500'>
-                        <div className='grid'>
-                            <label htmlFor="" className='text-[15px] w-[500px] font-medium'>Product Name</label>
-                            <input type="text" className='border' />
+                    <div className='flex'>
+                        <div className='grid gap-1'>
+                            <label htmlFor="" className='w-[500px] font-medium'>Product Name</label>
+                            <input type="text" className='border py-2 px-3' />
                         </div>
-                        <div className='grid'>
-                            <label htmlFor="" className='text-[15px] font-medium'>Category</label>
-                            <select name="" id="">
+                        <div className='grid gap-1'>
+                            <label htmlFor="" className='font-medium'>Category</label>
+                            <select name="" id="" className='py-2 px-3 w-40'>
                                 <option value="">-- select --</option>
                                 <option value={`electronics`}>Electronics</option>
                             </select>
                         </div>
                     </div>
-
+                    <RichTextEditor />
                 </div>
             </Form>
         </div>
