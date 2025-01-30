@@ -8,6 +8,11 @@ const RichTextEditor = ({ value, onChange }: any) => {
     editorRef.current?.focus();
   };
 
+  const handleInput = (e: React.FormEvent<HTMLDivElement>) => {
+    const newValue = e.currentTarget.innerHTML;
+    onChange(newValue); // Send updated HTML to parent
+  };
+
   const handleFontSize = (operation: 'increase' | 'decrease') => {
     const selection = window.getSelection();
     if (!selection || selection.rangeCount === 0) return;
@@ -105,8 +110,8 @@ const RichTextEditor = ({ value, onChange }: any) => {
         className="w-full p-4 min-h-[200px] focus:outline-none"
         contentEditable
         onInput={(e) => onChange(e.currentTarget.innerHTML)}
-        dangerouslySetInnerHTML={{ __html: value }}
       />
+       
     </div>
   );
 };
