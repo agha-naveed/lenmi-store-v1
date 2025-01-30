@@ -125,9 +125,9 @@ export default function page() {
           <div className='grid gap-2'>
             <label htmlFor="" className='font-medium'>Description</label>
             <RichTextEditor
-        value={contentValue} // Initial value
-        onChange={(value:any) => setValue("content", value)} // Update form state
-      />
+                value={contentValue}
+                onChange={(value:any) => setValue("content", value)}
+            />
           </div>
 
           <button type="submit" className='w-full bg-slate-800 text-white p-[10px] rounded-lg hover:bg-slate-900 transition-all'>
