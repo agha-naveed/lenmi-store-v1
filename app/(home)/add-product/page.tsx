@@ -9,21 +9,51 @@ import Form from 'next/form';
 import { IoCloseCircle } from "react-icons/io5";
 import RichTextEditor from '@/app/components/RichTextEditor';
 
+interface IFormInputs {
+    first_name: string;
+    last_name: string;
+    phone_number: number;
+    email: string,
+    password: string;
+    account_type: string
+}
+
+
 export default function page() {
-   
-
-    interface IFormInputs {
-        first_name: string;
-        last_name: string;
-        phone_number: number;
-        email: string,
-        password: string;
-        account_type: string
-    }
-
     let [selectedImage, setSelectedImage] = useState<string[]>([])
      
     const { register, handleSubmit, formState: { errors } } = useForm<IFormInputs>();
+
+
+    const onSubmit = async (data: IFormInputs) => {
+            
+            // if(data.email.includes(".com") || data.email.includes(".net") || data.email.includes(".org")) {
+            //     setEmailError("")
+            //     const res = await fetch("http://localhost:3000/account/signup/api", {
+            //         method: "POST",
+            //         body: JSON.stringify(data)
+            //     })
+            //     if(res.ok) {
+            //         setMessage(await res.json())
+            //     }
+            //     else {
+            //         setMessage("error")
+            //     }
+    
+                
+            //     if(message != "error") {
+            //         redirect("/account")
+            //     }
+            //     else {
+            //         alert("Invalid Email or Password")
+            //     }
+            // }
+            // else {
+            //     setEmailError("Not Valid Email...")
+            // }
+        }
+
+
 
     const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
@@ -35,10 +65,11 @@ export default function page() {
     const handleRemoveImage = (imageUrl: string) => {
         setSelectedImage((prevImages) => prevImages.filter(image => image !== imageUrl));
     };
+    
 
     return (
         <div className='container mx-auto'>
-            <Form action={""} formMethod='POST' className='grid gap-10'>
+            <Form action={''} onSubmit={handleSubmit(onSubmit)} formMethod='POST' className='grid gap-10'>
 
                 <div className='flex gap-3 shadow-md shadow-gray-400 rounded-lg w-fit p-5'>
                     
@@ -60,7 +91,7 @@ export default function page() {
                                     { 
                                         <>
                                             <Image src={imgs} alt='' width={300} height={300} className='w-full h-full object-cover' />
-                                            <IoCloseCircle className='absolute w-5 h-5 top-0 right-0 z-20 cursor-pointer' onClick={() => handleRemoveImage(imgs)} />
+                                            <IoCloseCircle title='remove picture' className='absolute w-5 h-5 top-0 right-0 z-20 cursor-pointer' onClick={() => handleRemoveImage(imgs)} />
                                         </>
                                     }
                                     </div>
@@ -90,6 +121,8 @@ export default function page() {
                         <label htmlFor="" className='font-medium'>Description</label>
                         <RichTextEditor />
                     </div>
+
+                    <button className='w-full bg-slate-800 text-white p-[10px] rounded-lg hover:bg-slate-900 transition-all'>Add Product</button>
                 </div>
             </Form>
         </div>
