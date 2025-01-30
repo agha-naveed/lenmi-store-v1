@@ -15,6 +15,7 @@ interface IFormInputs {
     description?: string;
     price: number;
     d_price: number;
+    stock: number;
     content: string;
 }
 
@@ -110,12 +111,12 @@ export default function page() {
         <div className='font-opensans grid gap-4 w-fit'>
           <div className='flex gap-3'>
             <div className='grid gap-2'>
-              <label htmlFor="" className='w-[500px] font-medium'>Product Name</label>
-              <input type="text" className='border py-2 px-3' {...register("product_name")} required />
+              <label htmlFor="" className='font-medium'>Product Name</label>
+              <input type="text" className='w-[500px] border border-gray-400 rounded-md py-2 px-3' {...register("product_name")} required />
             </div>
             <div className='grid gap-2'>
               <label htmlFor="" className='font-medium'>Category</label>
-              <select {...register("category")} className='py-2 px-3 w-40'>
+              <select {...register("category")} className='py-2 px-3 w-44 rounded-md border border-gray-400'>
                 <option value="">-- select --</option>
                 <option value={`electronics`}>Electronics</option>
               </select>
@@ -129,17 +130,68 @@ export default function page() {
             />
           </div>
           
-          <div className='flex'>
-            <div className='grid gap-2'>
-              <label htmlFor="" className='w-[500px] font-medium'>Price</label>
-              <input type="text" className='border py-2 px-3' {...register("price")} required />
+          <div className='flex gap-3 w-fit'>
+            <div className='grid gap-1'>
+              <label htmlFor="" className='font-medium'>Price</label>
+              <input type="text" className='border border-gray-400 rounded-md py-2 px-3' {...register("price")} required />
             </div>
-            <div className='grid gap-2'>
-              <label htmlFor="" className='w-[500px] font-medium'>Discounted Price</label>
-              <input type="text" className='border py-2 px-3' {...register("d_price")} required />
+            <div className='grid gap-1'>
+              <label htmlFor="" className='font-medium'>Discounted Price</label>
+              <input type="text" className='border border-gray-400 rounded-md py-2 px-3' {...register("d_price")} required />
             </div>
           </div>
 
+          <div className='grid gap-1'>
+            <label htmlFor="" className='font-medium'>Stock</label>
+            <input type="number" className='border border-gray-400 rounded-md py-2 px-3' {...register("stock")} required />
+          </div>
+
+          <div className='grid gap-1'>
+            {/* <input type="number" className='border border-gray-400 rounded-md py-2 px-3' {...register("stock")} required /> */}
+            <div>
+              <label htmlFor="" className='font-medium'>Colors</label>
+              <ul className='grid grid-cols-2 border border-gray-300 py-2 px-1 rounded-md transition-all hover:h-fit w-fit overflow-hidden'>
+                <li className='p-2 w-32 flex gap-2'>
+                  <input type="checkbox" className='cursor-pointer' id="p-clr-black" />
+                  <label htmlFor="p-clr-black" className='cursor-pointer'>Black</label>
+                </li>
+                <li className='p-2 w-32 flex gap-2'>
+                  <input type="checkbox" className='cursor-pointer' id="p-clr-white" />
+                  <label htmlFor="p-clr-white" className='cursor-pointer'>White</label>
+                </li>
+                <li className='p-2 w-32 flex gap-2'>
+                  <input type="checkbox" className='cursor-pointer' id="p-clr-brown" />
+                  <label htmlFor="p-clr-brown" className='cursor-pointer'>Brown</label>
+                </li>
+                <li className='p-2 w-32 flex gap-2'>
+                  <input type="checkbox" className='cursor-pointer' id="p-clr-blue" />
+                  <label htmlFor="p-clr-blue" className='cursor-pointer'>Blue</label>
+                </li>
+                <li className='p-2 w-32 flex gap-2'>
+                  <input type="checkbox" className='cursor-pointer' id="p-clr-silver" />
+                  <label htmlFor="p-clr-silver" className='cursor-pointer'>Silver</label>
+                </li>
+                <li className='p-2 w-32 flex gap-2'>
+                  <input type="checkbox" className='cursor-pointer' id="p-clr-red" />
+                  <label htmlFor="p-clr-red" className='cursor-pointer'>Red</label>
+                </li>
+                <li className='p-2 w-32 flex gap-2'>
+                  <input type="checkbox" className='cursor-pointer' id="p-clr-purple" />
+                  <label htmlFor="p-clr-purple" className='cursor-pointer'>Purple</label>
+                </li>
+                <li className='p-2 w-32 flex gap-2'>
+                  <input type="checkbox" className='cursor-pointer' id="p-clr-orange" />
+                  <label htmlFor="p-clr-orange" className='cursor-pointer'>Orange</label>
+                </li>
+                <li className='p-2 w-32 flex gap-2'>
+                  <input type="checkbox" className='cursor-pointer' id="p-clr-pink" />
+                  <label htmlFor="p-clr-pink" className='cursor-pointer'>Pink</label>
+                </li>
+                
+
+              </ul>
+            </div>
+          </div>
 
           <button type="submit" className='w-full bg-slate-800 text-white p-[10px] rounded-lg hover:bg-slate-900 transition-all'>
             Add Product
