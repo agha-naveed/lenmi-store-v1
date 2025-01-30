@@ -2,3 +2,4 @@
 
 ## Technologies Used:
  - NEXT.JS
+ - MongoDB

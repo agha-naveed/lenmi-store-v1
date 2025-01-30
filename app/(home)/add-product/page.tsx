@@ -4,25 +4,30 @@ import React, { useState, ChangeEvent, useEffect } from 'react'
 import ReactDOM from 'react-dom';
 import { MdAddPhotoAlternate } from "react-icons/md";
 import img from '@/images/jethalal.jpeg'
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import Form from 'next/form';
 import { IoCloseCircle } from "react-icons/io5";
 import RichTextEditor from '@/app/components/RichTextEditor';
 
 interface IFormInputs {
-    first_name: string;
-    last_name: string;
+    product_name: string;
+    category: string;
     phone_number: number;
     email: string,
     password: string;
-    account_type: string
+    account_type: string,
+    content: string
 }
 
 
 export default function page() {
+
+    
     let [selectedImage, setSelectedImage] = useState<string[]>([])
-     
-    const { register, handleSubmit, formState: { errors } } = useForm<IFormInputs>();
+    
+    const { watch, setValue, register, handleSubmit, formState: { errors } } = useForm<IFormInputs>();
+
+    const contentValue = watch("content");
 
 
     const onSubmit = async (data: IFormInputs) => {
@@ -101,17 +106,19 @@ export default function page() {
                     <div className='flex justify-center items-center w-[120px] h-[120px] border border-gray-500 rounded-lg overflow-hidden relative'>
                         <span className='text-gray-600 select-none'>Photo</span>
                     </div>
+
                 </div>
+
 
                 <div className='font-opensans grid gap-4 w-fit'>
                     <div className='flex gap-3'>
                         <div className='grid gap-2'>
                             <label htmlFor="" className='w-[500px] font-medium'>Product Name</label>
-                            <input type="text" className='border py-2 px-3' />
+                            <input type="text" className='border py-2 px-3' {...register("product_name")} required />
                         </div>
                         <div className='grid gap-2'>
                             <label htmlFor="" className='font-medium'>Category</label>
-                            <select name="" id="" className='py-2 px-3 w-40'>
+                            <select {...register("category")} className='py-2 px-3 w-40'>
                                 <option value="">-- select --</option>
                                 <option value={`electronics`}>Electronics</option>
                             </select>
@@ -119,7 +126,11 @@ export default function page() {
                     </div>
                     <div className='grid gap-2'>
                         <label htmlFor="" className='font-medium'>Description</label>
-                        <RichTextEditor />
+                        
+                        <RichTextEditor
+                            value={contentValue}
+                            onChange={(value) => setValue("content", value)}
+                        />
                     </div>
 
                     <button className='w-full bg-slate-800 text-white p-[10px] rounded-lg hover:bg-slate-900 transition-all'>Add Product</button>

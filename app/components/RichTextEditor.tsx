@@ -1,7 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 
-const RichTextEditor = () => {
-  const [content, setContent] = useState<string>('');
+const RichTextEditor = ({ value, onChange }: any) => {
   const editorRef = useRef<HTMLDivElement>(null);
 
   const handleFormat = (command: string, value?: string) => {
@@ -98,7 +97,6 @@ const RichTextEditor = () => {
 
         {/* Divider */}
         <div className="h-6 w-px bg-gray-300 my-1" />
-
       </div>
 
       {/* Editor Area */}
@@ -106,7 +104,8 @@ const RichTextEditor = () => {
         ref={editorRef}
         className="w-full p-4 min-h-[200px] focus:outline-none"
         contentEditable
-        onInput={(e) => setContent(e.currentTarget.innerHTML)}
+        onInput={(e) => onChange(e.currentTarget.innerHTML)}
+        dangerouslySetInnerHTML={{ __html: value }}
       />
     </div>
   );
