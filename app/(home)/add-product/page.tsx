@@ -13,17 +13,14 @@ interface IFormInputs {
     product_name: string;
     category: string;
     description?: string;
-    phone_number: number;
-    email: string,
-    password: string;
-    account_type: string,
-    content: string
+    price: number;
+    d_price: number;
+    content: string;
 }
 
 
 export default function page() {
 
-    let [description, setDescription] = useState('')
 
     let [selectedImage, setSelectedImage] = useState<string[]>([])
     
@@ -34,6 +31,7 @@ export default function page() {
     const onSubmit = async (data: IFormInputs) => {
         console.log("Submitted!")
         console.log(data)
+        console.log(selectedImage)
 
             
             // if(data.email.includes(".com") || data.email.includes(".net") || data.email.includes(".org")) {
@@ -79,7 +77,7 @@ export default function page() {
     return (
         <div className='container mx-auto'>
       <form onSubmit={handleSubmit(onSubmit)} className='grid gap-10'>
-        {/* Image Upload Section */}
+        {/* ---------- Image Upload Section ---------- */}
         <div className='flex gap-3 shadow-md shadow-gray-400 rounded-lg w-fit p-5'>
           <div title='Upload Picture'>
             <label htmlFor="upload-product-pic" className='cursor-pointer flex justify-center items-center w-[120px] h-[120px] border border-dashed border-gray-500 rounded-lg'>
@@ -106,6 +104,7 @@ export default function page() {
             <span className='text-gray-600 select-none'>Photo</span>
           </div>
         </div>
+        {/* ---------- Image Upload Section Ended ---------- */}
 
         {/* Form Fields */}
         <div className='font-opensans grid gap-4 w-fit'>
@@ -129,6 +128,18 @@ export default function page() {
                 onChange={(value:any) => setValue("content", value)}
             />
           </div>
+          
+          <div className='flex'>
+            <div className='grid gap-2'>
+              <label htmlFor="" className='w-[500px] font-medium'>Price</label>
+              <input type="text" className='border py-2 px-3' {...register("price")} required />
+            </div>
+            <div className='grid gap-2'>
+              <label htmlFor="" className='w-[500px] font-medium'>Discounted Price</label>
+              <input type="text" className='border py-2 px-3' {...register("d_price")} required />
+            </div>
+          </div>
+
 
           <button type="submit" className='w-full bg-slate-800 text-white p-[10px] rounded-lg hover:bg-slate-900 transition-all'>
             Add Product
