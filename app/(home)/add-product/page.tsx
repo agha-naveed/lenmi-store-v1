@@ -25,6 +25,8 @@ export default function page() {
 
   const [customColors, setCustomColors] = useState<string[]>([]);
   const [newColor, setNewColor] = useState("");
+  const [originalPrice, setOriginalPrice] = useState(0);
+  const [discountedPrice, setDiscountedPrice] = useState(0);
 
   const handleAddColor = () => {
     if (newColor.trim()) {
@@ -94,7 +96,7 @@ export default function page() {
       <Form
         action={""}
         onSubmit={handleSubmit(onSubmit)}
-        className="grid gap-10 w-fit"
+        className="grid gap-10 w-fit py-10"
       >
         {/* ---------- Image Upload Section ---------- */}
         <div className="flex gap-3 shadow-md shadow-gray-400 rounded-lg w-fit p-5">
@@ -186,17 +188,38 @@ export default function page() {
               <input
                 type="number"
                 className="border border-gray-400 rounded-md py-2 px-3"
+                onInput={(e:any) => setOriginalPrice(e.target.value)}
                 {...register("price")}
                 required
               />
             </div>
             <div className="grid gap-1">
-              <label htmlFor="" className="font-medium">
-                Discounted Price
-              </label>
+              <div className="flex justify-between">
+                <label htmlFor="" className="font-medium">
+                  Discounted Price
+                </label>
+                <span className="content-start font-semibold text-gray-500">
+                  {
+                    discountedPrice > 0 && originalPrice > 0 ?
+                    <>
+                      {
+                        discountedPrice <= originalPrice ?
+                        <>
+                          -{(discountedPrice / originalPrice) * 100}%
+                        </>
+                        :
+                        undefined
+                      }
+                    </>
+                    :
+                    undefined
+                  }
+                  </span>
+              </div>
               <input
                 type="number"
                 className="border border-gray-400 rounded-md py-2 px-3"
+                onInput={(e:any) => setDiscountedPrice(e.target.value)}
                 {...register("d_price")}
                 required
               />
@@ -349,8 +372,8 @@ export default function page() {
                 ))}
               </ul>
 
-              <div className="grid">
-                <label htmlFor="">Other</label>
+              <div className="grid pt-3 pb-2 gap-1">
+                <label htmlFor="" className="font-medium">Other</label>
                 <div className="flex gap-[6px]">
                   <input
                     type="text"
@@ -365,6 +388,7 @@ export default function page() {
                   >
                     Add
                   </button>
+
                 </div>
               </div>
             </div>
