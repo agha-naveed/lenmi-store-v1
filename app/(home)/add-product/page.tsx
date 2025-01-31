@@ -16,15 +16,17 @@ interface IFormInputs {
     price: number;
     d_price: number;
     stock: number;
+    color: string;
     content: string;
 }
 
 
 export default function page() {
 
-
     let [selectedImage, setSelectedImage] = useState<string[]>([])
-    
+
+    let [addColor, setAddColor] = useState('')
+
     const { watch, setValue, register, handleSubmit, formState: { errors } } = useForm<IFormInputs>();
 
     const contentValue = watch("content");
@@ -147,49 +149,55 @@ export default function page() {
           </div>
 
           <div className='grid gap-1'>
-            {/* <input type="number" className='border border-gray-400 rounded-md py-2 px-3' {...register("stock")} required /> */}
             <div>
               <label htmlFor="" className='font-medium'>Colors</label>
-              <ul className='grid grid-cols-2 border border-gray-300 py-2 px-1 rounded-md transition-all hover:h-fit w-fit overflow-hidden'>
+              <ul className='grid grid-cols-2 border border-gray-300 mt-[6px] py-2 px-1 rounded-md transition-all hover:h-fit w-fit overflow-hidden'>
                 <li className='p-2 w-32 flex gap-2'>
-                  <input type="checkbox" className='cursor-pointer' id="p-clr-black" />
+                  <input type="checkbox" {...register("color")} className='cursor-pointer' id="p-clr-black" />
                   <label htmlFor="p-clr-black" className='cursor-pointer'>Black</label>
                 </li>
                 <li className='p-2 w-32 flex gap-2'>
-                  <input type="checkbox" className='cursor-pointer' id="p-clr-white" />
+                  <input type="checkbox" {...register("color")} className='cursor-pointer' id="p-clr-white" />
                   <label htmlFor="p-clr-white" className='cursor-pointer'>White</label>
                 </li>
                 <li className='p-2 w-32 flex gap-2'>
-                  <input type="checkbox" className='cursor-pointer' id="p-clr-brown" />
+                  <input type="checkbox" {...register("color")} className='cursor-pointer' id="p-clr-brown" />
                   <label htmlFor="p-clr-brown" className='cursor-pointer'>Brown</label>
                 </li>
                 <li className='p-2 w-32 flex gap-2'>
-                  <input type="checkbox" className='cursor-pointer' id="p-clr-blue" />
+                  <input type="checkbox" {...register("color")} className='cursor-pointer' id="p-clr-blue" />
                   <label htmlFor="p-clr-blue" className='cursor-pointer'>Blue</label>
                 </li>
                 <li className='p-2 w-32 flex gap-2'>
-                  <input type="checkbox" className='cursor-pointer' id="p-clr-silver" />
+                  <input type="checkbox" {...register("color")} className='cursor-pointer' id="p-clr-silver" />
                   <label htmlFor="p-clr-silver" className='cursor-pointer'>Silver</label>
                 </li>
                 <li className='p-2 w-32 flex gap-2'>
-                  <input type="checkbox" className='cursor-pointer' id="p-clr-red" />
+                  <input type="checkbox" {...register("color")} className='cursor-pointer' id="p-clr-red" />
                   <label htmlFor="p-clr-red" className='cursor-pointer'>Red</label>
                 </li>
                 <li className='p-2 w-32 flex gap-2'>
-                  <input type="checkbox" className='cursor-pointer' id="p-clr-purple" />
+                  <input type="checkbox" {...register("color")} className='cursor-pointer' id="p-clr-purple" />
                   <label htmlFor="p-clr-purple" className='cursor-pointer'>Purple</label>
                 </li>
                 <li className='p-2 w-32 flex gap-2'>
-                  <input type="checkbox" className='cursor-pointer' id="p-clr-orange" />
+                  <input type="checkbox" {...register("color")} className='cursor-pointer' id="p-clr-orange" />
                   <label htmlFor="p-clr-orange" className='cursor-pointer'>Orange</label>
                 </li>
                 <li className='p-2 w-32 flex gap-2'>
-                  <input type="checkbox" className='cursor-pointer' id="p-clr-pink" />
+                  <input type="checkbox" {...register("color")} className='cursor-pointer' id="p-clr-pink" />
                   <label htmlFor="p-clr-pink" className='cursor-pointer'>Pink</label>
                 </li>
                 
 
               </ul>
+
+              <div className='grid'>
+                <label htmlFor="">Other</label>
+                <input type="text" className='w-fit border border-black rounded-md py-1 px-2' />
+                <button className='bg-orange-300 w-fit py-1 px-3'>Add</button>
+              </div>
+
             </div>
           </div>
 
