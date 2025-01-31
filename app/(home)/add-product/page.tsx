@@ -27,6 +27,8 @@ export default function page() {
   const [newColor, setNewColor] = useState("");
   const [originalPrice, setOriginalPrice] = useState(0);
   const [discountedPrice, setDiscountedPrice] = useState(0);
+  const [showAlert, setShowAlert] = useState('');
+  
 
   const handleAddColor = () => {
     if (newColor.trim()) {
@@ -34,6 +36,7 @@ export default function page() {
       setNewColor(""); // Reset input
     }
   };
+
 
   const {
     watch,
@@ -46,9 +49,15 @@ export default function page() {
   const contentValue = watch("content");
 
   const onSubmit = async (data: IFormInputs) => {
-    console.log("Submitted!");
-    console.log(data);
-    console.log(selectedImage);
+
+    if(originalPrice < discountedPrice) {
+      setShowAlert("Some Problem... Check Information Again")
+    }
+    else {
+      console.log("Submitted!");
+      console.log(data);
+      console.log(selectedImage);
+    }
 
     // if(data.email.includes(".com") || data.email.includes(".net") || data.email.includes(".org")) {
     //     setEmailError("")
@@ -202,14 +211,7 @@ export default function page() {
                   {
                     discountedPrice > 0 && originalPrice > 0 ?
                     <>
-                      {
-                        discountedPrice <= originalPrice ?
-                        <>
-                          -{(discountedPrice / originalPrice) * 100}%
-                        </>
-                        :
-                        undefined
-                      }
+                      -{(discountedPrice / originalPrice) * 100}%
                     </>
                     :
                     undefined
@@ -219,7 +221,9 @@ export default function page() {
               <input
                 type="number"
                 className="border border-gray-400 rounded-md py-2 px-3"
-                onInput={(e:any) => setDiscountedPrice(e.target.value)}
+                onInput={(e:any) => {  
+                  setDiscountedPrice(e.target.value)
+                }}
                 {...register("d_price")}
                 required
               />
