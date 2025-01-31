@@ -51,12 +51,10 @@ export default function page() {
   const onSubmit = async (data: IFormInputs) => {
 
     if(originalPrice < discountedPrice) {
-      setShowAlert("Some Problem... Check Information Again")
+      setShowAlert("Discounted Price Must be less than Original Price")
     }
     else {
-      console.log("Submitted!");
-      console.log(data);
-      console.log(selectedImage);
+      setShowAlert("")
     }
 
     // if(data.email.includes(".com") || data.email.includes(".net") || data.email.includes(".org")) {
@@ -197,7 +195,10 @@ export default function page() {
               <input
                 type="number"
                 className="border border-gray-400 rounded-md py-2 px-3"
-                onInput={(e:any) => setOriginalPrice(e.target.value)}
+                value={originalPrice}
+                onInput={(e:any) => {
+                  setOriginalPrice(Number(e.target.value))
+                }}
                 {...register("price")}
                 required
               />
@@ -221,15 +222,20 @@ export default function page() {
               <input
                 type="number"
                 className="border border-gray-400 rounded-md py-2 px-3"
+                value={discountedPrice}
                 onInput={(e:any) => {  
-                  setDiscountedPrice(e.target.value)
+                  setDiscountedPrice(Number(e.target.value))
                 }}
                 {...register("d_price")}
                 required
               />
             </div>
+            
           </div>
-
+          {
+            showAlert.length > 0 ?
+              <span className="text-red-700">{showAlert}</span> : null
+          }
           <div className="grid gap-1">
             <label htmlFor="" className="font-medium">
               Stock
