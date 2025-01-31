@@ -25,7 +25,8 @@ export default function page() {
 
     let [selectedImage, setSelectedImage] = useState<string[]>([])
 
-    let [addColor, setAddColor] = useState('')
+    let [addColor, setAddColor] = useState([])
+    let [colorAdded, setColorAdded] = useState(false)
 
     const { watch, setValue, register, handleSubmit, formState: { errors } } = useForm<IFormInputs>();
 
@@ -188,14 +189,24 @@ export default function page() {
                   <input type="checkbox" {...register("color")} className='cursor-pointer' id="p-clr-pink" />
                   <label htmlFor="p-clr-pink" className='cursor-pointer'>Pink</label>
                 </li>
+
+                {
+                  
+                }
                 
 
               </ul>
 
               <div className='grid'>
                 <label htmlFor="">Other</label>
-                <input type="text" className='w-fit border border-black rounded-md py-1 px-2' />
-                <button className='bg-orange-300 w-fit py-1 px-3'>Add</button>
+                <input type="text"
+                className='w-fit border border-black rounded-md py-1 px-2'
+                onInput={(e:any) => setAddColor(e.target.value)}
+                />
+                <button type='button'
+                className='bg-orange-300 w-fit py-1 px-3'
+                onClick={() => setColorAdded(true)}
+                >Add</button>
               </div>
 
             </div>
