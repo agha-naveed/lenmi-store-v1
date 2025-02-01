@@ -2,9 +2,9 @@
 import Image from "next/image";
 import React, { useState, ChangeEvent, useEffect } from "react";
 import ReactDOM from "react-dom";
-import { MdAddPhotoAlternate } from "react-icons/md";
-import img from "@/images/jethalal.jpeg";
-import { useForm, Controller } from "react-hook-form";
+import { MdAddPhotoAlternate, MdInventory } from "react-icons/md";
+import { RiColorFilterAiLine } from "react-icons/ri";
+import { useForm } from "react-hook-form";
 import Form from "next/form";
 import { IoCloseCircle } from "react-icons/io5";
 import RichTextEditor from "@/app/components/RichTextEditor";
@@ -28,6 +28,8 @@ export default function page() {
   const [originalPrice, setOriginalPrice] = useState(0);
   const [discountedPrice, setDiscountedPrice] = useState(0);
   const [showAlert, setShowAlert] = useState('');
+
+  const [selectedOption, setSelectedOption] = useState("")
   
 
   const handleAddColor = () => {
@@ -236,17 +238,36 @@ export default function page() {
             showAlert.length > 0 ?
               <span className="text-red-700">{showAlert}</span> : null
           }
-          <div className="grid gap-1">
-            <label htmlFor="" className="font-medium">
-              Stock
-            </label>
-            <input
-              type="number"
-              className="border border-gray-400 rounded-md py-2 px-3"
-              {...register("stock")}
-              required
-            />
-          </div>
+
+          <aside className="flex">
+            <ul className="grid gap-[2px] border w-fit">
+              <li className="flex items-center gap-[7px] text-[17px] cursor-pointer transition-all hover:bg-gray-200 w-52 h-12 p-3">
+                <MdInventory className="text-[18px]" />
+                Stock
+              </li>
+              <li className="flex items-center gap-[7px] text-[17px] cursor-pointer transition-all hover:bg-gray-200 w-52 h-12 p-3">
+                <RiColorFilterAiLine className="text-[18px]" />
+                Colors
+              </li>
+            </ul>
+            <div className="border w-full p-3">
+
+              <div className="grid gap-1">
+                <label htmlFor="" className="font-medium">
+                  Stock
+                </label>
+                <input
+                  type="number"
+                  className="border border-gray-400 w-full rounded-md py-2 px-3"
+                  {...register("stock")}
+                  required
+                />
+              </div>
+
+            </div>
+          </aside>
+
+          
 
           <div className="grid gap-1">
             <div>
