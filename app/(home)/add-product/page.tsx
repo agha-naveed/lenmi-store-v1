@@ -3,6 +3,7 @@ import Image from "next/image";
 import React, { useState, ChangeEvent, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { MdAddPhotoAlternate, MdInventory } from "react-icons/md";
+import { GrCurrency } from "react-icons/gr";
 import { RiColorFilterAiLine } from "react-icons/ri";
 import { useForm } from "react-hook-form";
 import Form from "next/form";
@@ -18,6 +19,7 @@ interface IFormInputs {
   stock: number;
   color: string;
   content: string;
+  payment_method: string;
 }
 
 export default function page() {
@@ -240,190 +242,227 @@ export default function page() {
           }
 
           <aside className="flex">
-            <ul className="grid gap-[2px] border w-fit">
-              <li className="flex items-center gap-[7px] text-[17px] cursor-pointer transition-all hover:bg-gray-200 w-52 h-12 p-3">
+            <ul className="flex flex-col gap-[2px] border w-fit">
+              <li
+                className="flex items-center gap-[7px] text-[17px] cursor-pointer transition-all hover:bg-gray-200 w-52 h-12 px-4"
+                onClick={() => setSelectedOption("stock")}
+                >
                 <MdInventory className="text-[18px]" />
                 Stock
               </li>
-              <li className="flex items-center gap-[7px] text-[17px] cursor-pointer transition-all hover:bg-gray-200 w-52 h-12 p-3">
+              <li
+                className="flex items-center gap-[7px] text-[17px] cursor-pointer transition-all hover:bg-gray-200 w-52 h-12 px-4"
+                onClick={() => setSelectedOption("color")}
+                >
                 <RiColorFilterAiLine className="text-[18px]" />
                 Colors
               </li>
-            </ul>
-            <div className="border w-full p-3">
+              <li
+                className="flex items-center gap-[7px] text-[17px] cursor-pointer transition-all hover:bg-gray-200 w-52 h-12 px-4"
+                onClick={() => setSelectedOption("shipping")}
+                >
+                <GrCurrency className="text-[18px]" />
+                Payment
+              </li>
 
-              <div className="grid gap-1">
+            </ul>
+
+
+            <div className="border w-full p-5">
+
+              <div className={`grid gap-1 ${selectedOption == 'stock' ? "block" : "hidden"}`}>
                 <label htmlFor="" className="font-medium">
                   Stock
                 </label>
                 <input
                   type="number"
-                  className="border border-gray-400 w-full rounded-md py-2 px-3"
+                  className="border border-gray-400 w-[80%] rounded-md py-2 px-3"
+                  placeholder="e.g: 1000"
                   {...register("stock")}
                   required
                 />
               </div>
 
+              
+              <div className={`grid gap-1 ${selectedOption == 'color' ? "block" : "hidden"}`}>
+                <div>
+                  <label htmlFor="" className="font-medium">
+                    Colors
+                  </label>
+                  <ul className="grid grid-cols-2 border border-gray-300 mt-[6px] py-2 px-1 rounded-md transition-all hover:h-fit w-fit overflow-hidden">
+                    <li className="p-2 w-32 flex gap-2">
+                      <input
+                        type="checkbox"
+                        {...register("color")}
+                        value={"black"}
+                        className="cursor-pointer"
+                        id="p-clr-black"
+                      />
+                      <label htmlFor="p-clr-black" className="cursor-pointer">
+                        Black
+                      </label>
+                    </li>
+                    <li className="p-2 w-32 flex gap-2">
+                      <input
+                        type="checkbox"
+                        {...register("color")}
+                        value={"white"}
+                        className="cursor-pointer"
+                        id="p-clr-white"
+                      />
+                      <label htmlFor="p-clr-white" className="cursor-pointer">
+                        White
+                      </label>
+                    </li>
+                    <li className="p-2 w-32 flex gap-2">
+                      <input
+                        type="checkbox"
+                        {...register("color")}
+                        value={"brown"}
+                        className="cursor-pointer"
+                        id="p-clr-brown"
+                      />
+                      <label htmlFor="p-clr-brown" className="cursor-pointer">
+                        Brown
+                      </label>
+                    </li>
+                    <li className="p-2 w-32 flex gap-2">
+                      <input
+                        type="checkbox"
+                        {...register("color")}
+                        value={"blue"}
+                        className="cursor-pointer"
+                        id="p-clr-blue"
+                      />
+                      <label htmlFor="p-clr-blue" className="cursor-pointer">
+                        Blue
+                      </label>
+                    </li>
+                    <li className="p-2 w-32 flex gap-2">
+                      <input
+                        type="checkbox"
+                        {...register("color")}
+                        value={"silver"}
+                        className="cursor-pointer"
+                        id="p-clr-silver"
+                      />
+                      <label htmlFor="p-clr-silver" className="cursor-pointer">
+                        Silver
+                      </label>
+                    </li>
+                    <li className="p-2 w-32 flex gap-2">
+                      <input
+                        type="checkbox"
+                        {...register("color")}
+                        value={"red"}
+                        className="cursor-pointer"
+                        id="p-clr-red"
+                      />
+                      <label htmlFor="p-clr-red" className="cursor-pointer">
+                        Red
+                      </label>
+                    </li>
+                    <li className="p-2 w-32 flex gap-2">
+                      <input
+                        type="checkbox"
+                        {...register("color")}
+                        value={"purple"}
+                        className="cursor-pointer"
+                        id="p-clr-purple"
+                      />
+                      <label htmlFor="p-clr-purple" className="cursor-pointer">
+                        Purple
+                      </label>
+                    </li>
+                    <li className="p-2 w-32 flex gap-2">
+                      <input
+                        type="checkbox"
+                        {...register("color")}
+                        value={"orange"}
+                        className="cursor-pointer"
+                        id="p-clr-orange"
+                      />
+                      <label htmlFor="p-clr-orange" className="cursor-pointer">
+                        Orange
+                      </label>
+                    </li>
+                    <li className="p-2 w-32 flex gap-2">
+                      <input
+                        type="checkbox"
+                        {...register("color")}
+                        value={"pink"}
+                        className="cursor-pointer"
+                        id="p-clr-pink"
+                      />
+                      <label htmlFor="p-clr-pink" className="cursor-pointer">
+                        Pink
+                      </label>
+                    </li>
+
+                    {customColors.map((color, index) => (
+                      <li key={index} className="p-2 w-32 flex gap-2">
+                        <input
+                          type="checkbox"
+                          id={`p-clr-${index}`}
+                          value={color}
+                          {...register("color")}
+                          className="cursor-pointer"
+                        />
+                        <label
+                          htmlFor={`p-clr-${index}`}
+                          className="cursor-pointer"
+                        >
+                          {color}
+                        </label>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="grid pt-3 pb-2 gap-1">
+                    <label htmlFor="" className="font-medium">Other</label>
+                    <div className="flex gap-[6px]">
+                      <input
+                        type="text"
+                        className="w-32 border border-black rounded-md py-1 px-2"
+                        value={newColor}
+                        placeholder="e.g: indigo"
+                        onChange={(e) => setNewColor(e.target.value)}
+                      />
+                      <button
+                        type="button"
+                        className="border bg-slate-800 text-white rounded-md w-fit py-2 px-5"
+                        onClick={handleAddColor}
+                      >
+                        Add
+                      </button>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className={`grid gap-1 ${selectedOption == 'shipping' ? "block" : "hidden"}`}>
+                <div className="grid">
+                  <label htmlFor="" className="font-medium text-[18px]">Payment Options</label>
+                  <div className="flex gap-2 mt-3">
+                    <input type="checkbox" id="cod" className="cursor-pointer" {...register("payment_method")} />
+                    <label htmlFor="cod" title="Cash on Delivery" className="cursor-pointer">Cash on Delivery</label>
+                  </div>
+                  <div className="flex gap-2 mt-2">
+                    <input type="checkbox" id="credit-card" className="cursor-pointer" {...register("payment_method")} />
+                    <label htmlFor="credit-card" title="Credit Card" className="cursor-pointer">Credit Card</label>
+                  </div>
+                  <div className="flex gap-2 mt-2">
+                    <input type="checkbox" id="debit-card" className="cursor-pointer" {...register("payment_method")} />
+                    <label htmlFor="debit-card" title="Debit Card" className="cursor-pointer">Debit Card</label>
+                  </div>
+                </div>
+              </div>
             </div>
           </aside>
 
           
 
-          <div className="grid gap-1">
-            <div>
-              <label htmlFor="" className="font-medium">
-                Colors
-              </label>
-              <ul className="grid grid-cols-2 border border-gray-300 mt-[6px] py-2 px-1 rounded-md transition-all hover:h-fit w-fit overflow-hidden">
-                <li className="p-2 w-32 flex gap-2">
-                  <input
-                    type="checkbox"
-                    {...register("color")}
-                    value={"black"}
-                    className="cursor-pointer"
-                    id="p-clr-black"
-                  />
-                  <label htmlFor="p-clr-black" className="cursor-pointer">
-                    Black
-                  </label>
-                </li>
-                <li className="p-2 w-32 flex gap-2">
-                  <input
-                    type="checkbox"
-                    {...register("color")}
-                    value={"white"}
-                    className="cursor-pointer"
-                    id="p-clr-white"
-                  />
-                  <label htmlFor="p-clr-white" className="cursor-pointer">
-                    White
-                  </label>
-                </li>
-                <li className="p-2 w-32 flex gap-2">
-                  <input
-                    type="checkbox"
-                    {...register("color")}
-                    value={"brown"}
-                    className="cursor-pointer"
-                    id="p-clr-brown"
-                  />
-                  <label htmlFor="p-clr-brown" className="cursor-pointer">
-                    Brown
-                  </label>
-                </li>
-                <li className="p-2 w-32 flex gap-2">
-                  <input
-                    type="checkbox"
-                    {...register("color")}
-                    value={"blue"}
-                    className="cursor-pointer"
-                    id="p-clr-blue"
-                  />
-                  <label htmlFor="p-clr-blue" className="cursor-pointer">
-                    Blue
-                  </label>
-                </li>
-                <li className="p-2 w-32 flex gap-2">
-                  <input
-                    type="checkbox"
-                    {...register("color")}
-                    value={"silver"}
-                    className="cursor-pointer"
-                    id="p-clr-silver"
-                  />
-                  <label htmlFor="p-clr-silver" className="cursor-pointer">
-                    Silver
-                  </label>
-                </li>
-                <li className="p-2 w-32 flex gap-2">
-                  <input
-                    type="checkbox"
-                    {...register("color")}
-                    value={"red"}
-                    className="cursor-pointer"
-                    id="p-clr-red"
-                  />
-                  <label htmlFor="p-clr-red" className="cursor-pointer">
-                    Red
-                  </label>
-                </li>
-                <li className="p-2 w-32 flex gap-2">
-                  <input
-                    type="checkbox"
-                    {...register("color")}
-                    value={"purple"}
-                    className="cursor-pointer"
-                    id="p-clr-purple"
-                  />
-                  <label htmlFor="p-clr-purple" className="cursor-pointer">
-                    Purple
-                  </label>
-                </li>
-                <li className="p-2 w-32 flex gap-2">
-                  <input
-                    type="checkbox"
-                    {...register("color")}
-                    value={"orange"}
-                    className="cursor-pointer"
-                    id="p-clr-orange"
-                  />
-                  <label htmlFor="p-clr-orange" className="cursor-pointer">
-                    Orange
-                  </label>
-                </li>
-                <li className="p-2 w-32 flex gap-2">
-                  <input
-                    type="checkbox"
-                    {...register("color")}
-                    value={"pink"}
-                    className="cursor-pointer"
-                    id="p-clr-pink"
-                  />
-                  <label htmlFor="p-clr-pink" className="cursor-pointer">
-                    Pink
-                  </label>
-                </li>
-
-                {customColors.map((color, index) => (
-                  <li key={index} className="p-2 w-32 flex gap-2">
-                    <input
-                      type="checkbox"
-                      id={`p-clr-${index}`}
-                      value={color}
-                      {...register("color")}
-                      className="cursor-pointer"
-                    />
-                    <label
-                      htmlFor={`p-clr-${index}`}
-                      className="cursor-pointer"
-                    >
-                      {color}
-                    </label>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="grid pt-3 pb-2 gap-1">
-                <label htmlFor="" className="font-medium">Other</label>
-                <div className="flex gap-[6px]">
-                  <input
-                    type="text"
-                    className="w-32 border border-black rounded-md py-1 px-2"
-                    value={newColor}
-                    onChange={(e) => setNewColor(e.target.value)}
-                  />
-                  <button
-                    type="button"
-                    className="border bg-slate-800 text-white rounded-md w-fit py-2 px-5"
-                    onClick={handleAddColor}
-                  >
-                    Add
-                  </button>
-
-                </div>
-              </div>
-            </div>
-          </div>
 
           <button
             type="submit"
