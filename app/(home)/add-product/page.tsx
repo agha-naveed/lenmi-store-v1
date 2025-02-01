@@ -54,6 +54,7 @@ export default function page() {
 
   const onSubmit = async (data: IFormInputs) => {
 
+    console.log(data)
     if(originalPrice < discountedPrice) {
       setShowAlert("Discounted Price Must be less than Original Price")
     }
@@ -445,24 +446,21 @@ export default function page() {
                 <div className="grid">
                   <label htmlFor="" className="font-medium text-[18px]">Payment Options</label>
                   <div className="flex gap-2 mt-3">
-                    <input type="checkbox" id="cod" className="cursor-pointer" {...register("payment_method")} />
+                    <input type="checkbox" id="cod" className="cursor-pointer" value={"cash-on-delivery"} {...register("payment_method")} />
                     <label htmlFor="cod" title="Cash on Delivery" className="cursor-pointer">Cash on Delivery</label>
                   </div>
                   <div className="flex gap-2 mt-2">
-                    <input type="checkbox" id="credit-card" className="cursor-pointer" {...register("payment_method")} />
+                    <input type="checkbox" id="credit-card" className="cursor-pointer" value={"credit-card"} {...register("payment_method")} />
                     <label htmlFor="credit-card" title="Credit Card" className="cursor-pointer">Credit Card</label>
                   </div>
                   <div className="flex gap-2 mt-2">
-                    <input type="checkbox" id="debit-card" className="cursor-pointer" {...register("payment_method")} />
+                    <input type="checkbox" id="debit-card" value={"debit-card"} className="cursor-pointer" {...register("payment_method")} />
                     <label htmlFor="debit-card" title="Debit Card" className="cursor-pointer">Debit Card</label>
                   </div>
                 </div>
               </div>
             </div>
           </aside>
-
-          
-
 
           <button
             type="submit"
