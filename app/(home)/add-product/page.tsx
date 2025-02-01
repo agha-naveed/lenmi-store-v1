@@ -20,13 +20,15 @@ interface IFormInputs {
   stock: number;
   color: string;
   content: string;
-  imgURL: string[];
+  imgURL: File[];
   payment_method: string[];
 }
 
 export default function page() {
   let [message, setMessage] = useState("");
+
   let [selectedImage, setSelectedImage] = useState<string[]>([]);
+  const [files, setFiles] = useState<File[]>([]);
 
   const [customColors, setCustomColors] = useState<string[]>([]);
   const [newColor, setNewColor] = useState("");
@@ -54,7 +56,7 @@ export default function page() {
   const contentValue = watch("content");
 
   const onSubmit = async (data: IFormInputs) => {
-    data["imgURL"] = selectedImage;
+    data["imgURL"] = files;
     console.log(data);
     if (originalPrice < discountedPrice) {
       setShowAlert("Discounted Price Must be less than Original Price");
@@ -62,15 +64,15 @@ export default function page() {
       setShowAlert("");
     }
 
-    const res = await axios.post("http://localhost:3000/add-product/api", data);
+    // const res = await axios.post("http://localhost:3000/add-product/api", data);
 
-    if (res.data.message != "ok") setMessage("Some Problem Occurred!");
-    else {
-      setMessage("Successfully Added Product");
-      setTimeout(function () {
-        // window.location.reload()
-      }, 800);
-    }
+    // if (res.data.message != "ok") setMessage("Some Problem Occurred!");
+    // else {
+    //   setMessage("Successfully Added Product");
+    //   setTimeout(function () {
+    //     // window.location.reload()
+    //   }, 800);
+    // }
   };
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -80,6 +82,7 @@ export default function page() {
         ...prevImages,
         URL.createObjectURL(file),
       ]);
+      setFiles((prevFiles) => [...prevFiles, file]);
     }
   };
 
