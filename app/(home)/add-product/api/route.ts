@@ -12,7 +12,9 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-
+export default function POST() {
+    
+}
 
 export const config = {
     api: {
