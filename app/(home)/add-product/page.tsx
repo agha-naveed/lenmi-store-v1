@@ -25,17 +25,16 @@ interface IFormInputs {
 }
 
 export default function page() {
-  let [message, setMessage] = useState('');
+  let [message, setMessage] = useState("");
   let [selectedImage, setSelectedImage] = useState<string[]>([]);
 
   const [customColors, setCustomColors] = useState<string[]>([]);
   const [newColor, setNewColor] = useState("");
   const [originalPrice, setOriginalPrice] = useState(0);
   const [discountedPrice, setDiscountedPrice] = useState(0);
-  const [showAlert, setShowAlert] = useState('');
+  const [showAlert, setShowAlert] = useState("");
 
-  const [selectedOption, setSelectedOption] = useState("")
-  
+  const [selectedOption, setSelectedOption] = useState("");
 
   const handleAddColor = () => {
     if (newColor.trim()) {
@@ -43,7 +42,6 @@ export default function page() {
       setNewColor(""); // Reset input
     }
   };
-
 
   const {
     watch,
@@ -56,29 +54,23 @@ export default function page() {
   const contentValue = watch("content");
 
   const onSubmit = async (data: IFormInputs) => {
+    data["imgURL"] = selectedImage;
+    console.log(data);
+    if (originalPrice < discountedPrice) {
+      setShowAlert("Discounted Price Must be less than Original Price");
+    } else {
+      setShowAlert("");
+    }
 
-    data["imgURL"] = selectedImage
-    console.log(data)
-    if(originalPrice < discountedPrice) {
-      setShowAlert("Discounted Price Must be less than Original Price")
-    }
+    const res = await axios.post("http://localhost:3000/add-product/api", data);
+
+    if (res.data.message != "ok") setMessage("Some Problem Occurred!");
     else {
-      setShowAlert("")
-    }
-    
-    const res = await axios.post("http://localhost:3000/add-product/api")
-    
-    if(res.data.message != "ok")
-      setMessage("Some Problem Occurred!")
-    
-    else {
-      setMessage("Successfully Added Product")
-      setTimeout(function() {
+      setMessage("Successfully Added Product");
+      setTimeout(function () {
         // window.location.reload()
-      }, 800)
+      }, 800);
     }
-
-    
   };
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -98,7 +90,7 @@ export default function page() {
   };
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto px-2">
       <Form
         action={""}
         onSubmit={handleSubmit(onSubmit)}
@@ -195,8 +187,8 @@ export default function page() {
                 type="number"
                 className="border border-gray-400 rounded-md py-2 px-3"
                 value={originalPrice}
-                onInput={(e:any) => {
-                  setOriginalPrice(Number(e.target.value))
+                onInput={(e: any) => {
+                  setOriginalPrice(Number(e.target.value));
                 }}
                 {...register("price")}
                 required
@@ -208,64 +200,58 @@ export default function page() {
                   Discounted Price
                 </label>
                 <span className="content-start font-semibold text-gray-500">
-                  {
-                    discountedPrice > 0 && originalPrice > 0 ?
-                    <>
-                      -{(discountedPrice / originalPrice) * 100}%
-                    </>
-                    :
-                    undefined
-                  }
-                  </span>
+                  {discountedPrice > 0 && originalPrice > 0 ? (
+                    <>-{(discountedPrice / originalPrice) * 100}%</>
+                  ) : undefined}
+                </span>
               </div>
               <input
                 type="number"
                 className="border border-gray-400 rounded-md py-2 px-3"
                 value={discountedPrice}
-                onInput={(e:any) => {  
-                  setDiscountedPrice(Number(e.target.value))
+                onInput={(e: any) => {
+                  setDiscountedPrice(Number(e.target.value));
                 }}
                 {...register("d_price")}
                 required
               />
             </div>
-            
           </div>
-          {
-            showAlert.length > 0 ?
-              <span className="text-red-700">{showAlert}</span> : null
-          }
+          {showAlert.length > 0 ? (
+            <span className="text-red-700">{showAlert}</span>
+          ) : null}
 
           <aside className="flex">
             <ul className="flex flex-col gap-[2px] border w-fit">
               <li
                 className="flex items-center gap-[7px] text-[17px] cursor-pointer transition-all hover:bg-gray-200 w-52 h-14 px-4"
                 onClick={() => setSelectedOption("stock")}
-                >
+              >
                 <MdInventory className="text-[18px]" />
                 Stock
               </li>
               <li
                 className="flex items-center gap-[7px] text-[17px] cursor-pointer transition-all hover:bg-gray-200 w-52 h-14 px-4"
                 onClick={() => setSelectedOption("color")}
-                >
+              >
                 <RiColorFilterAiLine className="text-[18px]" />
                 Colors
               </li>
               <li
                 className="flex items-center gap-[7px] text-[17px] cursor-pointer transition-all hover:bg-gray-200 w-52 h-14 px-4"
                 onClick={() => setSelectedOption("shipping")}
-                >
+              >
                 <GrCurrency className="text-[18px]" />
                 Payment
               </li>
-
             </ul>
 
-
             <div className="border w-full p-5">
-
-              <div className={`grid gap-1 ${selectedOption == 'stock' ? "block" : "hidden"}`}>
+              <div
+                className={`grid gap-1 ${
+                  selectedOption == "stock" ? "block" : "hidden"
+                }`}
+              >
                 <label htmlFor="" className="font-medium">
                   Stock
                 </label>
@@ -278,8 +264,11 @@ export default function page() {
                 />
               </div>
 
-              
-              <div className={`grid gap-1 ${selectedOption == 'color' ? "block" : "hidden"}`}>
+              <div
+                className={`grid gap-1 ${
+                  selectedOption == "color" ? "block" : "hidden"
+                }`}
+              >
                 <div>
                   <label htmlFor="" className="font-medium">
                     Colors
@@ -414,7 +403,9 @@ export default function page() {
                   </ul>
 
                   <div className="grid pt-3 pb-2 gap-1">
-                    <label htmlFor="" className="font-medium">Other</label>
+                    <label htmlFor="" className="font-medium">
+                      Other
+                    </label>
                     <div className="flex gap-[6px]">
                       <input
                         type="text"
@@ -430,26 +421,67 @@ export default function page() {
                       >
                         Add
                       </button>
-
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className={`grid gap-1 ${selectedOption == 'shipping' ? "block" : "hidden"}`}>
+              <div
+                className={`grid gap-1 ${
+                  selectedOption == "shipping" ? "block" : "hidden"
+                }`}
+              >
                 <div className="grid">
-                  <label htmlFor="" className="font-medium text-[18px]">Payment Options</label>
+                  <label htmlFor="" className="font-medium text-[18px]">
+                    Payment Options
+                  </label>
                   <div className="flex gap-2 mt-3">
-                    <input type="checkbox" id="cod" className="cursor-pointer" value={"cash-on-delivery"} {...register("payment_method")} />
-                    <label htmlFor="cod" title="Cash on Delivery" className="cursor-pointer">Cash on Delivery</label>
+                    <input
+                      type="checkbox"
+                      id="cod"
+                      className="cursor-pointer"
+                      value={"cash-on-delivery"}
+                      {...register("payment_method")}
+                    />
+                    <label
+                      htmlFor="cod"
+                      title="Cash on Delivery"
+                      className="cursor-pointer"
+                    >
+                      Cash on Delivery
+                    </label>
                   </div>
                   <div className="flex gap-2 mt-3">
-                    <input type="checkbox" id="credit-card" className="cursor-pointer" value={"credit-card"} {...register("payment_method")} />
-                    <label htmlFor="credit-card" title="Credit Card" className="cursor-pointer">Credit Card</label>
+                    <input
+                      type="checkbox"
+                      id="credit-card"
+                      className="cursor-pointer"
+                      value={"credit-card"}
+                      {...register("payment_method")}
+                    />
+                    <label
+                      htmlFor="credit-card"
+                      title="Credit Card"
+                      className="cursor-pointer"
+                    >
+                      Credit Card
+                    </label>
                   </div>
                   <div className="flex gap-2 mt-3">
-                    <input type="checkbox" id="debit-card" value={"debit-card"} className="cursor-pointer" {...register("payment_method")} />
-                    <label htmlFor="debit-card" title="Debit Card" className="cursor-pointer">Debit Card</label>
+                    <input
+                      type="checkbox"
+                      id="debit-card"
+                      value={"debit-card"}
+                      className="cursor-pointer"
+                      {...register("payment_method")}
+                    />
+                    <label
+                      htmlFor="debit-card"
+                      title="Debit Card"
+                      className="cursor-pointer"
+                    >
+                      Debit Card
+                    </label>
                   </div>
                 </div>
               </div>

@@ -113,8 +113,9 @@ export default function page() {
         if(res.data.password == "true") {
           setTimeout(() => {
             alert("You have been logged out")
+            window.location.reload()
             redirect("/account")
-          }, 600)
+          }, 800)
         }
       }
 

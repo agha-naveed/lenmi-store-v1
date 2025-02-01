@@ -18,6 +18,7 @@ export default function Login() {
     const { register, handleSubmit, formState: { errors } } = useForm<IFormInputs>();
     
     const [message, setMessage] = useState("")
+      const [error, setError] = useState("")
 
 
     const onSubmit = async (data: IFormInputs) => {
