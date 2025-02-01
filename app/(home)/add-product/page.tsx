@@ -247,21 +247,21 @@ export default function page() {
           <aside className="flex">
             <ul className="flex flex-col gap-[2px] border w-fit">
               <li
-                className="flex items-center gap-[7px] text-[17px] cursor-pointer transition-all hover:bg-gray-200 w-52 h-12 px-4"
+                className="flex items-center gap-[7px] text-[17px] cursor-pointer transition-all hover:bg-gray-200 w-52 h-14 px-4"
                 onClick={() => setSelectedOption("stock")}
                 >
                 <MdInventory className="text-[18px]" />
                 Stock
               </li>
               <li
-                className="flex items-center gap-[7px] text-[17px] cursor-pointer transition-all hover:bg-gray-200 w-52 h-12 px-4"
+                className="flex items-center gap-[7px] text-[17px] cursor-pointer transition-all hover:bg-gray-200 w-52 h-14 px-4"
                 onClick={() => setSelectedOption("color")}
                 >
                 <RiColorFilterAiLine className="text-[18px]" />
                 Colors
               </li>
               <li
-                className="flex items-center gap-[7px] text-[17px] cursor-pointer transition-all hover:bg-gray-200 w-52 h-12 px-4"
+                className="flex items-center gap-[7px] text-[17px] cursor-pointer transition-all hover:bg-gray-200 w-52 h-14 px-4"
                 onClick={() => setSelectedOption("shipping")}
                 >
                 <GrCurrency className="text-[18px]" />
@@ -451,11 +451,11 @@ export default function page() {
                     <input type="checkbox" id="cod" className="cursor-pointer" value={"cash-on-delivery"} {...register("payment_method")} />
                     <label htmlFor="cod" title="Cash on Delivery" className="cursor-pointer">Cash on Delivery</label>
                   </div>
-                  <div className="flex gap-2 mt-2">
+                  <div className="flex gap-2 mt-3">
                     <input type="checkbox" id="credit-card" className="cursor-pointer" value={"credit-card"} {...register("payment_method")} />
                     <label htmlFor="credit-card" title="Credit Card" className="cursor-pointer">Credit Card</label>
                   </div>
-                  <div className="flex gap-2 mt-2">
+                  <div className="flex gap-2 mt-3">
                     <input type="checkbox" id="debit-card" value={"debit-card"} className="cursor-pointer" {...register("payment_method")} />
                     <label htmlFor="debit-card" title="Debit Card" className="cursor-pointer">Debit Card</label>
                   </div>
