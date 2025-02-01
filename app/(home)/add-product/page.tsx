@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import Form from "next/form";
 import { IoCloseCircle } from "react-icons/io5";
 import RichTextEditor from "@/app/components/RichTextEditor";
+import axios from "axios";
 
 interface IFormInputs {
   product_name: string;
@@ -24,6 +25,7 @@ interface IFormInputs {
 }
 
 export default function page() {
+  let [message, setMessage] = useState('');
   let [selectedImage, setSelectedImage] = useState<string[]>([]);
 
   const [customColors, setCustomColors] = useState<string[]>([]);
@@ -63,30 +65,20 @@ export default function page() {
     else {
       setShowAlert("")
     }
+    
+    const res = await axios.post("http://localhost:3000/add-product/api")
+    
+    if(res.data.message != "ok")
+      setMessage("Some Problem Occurred!")
+    
+    else {
+      setMessage("Successfully Added Product")
+      setTimeout(function() {
+        // window.location.reload()
+      }, 800)
+    }
 
-    // if(data.email.includes(".com") || data.email.includes(".net") || data.email.includes(".org")) {
-    //     setEmailError("")
-    //     const res = await fetch("http://localhost:3000/account/signup/api", {
-    //         method: "POST",
-    //         body: JSON.stringify(data)
-    //     })
-    //     if(res.ok) {
-    //         setMessage(await res.json())
-    //     }
-    //     else {
-    //         setMessage("error")
-    //     }
-
-    //     if(message != "error") {
-    //         redirect("/account")
-    //     }
-    //     else {
-    //         alert("Invalid Email or Password")
-    //     }
-    // }
-    // else {
-    //     setEmailError("Not Valid Email...")
-    // }
+    
   };
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -470,6 +462,8 @@ export default function page() {
           >
             Add Product
           </button>
+
+          {message ? <span>{message}</span> : null}
         </div>
       </Form>
     </div>
