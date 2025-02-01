@@ -17,10 +17,34 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
-const handler = nextConnect<NextApiRequest, NextApiResponse>();
+
+const uploadMiddleware = upload.array('image');
 
 
-export async function POST() {
-    await dbConnection()
-
-}
+export default function handler(req: any, res: any) {
+    if (req.method === 'POST') {
+      // Using the multer middleware to handle file upload
+      uploadMiddleware(req, res, (err) => {
+        if (err) {
+          // If an error occurs during upload, respond with error
+          return res.status(500).json({ message: 'Error uploading file', error: err });
+        }
+  
+        if (!req.file) {
+          // If no file is uploaded, return an error
+          return res.status(400).json({ message: 'No file uploaded' });
+        }
+  
+        // Construct the image URL to be used in the frontend
+        const imageUrl = `/uploads/${req.file.filename}`;
+  
+        // Respond with the image URL (you can also store it in a database here)
+        return res.status(200).json({
+          message: 'Image uploaded successfully!',
+          imageUrl,
+        });
+      });
+    } else {
+      res.status(405).json({ message: 'Method Not Allowed' });
+    }
+  }
