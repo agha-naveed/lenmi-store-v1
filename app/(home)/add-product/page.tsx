@@ -19,7 +19,8 @@ interface IFormInputs {
   stock: number;
   color: string;
   content: string;
-  payment_method: string;
+  imgURL: string[];
+  payment_method: string[];
 }
 
 export default function page() {
@@ -54,6 +55,7 @@ export default function page() {
 
   const onSubmit = async (data: IFormInputs) => {
 
+    data["imgURL"] = selectedImage
     console.log(data)
     if(originalPrice < discountedPrice) {
       setShowAlert("Discounted Price Must be less than Original Price")
