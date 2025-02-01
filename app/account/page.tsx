@@ -36,8 +36,9 @@ export default function Login() {
         }
         else {
           setMessage("error")
-          alert("Error")
+          setError("Invalid Email or Password")
         }
+
     }
     
 
@@ -58,6 +59,8 @@ export default function Login() {
                   <label htmlFor="">Password</label>
                   <input type="password" className='w-[300px] h-9 px-2 rounded-md border border-gray-300' required {...register("password")} />
                 </div>
+                
+                {error ? <span className='text-red-600 '>* {error}</span> : ""}
 
                 <button type='submit' title='Login' className='w-full h-10 transition-all rounded-md border font-muli-semibold bg-slate-800 hover:bg-slate-900 text-white '>Login</button>
 
