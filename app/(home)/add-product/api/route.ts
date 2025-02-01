@@ -1,50 +1,44 @@
-import * as nextConnect from 'next-connect'
-import dbConnection from "@/lib/database/dbConnection";
-import multer from 'multer';
-import path from 'path';
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextApiRequest, NextApiResponse } from "next";
+import formidable, {errors as formidableErrors} from 'formidable'
+import {promises as fs} from 'fs'
+import path from 'path'
 
-
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      // The folder where the files will be saved
-      cb(null, './public/uploads'); 
-    },
-    filename: (req, file, cb) => {
-      // Use a unique timestamp for each file to avoid name collisions
-      cb(null, Date.now() + path.extname(file.originalname)); 
-    },
-});
-
-const upload = multer({ storage });
-
-const uploadMiddleware = upload.array('image');
-
-
-export default function handler(req: any, res: any) {
-    if (req.method === 'POST') {
-      // Using the multer middleware to handle file upload
-      uploadMiddleware(req, res, (err) => {
-        if (err) {
-          // If an error occurs during upload, respond with error
-          return res.status(500).json({ message: 'Error uploading file', error: err });
-        }
-  
-        if (!req.file) {
-          // If no file is uploaded, return an error
-          return res.status(400).json({ message: 'No file uploaded' });
-        }
-  
-        // Construct the image URL to be used in the frontend
-        const imageUrl = `/uploads/${req.file.filename}`;
-  
-        // Respond with the image URL (you can also store it in a database here)
-        return res.status(200).json({
-          message: 'Image uploaded successfully!',
-          imageUrl,
-        });
-      });
-    } else {
-      res.status(405).json({ message: 'Method Not Allowed' });
-    }
+export const config = {
+  api: {
+    bodyParser: false,
   }
+}
+
+export default async function POST(req:NextApiRequest, res:NextApiResponse) {
+  
+  const form = formidable({ multiples: true })
+
+  let fields, files;
+  try {
+    [fields, files] = await form.parse(req);
+    const imageFile = files?.file?.[0];
+
+    if(!imageFile || !imageFile.filepath)
+      return res.status(400).json({message: "No image file uploaded!"})
+
+    const uploadDir = path.join(process.cwd(), 'public', 'uploads')
+
+    await fs.mkdir(uploadDir, {recursive: true})
+
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9)
+    const newFileName = `${uniqueSuffix}-${imageFile.originalFilename}`;
+    const newFilePath = `${uploadDir}/${newFileName}`;
+    
+    await fs.rename(imageFile.filepath, newFilePath)
+    
+    console.log("Uploaded image: "+newFilePath)
+
+    res.status(200).json({
+      message: "ok",
+      imageURL: `/uploads/${newFileName}`
+    })
+  } catch(e) {
+    console.log("afsoos!")
+  }
+
+}
