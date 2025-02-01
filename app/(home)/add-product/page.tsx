@@ -204,7 +204,7 @@ export default function page() {
                 </label>
                 <span className="content-start font-semibold text-gray-500">
                   {discountedPrice > 0 && originalPrice > 0 ? (
-                    <>-{(discountedPrice / originalPrice) * 100}%</>
+                    <>-{((discountedPrice / originalPrice) * 100).toFixed(1)}%</>
                   ) : undefined}
                 </span>
               </div>
