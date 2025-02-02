@@ -20,7 +20,7 @@ interface IFormInputs {
   stock: number;
   color: string;
   content: string;
-  imgURL: File[];
+  imgURL: File;
   payment_method: string[];
 }
 
@@ -56,7 +56,9 @@ export default function page() {
   const contentValue = watch("content");
 
   const onSubmit = async (data: IFormInputs) => {
-    data["imgURL"] = files;
+
+    data["imgURL"] = files[0];
+    
     console.log(data);
     if (originalPrice < discountedPrice) {
       setShowAlert("Discounted Price Must be less than Original Price");
@@ -66,7 +68,7 @@ export default function page() {
 
     const res = await axios.post("http://localhost:3000/add-product/api", data);
 
-    console.log(res.data)
+    console.log("response data: "+res.data)
 
     if (res.data.message != "ok")
       setMessage("Some Problem Occurred!");
