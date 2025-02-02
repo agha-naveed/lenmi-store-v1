@@ -18,7 +18,6 @@ export async function POST(req: NextRequest) {
     const color = formData.get("color") as string
     const stock = formData.get("stock") as string
 
-    console.log(formData.get("file"))
     console.log(formData)
 
     if (!file) {
@@ -30,7 +29,6 @@ export async function POST(req: NextRequest) {
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
 
-    console.log("Buffer: " + buffer)
     
     await Product.insertMany([
       {
@@ -38,6 +36,7 @@ export async function POST(req: NextRequest) {
         price,
         description,
         category,
+        color,
         stock,
         imgURL: buffer
       }

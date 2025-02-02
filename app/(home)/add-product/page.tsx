@@ -61,10 +61,13 @@ export default function page() {
 
     data.file = files
 
+    data.description = contentValue
+
     formData.append("file", data.file[0]);
     formData.append("name", data.product_name);
     formData.append("price", data.price);
-    // formData.append("description", data.description);
+    formData.append("description", data.description);
+    formData.append("payment_method", data.payment_method[0]);
     formData.append("category", data.category);
     formData.append("color", data.color);
     formData.append("stock", data.stock);
