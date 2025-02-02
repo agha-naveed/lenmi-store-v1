@@ -64,18 +64,19 @@ export default function page() {
       setShowAlert("");
     }
 
-    // const res = await axios.post("http://localhost:3000/add-product/api", data);
+    const res = await axios.post("http://localhost:3000/add-product/api", data);
 
-    // console.log(res.data)
-    // if (res.data.message != "ok")
-    //   setMessage("Some Problem Occurred!");
+    console.log(res.data)
+
+    if (res.data.message != "ok")
+      setMessage("Some Problem Occurred!");
     
-    // else {
-    //   setMessage("Successfully Added Product");
-    //   setTimeout(function () {
-    //     // window.location.reload()
-    //   }, 800);
-    // }
+    else {
+      setMessage("Successfully Added Product");
+      setTimeout(function () {
+        // window.location.reload()
+      }, 800);
+    }
   };
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
