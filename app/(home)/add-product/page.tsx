@@ -14,13 +14,13 @@ import axios from "axios";
 interface IFormInputs {
   product_name: string;
   category: string;
-  description?: string;
-  price: number;
+  description: string;
+  price: string;
   d_price: number;
-  stock: number;
+  stock: string;
   color: string;
   content: string;
-  imgURL: File;
+  file: File[];
   payment_method: string[];
 }
 
@@ -57,16 +57,28 @@ export default function page() {
 
   const onSubmit = async (data: IFormInputs) => {
 
-    data["imgURL"] = files[0];
+    const formData = new FormData();
+
+    data.file = files
+
+    formData.append("file", data.file[0]);
+    formData.append("name", data.product_name);
+    formData.append("price", data.price);
+    // formData.append("description", data.description);
+    formData.append("category", data.category);
+    formData.append("color", data.color);
+    formData.append("stock", data.stock);
     
-    console.log(data);
+    
+    console.log("Myform Data: "+formData);
+
     if (originalPrice < discountedPrice) {
       setShowAlert("Discounted Price Must be less than Original Price");
     } else {
       setShowAlert("");
     }
 
-    const res = await axios.post("http://localhost:3000/add-product/api", data);
+    const res = await axios.post("http://localhost:3000/add-product/api", formData);
 
     console.log("response data: "+res.data)
 
@@ -121,6 +133,7 @@ export default function page() {
               disabled={selectedImage.length === 5}
               className="hidden"
               onChange={handleImageChange}
+              // {...register('files')}
             />
           </div>
 

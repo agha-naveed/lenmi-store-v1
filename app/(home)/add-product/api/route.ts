@@ -1,71 +1,64 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import multer from "multer";
-import { GridFsStorage } from "multer-gridfs-storage";
-import connectToDatabase from "@/lib/database/dbConnection";
-import { NextResponse } from "next/server";
+import dbConnection from "@/lib/database/dbConnection";
 import Product from "@/lib/database/model/product";
+import { NextRequest, NextResponse } from "next/server";
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
-// Extend NextApiRequest
-interface NextApiRequestWithFile extends NextApiRequest {
-  file?: Express.Multer.File;
-}
-
-// MongoDB connection
-connectToDatabase();
-
-// Use memory storage for debugging first
-const storage = multer.memoryStorage();
-const upload = multer({ storage });
-
-
-export async function POST(
-  req: NextApiRequestWithFile,
-  res: NextApiResponse
-) {
+export async function POST(req: NextRequest) {
+  
   try {
-    console.log("Incoming request method:", req.method);
+    await dbConnection()
+    
+    const formData = await req.formData();
 
-    console.log("Uploading file...");
+    const file = formData.get("file") as File;
+    
+    const name = formData.get("name") as string
+    const price = formData.get("price") as string
+    const description = formData.get("description") as string
+    const category = formData.get("category") as string
+    const color = formData.get("color") as string
+    const stock = formData.get("stock") as string
 
-    return new Promise<void>((resolve, reject) => {
-      upload.single("file")(req as any, res as any, async (err) => {
-        if (err) {
-          console.error("Multer error:", err);
-          return reject(NextResponse.json({ message: "Upload Error", error: err.message }));
-        }
+    console.log(formData.get("file"))
+    console.log(formData)
 
-        console.log(await req)
+    if (!file) {
+      return NextResponse.json({ message: "No file uploaded" }, { status: 400 });
+    }
 
-        // if (!req.file) {
-        //   console.error("No file found in request");
-        //   return reject(NextResponse.json({ message: "No file uploaded" }));
-        // }
+    console.log("File received:", file);
 
-        // console.log("File received:", req.file.originalname);
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
 
-        // const { buffer, originalname, mimetype } = req.file;
+    console.log("Buffer: " + buffer)
+    
+    await Product.insertMany([
+      {
+        name,
+        price,
+        description,
+        category,
+        stock,
+        imgURL: buffer
+      }
+    ])
 
-        // const db = await connectToDatabase();
-        // const collection = db.collection("images");
-
-        // const result = await Product.insertMany([{
-        //   imgURL : buffer
-        // }]);
-
-        // console.log("File successfully uploaded with ID:", result);
-
-        return NextResponse.json({message: "ok"})
-      });
+    console.log("File details:", {
+      name: file.name,
+      type: file.type,
+      size: file.size,
     });
 
-  } catch (error: any) {
-    console.error("Unexpected error:", error);
-    return NextResponse.json({ message: "Internal Server Error", error: error.message });
+    return NextResponse.json({
+      message: "ok",
+      file: {
+        name: file.name,
+        type: file.type,
+        size: file.size,
+      },
+    });
+  } catch (error) {
+    console.error("Upload error:", error);
+    return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
   }
 }
