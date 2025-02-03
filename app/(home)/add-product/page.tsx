@@ -18,7 +18,7 @@ interface IFormInputs {
   price: string;
   d_price: number;
   stock: string;
-  color: string;
+  color: string[];
   content: string;
   file: File[];
   payment_method: string[];
@@ -63,17 +63,20 @@ export default function page() {
 
     data.description = contentValue
 
-    formData.append("file", data.file[0]);
+    for(let i=0; i<files.length; i++) {
+      formData.append(`file`, data.file[i]);
+    }
+
     formData.append("name", data.product_name);
     formData.append("price", data.price);
     formData.append("description", data.description);
-    formData.append("payment_method", data.payment_method[0]);
+    formData.append("payment_method", JSON.stringify(data.payment_method));
     formData.append("category", data.category);
-    formData.append("color", data.color);
+    formData.append("color", JSON.stringify(data.color));
     formData.append("stock", data.stock);
-    
-    
-    console.log("Myform Data: "+formData);
+
+
+    console.log("Myform Data: " + formData);
 
     if (originalPrice < discountedPrice) {
       setShowAlert("Discounted Price Must be less than Original Price");
@@ -83,11 +86,11 @@ export default function page() {
 
     const res = await axios.post("http://localhost:3000/add-product/api", formData);
 
-    console.log("response data: "+res.data)
+    console.log("response data: " + res.data)
 
     if (res.data.message != "ok")
       setMessage("Some Problem Occurred!");
-    
+
     else {
       setMessage("Successfully Added Product");
       setTimeout(function () {
@@ -136,7 +139,7 @@ export default function page() {
               disabled={selectedImage.length === 5}
               className="hidden"
               onChange={handleImageChange}
-              // {...register('files')}
+            // {...register('files')}
             />
           </div>
 
@@ -273,9 +276,8 @@ export default function page() {
 
             <div className="border w-full p-5">
               <div
-                className={`grid gap-1 ${
-                  selectedOption == "stock" ? "block" : "hidden"
-                }`}
+                className={`grid gap-1 ${selectedOption == "stock" ? "block" : "hidden"
+                  }`}
               >
                 <label htmlFor="" className="font-medium">
                   Stock
@@ -290,9 +292,8 @@ export default function page() {
               </div>
 
               <div
-                className={`grid gap-1 ${
-                  selectedOption == "color" ? "block" : "hidden"
-                }`}
+                className={`grid gap-1 ${selectedOption == "color" ? "block" : "hidden"
+                  }`}
               >
                 <div>
                   <label htmlFor="" className="font-medium">
@@ -452,9 +453,8 @@ export default function page() {
               </div>
 
               <div
-                className={`grid gap-1 ${
-                  selectedOption == "shipping" ? "block" : "hidden"
-                }`}
+                className={`grid gap-1 ${selectedOption == "shipping" ? "block" : "hidden"
+                  }`}
               >
                 <div className="grid">
                   <label htmlFor="" className="font-medium text-[18px]">

@@ -9,16 +9,16 @@ export async function POST(req: NextRequest) {
     
     const formData = await req.formData();
 
-    const file = formData.get("file") as File;
+    const file = formData.getAll("file") as File[]
     
     const name = formData.get("name") as string
     const price = formData.get("price") as string
     const description = formData.get("description") as string
     const category = formData.get("category") as string
-    const color = formData.get("color") as string
+    const color = JSON.parse(formData.get("color") as string)
     const stock = formData.get("stock") as string
 
-    console.log(formData)
+    console.log(formData.get('file'))
 
     if (!file) {
       return NextResponse.json({ message: "No file uploaded" }, { status: 400 });
@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
 
     console.log("File received:", file);
 
-    const arrayBuffer = await file.arrayBuffer();
+    const arrayBuffer = await file[0].arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
 
     
@@ -43,17 +43,17 @@ export async function POST(req: NextRequest) {
     ])
 
     console.log("File details:", {
-      name: file.name,
-      type: file.type,
-      size: file.size,
+      name: file[0].name,
+      type: file[0].type,
+      size: file[0].size,
     });
 
     return NextResponse.json({
       message: "ok",
       file: {
-        name: file.name,
-        type: file.type,
-        size: file.size,
+        name: file[0].name,
+        type: file[0].type,
+        size: file[0].size,
       },
     });
   } catch (error) {
