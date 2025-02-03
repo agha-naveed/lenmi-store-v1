@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
     const buffers = await Promise.all(
       file.map(async (files) => {
         const arrayBuffer = await files.arrayBuffer();
-        return Buffer.from(arrayBuffer);
+        return Buffer.from(arrayBuffer)
       })
     );
 

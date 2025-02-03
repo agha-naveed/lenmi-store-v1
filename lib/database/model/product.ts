@@ -44,12 +44,7 @@ const productSchema = new Schema<IProduct>({
         type: Number
     },
     imgURL: [{
-        type: Buffer,
-        // contentType: String,
-        // createdAt: {
-        //     type: Date,
-        //     default: Date.now()
-        // }
+        type: Buffer
     }],
     stock: {
         type: Number
