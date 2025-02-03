@@ -3,7 +3,7 @@
 import React, { ChangeEvent, useState } from 'react'
 import { Image } from 'cloudinary-react'
 
-export default function Upload() {
+export default function UploadImage() {
   const [image, setImage] = useState("")
 
   const imageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -17,10 +17,10 @@ export default function Upload() {
     data.append("file", file[0])
     data.append("upload_preset", "my-images")
 
-    console.log(file)
+    // console.log(data)
 
     // Make the request to Cloudinary
-    const res = await fetch(`https://api.cloudinary.com/v1_1/dpc7k1bpc/image/upload`, {
+    const res = await fetch(`https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`, {
       method: "POST",
       body: data
     })
@@ -28,7 +28,6 @@ export default function Upload() {
     // Get the response and extract the secure_url
     const myFile = await res.json()
     setImage(myFile.secure_url)  // Correct access to secure_url
-
   }
 
   return (
@@ -37,12 +36,6 @@ export default function Upload() {
         photo
         <input type="file" name='file' onChange={imageUpload} />
         <br />
-
-        {
-          image ? 
-            <Image cloudName={"dpc7k1bpc"} publicId={image} /> 
-          : null
-        }
 
         <button type='submit' className='bg-slate-800 text-white px-3 py-2'>Click Me!</button>
       </form>
