@@ -26,10 +26,20 @@ export async function POST(req: NextRequest) {
 
     console.log("File received:", file);
 
-    const arrayBuffer = await file[0].arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
+    // let buffer:any[] = []
+    // let arrayBuffer
+    // file.forEach(async (items, index) => {
+    //   arrayBuffer = await items.arrayBuffer();
+    //   buffer[index] = Buffer.from(arrayBuffer);
+    // })
 
-    
+    const buffers = await Promise.all(
+      file.map(async (files) => {
+        const arrayBuffer = await files.arrayBuffer();
+        return Buffer.from(arrayBuffer);
+      })
+    );
+
     await Product.insertMany([
       {
         name,
@@ -38,23 +48,12 @@ export async function POST(req: NextRequest) {
         category,
         color,
         stock,
-        imgURL: buffer
+        imgURL: buffers
       }
     ])
 
-    console.log("File details:", {
-      name: file[0].name,
-      type: file[0].type,
-      size: file[0].size,
-    });
-
     return NextResponse.json({
       message: "ok",
-      file: {
-        name: file[0].name,
-        type: file[0].type,
-        size: file[0].size,
-      },
     });
   } catch (error) {
     console.error("Upload error:", error);

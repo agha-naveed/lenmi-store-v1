@@ -43,14 +43,14 @@ const productSchema = new Schema<IProduct>({
     sold: {
         type: Number
     },
-    imgURL: {
+    imgURL: [{
         type: Buffer,
-        contentType: String,
-        createdAt: {
-            type: Date,
-            default: Date.now()
-        }
-    },
+        // contentType: String,
+        // createdAt: {
+        //     type: Date,
+        //     default: Date.now()
+        // }
+    }],
     stock: {
         type: Number
     }
