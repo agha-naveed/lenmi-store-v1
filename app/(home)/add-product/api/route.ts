@@ -26,13 +26,7 @@ export async function POST(req: NextRequest) {
 
     console.log("File received:", file);
 
-    // let buffer:any[] = []
-    // let arrayBuffer
-    // file.forEach(async (items, index) => {
-    //   arrayBuffer = await items.arrayBuffer();
-    //   buffer[index] = Buffer.from(arrayBuffer);
-    // })
-
+    
     const buffers = await Promise.all(
       file.map(async (files) => {
         const arrayBuffer = await files.arrayBuffer();

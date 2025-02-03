@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 import Image from 'next/image'
 import { GoStarFill } from "react-icons/go";
 import { MdLocationOn } from "react-icons/md";
+import clothes from '@/images/clothes_render.png'
 import { IoIosArrowForward } from "react-icons/io";
 import Link from 'next/link';
 
@@ -40,7 +41,7 @@ export default function page() {
       <div className='md:flex grid sm:border xl:border-transparent pt-3 rounded-xl md:border-black md:w-full w-fit h-fit xl:gap-5 gap-3 justify-items-center'>
         
         <div onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} className='md:w-[400px] md:h-[400px] w-[300px] h-[300px] p-3 overflow-hidden cursor-pointer border border-gray-400 rounded-xl'>
-          <Image ref={imageRef} src="https://m.media-amazon.com/images/I/71zwwEe2nLL._AC_SL1500_.jpg" alt='Jacket' style={{transform: `scale(${zoom})`, transformOrigin: `${offset.x}px ${offset.y}px`, transition: 'tranform 0.2s ease-out'}} width={200} height={200} className='w-full h-full object-contain' />
+          <Image ref={imageRef} src={clothes} alt='Jacket' style={{transform: `scale(${zoom})`, transformOrigin: `${offset.x}px ${offset.y}px`, transition: 'tranform 0.2s ease-out'}} width={200} height={200} className='w-full h-full object-contain' />
         </div>
 
         <div className='w-fit sm:p-6 p-2 h-auto'>
