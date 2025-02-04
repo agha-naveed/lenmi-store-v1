@@ -1,14 +1,26 @@
 'use client'
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image'
 import { GoStarFill } from "react-icons/go";
 import { MdLocationOn } from "react-icons/md";
 import clothes from '@/images/clothes_render.png'
 import { IoIosArrowForward } from "react-icons/io";
 import Link from 'next/link';
+import axios from 'axios';
+import { useParams } from 'next/navigation';
 
 export default function page() {
+
+  const param = useParams()
+
+  useEffect(() => {
+    const gettingData = async () => {
+      const res = await axios.get(`/product/${param.id}/api`)
+      
+    }
+    gettingData()
+  }, [])
 
   const [quantity, setQuantity] = useState(1)
   const [zoom, setZoom] = useState<number>(1);
