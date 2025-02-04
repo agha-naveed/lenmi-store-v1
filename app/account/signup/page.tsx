@@ -28,7 +28,7 @@ export default function Signup() {
         
         if(data.email.includes(".com") || data.email.includes(".net") || data.email.includes(".org")) {
             setEmailError("")
-            const res = await fetch("http://localhost:3000/account/signup/api", {
+            const res = await fetch("/account/signup/api", {
                 method: "POST",
                 body: JSON.stringify(data)
             })

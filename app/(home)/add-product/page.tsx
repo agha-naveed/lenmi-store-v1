@@ -115,7 +115,7 @@ export default function page() {
       setShowAlert("");
     }
 
-    const res = await axios.post("http://localhost:3000/add-product/api", formData);
+    const res = await axios.post("/add-product/api", formData);
 
     console.log("response data: " + res.data)
 

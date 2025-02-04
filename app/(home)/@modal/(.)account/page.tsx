@@ -18,7 +18,7 @@ export default function Login() {
       const { register, handleSubmit, formState: { errors } } = useForm<IFormInputs>();
   
       const onSubmit = async (data: IFormInputs) => {
-          const res = await fetch("http://localhost:3000/account/api", {
+          const res = await fetch("/account/api", {
             method: "POST",
             body: JSON.stringify(data),
             credentials: "include"

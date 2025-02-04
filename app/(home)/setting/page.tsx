@@ -63,7 +63,7 @@ export default function page() {
 
   useInsertionEffect(() => {
     const getData = async () => {
-      const res = await axios.get("http://localhost:3000/setting/api", {
+      const res = await axios.get("/setting/api", {
         withCredentials: true,
       });
 
@@ -102,7 +102,7 @@ export default function page() {
       let myData = data
       myData['profile_pic'] = image
 
-      const res = await axios.post("http://localhost:3000/setting/api", myData, {
+      const res = await axios.post("/setting/api", myData, {
         withCredentials: true
       })
       console.log("this is response" + res.data)

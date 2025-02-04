@@ -23,7 +23,7 @@ export default function Login() {
 
 
   const onSubmit = async (data: IFormInputs) => {
-    const res = await axios.post("http://localhost:3000/account/signup/api", data, {
+    const res = await axios.post("/account/signup/api", data, {
         withCredentials: true
     })
 

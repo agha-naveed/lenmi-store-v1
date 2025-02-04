@@ -33,7 +33,7 @@ export default function Navbar() {
         if(logOut == false) {
             const getData = async () => {
                 
-                let fetchData = await axios.get("http://localhost:3000/account/api", {
+                let fetchData = await axios.get("/account/api", {
                     withCredentials: true
                 })
 
@@ -50,7 +50,7 @@ export default function Navbar() {
 
         if(logOut == true) {
             async function logout() {
-                await axios.patch("http://localhost:3000/account/api")
+                await axios.patch("/account/api")
                     setMessage(null)
             }
 
