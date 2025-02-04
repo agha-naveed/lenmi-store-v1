@@ -61,37 +61,43 @@ export default function page() {
 
     const picData = new FormData();
 
-    if(!myfile) {
+    if(!files) {
       console.log("No FIle")
       return
     }
-      picData.append("file", myfile)
-      picData.append("upload_preset", "my-images")
 
+    const uploadedUrls: string[] = [];
 
-      // Make the request to Cloudinary
-      const cloudRes = await fetch(`https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`, {
-        method: "POST",
-        body: picData
-      })
-      
+    let myFile;
+    for (let i = 0; i < files.length; i++) {
+      const picData = new FormData();
+      picData.append("file", files[i]); // Single file per request
+      picData.append("upload_preset", "my-images");
   
-      
-      let myFile = await cloudRes.json()
-      setImageURL(await myFile.secure_url)
+      try {
+        const cloudRes = await fetch(
+          `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+          {
+            method: "POST",
+            body: picData,
+          }
+        );
+  
+        myFile = await cloudRes.json();
+        if (myFile.secure_url) {
+          uploadedUrls.push(await myFile.secure_url);
+        }
+      } catch (error) {
+        console.error("Upload error:", error);
+      }
+    }
 
-      console.log("Image URL" + await myFile.secure_url)
-
-      
-    // data.file = files
     const formData = new FormData();
 
     data.description = contentValue
 
-    // for(let i=0; i<files.length; i++) {
-    //   formData.append(`file`, data.file[i]);
-    formData.append(`file`, await myFile.secure_url);
-    // }
+    for(let i=0; i<uploadedUrls.length; i++)
+      formData.append(`imgFile`, uploadedUrls[i]);
 
     formData.append("name", data.product_name);
     formData.append("price", data.price);
@@ -120,7 +126,7 @@ export default function page() {
     else {
       setMessage("Successfully Added Product");
       setTimeout(function () {
-        // window.location.reload()
+        window.location.reload()
       }, 800);
     }
   };

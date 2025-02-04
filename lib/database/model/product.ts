@@ -43,9 +43,9 @@ const productSchema = new Schema<IProduct>({
     sold: {
         type: Number
     },
-    imgURL: {
+    imgURL: [{
         type: String
-    },
+    }],
     stock: {
         type: Number
     }
