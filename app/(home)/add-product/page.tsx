@@ -126,7 +126,7 @@ export default function page() {
     else {
       setMessage("Successfully Added Product");
       setTimeout(function () {
-        window.location.reload()
+        // window.location.reload()
       }, 800);
     }
   };

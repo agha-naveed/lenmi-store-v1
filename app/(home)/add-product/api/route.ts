@@ -1,5 +1,7 @@
 import dbConnection from "@/lib/database/dbConnection";
 import Product from "@/lib/database/model/product";
+import jwt from "jsonwebtoken";
+import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
@@ -26,13 +28,16 @@ export async function POST(req: NextRequest) {
 
 
     // Get User Object
-    async function getUserId() {
-      
-    }
+  
+    const cookie = await cookies()
+
+    let objId = cookie.get("u_obj_i")?.value
+
+    let decodedData = jwt.verify(objId || "", process.env.JWT_CODE || "") as { obj_id: string };
 
     await Product.insertMany([
       {
-        userId: "",
+        userId: decodedData?.obj_id,
         name,
         price,
         description,
@@ -42,6 +47,10 @@ export async function POST(req: NextRequest) {
         imgURL: imageURL  
       }
     ])
+
+    
+
+  
 
 
 
