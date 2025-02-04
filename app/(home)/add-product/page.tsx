@@ -28,9 +28,8 @@ export default function page() {
   let [message, setMessage] = useState("");
 
   let [selectedImage, setSelectedImage] = useState<string[]>([]);
-  let [imageURL, setImageURL] = useState<string>('')
   const [files, setFiles] = useState<File[]>([]);
-  const [myfile, setMyFile] = useState<File>();
+  // const [myfile, setMyFile] = useState<File>();
 
   const [customColors, setCustomColors] = useState<string[]>([]);
   const [newColor, setNewColor] = useState("");
@@ -139,15 +138,20 @@ export default function page() {
         URL.createObjectURL(file),
       ]);
       setFiles((prevFiles) => [...prevFiles, file]);
-      setMyFile(file)
-      
     }
   };
 
   const handleRemoveImage = (imageUrl: string) => {
-    setSelectedImage((prevImages) =>
-      prevImages.filter((image) => image !== imageUrl)
-    );
+    setSelectedImage((prevImages) => {
+      const indexToRemove = prevImages.indexOf(imageUrl);
+      if (indexToRemove === -1) return prevImages; // If not found, return unchanged
+  
+      // Remove the corresponding file from setFiles
+      setFiles((prevFiles) => prevFiles.filter((_, index) => index !== indexToRemove));
+  
+      return prevImages.filter((image) => image !== imageUrl);
+    });
+    
   };
 
   return (
