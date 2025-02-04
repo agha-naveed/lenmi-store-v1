@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
-import React, { useState, ChangeEvent } from "react";
-import ReactDOM from "react-dom";
+import React, { useState, useEffect, ChangeEvent } from "react";
+import { redirect } from "next/navigation";
 import { MdAddPhotoAlternate, MdInventory } from "react-icons/md";
 import { GrCurrency } from "react-icons/gr";
 import { RiColorFilterAiLine } from "react-icons/ri";
@@ -25,11 +25,28 @@ interface IFormInputs {
 }
 
 export default function page() {
+  
+  useEffect(() => {
+        
+    const getData = async () => {
+        
+        let fetchData = await axios.get("/account/api", {
+            withCredentials: true
+        })
+
+        if(fetchData == null) {
+          redirect("/")
+        }
+    }
+    getData()
+    
+  }, [])
+
+
   let [message, setMessage] = useState("");
 
   let [selectedImage, setSelectedImage] = useState<string[]>([]);
   const [files, setFiles] = useState<File[]>([]);
-  // const [myfile, setMyFile] = useState<File>();
 
   const [customColors, setCustomColors] = useState<string[]>([]);
   const [newColor, setNewColor] = useState("");
