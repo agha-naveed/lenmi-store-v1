@@ -144,14 +144,12 @@ export default function page() {
   const handleRemoveImage = (imageUrl: string) => {
     setSelectedImage((prevImages) => {
       const indexToRemove = prevImages.indexOf(imageUrl);
-      if (indexToRemove === -1) return prevImages; // If not found, return unchanged
+      if (indexToRemove === -1) return prevImages;
   
-      // Remove the corresponding file from setFiles
       setFiles((prevFiles) => prevFiles.filter((_, index) => index !== indexToRemove));
   
       return prevImages.filter((image) => image !== imageUrl);
     });
-    
   };
 
   return (
