@@ -24,8 +24,15 @@ export async function POST(req: NextRequest) {
     }
 
 
+
+    // Get User Object
+    async function getUserId() {
+      
+    }
+
     await Product.insertMany([
       {
+        userId: "",
         name,
         price,
         description,
@@ -35,6 +42,9 @@ export async function POST(req: NextRequest) {
         imgURL: imageURL  
       }
     ])
+
+
+
 
     return NextResponse.json({
       message: "ok",

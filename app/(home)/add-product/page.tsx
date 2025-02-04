@@ -201,6 +201,8 @@ export default function page() {
             <span className="text-gray-600 select-none">Photo</span>
           </div>
         </div>
+
+        
         {/* ---------- Image Upload Section Ended ---------- */}
 
         {/* Form Fields */}

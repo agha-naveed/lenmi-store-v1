@@ -3,6 +3,7 @@ import User from '@/lib/database/model/user'
 import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcrypt'
 import { cookies } from 'next/headers';
+import jwt from 'jsonwebtoken'
 
 export async function POST(req: NextRequest) {
     
@@ -18,6 +19,8 @@ export async function POST(req: NextRequest) {
             let result = await bcrypt.compare(password, isExist.password)
 
             if(result) {
+                let token = jwt.sign({obj_id: isExist._id}, process.env.JWT_CODE || '')
+                cookie.set("u_obj_i", token, {secure: true, httpOnly: true})
                 cookie.set("email", email, {secure: true, httpOnly: true})
                 return NextResponse.json(isExist)
             }
@@ -52,6 +55,7 @@ export async function GET(req: NextRequest) {
 export async function PATCH(req: NextRequest) {
     
     const cookie = await cookies()
+    cookie.delete("u_obj_i")
     cookie.delete("email")
 
     return Response.json({message: "done"})
