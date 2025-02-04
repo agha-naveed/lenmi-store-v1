@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
     
     const formData = await req.formData();
 
-    const file = formData.getAll("file") as File[]
+    const imageURL = formData.get("file") as string
     
     const name = formData.get("name") as string
     const price = formData.get("price") as string
@@ -18,21 +18,21 @@ export async function POST(req: NextRequest) {
     const color = JSON.parse(formData.get("color") as string)
     const stock = formData.get("stock") as string
 
-    console.log(formData.get('file'))
+    console.log("myForm Data: "+formData.get('file'))
 
-    if (!file) {
+    if (!imageURL) {
       return NextResponse.json({ message: "No file uploaded" }, { status: 400 });
     }
 
-    console.log("File received:", file);
+    console.log("File received:", imageURL);
 
     
-    const buffers = await Promise.all(
-      file.map(async (files) => {
-        const arrayBuffer = await files.arrayBuffer();
-        return Buffer.from(arrayBuffer)
-      })
-    );
+    // const buffers = await Promise.all(
+    //   file.map(async (files) => {
+    //     const arrayBuffer = await files.arrayBuffer();
+    //     return Buffer.from(arrayBuffer)
+    //   })
+    // );
 
     await Product.insertMany([
       {
@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
         category,
         color,
         stock,
-        imgURL: buffers
+        imgURL: imageURL  
       }
     ])
 

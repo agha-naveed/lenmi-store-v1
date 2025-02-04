@@ -9,7 +9,7 @@ interface IProduct extends Document {
     rating: number;
     color: [string];
     sold: number;
-    imgURL : Buffer;
+    imgURL : string;
     stock: number;
 }
 
@@ -43,9 +43,9 @@ const productSchema = new Schema<IProduct>({
     sold: {
         type: Number
     },
-    imgURL: [{
-        type: Buffer
-    }],
+    imgURL: {
+        type: String
+    },
     stock: {
         type: Number
     }

@@ -28,7 +28,9 @@ export default function page() {
   let [message, setMessage] = useState("");
 
   let [selectedImage, setSelectedImage] = useState<string[]>([]);
+  let [imageURL, setImageURL] = useState<string>('')
   const [files, setFiles] = useState<File[]>([]);
+  const [myfile, setMyFile] = useState<File>();
 
   const [customColors, setCustomColors] = useState<string[]>([]);
   const [newColor, setNewColor] = useState("");
@@ -57,15 +59,39 @@ export default function page() {
 
   const onSubmit = async (data: IFormInputs) => {
 
-    const formData = new FormData();
+    const picData = new FormData();
 
-    data.file = files
+    if(!myfile) {
+      console.log("No FIle")
+      return
+    }
+      picData.append("file", myfile)
+      picData.append("upload_preset", "my-images")
+
+
+      // Make the request to Cloudinary
+      const cloudRes = await fetch(`https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`, {
+        method: "POST",
+        body: picData
+      })
+      
+  
+      
+      let myFile = await cloudRes.json()
+      setImageURL(await myFile.secure_url)
+
+      console.log("Image URL" + await myFile.secure_url)
+
+      
+    // data.file = files
+    const formData = new FormData();
 
     data.description = contentValue
 
-    for(let i=0; i<files.length; i++) {
-      formData.append(`file`, data.file[i]);
-    }
+    // for(let i=0; i<files.length; i++) {
+    //   formData.append(`file`, data.file[i]);
+    formData.append(`file`, await myFile.secure_url);
+    // }
 
     formData.append("name", data.product_name);
     formData.append("price", data.price);
@@ -106,7 +132,8 @@ export default function page() {
         ...prevImages,
         URL.createObjectURL(file),
       ]);
-      // setFiles((prevFiles) => [...prevFiles, file]);
+      setFiles((prevFiles) => [...prevFiles, file]);
+      setMyFile(file)
       
     }
   };
