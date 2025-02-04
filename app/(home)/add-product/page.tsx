@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useState, ChangeEvent, useEffect } from "react";
+import React, { useState, ChangeEvent } from "react";
 import ReactDOM from "react-dom";
 import { MdAddPhotoAlternate, MdInventory } from "react-icons/md";
 import { GrCurrency } from "react-icons/gr";
@@ -106,7 +106,8 @@ export default function page() {
         ...prevImages,
         URL.createObjectURL(file),
       ]);
-      setFiles((prevFiles) => [...prevFiles, file]);
+      // setFiles((prevFiles) => [...prevFiles, file]);
+      
     }
   };
 

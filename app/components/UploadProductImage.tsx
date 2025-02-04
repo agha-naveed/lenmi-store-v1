@@ -3,7 +3,7 @@
 import React, { ChangeEvent, useState } from 'react'
 import { Image } from 'cloudinary-react'
 
-export default function UploadImage() {
+export default function UploadProductImage() {
   const [image, setImage] = useState("")
 
   const imageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
