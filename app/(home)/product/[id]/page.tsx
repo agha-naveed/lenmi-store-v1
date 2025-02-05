@@ -62,7 +62,7 @@ export default function page() {
   return (
     <section className='container mx-auto grid xl:grid-cols-[auto_auto] grid-col-[auto] py-10 xl:justify-between justify-center justify-items-center gap-4'>
 
-      <div>
+      <div className='grid'>
         <div className='md:flex grid sm:border xl:border-transparent rounded-xl md:border-black md:w-full w-fit h-fit xl:gap-5 gap-3 justify-items-center'>
           
           <div onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} className='md:w-[400px] md:h-[400px] w-[300px] h-auto p-3 overflow-hidden cursor-pointer border border-gray-400 rounded-xl'>
@@ -135,14 +135,11 @@ export default function page() {
         </div>
         
         <div>
-          <div className='w-full h-[500px] overflow-y-scroll' dangerouslySetInnerHTML={{ __html: fetchData.description }} />
-            {/*   {fetchData.description} */}
-            
-          {/* </div> */}
+          <div className='h-[500px] overflow-y-scroll' dangerouslySetInnerHTML={{ __html: fetchData.description }} />
         </div>
       </div>
 
-      <div className='font-opensans xl:w-[370px] sm:w-fit w-[90%] h-fit border border-black rounded-lg'>
+      <div className='font-opensans xl:w-[370px] w-full h-fit border border-black rounded-lg'>
 
         <div className='flex items-center justify-between sm:w-full w-[80%] py-3 px-4'>
           <span className='font-semibold text-[15px]'>Ship to</span>
