@@ -10,11 +10,18 @@ export async function GET(req:NextRequest, { params }: { params: Promise<{ id: s
 
     let p_id = await params
 
-    let data = await Product.findOne({_id: p_id})
+    let data = await Product.findById(p_id.id)
 
+    try {
+        if(!data) {
+            return NextResponse.json({message: "No data with given ID"}, { status: 404 })
+        }
+        return NextResponse.json({
+            message: "ok",
+            data
+        }, { status: 200})
 
-    return NextResponse.json({
-        message: "ok",
-        data
-    }, { status: 200 })
+    } catch(err) {
+        return NextResponse.json({message: "No data with given ID"}, { status: 404 })
+    }
 }
