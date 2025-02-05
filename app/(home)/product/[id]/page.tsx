@@ -12,11 +12,11 @@ import { useParams } from 'next/navigation';
 
 export default function page() {
 
+  
   const param = useParams()
   const [fetchData, setFetchData] = useState<any>({})
   const [images, setImages] = useState<string[]>([])
-  let img1 = 'https://m.media-amazon.com/images/I/71zwwEe2nLL._AC_SL1500_.jpg'
-
+  
   useInsertionEffect(() => {
     const gettingData = async () => {
       const res = await axios.get(`/product/${param.id}/api`)
@@ -24,7 +24,6 @@ export default function page() {
       if(res.status === 200) {
         setFetchData(await datas)
         setImages(datas.imgURL)
-        img1 = datas.imgURL[0]
       }
       else {
         console.log("Nhi")
@@ -33,6 +32,7 @@ export default function page() {
     }
     gettingData()
   }, [])
+
 
   const [quantity, setQuantity] = useState(1)
   const [zoom, setZoom] = useState<number>(1);
@@ -60,80 +60,89 @@ export default function page() {
 
 
   return (
-    <section className='container mx-auto grid xl:grid-cols-[auto_auto] grid-col-[auto] py-10 xl:justify-between justify-center justify-items-center gap-5'>
+    <section className='container mx-auto grid xl:grid-cols-[auto_auto] grid-col-[auto] py-10 xl:justify-between justify-center justify-items-center gap-4'>
 
-      <div className='md:flex grid sm:border xl:border-transparent rounded-xl md:border-black md:w-full w-fit h-fit xl:gap-5 gap-3 justify-items-center'>
-        
-        <div onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} className='md:w-[400px] md:h-[400px] w-[300px] h-auto p-3 overflow-hidden cursor-pointer border border-gray-400 rounded-xl'>
-          {
-            images[0] && images[0].trim() !== "" ?
-              <img ref={imageRef}
-              src={images[0]}
-              alt='Jacket' style={{transform: `scale(${zoom})`, transformOrigin: `${offset.x}px ${offset.y}px`, transition: 'tranform 0.3s ease-out'}} width={1000} height={1000} className='w-full h-full object-contain' />
-            : <h2>Loading...</h2>
-           }
-        </div>
-
-        <div className='sm:w-fit sm:p-6 p-2 h-auto w-[90%]'>
+      <div>
+        <div className='md:flex grid sm:border xl:border-transparent rounded-xl md:border-black md:w-full w-fit h-fit xl:gap-5 gap-3 justify-items-center'>
           
-          <h2 className='font-opensans font-semibold text-2xl'>{fetchData?.name}</h2>
-
-          <div className='mt-3 mb-5 flex flex-col gap-1'>
-            <div className='flex gap-3'>
-              <div className='flex gap-1 items-center'>
-                <span>Rating:</span>
-                <span className='flex text-orangeClr'>
-                  <GoStarFill />
-                  <GoStarFill />
-                  <GoStarFill />
-                  <GoStarFill />
-                  <GoStarFill />
-                </span>
-              </div>
-              <div>|</div>
-              <div className='font-opensans'>
-                10000+ Sold
-              </div>
-            </div>
-
-            <div className='flex gap-1 font-opensans items-center'>
-              Category:
-              <span className='font-semibold text-orangeClr'>{fetchData?.category}</span>
-            </div>
+          <div onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} className='md:w-[400px] md:h-[400px] w-[300px] h-auto p-3 overflow-hidden cursor-pointer border border-gray-400 rounded-xl'>
+            {
+              images[0] && images[0].trim() !== "" ?
+                <img ref={imageRef}
+                src={images[0]}
+                alt='Jacket' style={{transform: `scale(${zoom})`, transformOrigin: `${offset.x}px ${offset.y}px`, transition: 'tranform 0.3s ease-out'}} width={1000} height={1000} className='w-full h-full object-contain' />
+              : <h2>Loading...</h2>
+            }
           </div>
 
-          <div className='flex gap-[6px] my-2 items-end'>
-            <span className='font-opensans font-bold text-[32px]'>PKR {fetchData?.price}</span>
-            <span className='text-gray-700 line-through relative bottom-[6px]'>PKR 999</span>
-          </div>
+          <div className='sm:w-fit sm:p-6 p-2 h-auto w-[90%]'>
+            
+            <h2 className='font-opensans font-semibold text-2xl'>{fetchData?.name}</h2>
 
-          <div className='grid'>
-            <span className='my-2'>Color: Black</span>
-            <div className='flex gap-1'>
-              {
-                images ?
-                <>
-                  {
-                    images.map((image, index) => {
-                      return (
-                        <div key={`product-small-image-${index}`} className='w-[70px] h-[70px] cursor-pointer border p-[3px]'>
-                          <Image src={image} alt='' width={200} height={200} className='w-full h-full object-cover' />
-                        </div>
-                      )
-                    })
-                  }
-                </>
-                :
-                <span> Loading... </span>
-              }
+            <div className='mt-3 mb-5 flex flex-col gap-1'>
+              <div className='flex gap-3'>
+                <div className='flex gap-1 items-center'>
+                  <span>Rating:</span>
+                  <span className='flex text-orangeClr'>
+                    <GoStarFill />
+                    <GoStarFill />
+                    <GoStarFill />
+                    <GoStarFill />
+                    <GoStarFill />
+                  </span>
+                </div>
+                <div>|</div>
+                <div className='font-opensans'>
+                  10000+ Sold
+                </div>
+              </div>
+
+              <div className='flex gap-1 font-opensans items-center'>
+                Category:
+                <span className='font-semibold text-orangeClr'>{fetchData?.category}</span>
+              </div>
             </div>
+
+            <div className='flex gap-[6px] my-2 items-end'>
+              <span className='font-opensans font-bold text-[32px]'>PKR {fetchData?.price}</span>
+              <span className='text-gray-700 line-through relative bottom-[6px]'>PKR 999</span>
+            </div>
+
+            <div className='grid'>
+              <span className='my-2'>Color: Black</span>
+              <div className='flex gap-1'>
+                {
+                  images ?
+                  <>
+                    {
+                      images.map((image, index) => {
+                        return (
+                          <div key={`product-small-image-${index}`} className='w-[70px] h-[70px] cursor-pointer border p-[3px]'>
+                            <Image src={image} alt='' width={200} height={200} className='w-full h-full object-cover' />
+                          </div>
+                        )
+                      })
+                    }
+                  </>
+                  :
+                  <span> Loading... </span>
+                }
+              </div>
+            </div>
+
           </div>
 
         </div>
-
+        
+        <div>
+          <div className='w-full h-[500px] overflow-y-scroll' dangerouslySetInnerHTML={{ __html: fetchData.description }} />
+            {/*   {fetchData.description} */}
+            
+          {/* </div> */}
+        </div>
       </div>
 
-      <div className='font-opensans xl:w-[370px] sm:w-fit w-[90%] h-fit border border-black rounded-lg px-3'>
+      <div className='font-opensans xl:w-[370px] sm:w-fit w-[90%] h-fit border border-black rounded-lg'>
 
         <div className='flex items-center justify-between sm:w-full w-[80%] py-3 px-4'>
           <span className='font-semibold text-[15px]'>Ship to</span>
