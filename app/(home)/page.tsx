@@ -51,9 +51,13 @@ export default function page() {
           {
             productData ? 
             <div className="flex flex-wrap gap-5">
-              <ProductCard data={productData[0]} />
-              <ProductCard data={productData[0]} />
-              <ProductCard data={productData[0]} />
+              {
+                productData.map((item, index) => {
+                  return (
+                    <ProductCard key={`product-card-${index}`} data={item} />
+                  )
+                })
+              }
             </div>
             : null
           }
