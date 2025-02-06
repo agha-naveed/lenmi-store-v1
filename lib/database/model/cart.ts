@@ -16,7 +16,11 @@ const cartItemSchema = new Schema<ICartItem>({
 });
   
 const cartSchema = new Schema<ICart>({
-    userId: { type: String, required: true },
+    userId: { 
+        type: String,
+        ref: "User",
+        required: true 
+    },
     items: [cartItemSchema],
 });
   

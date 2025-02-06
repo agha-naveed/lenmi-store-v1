@@ -1,9 +1,10 @@
 import dbConnection from "@/lib/database/dbConnection";
 import Product from "@/lib/database/model/product";
-// import User from "@/lib/database/model/product";
+import Cart from "@/lib/database/model/cart";
 
 
 import { NextRequest, NextResponse } from "next/server";
+import { cookies } from "next/headers";
 
 
 export async function GET(req:NextRequest, { params }: { params: Promise<{ id: string }> }) {
@@ -28,5 +29,18 @@ export async function GET(req:NextRequest, { params }: { params: Promise<{ id: s
 }
 
 export async function POST(req:NextRequest, { params }: { params: Promise<{ id: string }> }) {
+    await dbConnection()
 
+    let data = await req.json();
+
+    let cookie = await cookies()
+    
+    let user_id = cookie.get("u_obj_i")
+
+    await Cart.insertMany([
+        {
+            userId: user_id,
+            items: ""
+        }
+    ])
 }
