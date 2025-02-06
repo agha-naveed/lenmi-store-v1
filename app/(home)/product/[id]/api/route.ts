@@ -1,6 +1,7 @@
 import dbConnection from "@/lib/database/dbConnection";
 import Product from "@/lib/database/model/product";
-// import 
+// import User from "@/lib/database/model/product";
+
 
 import { NextRequest, NextResponse } from "next/server";
 
@@ -24,4 +25,8 @@ export async function GET(req:NextRequest, { params }: { params: Promise<{ id: s
     } catch(err) {
         return NextResponse.json({message: "No data with given ID"}, { status: 404 })
     }
+}
+
+export async function POST(req:NextRequest, { params }: { params: Promise<{ id: string }> }) {
+
 }
