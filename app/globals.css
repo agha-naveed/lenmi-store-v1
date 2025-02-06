@@ -207,7 +207,3 @@ input[type="number"] {
     transform: translateX(-28px);
   }
 }
-
-.description-see-more-less {
-  background: linear-gradient(0deg, #20243c61, transparent);
-}

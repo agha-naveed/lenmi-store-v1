@@ -4,7 +4,6 @@ import { useState, useRef, useEffect, useInsertionEffect } from 'react';
 import Image from 'next/image'
 import { GoStarFill } from "react-icons/go";
 import { MdLocationOn } from "react-icons/md";
-import clothes from '@/images/clothes_render.png'
 import { IoIosArrowForward, IoIosArrowDown } from "react-icons/io";
 import Link from 'next/link';
 import axios from 'axios';
@@ -120,7 +119,7 @@ export default function page() {
                     {
                       images.map((image, index) => {
                         return (
-                          <div key={`product-small-image-${index}`} className='w-[70px] h-[70px] cursor-pointer border p-[3px]' onClick={() => {
+                          <div key={`product-small-image-${index}`} className={`w-[70px] h-[70px] cursor-pointer border p-[3px] ${selectImage == index ? "border-black" : ""}`} onClick={() => {
                             setSelectImages(index)
                           }}>
                             <Image src={image} alt='' width={200} height={200} className='w-full h-full object-cover' />

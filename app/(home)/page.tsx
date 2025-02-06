@@ -1,11 +1,22 @@
-import React from 'react'
+'use client'
+import React, { useEffect } from 'react'
 import ProductCard from '../components/products-cards/ProductCard'
 import Carousel from '@/components/Carousel'
 import TrendingProducts from '../components/products-cards/TrendingProducts'
 import HorizontalCard from '@/components/products-cards/HorizontalCard'
 import CategoriesDesign from '../components/CategoriesDesign'
+import axios from 'axios'
 
 export default function page() {
+
+  useEffect(() => {
+    let productCardData = async () => {
+      const res = await axios.get("/api")
+      
+    }
+  }, [])
+
+
   return (
     <div className='w-full h-auto'>
       <div className='md:block hidden'>
