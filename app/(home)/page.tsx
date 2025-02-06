@@ -9,14 +9,13 @@ import axios from 'axios'
 
 export default function page() {
 
-  const [productData, setProductData] = useState<object[]>([])
+  const [productData, setProductData] = useState<object[]>()
 
   useEffect(() => {
     let productCardData = async () => {
       const res = await axios.get("/api")
       if(res.status == 200) {
         setProductData(await res.data.data)
-        console.log(productData.length)
       }
     }
     productCardData()
@@ -49,12 +48,15 @@ export default function page() {
           <div>
             <CategoriesDesign />
           </div>
-          
-          <div className="flex flex-wrap gap-5">
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-          </div>
+          {
+            productData ? 
+            <div className="flex flex-wrap gap-5">
+              <ProductCard data={productData[0]} />
+              <ProductCard data={productData[0]} />
+              <ProductCard data={productData[0]} />
+            </div>
+            : null
+          }
         </div>
       </div>
     </div>
