@@ -50,7 +50,7 @@ export default function page() {
     const rect = imageRef.current.getBoundingClientRect();
     const mouseX = (event.clientX - rect.left) / 1.3;
     const mouseY = event.clientY - rect.top;
-    const zoomLevel = 1.4;
+    const zoomLevel = 1.35;
 
     setZoom(zoomLevel);
     setOffset({ x: mouseX, y: mouseY });
