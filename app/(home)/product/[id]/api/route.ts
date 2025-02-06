@@ -1,8 +1,7 @@
 import dbConnection from "@/lib/database/dbConnection";
 import Product from "@/lib/database/model/product";
 import Cart from "@/lib/database/model/cart";
-
-
+import jwt from 'jsonwebtoken'
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
@@ -32,16 +31,25 @@ export async function POST(req:NextRequest, { params }: { params: Promise<{ id: 
     await dbConnection()
 
     let data = await req.json();
+    let product_objId = await data.id
+    let product_quantity = await data.quantity
     
-
     let cookie = await cookies()
     
-    let user_id = cookie.get("u_obj_i")
+    let user_id = cookie.get("u_obj_i")?.value
+    let originalId = jwt.verify(user_id ?? "", process.env.JWT_CODE ?? "") as { obj_id: string }
+
+
 
     await Cart.insertMany([
         {
-            userId: user_id,
-
+            userId: originalId.obj_id,
+            items: [{
+                productId: product_objId,
+                quantity: product_quantity
+            }]
         }
     ])
+
+    return NextResponse.json({})
 }

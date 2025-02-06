@@ -11,6 +11,7 @@ import { useParams } from 'next/navigation';
 
 export default function page() {
 
+  const [quantity, setQuantity] = useState(1)
   
   const param = useParams()
   const [fetchData, setFetchData] = useState<any>({})
@@ -37,12 +38,15 @@ export default function page() {
 
 
   const postData = async () => {
-    const data = await axios.post(`/product/${param.id}/api`, fetchData)
+    let sendDetail = {
+      id: fetchData._id,
+      quantity
+    }
+    const data = await axios.post(`/product/${param.id}/api`, sendDetail)
     
   }
 
 
-  const [quantity, setQuantity] = useState(1)
   const [zoom, setZoom] = useState<number>(1);
   const [offset, setOffset] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 
