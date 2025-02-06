@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import ProductCard from '../components/products-cards/ProductCard'
 import Carousel from '@/components/Carousel'
 import TrendingProducts from '../components/products-cards/TrendingProducts'
@@ -9,11 +9,17 @@ import axios from 'axios'
 
 export default function page() {
 
+  const [productData, setProductData] = useState<object[]>([])
+
   useEffect(() => {
     let productCardData = async () => {
       const res = await axios.get("/api")
-      
+      if(res.status == 200) {
+        setProductData(await res.data.data)
+        console.log(productData.length)
+      }
     }
+    productCardData()
   }, [])
 
 
