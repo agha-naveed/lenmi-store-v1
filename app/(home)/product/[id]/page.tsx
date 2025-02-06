@@ -16,6 +16,7 @@ export default function page() {
   const param = useParams()
   const [fetchData, setFetchData] = useState<any>({})
   const [images, setImages] = useState<string[]>([])
+  const [selectImage, setSelectImages] = useState<number>(0)
   
   const [showMore, setShowMore] = useState<boolean>(false)
   
@@ -69,9 +70,9 @@ export default function page() {
           
           <div onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} className='md:w-[400px] md:h-[400px] w-[300px] h-auto p-3 overflow-hidden cursor-pointer border border-gray-400 rounded-xl'>
             {
-              images[0] && images[0].trim() !== "" ?
+              images[selectImage] && images[selectImage].trim() !== "" ?
                 <img ref={imageRef}
-                src={images[0]}
+                src={images[selectImage]}
                 alt='Jacket' style={{transform: `scale(${zoom})`, transformOrigin: `${offset.x}px ${offset.y}px`, transition: 'tranform 0.3s ease-out'}} width={1000} height={1000} className='w-full h-full object-contain' />
               : <h2>Loading...</h2>
             }
@@ -119,7 +120,9 @@ export default function page() {
                     {
                       images.map((image, index) => {
                         return (
-                          <div key={`product-small-image-${index}`} className='w-[70px] h-[70px] cursor-pointer border p-[3px]'>
+                          <div key={`product-small-image-${index}`} className='w-[70px] h-[70px] cursor-pointer border p-[3px]' onClick={() => {
+                            setSelectImages(index)
+                          }}>
                             <Image src={image} alt='' width={200} height={200} className='w-full h-full object-cover' />
                           </div>
                         )
