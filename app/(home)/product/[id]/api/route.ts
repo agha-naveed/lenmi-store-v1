@@ -32,6 +32,7 @@ export async function POST(req:NextRequest, { params }: { params: Promise<{ id: 
     await dbConnection()
 
     let data = await req.json();
+    
 
     let cookie = await cookies()
     
@@ -40,7 +41,7 @@ export async function POST(req:NextRequest, { params }: { params: Promise<{ id: 
     await Cart.insertMany([
         {
             userId: user_id,
-            items: ""
+
         }
     ])
 }

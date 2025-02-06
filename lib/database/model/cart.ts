@@ -6,7 +6,7 @@ interface ICartItem {
 }
   
 interface ICart extends Document {
-    userId: string;
+    userId: Schema.Types.ObjectId;
     items: ICartItem[];
 }
 
@@ -17,7 +17,7 @@ const cartItemSchema = new Schema<ICartItem>({
   
 const cartSchema = new Schema<ICart>({
     userId: { 
-        type: String,
+        type: Schema.Types.ObjectId,
         ref: "User",
         required: true 
     },
