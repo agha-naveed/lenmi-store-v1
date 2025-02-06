@@ -15,6 +15,19 @@ export default {
   		fontFamily: {
   			opensans: ['opensans']
   		},
+		animation: {
+			up_down: "upDown 0.5s infinite ease-out alternate"
+		},
+		keyframes: {
+			upDown: {
+				"0%": {
+					transform: 'translateX(-50%) translateY(0)'
+				},
+				"100%": {
+					transform: 'translateX(-50%) translateY(-5px)'
+				}
+			}
+		},
   		colors: {
   			orangeClr: '#f08a06',
 			lightPeachClr: "rgba(255, 196, 0, 0.151)",
