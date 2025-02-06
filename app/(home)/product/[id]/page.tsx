@@ -62,7 +62,7 @@ export default function page() {
 
 
   return (
-    <section className='container mx-auto grid xl:grid-cols-[auto_auto] grid-col-[auto] py-10 xl:justify-between justify-center justify-items-center gap-4'>
+    <section className='container mx-auto grid xl:grid-cols-[auto_auto] grid-col-[auto] py-10 sm:px-0 px-4 xl:justify-between justify-center justify-items-center gap-4'>
 
       <div className='grid gap-10'>
         <div className='md:flex grid sm:border xl:border-transparent rounded-xl md:border-black md:w-full w-fit h-fit xl:gap-5 gap-3 justify-items-center'>
@@ -136,11 +136,11 @@ export default function page() {
 
         </div>
         
-        <div className='grid gap-2 relative'>
+        <div className='grid gap-2 relative lg:place-self-start place-self-center'>
           <span className='text-xl font-semibold'>Description:</span>
-          <div className={`lg:w-[880px] w-[92vw] pb-5 ${showMore ? "h-auto" : "h-[400px]"} overflow-hidden border border-black rounded-md`} dangerouslySetInnerHTML={{ __html: fetchData.description }} />
+          <div className={`xl:w-[880px] w-[92vw] pb-5 ${showMore ? "h-auto" : "h-[400px]"} overflow-hidden border border-black rounded-md`} dangerouslySetInnerHTML={{ __html: fetchData.description }} />
           <button
-            className='animate-up_down absolute bottom-[6px] bg-slate-800 hover:bg-slate-900 transition-all left-1/2 w-fit rounded-full flex py-2 px-[18px] justify-center items-center gap-1 text-white'
+            className='animate-up_down absolute bottom-[6px] bg-slate-800 hover:bg-slate-900 transition-all left-1/2 w-fit rounded-full flex py-2 sm:px-[18px] px-3 justify-center items-center gap-1 text-white'
             onClick={() => setShowMore(!showMore)}
             title={`${showMore ? "Click to Collapse" : "Click to show full details"}`}
             >
