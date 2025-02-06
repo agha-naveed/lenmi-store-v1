@@ -17,6 +17,8 @@ export default function page() {
   const [fetchData, setFetchData] = useState<any>({})
   const [images, setImages] = useState<string[]>([])
   
+  const [showMore, setShowMore] = useState<boolean>(false)
+  
   useInsertionEffect(() => {
     const gettingData = async () => {
       const res = await axios.get(`/product/${param.id}/api`)
@@ -136,10 +138,14 @@ export default function page() {
         
         <div className='grid gap-2 relative'>
           <span className='text-xl font-semibold'>Description:</span>
-          <div className='lg:w-[880px] w-[92vw] h-[400px] overflow-hidden border border-black rounded-md' dangerouslySetInnerHTML={{ __html: fetchData.description }} />
-          <button className='absolute bottom-1 bg-slate-800 hover:bg-slate-900 transition-all left-1/2 translate-x-[-50%] w-fit rounded-full flex py-2 px-[18px] justify-center items-center gap-1 text-white'>
-            <IoIosArrowDown className='text-[15px]' />
-            <span>Show More</span>
+          <div className={`lg:w-[880px] w-[92vw] pb-5 ${showMore ? "h-auto" : "h-[400px]"} overflow-hidden border border-black rounded-md`} dangerouslySetInnerHTML={{ __html: fetchData.description }} />
+          <button
+            className='absolute bottom-[6px] bg-slate-800 hover:bg-slate-900 transition-all left-1/2 translate-x-[-50%] w-fit rounded-full flex py-2 px-[18px] justify-center items-center gap-1 text-white'
+            onClick={() => setShowMore(!showMore)}
+            title={`${showMore ? "Click to Collapse" : "Click to show full details"}`}
+            >
+            <IoIosArrowDown className={`text-[15px] ${showMore ? "rotate-[180deg]" : ""}`} />
+            <span>{showMore ? "Show Less" : "Show More"}</span>
           </button>
         </div>
       </div>
