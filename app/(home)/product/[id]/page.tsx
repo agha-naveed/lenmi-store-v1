@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { GoStarFill } from "react-icons/go";
 import { MdLocationOn } from "react-icons/md";
 import clothes from '@/images/clothes_render.png'
-import { IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowForward, IoIosArrowDown } from "react-icons/io";
 import Link from 'next/link';
 import axios from 'axios';
 import { useParams } from 'next/navigation';
@@ -62,7 +62,7 @@ export default function page() {
   return (
     <section className='container mx-auto grid xl:grid-cols-[auto_auto] grid-col-[auto] py-10 xl:justify-between justify-center justify-items-center gap-4'>
 
-      <div className='grid'>
+      <div className='grid gap-10'>
         <div className='md:flex grid sm:border xl:border-transparent rounded-xl md:border-black md:w-full w-fit h-fit xl:gap-5 gap-3 justify-items-center'>
           
           <div onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} className='md:w-[400px] md:h-[400px] w-[300px] h-auto p-3 overflow-hidden cursor-pointer border border-gray-400 rounded-xl'>
@@ -134,8 +134,13 @@ export default function page() {
 
         </div>
         
-        <div>
-          <div className='h-[500px] overflow-y-scroll' dangerouslySetInnerHTML={{ __html: fetchData.description }} />
+        <div className='grid gap-2 relative'>
+          <span className='text-xl font-semibold'>Description:</span>
+          <div className='lg:w-[880px] w-[92vw] h-[400px] overflow-hidden border border-black rounded-md' dangerouslySetInnerHTML={{ __html: fetchData.description }} />
+          <button className='absolute bottom-1 bg-slate-800 hover:bg-slate-900 transition-all left-1/2 translate-x-[-50%] w-fit rounded-full flex py-2 px-[18px] justify-center items-center gap-1 text-white'>
+            <IoIosArrowDown className='text-[15px]' />
+            <span>Show More</span>
+          </button>
         </div>
       </div>
 
