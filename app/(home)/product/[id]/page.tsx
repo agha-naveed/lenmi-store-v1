@@ -43,7 +43,6 @@ export default function page() {
       quantity
     }
     const data = await axios.post(`/product/${param.id}/api`, sendDetail)
-    
   }
 
 

@@ -20,8 +20,7 @@ interface ApiResponse {
 }
 
 
-export default function Navbar() {
-    
+export default function Navbar() {    
     
     const [message, setMessage] = useState<ApiResponse | null>(null);
 
@@ -59,6 +58,12 @@ export default function Navbar() {
 
     }, [logOut])
     
+    useEffect(() => {
+        async function cartData() {
+            
+        }
+        cartData()
+    }, [])
 
     return (
         <div className='w-full md:h-[130px] h-[135px] relative z-30 bg-slate-800 py-3'>
