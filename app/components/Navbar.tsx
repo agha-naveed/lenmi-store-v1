@@ -23,6 +23,7 @@ interface ApiResponse {
 export default function Navbar() {    
     
     const [message, setMessage] = useState<ApiResponse | null>(null);
+    const [cartLength, setCartLength] = useState<number | null>(0);
 
     const [logOut, setLogOut] = useState(false)
 
@@ -58,15 +59,18 @@ export default function Navbar() {
 
     }, [logOut])
     
-    useEffect(() => {
-        async function cartData() {
-            const res = await axios.get("/cart/api")
-            if(res.status == 201) {
-                
-            }
-        }
-        cartData()
-    }, [])
+    // useEffect(() => {
+    //     async function cartData() {
+    //         const res = await axios.get("/cart/api")
+    //         if(res.status == 201) {
+    //             setCartLength(res.data)
+    //         }
+    //         else {
+
+    //         }
+    //     }
+    //     cartData()
+    // }, [])
 
     return (
         <div className='w-full md:h-[130px] h-[135px] relative z-30 bg-slate-800 py-3'>

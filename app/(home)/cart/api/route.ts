@@ -16,10 +16,10 @@ export async function POST(req:NextRequest) {
     let user_id = cookie.get("u_obj_i")?.value
     let originalId = jwt.verify(user_id ?? "", process.env.JWT_CODE ?? "") as { obj_id: string }
 
-    let isExist = await Cart.find({userId: originalId.obj_id})
+    let isExist = await Cart.findOne({userId: originalId.obj_id})
     
     if(!isExist) {
-        await Cart.insertMany([
+        let dbData = await Cart.insertMany([
             {
                 userId: originalId.obj_id,
                 items: [{
@@ -28,20 +28,25 @@ export async function POST(req:NextRequest) {
                 }]
             }
         ])
-        .then(() => {
+
+        if(dbData) {
             return NextResponse.json({
                 message: "Successfully Added Data",
+                data: 1
             }, { status: 201 })
-        }).catch(() => {
+        }
+
+        else {
             return NextResponse.json({
                 message: "Some Error Occurred!",
             }, { status: 400 })
-        })
+        }
         
     }
+
     else {
-        await Cart.updateOne({
-            userId: originalId.obj_id
+        let dbData = await Cart.updateOne({
+             userId: originalId.obj_id
         }, {
             $addToSet: {
                 items: {
@@ -49,16 +54,19 @@ export async function POST(req:NextRequest) {
                     quantity: product_quantity
                 }
             }
-        }).then(() => {
+        })
+        
+        if(dbData) {
+            console.log(dbData)
             return NextResponse.json({
                 message: "Successfully Added Data",
+                itemLength: ++isExist.items.length
             }, { status: 201 })
-        }).catch(() => {
+        }
+        else {
             return NextResponse.json({
                 message: "Some Error Occurred!",
             }, { status: 400 })
-        })
+        }
     }
-
-    return NextResponse.json({})
 }
