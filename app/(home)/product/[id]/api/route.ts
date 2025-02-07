@@ -39,17 +39,31 @@ export async function POST(req:NextRequest, { params }: { params: Promise<{ id: 
     let user_id = cookie.get("u_obj_i")?.value
     let originalId = jwt.verify(user_id ?? "", process.env.JWT_CODE ?? "") as { obj_id: string }
 
-
-
-    await Cart.insertMany([
-        {
-            userId: originalId.obj_id,
-            items: [{
-                productId: product_objId,
-                quantity: product_quantity
-            }]
-        }
-    ])
+    let isExist = await Cart.find({userId: originalId.obj_id})
+    
+    if(!isExist) {
+        await Cart.insertMany([
+            {
+                userId: originalId.obj_id,
+                items: [{
+                    productId: product_objId,
+                    quantity: product_quantity
+                }]
+            }
+        ])
+    }
+    else {
+        await Cart.updateOne({
+            userId: originalId.obj_id
+        }, {
+            $addToSet: {
+                items: {
+                    productId: product_objId,
+                    quantity: product_quantity
+                }
+            }
+        })
+    }
 
     return NextResponse.json({})
 }
