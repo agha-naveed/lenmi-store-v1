@@ -61,6 +61,7 @@ export default function Navbar() {
 
     }, [logOut])
     
+
     useEffect(() => {
         
         async function cartData() {
@@ -82,6 +83,7 @@ export default function Navbar() {
         }
         cartData()
     }, [length])
+    
 
     return (
         <div className='w-full md:h-[130px] h-[135px] relative z-30 bg-slate-800 py-3'>

@@ -8,8 +8,13 @@ import { IoIosArrowForward, IoIosArrowDown } from "react-icons/io";
 import Link from 'next/link';
 import axios from 'axios';
 import { useParams } from 'next/navigation';
+import { useCart } from '@/app/components/CartProvider';
 
 export default function page() {
+
+
+  const { length, setLength } = useCart()
+
 
   const [quantity, setQuantity] = useState(1)
   
@@ -43,6 +48,7 @@ export default function page() {
       quantity
     }
     const data = await axios.post(`/cart/api`, sendDetail)
+    setLength(length + 1)
   }
 
 
