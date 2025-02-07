@@ -32,7 +32,6 @@ export async function POST(req:NextRequest) {
         if(dbData) {
             return NextResponse.json({
                 message: "Successfully Added Data",
-                data: 1
             }, { status: 201 })
         }
 
@@ -60,7 +59,6 @@ export async function POST(req:NextRequest) {
             console.log(dbData)
             return NextResponse.json({
                 message: "Successfully Added Data",
-                itemLength: ++isExist.items.length
             }, { status: 201 })
         }
         else {
@@ -69,4 +67,28 @@ export async function POST(req:NextRequest) {
             }, { status: 400 })
         }
     }
+}
+
+export async function GET() {
+    await dbConnection()
+
+    let cookie = await cookies()
+
+    let user_id = cookie.get("u_obj_i")?.value
+    let originalId = jwt.verify(user_id ?? "", process.env.JWT_CODE ?? "") as { obj_id: string }
+
+    let data = await Cart.findOne({ userId: originalId })
+
+    if(data) {
+        return NextResponse.json({
+            message: "ok",
+            data: data.items.length
+        }, { status: 201 })
+    }
+    else {
+        return NextResponse.json({
+            message: "some error occurred"
+        }, { status: 400 })
+    }
+    
 }

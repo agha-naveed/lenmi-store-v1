@@ -59,18 +59,18 @@ export default function Navbar() {
 
     }, [logOut])
     
-    // useEffect(() => {
-    //     async function cartData() {
-    //         const res = await axios.get("/cart/api")
-    //         if(res.status == 201) {
-    //             setCartLength(res.data)
-    //         }
-    //         else {
+    useEffect(() => {
+        async function cartData() {
+            const res = await axios.get("/cart/api")
+            if(res.status == 201) {
+                setCartLength(res.data)
+            }
+            else {
 
-    //         }
-    //     }
-    //     cartData()
-    // }, [])
+            }
+        }
+        cartData()
+    }, [])
 
     return (
         <div className='w-full md:h-[130px] h-[135px] relative z-30 bg-slate-800 py-3'>
