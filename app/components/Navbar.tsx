@@ -25,7 +25,7 @@ export default function Navbar() {
     
     const { length, setLength } = useCart()
     const [message, setMessage] = useState<ApiResponse | null>(null);
-    // const [cartLength, setCartLength] = useState<number | null>(0);
+    
 
     const [logOut, setLogOut] = useState(false)
 
@@ -70,7 +70,6 @@ export default function Navbar() {
                 
                 if(res.status == 201) {
                     setLength(await res.data.data)
-                    console.log(await res.data.data)
                 }
                 else {
                     

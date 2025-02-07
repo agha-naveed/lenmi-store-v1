@@ -1,13 +1,21 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { GoStarFill } from "react-icons/go";
 import Link from 'next/link';
+import axios from 'axios';
 
 export default function page() {
 
     const [quantity, setQuantity] = useState(1)
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const res = await axios.get("/cart/cart-data/api")
+            
+        }
+    }, [])
 
   return (
     <div className='bg-gray-100 min-h-screen h-full'>
