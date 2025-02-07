@@ -12,6 +12,7 @@ import { GoChecklist } from "react-icons/go";
 import { TbMessageDots } from "react-icons/tb";
 import { IoSettingsOutline } from "react-icons/io5"
 import axios from 'axios';
+import { useCart } from './CartProvider';
 
 interface ApiResponse {
     first_name: string;
@@ -22,8 +23,9 @@ interface ApiResponse {
 
 export default function Navbar() {    
     
+    const { length, setLength } = useCart()
     const [message, setMessage] = useState<ApiResponse | null>(null);
-    const [cartLength, setCartLength] = useState<number | null>(0);
+    // const [cartLength, setCartLength] = useState<number | null>(0);
 
     const [logOut, setLogOut] = useState(false)
 
@@ -60,17 +62,26 @@ export default function Navbar() {
     }, [logOut])
     
     useEffect(() => {
+        
         async function cartData() {
-            const res = await axios.get("/cart/api")
-            if(res.status == 201) {
-                setCartLength(res.data)
+            try {
+                let res = await axios.get("/cart/api")
+                
+                if(res.status == 201) {
+                    setLength(await res.data.data)
+                    console.log(await res.data.data)
+                }
+                else {
+                    
+                }
             }
-            else {
-
+            catch(err) {
+                console.log("Error" + err)
             }
+            
         }
         cartData()
-    }, [])
+    }, [length])
 
     return (
         <div className='w-full md:h-[130px] h-[135px] relative z-30 bg-slate-800 py-3'>
@@ -148,7 +159,7 @@ export default function Navbar() {
                                 <TiShoppingCart className='cursor-pointer text-[38px]' title='Cart' />
                                 <div className='grid content-center leading-[17px]'>
                                     <span className='text-[12.5px] text-black font-opensans  bg-white rounded-xl w-[26px] h-[14px] text-center'>
-                                        <p className='relative top-[-2px] font-opensans font-bold'>0</p>
+                                        <p className='relative top-[-2px] font-opensans font-bold'>{length}</p>
                                     </span>
                                     <span className='font-opensans font-medium text-[14px]'>Cart</span>
                                 </div>
