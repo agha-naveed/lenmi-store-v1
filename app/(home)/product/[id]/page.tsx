@@ -22,7 +22,7 @@ export default function page() {
   
   useInsertionEffect(() => {
     const gettingData = async () => {
-      const res = await axios.get(`/product/${param.id}/api`)
+      const res = await axios.get(`/cart/api`)
       let datas = await res.data.data
       if(res.status === 200) {
         setFetchData(await datas)

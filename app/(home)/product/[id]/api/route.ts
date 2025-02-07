@@ -1,9 +1,6 @@
 import dbConnection from "@/lib/database/dbConnection";
 import Product from "@/lib/database/model/product";
-import Cart from "@/lib/database/model/cart";
-import jwt from 'jsonwebtoken'
 import { NextRequest, NextResponse } from "next/server";
-import { cookies } from "next/headers";
 
 
 export async function GET(req:NextRequest, { params }: { params: Promise<{ id: string }> }) {

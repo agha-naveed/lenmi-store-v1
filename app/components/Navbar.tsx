@@ -60,7 +60,10 @@ export default function Navbar() {
     
     useEffect(() => {
         async function cartData() {
-            
+            const res = await axios.get("/cart/api")
+            if(res.status == 201) {
+                
+            }
         }
         cartData()
     }, [])
