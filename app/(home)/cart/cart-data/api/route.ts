@@ -17,17 +17,18 @@ export async function GET() {
     if(user_id) {
         let originalId = jwt.verify(user_id ?? "", process.env.JWT_CODE ?? "") as { obj_id: string }
 
-        let data = await Cart.findOne({ userId: originalId.obj_id })
-        let items = data.items
+        let objdata = await Cart.findOne({ userId: originalId.obj_id })
+        let items = objdata.items
         
         let cartDatas:any = []
 
         await Promise.all(
-            items.map(async (item:any, index:number) => {
+            items.map(async (item:any) => {
                 let data = await Product.findById(item.productId)
-                await cartDatas.push(data)
+                cartDatas.push({data, itemQuantity: item.quantity})
             })
         )
+
         
         return NextResponse.json({
             message: "ok",
