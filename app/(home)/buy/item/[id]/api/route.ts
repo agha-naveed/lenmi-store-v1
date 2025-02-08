@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken"
 import Cart from "@/lib/database/model/cart";
+import Product from "@/lib/database/model/product";
 
 export async function GET(req:NextRequest, { params }: { params: Promise<{ id: string }> }) {
     await dbConnection()
@@ -23,9 +24,15 @@ export async function GET(req:NextRequest, { params }: { params: Promise<{ id: s
         if(cartItems.length > 0) {
             for(let i=0; i<cartItems.length; i++) {
                 if(p_id.id == cartItems[i].productId) {
+                    let productDetails = await Product.findById(cartItems[i].productId)
+
                     return NextResponse.json({
                         message: "done",
-                        data: cartItems[i]
+                        data: {
+                            userData: userDetails.userId,
+                            productData: productDetails,
+                            itemQuantity: cartItems[i].quantity
+                        }
                     }, { status: 200 })
                 }
             }
