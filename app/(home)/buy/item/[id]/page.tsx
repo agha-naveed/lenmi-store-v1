@@ -1,10 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { redirect, useParams } from "next/navigation";
-import { GoStarFill } from "react-icons/go";
-import Link from "next/link";
-import Image from "next/image";
+import React from "react";
 
 export default function page() {
  
@@ -29,7 +24,7 @@ export default function page() {
 
                   <div className="grid gap-1 w-44">
                     <label htmlFor="">District</label>
-                    <select name="" id="" className="h-9 p-2">
+                    <select name="" id="" className="h-9 p-2 rounded-lg cursor-pointer">
                         <option value="">-- select --</option>
                         <option value="Ghanche">Ghanche</option>
                         <option value="Rondu">Rondu</option>
@@ -41,14 +36,26 @@ export default function page() {
                         <option value="Nagar">Nagar</option>
                         <option value="Hunza">Hunza</option>
                     </select>
-                  </div>    
+                  </div>
+                      
                 </div>
 
                 <div className="grid gap-1">
                   <label htmlFor="">Full Address</label>
-                  <textarea name="" id="" className="border"></textarea>
+                  <textarea name="" id="" className="border border-zinc-400 rounded-lg w-[80%] h-20 py-2 px-3"></textarea>
                 </div>
-                <button type="submit">Submit</button>
+                <button type="submit"
+                  className="bg-slate-800
+                  text-white
+                  py-2 px-6
+                  rounded-lg
+                  transition-all
+                  hover:bg-slate-900
+                  mt-3
+                  "
+                >
+                  Submit
+                </button>
             </div>
         </section>
 

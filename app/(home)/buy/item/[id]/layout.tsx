@@ -25,6 +25,8 @@ export default function layout({ children } : {children: React.ReactNode}) {
     };
     fetchData();
   }, []);
+
+  
   return (
     <div>
         <div className='container mx-auto'>
@@ -130,7 +132,9 @@ export default function layout({ children } : {children: React.ReactNode}) {
       </div>
 
         </div>
+
         {children}
+
     </div>
   )
 }
