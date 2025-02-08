@@ -91,7 +91,7 @@ export default function page() {
                                             <td>
                                                 <Link href={""} title={item.data.name} className='cursor-pointer flex items-center sm:gap-4 gap-2 py-5 group'>
                                                     <span className='flex rounded-xl !h-fit p-1 sm:!w-[220px] w-[190px] overflow-hidden'>
-                                                        <Image src={item.data.imgURL[0]} className='w-full h-full object-cover' alt='pikachu' width={100} height={100} />
+                                                        <Image src={item.data.imgURL[0]} className='w-full h-full object-cover' alt='pikachu' width={400} height={400} />
 
                                                     </span>
                                                     <span className='w-full'>

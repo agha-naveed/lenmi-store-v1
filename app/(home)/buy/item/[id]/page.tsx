@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "next/navigation";
+import { redirect, useParams } from "next/navigation";
 import { GoStarFill } from "react-icons/go";
 import Link from "next/link";
 import Image from "next/image";
@@ -15,15 +15,19 @@ export default function page() {
     const fetchData = async () => {
       const res = await axios.get(`/buy/item/${param.id}/api`);
 
-      if (res.status == 200) {
-        setProductDetails(await res.data.data);
-      }
+        if (res.status == 200) {
+            setProductDetails(await res.data.data);
+        }
+        if(res.data.message != "done") {
+            redirect("/")
+        }
     };
     fetchData();
   }, []);
 
   return (
     <div className="container mx-auto">
+        
       <div className="w-full h-full rounded-2xl shadow-xl bg-white">
         <div className="md:p-7 p-2">
           <table className="w-full">
@@ -53,8 +57,8 @@ export default function page() {
                                     src={productDetails.productData.imgURL[0]}
                                     className="w-full h-full object-cover"
                                     alt="pikachu"
-                                    width={100}
-                                    height={100}
+                                    width={400}
+                                    height={400}
                                     />
                                 </span>
                                 <span className="w-full">
@@ -123,6 +127,27 @@ export default function page() {
           </table>
         </div>
       </div>
+
+      <section>
+            <div>
+                <div>
+                    <label htmlFor="">District</label>
+                    <select name="" id="">
+                        <option value="">-- select --</option>
+                        <option value="khaplu">Ghanche</option>
+                        <option value="khaplu">Rondu</option>
+                        <option value="khaplu">Shigar</option>
+                        <option value="khaplu">Kharmang</option>
+                        <option value="khaplu">Gilgit</option>
+                        <option value="khaplu">Astore</option>
+                        <option value="khaplu">Ghizer</option>
+                        <option value="khaplu">Nagar</option>
+                        <option value="khaplu">Hunza</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
     </div>
   );
 }
