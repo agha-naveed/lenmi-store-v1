@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken"
 import Cart from "@/lib/database/model/cart";
 import Product from "@/lib/database/model/product";
+import Buy from "@/lib/database/model/buy";
 
 export async function GET(req:NextRequest, { params }: { params: Promise<{ id: string }> }) {
     await dbConnection()
@@ -13,7 +14,7 @@ export async function GET(req:NextRequest, { params }: { params: Promise<{ id: s
     let cookie = await cookies()
     let userIdCookie = cookie.get("u_obj_i")?.value
     
-    console.log(userIdCookie)
+    
     if(userIdCookie) {
         let userId = jwt.verify(userIdCookie, process.env.JWT_CODE ?? "") as { obj_id: string }
         
@@ -53,4 +54,25 @@ export async function GET(req:NextRequest, { params }: { params: Promise<{ id: s
         })
     }
 
+}
+
+
+export async function POST(req:NextRequest) {
+    await dbConnection()
+
+    let { productId, recipients_name, phone_number, district, address } = await req.json()
+
+    let cookie = await cookies()
+    let userIdCookie = cookie.get("u_obj_i")?.value
+
+    let userId = jwt.verify(userIdCookie ?? "", process.env.JWT_CODE ?? "") as { obj_id: string }
+    
+    await Buy.insertMany([{
+        userId,
+        items: [{
+            productId,
+            quantity: 2
+        }]
+    }])
+    return NextResponse.json({  })
 }

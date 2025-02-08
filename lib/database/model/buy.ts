@@ -3,6 +3,7 @@ import mongoose, { Document, Schema } from 'mongoose';
 interface IBuyItems {
     productId: Schema.Types.ObjectId;
     quantity: number;
+    deliveryAddress: object;
 }
   
 interface IBuy extends Document {
@@ -13,6 +14,20 @@ interface IBuy extends Document {
 const buyItemSchema = new Schema<IBuyItems>({
     productId: { type: Schema.Types.ObjectId, ref: 'Buy', required: true },
     quantity: { type: Number, required: true },
+    deliveryAddress: {
+        recipientName: {
+            type: String
+        },
+        phone_number: {
+            type: Number
+        },
+        district: {
+            type: String
+        },
+        address: {
+            type: String
+        }
+    }
 }, { _id: false });
   
 const buySchema = new Schema<IBuy>({
