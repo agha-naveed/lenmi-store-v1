@@ -4,6 +4,7 @@ interface IBuyItems {
     productId: Schema.Types.ObjectId;
     quantity: number;
     deliveryAddress: object;
+    paymentMethod: any;
 }
   
 interface IBuy extends Document {
@@ -27,6 +28,9 @@ const buyItemSchema = new Schema<IBuyItems>({
         address: {
             type: String
         }
+    },
+    paymentMethod: {
+        type: String
     }
 }, { _id: false });
   

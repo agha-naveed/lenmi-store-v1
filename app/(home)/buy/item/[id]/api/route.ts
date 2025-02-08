@@ -60,19 +60,23 @@ export async function GET(req:NextRequest, { params }: { params: Promise<{ id: s
 export async function POST(req:NextRequest) {
     await dbConnection()
 
-    let { productId, recipients_name, phone_number, district, address } = await req.json()
+    let { productId, recipients_name, phone_number, district, address, userId, itemQuantity } = await req.json()
 
-    let cookie = await cookies()
-    let userIdCookie = cookie.get("u_obj_i")?.value
-
-    let userId = jwt.verify(userIdCookie ?? "", process.env.JWT_CODE ?? "") as { obj_id: string }
-    
     await Buy.insertMany([{
         userId,
         items: [{
             productId,
-            quantity: 2
+            quantity: itemQuantity,
+            deliveryAddress: {
+                recipientName: recipients_name,
+                phone_number,
+                district,
+                address
+            }
         }]
     }])
-    return NextResponse.json({  })
+
+    return NextResponse.json({ 
+        message: "done"
+    }, { status: 201 })
 }
