@@ -10,6 +10,7 @@ import axios from 'axios';
 
 export default function page() {
 
+
     const [quantity, setQuantity] = useState(1)
     const [cartItems, setCartItems] = useState<any[]>([])
 
@@ -24,6 +25,10 @@ export default function page() {
         }
         fetchData()
     }, [])
+
+    async function buyProcess() {
+        const res = await axios.post("/cart/cart-data/api")
+    }
 
   return (
     <div className='bg-gray-100 min-h-screen h-full'>
@@ -48,6 +53,7 @@ export default function page() {
                         overflow-hidden
                         ${selectProduct != null ? "bottom-0 opacity-100" : "bottom-10 opacity-0"}
                         `}
+                        onClick={() => buyProcess()}
                     >
                         <span className='transition-all relative z-10 '>Continue to Buy</span>
                         <IoArrowForwardCircleOutline className='relative z-10 text-xl transition-all' />
@@ -81,8 +87,9 @@ export default function page() {
                                             
                                             <td>
                                                 <Link href={""} title={item.data.name} className='cursor-pointer flex items-center sm:gap-4 gap-2 py-5 group'>
-                                                    <span className='rounded-xl !h-fit p-1 sm:!w-[220px] w-[190px] overflow-hidden'>
+                                                    <span className='flex rounded-xl !h-fit p-1 sm:!w-[220px] w-[190px] overflow-hidden'>
                                                         <Image src={item.data.imgURL[0]} className='w-full h-full object-cover' alt='pikachu' width={100} height={100} />
+
                                                     </span>
                                                     <span className='w-full'>
                                                         <h2 className='font-semibold tracking-[-1px] md:w-[60%] w-full line-clamp-2 my-2 sm:text-[16px] text-[15px] transition-all group-hover:text-orangeClr'>
