@@ -7,12 +7,14 @@ import { IoArrowForwardCircleOutline, IoArrowForwardCircle } from "react-icons/i
 
 import Link from 'next/link';
 import axios from 'axios';
+import { redirect } from 'next/navigation';
 
 export default function page() {
 
-
     const [quantity, setQuantity] = useState(1)
     const [cartItems, setCartItems] = useState<any[]>([])
+
+    const [selectedtId, setSelectedId] = useState<number>(0)
 
     const [selectProduct, setSelectProduct] = useState<number | null>(null)
 
@@ -26,8 +28,8 @@ export default function page() {
         fetchData()
     }, [])
 
-    async function buyProcess() {
-        const res = await axios.post("/cart/cart-data/api")
+    async function buyProcess(id:number) {
+        redirect(`/buy/item/${id}`)
     }
 
   return (
@@ -53,7 +55,7 @@ export default function page() {
                         overflow-hidden
                         ${selectProduct != null ? "bottom-0 opacity-100" : "bottom-10 opacity-0"}
                         `}
-                        onClick={() => buyProcess()}
+                        onClick={() => buyProcess(selectedtId)}
                     >
                         <span className='transition-all relative z-10 '>Continue to Buy</span>
                         <IoArrowForwardCircleOutline className='relative z-10 text-xl transition-all' />
@@ -80,7 +82,8 @@ export default function page() {
                                     <React.Fragment key={`cart-item-${index}`}>
                                         <tr 
                                             onClick={() => {
-                                                setSelectProduct(index)
+                                                setSelectProduct(index);
+                                                setSelectedId(item.data._id)
                                             }}
                                             className={`relative ${selectProduct == index ? "border-y border-orangeClr" : "border-b-2"}`}
                                         >
