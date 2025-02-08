@@ -35,7 +35,7 @@ export default function page() {
                 </div>
                 <div>
                     <button
-                        className='flex
+                        className={`flex
                         bg-orangeClr
                         group px-6
                         items-center
@@ -43,8 +43,11 @@ export default function page() {
                         text-white
                         rounded-lg
                         relative
+                        transition-all
                         overlay-btn
-                        '
+                        overflow-hidden
+                        ${selectProduct != null ? "bottom-0 opacity-100" : "bottom-10 opacity-0"}
+                        `}
                     >
                         <span className='transition-all relative z-10 '>Continue to Buy</span>
                         <IoArrowForwardCircleOutline className='relative z-10 text-xl transition-all' />
