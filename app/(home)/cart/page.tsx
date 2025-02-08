@@ -3,7 +3,8 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { GoStarFill } from "react-icons/go";
-import { IoClose } from "react-icons/io5";
+import { IoArrowForwardCircleOutline, IoArrowForwardCircle } from "react-icons/io5";
+
 import Link from 'next/link';
 import axios from 'axios';
 
@@ -27,9 +28,28 @@ export default function page() {
   return (
     <div className='bg-gray-100 min-h-screen h-full'>
         <div className="container mx-auto font-opensans py-7 grid gap-9">
-            <div>
-                <h1 className='font-bold text-3xl'>Cart</h1>
-                <p><span className='font-semibold text-[15px]'> 2 Items </span> in cart</p>
+            <div className='flex justify-between'>
+                <div>
+                    <h1 className='font-bold text-3xl'>Cart</h1>
+                    <p><span className='font-semibold text-[15px]'> 2 Items </span> in cart</p>
+                </div>
+                <div>
+                    <button
+                        className='flex
+                        bg-orangeClr
+                        group px-6
+                        items-center
+                        gap-2 py-3
+                        text-white
+                        rounded-lg
+                        relative
+                        overlay-btn
+                        '
+                    >
+                        <span className='transition-all relative z-10 '>Continue to Buy</span>
+                        <IoArrowForwardCircleOutline className='relative z-10 text-xl transition-all' />
+                    </button>
+                </div>
             </div>
 
             <div className='w-full h-full rounded-2xl shadow-xl bg-white'>
@@ -53,7 +73,7 @@ export default function page() {
                                             onClick={() => {
                                                 setSelectProduct(index)
                                             }}
-                                            className={`relative rounded-lg ${selectProduct == index ? "border border-black" : "border-b-2"}`}
+                                            className={`relative ${selectProduct == index ? "border-y border-orangeClr" : "border-b-2"}`}
                                         >
                                             
                                             <td>
