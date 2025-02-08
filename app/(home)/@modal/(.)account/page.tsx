@@ -15,7 +15,7 @@ export default function Login() {
   
   const router = useRouter()
   const [error, setError] = useState("")
-      const { register, handleSubmit, formState: { errors } } = useForm<IFormInputs>();
+  const { register, handleSubmit, formState: { errors } } = useForm<IFormInputs>();
   
       const onSubmit = async (data: IFormInputs) => {
           const res = await fetch("/account/api", {
