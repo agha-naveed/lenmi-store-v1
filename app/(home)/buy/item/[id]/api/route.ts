@@ -11,20 +11,26 @@ export async function GET(req:NextRequest, { params }: { params: Promise<{ id: s
     
     let cookie = await cookies()
     let userIdCookie = cookie.get("u_obj_i")?.value
-
+    
+    console.log(userIdCookie)
     if(userIdCookie) {
         let userId = jwt.verify(userIdCookie, process.env.JWT_CODE ?? "") as { obj_id: string }
-
+        
         let userDetails = await Cart.findOne({userId: userId.obj_id})
 
-        if(userDetails.items.length > 0) {
-            userDetails.items.map((item:any) => {
-                if(p_id.id == item.productId) {
+        let cartItems = await userDetails.items
+    
+        if(cartItems.length > 0) {
+            for(let i=0; i<cartItems.length; i++) {
+                if(p_id.id == cartItems[i].productId) {
                     return NextResponse.json({
                         message: "done",
-                        data: item
+                        data: cartItems[i]
                     }, { status: 200 })
                 }
+            }
+            return NextResponse.json({
+                message: "Cart data does not match with product"
             })
         }
         else {
@@ -33,6 +39,7 @@ export async function GET(req:NextRequest, { params }: { params: Promise<{ id: s
             })
         }   
     }
+
     else {
         return NextResponse.json({
             message: "logout"
