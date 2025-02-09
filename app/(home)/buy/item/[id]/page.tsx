@@ -8,6 +8,7 @@ import { redirect, useParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { GoStarFill } from "react-icons/go";
+import { useBuyContext } from "@/app/components/BuyContext";
 
 
 interface IFormInputs {
@@ -27,12 +28,14 @@ export default function page() {
   const param = useParams()
   const [productDetails, setProductDetails] = useState<any>();
 
+  const { buyData, setBuyData }:any = useBuyContext();
+  
   useEffect(() => {
     const fetchData = async () => {
+
       const res = await axios.get(`/buy/item/${param.id}/api`);
 
         if (res.status == 200) {
-            console.log(await res.data.data)
             setProductDetails(await res.data.data);
         }
         if(res.data.message != "done") {
@@ -44,19 +47,23 @@ export default function page() {
 
 
   const onSubmit = async (data: IFormInputs) => {
-    data['userId'] = productDetails.userData
-    data['itemQuantity'] = productDetails.itemQuantity
-    data['productId'] = param.id
-    
-    const res = await axios.post(`/buy/item/${param.id}/api`, data)
-    
-    console.log(data)
-    if(res.status == 201) {
 
-      
+    const obj = {
+      userId: productDetails.userData,
+      productId: param.id,
+      quantity: productDetails.itemQuantity,
+      deliveryAddress: {
+        recipientName: data.recipients_name,
+        phone_number: data.phone_number,
+        district: data.district,
+        address: data.address
+      }
     }
-    else {
-      // setError("Invalid Email or Password")
+
+    setBuyData(obj)
+    
+    if(obj.userId) {
+      redirect(`/buy/item/${param.id}/address`)
     }
 } 
 
@@ -178,18 +185,19 @@ export default function page() {
                         <input
                           type="text"
                           className="border h-9 px-3 rounded-lg"
-                          {...register("recipients_name")}  
+                          required
+                          {...register("recipients_name")}
                         />
                     </div>
 
                     <div className="grid gap-1">
                         <label htmlFor="">Phone Number</label>
-                        <input type="number" min={11} className="border h-9 px-3 rounded-lg" {...register("phone_number")} />
+                        <input type="number" min={11} className="border h-9 px-3 rounded-lg" {...register("phone_number")} required />
                     </div>
 
                     <div className="grid gap-1 w-44">
                       <label htmlFor="">District</label>
-                      <select {...register("district")} className="h-9 px-2 rounded-lg cursor-pointer">
+                      <select {...register("district")} required className="h-9 px-2 rounded-lg cursor-pointer">
                           <option value="">-- select --</option>
                           <option value="Ghanche">Ghanche</option>
                           <option value="Rondu">Rondu</option>
@@ -207,7 +215,7 @@ export default function page() {
 
                   <div className="grid gap-1">
                     <label htmlFor="">Full Address</label>
-                    <textarea {...register("address")} className="border border-zinc-400 rounded-lg w-[80%] h-20 py-2 px-3"></textarea>
+                    <textarea {...register("address")} required className="border border-zinc-400 rounded-lg w-[80%] h-20 py-2 px-3"></textarea>
                   </div>
                   <button type="submit"
                     className="bg-slate-800
