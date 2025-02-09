@@ -16,7 +16,7 @@ export default function page() {
   const [payMethod, setPayMethod] = useState<string>("");
 
   return (
-    <div className="container mx-auto py-8 grid justify-center">
+    <div className="container mx-auto py-8 grid justify-center gap-4">
       <div className="w-fit rounded-2xl shadow-xl bg-white font-opensans p-6">
         <h1 className="text-xl font-semibold mb-4">Payment Method:</h1>
 
@@ -75,14 +75,29 @@ export default function page() {
         </div>
       </div>
 
-      <div className="w-full h-40 rounded-2xl shadow-xl bg-white font-opensans p-6">
+      <div
+        className={`w-full h-fit
+        rounded-2xl
+        shadow-xl
+      bg-white
+        font-opensans
+        p-6 ${payMethod.length > 0 ? "block" : "hidden"}`}
+      >
         {
           payMethod == "cod" ? 
-          <div className="flex gap-5">
-            <h3 className="text-xl content-center">
-              Please Keep PKR {/*buyData.quantity * buyData.productPrice*/} 19000
-              Ready
-            </h3>
+          <div className="flex gap-5 justify-between">
+            <div className="grid">
+              <h3 className="text-xl content-center">
+                Please Keep 
+                <span className="font-bold">
+                  <span className="text-[16px]"> PKR </span>
+                   {/* {buyData.quantity * buyData.productPrice}  */}
+                   <span className="relative -left-[1px]"> 12312 </span>
+                </span>
+                Ready
+              </h3>
+              <h4>When the parcel arrives at your door</h4>
+            </div>
             <button
               className={`flex
               bg-orangeClr
