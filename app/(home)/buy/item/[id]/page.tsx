@@ -15,6 +15,7 @@ interface IFormInputs {
   itemQuantity: number;
   userId: any;
   productId: any;
+  productPrice: any;
   recipients_name: string;
   phone_number: number;
   district: string;
@@ -51,6 +52,7 @@ export default function page() {
     setBuyData({
       userId: productDetails.userData,
       productId: param.id,
+      productPrice: productDetails.productData.price,
       quantity: productDetails.itemQuantity,
       deliveryAddress: {
         recipientName: data.recipients_name,

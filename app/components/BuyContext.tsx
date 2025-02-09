@@ -14,6 +14,7 @@ type BuyData = {
   userId: number;
   productId: number;
   quantity: number;
+  productPrice: number;
   deliveryAddress: DeliveryAddress;
 }
 
@@ -21,6 +22,7 @@ const defaultBuyData: BuyData = {
   userId: 0,
   productId: 0,
   quantity: 0,
+  productPrice: 0,
   deliveryAddress: {
     recipientName: "",
     phone_number: 0,
