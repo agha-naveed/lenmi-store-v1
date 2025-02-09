@@ -48,8 +48,6 @@ export default function page() {
 
   const onSubmit = async (data: IFormInputs) => {
 
-
-
     setBuyData({
       userId: productDetails.userData,
       productId: param.id,
@@ -61,11 +59,13 @@ export default function page() {
         address: data.address
       }
     })
-    
-    if(buyData.userId) {
+} 
+
+  useEffect(() => {
+    if(buyData.userId != 0) {
       redirect(`/buy/item/${param.id}/address`)
     }
-} 
+  }, [buyData])
 
   return (
     <div className="container mx-auto font-opensans">
