@@ -5,8 +5,11 @@ export default function page() {
 
   const { buyData, setBuyData }:any = useBuyContext();
   useEffect(() => {
-    console.log("This is Data: " + buyData)
-  }, [])
+    setTimeout(() => {
+      console.log("This is Data: " + buyData)
+
+    })
+  }, [buyData])
   return (
     <div>page</div>
   )

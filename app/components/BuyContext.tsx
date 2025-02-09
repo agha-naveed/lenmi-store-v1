@@ -29,11 +29,18 @@ const defaultBuyData: BuyData = {
   },
 }
 
-const buyContext = createContext<{
+type BuyContextType = {
   buyData: BuyData;
-  setBuyData: React.Dispatch<React.SetStateAction<BuyData>>;
-} | undefined>(undefined);
+  setBuyData: (buyData: BuyData) => void;
+};
 
+const defaultBuyContext: BuyContextType = {
+  buyData: defaultBuyData,
+  setBuyData: () => {},
+};
+
+
+const buyContext = createContext<BuyContextType>(defaultBuyContext);
 
 export function BuyDataProvider({ children }: { children: React.ReactNode }) {
   const [buyData, setBuyData] = useState<BuyData>(defaultBuyData);

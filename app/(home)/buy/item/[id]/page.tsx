@@ -48,7 +48,9 @@ export default function page() {
 
   const onSubmit = async (data: IFormInputs) => {
 
-    const obj = {
+
+
+    setBuyData({
       userId: productDetails.userData,
       productId: param.id,
       quantity: productDetails.itemQuantity,
@@ -58,11 +60,9 @@ export default function page() {
         district: data.district,
         address: data.address
       }
-    }
-
-    setBuyData(obj)
+    })
     
-    if(obj.userId) {
+    if(buyData.userId) {
       redirect(`/buy/item/${param.id}/address`)
     }
 } 
