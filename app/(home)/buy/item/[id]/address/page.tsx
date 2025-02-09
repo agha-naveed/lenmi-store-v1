@@ -17,16 +17,22 @@ export default function page() {
         <h1 className='text-[18px] font-semibold'>Payment Method:</h1>
 
         <div className='flex'>
-          <div className='w-32 h-32 bg-zinc-300 rounded-lg flex flex-col justify-center items-center'>
+
+          <div className='w-32 h-32 bg-zinc-300 rounded-lg p-2 gap-2 flex flex-col justify-center items-center'>
             <Image src={cod} alt='Cash on Delivery' className='w-16' />
-            <span>Cash on Delivery</span>
+            <span className='text-center text-[15px] font-medium leading-[17px]'>Cash on Delivery</span>
           </div>
-          <div>
-            <span>Credit Card</span>
+          
+          <div className='w-32 h-32 bg-zinc-300 rounded-lg p-2 gap-2 flex flex-col justify-center items-center'>
+            <Image src={cod} alt='Cash on Delivery' className='w-16' />
+            <span className='text-center text-[15px] font-medium leading-[17px]'>Paypal</span>
           </div>
-          <div>
-            <span>Online Banking</span>
+
+          <div className='w-32 h-32 bg-zinc-300 rounded-lg p-2 gap-2 flex flex-col justify-center items-center'>
+            <Image src={cod} alt='Cash on Delivery' className='w-16' />
+            <span className='text-center text-[15px] font-medium leading-[17px]'>Cash on Delivery</span>
           </div>
+          
         </div>
       </div>
     </div>
