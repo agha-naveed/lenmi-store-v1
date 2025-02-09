@@ -20,10 +20,19 @@ export default function page() {
       <div className="w-fit rounded-2xl shadow-xl bg-white font-opensans p-6">
         <h1 className="text-xl font-semibold mb-4">Payment Method:</h1>
 
-        <div className="flex gap-2">
+        <div className="flex md:gap-2 gap-3 flex-wrap justify-center">
           <button
             title="Cash on Delivery"
-            className="w-36 h-36 bg-zinc-300 rounded-lg p-2 gap-2 flex flex-col justify-center items-center"
+            className={`md:w-36 md:h-36
+              w-28 h-28
+              bg-zinc-300
+              rounded-lg p-2
+              gap-2 flex flex-col
+              justify-center
+              items-center
+              ${payMethod == "cod" ?
+                "outline outline-2 outline-offset-1 outline-black" : ""}
+              `}
             onClick={() => {
               setPayMethod("cod")
             }}
@@ -36,7 +45,16 @@ export default function page() {
 
           <button
             title="Easypaisa"
-            className="w-36 h-36 bg-zinc-300 rounded-lg p-2 gap-2 flex flex-col justify-center items-center"
+            className={`md:w-36 md:h-36
+              w-28 h-28
+              bg-zinc-300
+              rounded-lg p-2
+              gap-2 flex flex-col
+              justify-center
+              items-center
+              ${payMethod == "easypaisa" ?
+                "outline outline-2 outline-offset-1 outline-black" : ""}
+              `}
             onClick={() => {
               setPayMethod("easypaisa")
             }}
@@ -49,7 +67,16 @@ export default function page() {
 
           <button
             title="JazzCash"
-            className="w-36 h-36 bg-zinc-300 rounded-lg p-2 gap-2 flex flex-col justify-center items-center"
+            className={`md:w-36 md:h-36
+              w-28 h-28
+              bg-zinc-300
+              rounded-lg p-2
+              gap-2 flex flex-col
+              justify-center
+              items-center
+              ${payMethod == "jazzcash" ?
+                "outline outline-2 outline-offset-1 outline-black" : ""}
+              `}
             onClick={() => {
               setPayMethod("jazzcash")
             }}
@@ -62,7 +89,16 @@ export default function page() {
 
           <button
             title="Credit/Debit Card"
-            className="w-36 h-36 bg-zinc-300 rounded-lg p-2 gap-2 flex flex-col justify-center items-center"
+            className={`md:w-36 md:h-36
+              w-28 h-28
+              bg-zinc-300
+              rounded-lg p-2
+              gap-2 flex flex-col
+              justify-center
+              items-center
+              ${payMethod == "card" ?
+                "outline outline-2 outline-offset-1 outline-black" : ""}
+              `}
             onClick={() => {
               setPayMethod("card")
             }}
@@ -85,14 +121,13 @@ export default function page() {
       >
         {
           payMethod == "cod" ? 
-          <div className="flex gap-5 justify-between">
+          <div className="flex flex-wrap gap-5 justify-between">
             <div className="grid">
               <h3 className="text-xl content-center">
                 Please Keep 
                 <span className="font-bold">
                   <span className="text-[16px]"> PKR </span>
-                   {/* {buyData.quantity * buyData.productPrice}  */}
-                   <span className="relative -left-[1px]"> 12312 </span>
+                   <span className="relative -left-[1px]"> {buyData.quantity * buyData.productPrice} </span>
                 </span>
                 Ready
               </h3>
