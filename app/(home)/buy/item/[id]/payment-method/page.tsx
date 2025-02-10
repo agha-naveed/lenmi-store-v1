@@ -186,6 +186,41 @@ export default function page() {
             </button>
           </div>
           :
+          payMethod == "card" ?
+          <div className="flex flex-wrap gap-5 justify-between">
+            <div className="grid">
+              <div>
+                <label htmlFor="">Bank:</label>
+                <select name="" id="">
+                  <option value="">-- select --</option>
+                  <option value="hbl">HBL Habib Bank Limited</option>
+                  <option value="alhabib">Bank Al Habib Limited</option>
+                  <option value="habib_metro">Habib Metro Bank</option>
+                  <option value="soneri">Soneri Bank</option>
+                  <option value="allied">Allied Bank</option>
+                  <option value="js">JS Bank</option>
+                  <option value="mcb">MCB Bank</option>
+                </select>
+              </div>
+            </div>
+            <button
+              className={`flex
+              bg-orangeClr
+              group px-6
+              items-center
+              gap-2 py-3
+              text-white
+              rounded-lg
+              relative
+              transition-all
+              overlay-btn
+              overflow-hidden
+              `}
+            >
+              <span className='transition-all relative z-10 '>Click to Finish</span>
+            </button>
+          </div>
+          :
           ""
         }
       </div>
