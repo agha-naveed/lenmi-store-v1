@@ -7,7 +7,7 @@ import { IoArrowForwardCircleOutline, IoArrowForwardCircle } from "react-icons/i
 
 import Link from 'next/link';
 import axios from 'axios';
-import { redirect } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 
 export default function page() {
 
@@ -21,6 +21,9 @@ export default function page() {
     useEffect(() => {
         const fetchData = async () => {
             const res = await axios.get("/cart/cart-data/api")
+            if(res.data.message !== 'ok') {
+                redirect('/')
+            }
             if(res.status == 200) {
                 setCartItems(await res.data.data)
             }
@@ -52,7 +55,7 @@ export default function page() {
             <div className='flex justify-between'>
                 <div>
                     <h1 className='font-bold text-3xl'>Cart</h1>
-                    <p><span className='font-semibold text-[15px]'> {cartItems.length} Items </span> in cart</p>
+                    <p><span className='font-semibold text-[15px]'> {cartItems ? cartItems.length : "0"} Items </span> in cart</p>
                 </div>
                 <div className='flex gap-3'>
                     <button
@@ -115,6 +118,7 @@ export default function page() {
                         <tbody>
 
                             {
+                                cartItems ?
                                 cartItems.map((item, index) => (
                                     <React.Fragment key={`cart-item-${index}`}>
                                         <tr 
@@ -186,6 +190,7 @@ export default function page() {
                                         <tr></tr>
                                     </React.Fragment>
                                 ))
+                                : null
                             }    
                             
                         </tbody>
