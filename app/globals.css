@@ -208,7 +208,7 @@ input[type="number"] {
   }
 }
 
-.overlay-btn::before {
+.overlay-btn::before, .overlay-btn-inverse::before {
   content: '';
   position: absolute;
   top: 0;
@@ -218,9 +218,14 @@ input[type="number"] {
   z-index: 0;
   width: 200px;
   height: 260px;
-  background-color: #1e293b;
   transition: transform 1s cubic-bezier(.66,0,.34,1);
 }
-.overlay-btn:hover::before {
+.overlay-btn:hover::before, .overlay-btn-inverse:hover::before {
   transform: scale(1.3) translate(0, -100px);
+}
+.overlay-btn::before {
+  background-color: #1e293b;
+}
+.overlay-btn-inverse::before {
+  background-color: #f08a06;
 }

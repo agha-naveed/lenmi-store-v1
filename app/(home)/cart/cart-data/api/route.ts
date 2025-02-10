@@ -56,6 +56,7 @@ export async function POST(req:NextRequest) {
 
     let data = await Cart.findOne({userId: originalId.obj_id})
 
+    console.log(data.items.length)
     if(data.items.length == 1) {
         await Cart.deleteOne({userId: originalId.obj_id})
     }

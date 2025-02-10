@@ -30,9 +30,7 @@ export default function page() {
 
     async function removeProduct(id:number) {
         
-        const obj = {
-            id
-        }
+        const obj = { id }
 
         const res = await axios.post("/cart/cart-data/api", obj)
         // if(res.status == 200) {
@@ -52,25 +50,26 @@ export default function page() {
                     <h1 className='font-bold text-3xl'>Cart</h1>
                     <p><span className='font-semibold text-[15px]'> 2 Items </span> in cart</p>
                 </div>
-                <div>
+                <div className='flex gap-3'>
                     <button
                         className={`flex
-                        bg-orangeClr
+                        bg-slate-800
                         group px-6
                         items-center
-                        gap-2 py-3
+                        gap-2 py-2
+                        h-[50px]
                         text-white
                         rounded-lg
                         relative
                         transition-all
-                        overlay-btn
+                        overlay-btn-inverse
                         overflow-hidden
                         ${selectProduct != null ? "bottom-0 opacity-100" : "bottom-10 opacity-0"}
                         `}
+                        title='Click to Remove from Cart'
                         onClick={() => removeProduct(selectedtId)}
                     >
                         <span className='transition-all relative z-10 '>Remove from Cart</span>
-                        {/* <IoArrowForwardCircleOutline className='relative z-10 text-xl transition-all' /> */}
                     </button>
 
                     <button
@@ -78,7 +77,8 @@ export default function page() {
                         bg-orangeClr
                         group px-6
                         items-center
-                        gap-2 py-3
+                        gap-2 py-2
+                        h-[50px]
                         text-white
                         rounded-lg
                         relative
@@ -87,6 +87,7 @@ export default function page() {
                         overflow-hidden
                         ${selectProduct != null ? "bottom-0 opacity-100" : "bottom-10 opacity-0"}
                         `}
+                        title='Click to Buy Now!'
                         onClick={() => buyProcess(selectedtId)}
                     >
                         <span className='transition-all relative z-10 '>Continue to Buy</span>
