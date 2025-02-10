@@ -41,3 +41,33 @@ export async function GET() {
         })
     }
 }
+
+export async function POST(req:NextRequest) {
+    await dbConnection()
+
+    let fetchId = await req.json()
+    const id = fetchId.id
+
+    let cookie = await cookies()
+
+    let user_id = cookie.get("u_obj_i")?.value
+    let originalId = jwt.verify(user_id ?? "", process.env.JWT_CODE ?? "") as { obj_id: string }
+
+
+    let data = await Cart.updateOne({
+            userId: originalId.obj_id
+        },
+        {
+            $pull: {
+                items: {
+                    productId: id
+                }
+            }
+        }
+    )
+
+
+    return NextResponse.json({
+        message: "ok"
+    }, { status: 201 })
+}

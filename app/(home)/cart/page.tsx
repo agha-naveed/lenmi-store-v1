@@ -29,10 +29,15 @@ export default function page() {
     }, [])
 
     async function removeProduct(id:number) {
-        const res = await axios.patch("/cart/cart-data/api", id)
-        if(res.status == 200) {
-            setCartItems(await res.data.data)
+        
+        const obj = {
+            id
         }
+
+        const res = await axios.post("/cart/cart-data/api", obj)
+        // if(res.status == 200) {
+        //     setCartItems(await res.data.data)
+        // }
     }
 
     async function buyProcess(id:number) {
