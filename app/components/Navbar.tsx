@@ -26,7 +26,7 @@ export default function Navbar() {
     const { length, setLength } = useCart()
     const [message, setMessage] = useState<ApiResponse | null>(null);
     
-
+    const [searchInput, setSearchInput] = useState<string>('')
     const [logOut, setLogOut] = useState(false)
 
 
@@ -83,6 +83,9 @@ export default function Navbar() {
         cartData()
     }, [length])
     
+    function handleSearch() {
+        console.log(searchInput)
+    }
 
     return (
         <div className='w-full md:h-[130px] h-[135px] relative z-30 bg-slate-800 py-3'>
@@ -92,8 +95,23 @@ export default function Navbar() {
                         <Image decoding='async' className='md:w-[140px] sm:w-32 w-28' src={logo} width={200} height={200} alt="Lenmi Store Logo" />
                     </Link>
                     <div className='md:flex hidden w-1/2'>
-                        <input type="text" placeholder='What are you looking for?' className='pl-3 pr-[53px] h-[44px] w-full rounded-md outline-none font-opensans font-medium' />
-                        <FiSearch title='Search' className='text-xl cursor-pointer p-2 top-[2px] rounded-md w-11 h-10 text-white bg-slate-800 relative -left-11' />
+
+                        <input type="text"
+                            placeholder='What are you looking for?'
+                            className='pl-3 pr-[53px]
+                            h-[44px] w-full
+                            rounded-md
+                            outline-none
+                            font-opensans
+                            font-medium'
+                            onInput={(e:React.ChangeEvent<HTMLInputElement>) => {
+                                setSearchInput(e.target.value)
+                            }}
+                        />
+                        
+                        <FiSearch title='Search' className='text-xl cursor-pointer p-2 top-[2px] rounded-md w-11 h-10 text-white bg-slate-800 relative -left-11'
+                        onClick={() => {handleSearch()}}
+                    />
                     </div>
 
                     <div className='text-white flex gap-4'>
