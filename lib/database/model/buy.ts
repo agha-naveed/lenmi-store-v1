@@ -30,7 +30,7 @@ const buyItemSchema = new Schema<IBuyItems>({
         }
     },
     paymentMethod: {
-        type: String
+        type: Object
     }
 }, { _id: false });
   

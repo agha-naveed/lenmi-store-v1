@@ -11,19 +11,31 @@ export async function POST(req:NextRequest) {
 
     let delivery_address = buyData.deliveryAddress;
     
-    await Buy.insertMany([
-        {
-            userId: buyData.userId,
-            items: {
-                productId: buyData.productId,
-                quantity: buyData.quantity,
-                deliveryAddress: {
-                    recipientName: delivery_address.recipientName,
-                    phone_number: delivery_address.phone_number,
-                    district: delivery_address.district,
-                    address: delivery_address.address
+    let isExist = await Buy.findOne({ userId: buyData.userId })
+
+    if(!isExist) {
+        await Buy.insertMany([
+            {
+                userId: buyData.userId,
+                items: {
+                    productId: buyData.productId,
+                    quantity: buyData.quantity,
+                    deliveryAddress: {
+                        recipientName: delivery_address.recipientName,
+                        phone_number: delivery_address.phone_number,
+                        district: delivery_address.district,
+                        address: delivery_address.address
+                    },
+                    paymentMethod: {
+                        paymentData
+                    }
                 }
             }
-        }
-    ])
+        ])
+    }
+
+    else {
+        
+    }
+    
 }
