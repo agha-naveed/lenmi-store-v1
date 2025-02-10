@@ -20,7 +20,7 @@ export default function page() {
   const [payMethod, setPayMethod] = useState<string>("");
 
   return (
-    <div className="container mx-auto py-8 grid justify-center gap-4">
+    <div className="container mx-auto py-8 grid justify-items-center gap-4">
       <div className="w-fit rounded-2xl shadow-xl bg-white font-opensans p-6">
         <h1 className="text-xl font-semibold mb-4">Payment Method:</h1>
 
@@ -116,7 +116,9 @@ export default function page() {
       </div>
 
       <div
-        className={`w-full h-fit
+        className={`md:w-[648px]
+        w-full
+        h-fit
         rounded-2xl
         shadow-xl
       bg-white
@@ -139,17 +141,52 @@ export default function page() {
             </div>
             <button
               className={`flex
+                bg-orangeClr
+                group sm:px-6
+                px-5
+                items-center
+                gap-2 sm:py-3
+                py-2
+                text-white
+                rounded-lg
+                relative
+                transition-all
+                overlay-btn
+                overflow-hidden
+              `}
+            >
+              <span className='transition-all relative z-10 '>Click to Finish</span>
+            </button>
+          </div>
+          :
+          payMethod == "jazzcash" ?
+          <div className="flex flex-wrap gap-5 justify-between">
+            <div className="grid">
+              <h3 className="text-xl content-center">
+                Please Keep 
+                <span className="font-bold">
+                  <span className="text-[16px]"> PKR </span>
+                   <span className="relative -left-[1px]"> {buyData.quantity * buyData.productPrice} </span>
+                </span>
+                Ready
+              </h3>
+              <h4>When the parcel arrives at your door</h4>
+            </div>
+            <button
+              className={`flex
               bg-orangeClr
-              group px-6
+              group sm:px-6
+              px-5
               items-center
-              gap-2 py-3
+              gap-2 sm:py-3
+              py-2
               text-white
               rounded-lg
               relative
               transition-all
               overlay-btn
               overflow-hidden
-              `}
+            `}
             >
               <span className='transition-all relative z-10 '>Click to Finish</span>
             </button>
@@ -171,16 +208,18 @@ export default function page() {
             <button
               className={`flex
               bg-orangeClr
-              group px-6
+              group sm:px-6
+              px-5
               items-center
-              gap-2 py-3
+              gap-2 sm:py-3
+              py-2
               text-white
               rounded-lg
               relative
               transition-all
               overlay-btn
               overflow-hidden
-              `}
+            `}
             >
               <span className='transition-all relative z-10 '>Click to Finish</span>
             </button>
@@ -190,7 +229,7 @@ export default function page() {
           <div className="flex flex-wrap gap-5 justify-between">
             <div className="grid gap-1 w-full">
                 <label htmlFor="">Select Bank:</label>
-                <select name="" id="" className="w-full h-9 px-3 cursor-pointer" title="Select Bank">
+                <select name="" id="" className="w-full h-10 rounded-lg bg-transparent border border-gray-400 px-3 cursor-pointer" title="Select Bank">
                   <option value="">-- select --</option>
                   <option value="hbl">HBL Habib Bank Limited</option>
                   <option value="alhabib">Bank Al Habib Limited</option>
@@ -204,16 +243,29 @@ export default function page() {
 
             <div className="grid gap-1 w-full">
               <label htmlFor="">Card Number</label>
-              <input type="number" minLength={16} maxLength={16} className="w-full h-9 px-3 border border-gray-400 rounded-lg" title="Enter 16-digit Card Number"/>
+              <input type="number" minLength={16} maxLength={16} className="w-full h-10 px-3 border border-gray-400 rounded-lg" title="Enter 16-digit Card Number"/>
+            </div>
+
+            <div className="flex sm:flex-row flex-col gap-4 w-full">
+              <div className="grid gap-1">
+                <label htmlFor="">CVV</label>
+                <input type="number" minLength={3} maxLength={4} className="sm:w-40 w-full h-10 px-3 border border-gray-400 rounded-lg"/>
+              </div>
+              <div className="grid gap-1">
+                <label htmlFor="">Expiry Date</label>
+                <input type="date" minLength={3} maxLength={4} className="sm:w-44 w-full h-10 px-3 border border-gray-400 rounded-lg"/>
+              </div>
             </div>
 
 
             <button
               className={`flex
               bg-orangeClr
-              group px-6
+              group sm:px-6
+              px-5
               items-center
-              gap-2 py-3
+              gap-2 sm:py-3
+              py-2
               text-white
               rounded-lg
               relative
