@@ -14,7 +14,7 @@ export default function page() {
     const [quantity, setQuantity] = useState(1)
     const [cartItems, setCartItems] = useState<any[]>([])
 
-    const [selectedtId, setSelectedId] = useState<number>(0)
+    const [selectedId, setSelectedId] = useState<number>(0)
 
     const [selectProduct, setSelectProduct] = useState<number | null>(null)
 
@@ -29,15 +29,17 @@ export default function page() {
     }, [])
 
     async function removeProduct(id:number) {
-        
 
-        
-        // const obj = { id }
+        setCartItems((prevItems):any => {
+            return prevItems.filter((item, index) => index !== selectProduct)
+        })
 
-        // const res = await axios.post("/cart/cart-data/api", obj)
-        // if(res.status == 200) {
-        //     setCartItems(await res.data.data)
-        // }
+        const obj = { id }
+
+        const res = await axios.post("/cart/cart-data/api", obj)
+        if(res.status == 200) {
+            setCartItems(await res.data.data)
+        }
     }
 
     async function buyProcess(id:number) {
@@ -50,7 +52,7 @@ export default function page() {
             <div className='flex justify-between'>
                 <div>
                     <h1 className='font-bold text-3xl'>Cart</h1>
-                    <p><span className='font-semibold text-[15px]'> 2 Items </span> in cart</p>
+                    <p><span className='font-semibold text-[15px]'> {cartItems.length} Items </span> in cart</p>
                 </div>
                 <div className='flex gap-3'>
                     <button
@@ -69,7 +71,7 @@ export default function page() {
                         ${selectProduct != null ? "bottom-0 opacity-100" : "bottom-10 opacity-0"}
                         `}
                         title='Click to Remove from Cart'
-                        onClick={() => removeProduct(selectedtId)}
+                        onClick={() => removeProduct(selectedId)}
                     >
                         <span className='transition-all relative z-10 '>Remove from Cart</span>
                     </button>
@@ -90,7 +92,7 @@ export default function page() {
                         ${selectProduct != null ? "bottom-0 opacity-100" : "bottom-10 opacity-0"}
                         `}
                         title='Click to Buy Now!'
-                        onClick={() => buyProcess(selectedtId)}
+                        onClick={() => buyProcess(selectedId)}
                     >
                         <span className='transition-all relative z-10 '>Continue to Buy</span>
                         <IoArrowForwardCircleOutline className='relative z-10 text-xl transition-all' />
