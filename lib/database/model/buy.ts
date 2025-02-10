@@ -29,9 +29,6 @@ const buyItemSchema = new Schema<IBuyItems>({
             type: String
         }
     },
-    paymentMethod: {
-        type: Object
-    }
 }, { _id: false });
   
 const buySchema = new Schema<IBuy>({
