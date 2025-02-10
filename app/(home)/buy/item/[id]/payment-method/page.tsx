@@ -188,10 +188,9 @@ export default function page() {
           :
           payMethod == "card" ?
           <div className="flex flex-wrap gap-5 justify-between">
-            <div className="grid">
-              <div>
-                <label htmlFor="">Bank:</label>
-                <select name="" id="">
+            <div className="grid gap-1 w-full">
+                <label htmlFor="">Select Bank:</label>
+                <select name="" id="" className="w-full h-9 px-3 cursor-pointer" title="Select Bank">
                   <option value="">-- select --</option>
                   <option value="hbl">HBL Habib Bank Limited</option>
                   <option value="alhabib">Bank Al Habib Limited</option>
@@ -201,8 +200,14 @@ export default function page() {
                   <option value="js">JS Bank</option>
                   <option value="mcb">MCB Bank</option>
                 </select>
-              </div>
             </div>
+
+            <div className="grid gap-1 w-full">
+              <label htmlFor="">Card Number</label>
+              <input type="number" minLength={16} maxLength={16} className="w-full h-9 px-3 border border-gray-400 rounded-lg" title="Enter 16-digit Card Number"/>
+            </div>
+
+
             <button
               className={`flex
               bg-orangeClr
