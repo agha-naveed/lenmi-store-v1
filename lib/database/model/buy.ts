@@ -27,6 +27,16 @@ const buyItemSchema = new Schema<IBuyItems>({
         },
         address: {
             type: String
+        },
+        paymentMethod: {
+            type: String,
+            enum: ['cod', 'card', 'easypaisa', 'jazzcash'],
+        },
+        paymentDetails: {
+            bankName: { type: String },
+            cardNumber: { type: String },
+            cvv: { type: String },
+            expiryDate: { type: String }
         }
     },
 }, { _id: false });

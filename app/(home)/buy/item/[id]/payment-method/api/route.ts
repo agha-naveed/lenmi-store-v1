@@ -26,8 +26,12 @@ export async function POST(req:NextRequest) {
                         district: delivery_address.district,
                         address: delivery_address.address
                     },
-                    paymentMethod: {
-                        paymentData
+                    paymentMethod: buyData.payMethod,
+                    paymentDetails: {
+                        bankName: paymentData.bank,
+                        cardNumber: paymentData.cardNumber,
+                        cvv: paymentData.cvv,
+                        expiryDate: paymentData.expiryDate
                     }
                 }
             }
@@ -48,6 +52,13 @@ export async function POST(req:NextRequest) {
                         phone_number: delivery_address.phone_number,
                         district: delivery_address.district,
                         address: delivery_address.address
+                    },
+                    paymentMethod: buyData.payMethod,
+                    paymentDetails: {
+                        bankName: paymentData.bank,
+                        cardNumber: paymentData.cardNumber,
+                        cvv: paymentData.cvv,
+                        expiryDate: paymentData.expiryDate
                     }
                 }
             }        
