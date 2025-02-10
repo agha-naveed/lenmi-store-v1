@@ -6,10 +6,27 @@ import cod from "@/images/payment-methods/cod.png";
 import easypaisa from "@/images/payment-methods/Easypaisa-logo.png";
 import jazzcash from "@/images/payment-methods/new-Jazzcash-logo.png";
 import card from "@/images/payment-methods/Credit_or_Debit_Card.png";
-import { redirect } from "next/navigation";
+import Form from "next/form";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import { useParams } from "next/navigation";
+
+
+interface IFormInputs {
+  bank: string;
+  cardNumber: number;
+  cvv: number;
+  expiryDate: Date;
+}
 
 export default function page() {
+
+  let param = useParams()
+  
+  const { register, handleSubmit, formState: { errors } } = useForm<IFormInputs>();
+ 
   const { buyData, setBuyData }: any = useBuyContext();
+  
   useEffect(() => {
     // if(buyData.userId == 0) {
     //   redirect("/cart")
@@ -17,7 +34,19 @@ export default function page() {
     console.log(buyData)
   }, [])
 
+  const onSubmit = async (data: IFormInputs) => {
+    let obj = {
+      buyData,
+      paymentData: data
+    }
+    
+    const res = await axios.post(`/buy/item/${param.id}/payment-method/api`, obj)
+    
+  }
+
   const [payMethod, setPayMethod] = useState<string>("");
+
+  const [donePayment, setDonePayment] = useState<boolean>(false);
 
   return (
     <div className="container mx-auto py-8 grid justify-items-center gap-4">
@@ -173,7 +202,8 @@ export default function page() {
               <h4>When the parcel arrives at your door</h4>
             </div>
             <button
-              className={`flex
+            type="submit"
+            className={`flex
               bg-orangeClr
               group sm:px-6
               px-5
@@ -226,10 +256,10 @@ export default function page() {
           </div>
           :
           payMethod == "card" ?
-          <div className="flex flex-wrap gap-5 justify-between">
+          <Form action={""} onSubmit={handleSubmit(onSubmit)} className="flex flex-wrap gap-5 justify-between">
             <div className="grid gap-1 w-full">
                 <label htmlFor="">Select Bank:</label>
-                <select name="" id="" className="w-full h-10 rounded-lg bg-transparent border border-gray-400 px-3 cursor-pointer" title="Select Bank">
+                <select id="" className="w-full h-10 rounded-lg bg-transparent border border-gray-400 px-3 cursor-pointer" {...register("bank")} title="Select Bank">
                   <option value="">-- select --</option>
                   <option value="hbl">HBL Habib Bank Limited</option>
                   <option value="alhabib">Bank Al Habib Limited</option>
@@ -243,17 +273,17 @@ export default function page() {
 
             <div className="grid gap-1 w-full">
               <label htmlFor="">Card Number</label>
-              <input type="number" minLength={16} maxLength={16} className="w-full h-10 px-3 border border-gray-400 rounded-lg" title="Enter 16-digit Card Number"/>
+              <input type="number" minLength={16} maxLength={16} className="w-full h-10 px-3 border border-gray-400 rounded-lg" title="Enter 16-digit Card Number" required {...register("cardNumber")} />
             </div>
 
             <div className="flex sm:flex-row flex-col gap-4 w-full">
               <div className="grid gap-1">
                 <label htmlFor="">CVV</label>
-                <input type="number" minLength={3} maxLength={4} className="sm:w-40 w-full h-10 px-3 border border-gray-400 rounded-lg"/>
+                <input type="number" minLength={3} maxLength={4} className="sm:w-40 w-full h-10 px-3 border border-gray-400 rounded-lg" required {...register("cvv")} />
               </div>
               <div className="grid gap-1">
                 <label htmlFor="">Expiry Date</label>
-                <input type="date" minLength={3} maxLength={4} className="sm:w-44 w-full h-10 px-3 border border-gray-400 rounded-lg"/>
+                <input type="date" minLength={3} maxLength={4} className="sm:w-44 w-full h-10 px-3 border border-gray-400 rounded-lg" required {...register("expiryDate")} />
               </div>
             </div>
 
@@ -273,10 +303,11 @@ export default function page() {
               overlay-btn
               overflow-hidden
               `}
+              type="submit"
             >
               <span className='transition-all relative z-10 '>Click to Finish</span>
             </button>
-          </div>
+          </Form>
           :
           ""
         }
