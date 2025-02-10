@@ -66,7 +66,24 @@ export async function POST(req:NextRequest) {
     }
 
     return NextResponse.json({
-        message: "done"
+        message: "done",
+        data: {
+            productId: buyData.productId,
+            quantity: buyData.quantity,
+            deliveryAddress: {
+                recipientName: delivery_address.recipientName,
+                phone_number: delivery_address.phone_number,
+                district: delivery_address.district,
+                address: delivery_address.address
+            },
+            paymentMethod: buyData.payMethod,
+            paymentDetails: {
+                bankName: paymentData.bank,
+                cardNumber: paymentData.cardNumber,
+                cvv: paymentData.cvv,
+                expiryDate: paymentData.expiryDate
+            }
+        }
     }, { status: 201 })
     
 }

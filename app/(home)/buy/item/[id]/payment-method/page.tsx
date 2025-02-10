@@ -43,6 +43,8 @@ export default function page() {
     obj.buyData['payMethod'] = payMethod
     
     const res = await axios.post(`/buy/item/${param.id}/payment-method/api`, obj)
+
+    console.log(await res.data.data)
     
   }
 

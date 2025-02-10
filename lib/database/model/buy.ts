@@ -5,6 +5,7 @@ interface IBuyItems {
     quantity: number;
     deliveryAddress: object;
     paymentMethod: any;
+    paymentDetails: any;
 }
   
 interface IBuy extends Document {
@@ -28,17 +29,17 @@ const buyItemSchema = new Schema<IBuyItems>({
         address: {
             type: String
         },
-        paymentMethod: {
-            type: String,
-            enum: ['cod', 'card', 'easypaisa', 'jazzcash'],
-        },
-        paymentDetails: {
-            bankName: { type: String },
-            cardNumber: { type: String },
-            cvv: { type: String },
-            expiryDate: { type: String }
-        }
     },
+    paymentMethod: {
+        type: String,
+        enum: ['cod', 'card', 'easypaisa', 'jazzcash'],
+    },
+    paymentDetails: {
+        bankName: { type: String },
+        cardNumber: { type: String },
+        cvv: { type: String },
+        expiryDate: { type: String }
+    }
 }, { _id: false });
   
 const buySchema = new Schema<IBuy>({
