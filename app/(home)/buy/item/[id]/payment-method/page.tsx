@@ -50,7 +50,6 @@ export default function page() {
 
   const [payMethod, setPayMethod] = useState<string>("");
 
-  const [donePayment, setDonePayment] = useState<boolean>(false);
 
   return (
     <div className="container mx-auto py-8 grid justify-items-center gap-4">

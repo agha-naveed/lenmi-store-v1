@@ -28,6 +28,13 @@ export default function page() {
         fetchData()
     }, [])
 
+    async function removeProduct(id:number) {
+        const res = await axios.patch("/cart/cart-data/api", id)
+        if(res.status == 200) {
+            setCartItems(await res.data.data)
+        }
+    }
+
     async function buyProcess(id:number) {
         redirect(`/buy/item/${id}`)
     }
@@ -41,6 +48,26 @@ export default function page() {
                     <p><span className='font-semibold text-[15px]'> 2 Items </span> in cart</p>
                 </div>
                 <div>
+                    <button
+                        className={`flex
+                        bg-orangeClr
+                        group px-6
+                        items-center
+                        gap-2 py-3
+                        text-white
+                        rounded-lg
+                        relative
+                        transition-all
+                        overlay-btn
+                        overflow-hidden
+                        ${selectProduct != null ? "bottom-0 opacity-100" : "bottom-10 opacity-0"}
+                        `}
+                        onClick={() => removeProduct(selectedtId)}
+                    >
+                        <span className='transition-all relative z-10 '>Remove from Cart</span>
+                        {/* <IoArrowForwardCircleOutline className='relative z-10 text-xl transition-all' /> */}
+                    </button>
+
                     <button
                         className={`flex
                         bg-orangeClr
