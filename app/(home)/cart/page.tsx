@@ -30,9 +30,11 @@ export default function page() {
 
     async function removeProduct(id:number) {
         
-        const obj = { id }
 
-        const res = await axios.post("/cart/cart-data/api", obj)
+        
+        // const obj = { id }
+
+        // const res = await axios.post("/cart/cart-data/api", obj)
         // if(res.status == 200) {
         //     setCartItems(await res.data.data)
         // }
