@@ -6,10 +6,14 @@ import cod from "@/images/payment-methods/cod.png";
 import easypaisa from "@/images/payment-methods/Easypaisa-logo.png";
 import jazzcash from "@/images/payment-methods/new-Jazzcash-logo.png";
 import card from "@/images/payment-methods/Credit_or_Debit_Card.png";
+import { redirect } from "next/navigation";
 
 export default function page() {
   const { buyData, setBuyData }: any = useBuyContext();
   useEffect(() => {
+    // if(buyData.userId == 0) {
+    //   redirect("/cart")
+    // }
     console.log(buyData)
   }, [])
 
@@ -121,6 +125,37 @@ export default function page() {
       >
         {
           payMethod == "cod" ? 
+          <div className="flex flex-wrap gap-5 justify-between">
+            <div className="grid">
+              <h3 className="text-xl content-center">
+                Please Keep 
+                <span className="font-bold">
+                  <span className="text-[16px]"> PKR </span>
+                   <span className="relative -left-[1px]"> {buyData.quantity * buyData.productPrice} </span>
+                </span>
+                Ready
+              </h3>
+              <h4>When the parcel arrives at your door</h4>
+            </div>
+            <button
+              className={`flex
+              bg-orangeClr
+              group px-6
+              items-center
+              gap-2 py-3
+              text-white
+              rounded-lg
+              relative
+              transition-all
+              overlay-btn
+              overflow-hidden
+              `}
+            >
+              <span className='transition-all relative z-10 '>Click to Finish</span>
+            </button>
+          </div>
+          :
+          payMethod == "easypaisa" ?
           <div className="flex flex-wrap gap-5 justify-between">
             <div className="grid">
               <h3 className="text-xl content-center">

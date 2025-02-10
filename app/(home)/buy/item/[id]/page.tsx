@@ -65,7 +65,7 @@ export default function page() {
 
   useEffect(() => {
     if(buyData.userId != 0) {
-      redirect(`/buy/item/${param.id}/address`)
+      redirect(`/buy/item/${param.id}/payment-method`)
     }
   }, [buyData])
 
@@ -176,13 +176,13 @@ export default function page() {
      
              </div>
      
-      <section>
-            <div className="w-[80%] h-full mt-5 rounded-2xl shadow-xl bg-white md:p-7 p-2">
+      <section className="lg:justify-items-start justify-items-center">
+            <div className="lg:w-[80%] w-full h-full mt-5 rounded-2xl shadow-xl bg-white md:p-7 px-4 py-9">
                 <h4 className="mb-5 text-[18px] font-semibold">Delivery Details</h4>
                 
                 <Form action={""} onSubmit={handleSubmit(onSubmit)}>
                   <div className="flex flex-wrap gap-3 mb-3">
-                    <div className="grid gap-1">
+                    <div className="grid gap-1 md:w-fit w-full">
                         <label htmlFor="">Recipient's Name</label>
                         <input
                           type="text"
@@ -192,12 +192,12 @@ export default function page() {
                         />
                     </div>
 
-                    <div className="grid gap-1">
+                    <div className="grid gap-1 md:w-fit w-full">
                         <label htmlFor="">Phone Number</label>
                         <input type="number" min={11} className="border h-9 px-3 rounded-lg" {...register("phone_number")} required />
                     </div>
 
-                    <div className="grid gap-1 w-44">
+                    <div className="grid gap-1 md:w-44 w-full">
                       <label htmlFor="">District</label>
                       <select {...register("district")} required className="h-9 px-2 rounded-lg cursor-pointer">
                           <option value="">-- select --</option>
@@ -215,9 +215,9 @@ export default function page() {
                         
                   </div>
 
-                  <div className="grid gap-1">
+                  <div className="grid gap-1 md:w-fit w-full">
                     <label htmlFor="">Full Address</label>
-                    <textarea {...register("address")} required className="border border-zinc-400 rounded-lg w-[80%] h-20 py-2 px-3"></textarea>
+                    <textarea {...register("address")} required className="border border-zinc-400 rounded-lg md:w-[658px] w-full h-20 py-2 px-3"></textarea>
                   </div>
                   <button type="submit"
                     className="bg-slate-800
