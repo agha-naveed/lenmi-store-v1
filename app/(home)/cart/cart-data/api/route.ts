@@ -54,17 +54,24 @@ export async function POST(req:NextRequest) {
     let originalId = jwt.verify(user_id ?? "", process.env.JWT_CODE ?? "") as { obj_id: string }
 
 
-    let data = await Cart.updateOne({
-            userId: originalId.obj_id
-        },
-        {
-            $pull: {
-                items: {
-                    productId: id
+    let data = await Cart.findOne({userId: originalId.obj_id})
+
+    if(data.items.length == 1) {
+        await Cart.deleteOne({userId: originalId.obj_id})
+    }
+    else {
+        await Cart.updateOne({
+                userId: originalId.obj_id
+            },
+            {
+                $pull: {
+                    items: {
+                        productId: id
+                    }
                 }
             }
-        }
-    )
+        )
+    }
 
 
     return NextResponse.json({
