@@ -4,7 +4,7 @@ import Navbar from '@/components/Navbar'
 import { Suspense } from "react";
 import Loader from "../components/Loading";
 import { CartProvider } from "../components/CartProvider";
-
+import { SearchProvider } from "../components/SearchContext";
 
 export const metadata: Metadata = {
   title: "Lenmi Store Online Shopping Platform",
@@ -18,15 +18,17 @@ export default function RootLayout(props: {
   return (
     <html lang="en">
       <CartProvider>
-        <body>
-            <Suspense fallback={<Loader />}>
-              <Navbar />
+        <SearchProvider>
+          <body>
               <Suspense fallback={<Loader />}>
-                {props.children}
-                {props.modal}
+                <Navbar />
+                <Suspense fallback={<Loader />}>
+                  {props.children}
+                  {props.modal}
+                </Suspense>
               </Suspense>
-            </Suspense>
-        </body>
+          </body>
+        </SearchProvider>
       </CartProvider>
     </html>
   );

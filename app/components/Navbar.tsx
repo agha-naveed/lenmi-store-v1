@@ -14,6 +14,7 @@ import { IoSettingsOutline } from "react-icons/io5"
 import axios from 'axios';
 import { useCart } from './CartProvider';
 import { redirect } from 'next/navigation';
+import { useSearchQuery } from './SearchContext';
 
 interface ApiResponse {
     first_name: string;
@@ -24,6 +25,9 @@ interface ApiResponse {
 
 export default function Navbar() {
     
+
+    const { query, setQuery } = useSearchQuery()
+
     const { length, setLength } = useCart()
     const [message, setMessage] = useState<ApiResponse | null>(null);
     
@@ -86,7 +90,9 @@ export default function Navbar() {
     
     async function handleSearch(data:any) {
         const res = await axios.post("/api", {data})
-
+        if(await res.data.message == "ok") {
+            setQuery(res.data.data)
+        }
         redirect("/")
     }
 
