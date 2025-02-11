@@ -151,6 +151,7 @@ export default function page() {
 
         <main>
           <div className="product-search-items flex flex-wrap md:justify-start justify-center">
+            {/* <ProductCard />
             <ProductCard />
             <ProductCard />
             <ProductCard />
@@ -162,8 +163,7 @@ export default function page() {
             <ProductCard />
             <ProductCard />
             <ProductCard />
-            <ProductCard />
-            <ProductCard />
+            <ProductCard /> */}
           </div>
         </main>
       </div>

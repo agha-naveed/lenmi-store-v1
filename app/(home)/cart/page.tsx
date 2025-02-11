@@ -3,7 +3,8 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { GoStarFill } from "react-icons/go";
-import { IoArrowForwardCircleOutline, IoArrowForwardCircle } from "react-icons/io5";
+import { IoArrowForwardCircleOutline } from "react-icons/io5";
+import { useCart } from '@/components/CartProvider';
 
 import Link from 'next/link';
 import axios from 'axios';
@@ -11,6 +12,7 @@ import { redirect, useRouter } from 'next/navigation';
 
 export default function page() {
 
+    const { length, setLength } = useCart()
     const [quantity, setQuantity] = useState(1)
     const [cartItems, setCartItems] = useState<any[]>([])
 
@@ -32,6 +34,8 @@ export default function page() {
     }, [])
 
     async function removeProduct(id:number) {
+
+        setLength(length)
 
         setCartItems((prevItems):any => {
             return prevItems.filter((item, index) => index !== selectProduct)
