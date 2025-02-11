@@ -95,6 +95,7 @@ export default function Navbar() {
         const res = await axios.get(`/product-search/api/?q=${encodeURIComponent(searchValue)}`, {data})
         router.push(`/product-search/?q=${searchValue}`)
         
+        
         if(await res.data.message == "done") {
             setQuery(await res.data.data)
         }
