@@ -158,7 +158,7 @@ export default function page() {
         <main>
           <div className="product-search-items flex flex-wrap md:justify-start justify-center">
             {
-              <ProductCard />
+              
             }
           </div>
         </main>

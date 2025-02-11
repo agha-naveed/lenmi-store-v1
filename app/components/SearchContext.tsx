@@ -5,12 +5,12 @@ import { createContext, useContext, useState } from "react";
 
 
 type SearchContextType = {
-  query: string;
-  setQuery: (query: string) => void
+  query: object;
+  setQuery: (query: object[]) => void
 }
 
 const defaultSearch: SearchContextType = {
-  query: "",
+  query: {},
   setQuery: () => {}
 }
 
@@ -18,7 +18,7 @@ const searchContext = createContext<SearchContextType>(defaultSearch)
 
 export function SearchProvider({ children }: { children: React.ReactNode }) {
 
-  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [searchQuery, setSearchQuery] = useState<object[]>([]);
 
   return (
       <searchContext.Provider value={{query: searchQuery, setQuery: setSearchQuery}}>
