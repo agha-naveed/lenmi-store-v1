@@ -22,8 +22,17 @@ export async function GET() {
 }
 
 export async function POST(req:NextRequest) {
+    await dbConnection()
+    
     let a = await req.json()
     let searchQuery = a.data
 
-    
+    let productData = await Product.find({name: searchQuery})
+
+    return NextResponse.json({
+        data: productData,
+        message: 'done'
+    }, { status: 201 })
+
+
 }

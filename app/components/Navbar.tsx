@@ -13,6 +13,7 @@ import { TbMessageDots } from "react-icons/tb";
 import { IoSettingsOutline } from "react-icons/io5"
 import axios from 'axios';
 import { useCart } from './CartProvider';
+import { redirect } from 'next/navigation';
 
 interface ApiResponse {
     first_name: string;
@@ -85,6 +86,8 @@ export default function Navbar() {
     
     async function handleSearch(data:any) {
         const res = await axios.post("/api", {data})
+
+        redirect("/")
     }
 
     return (
