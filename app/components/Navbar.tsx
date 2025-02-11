@@ -92,8 +92,8 @@ export default function Navbar() {
         const res = await axios.post("/api", {data})
         if(await res.data.message == "ok") {
             setQuery(res.data.data)
+            redirect("/product-search")
         }
-        redirect("/")
     }
 
     return (

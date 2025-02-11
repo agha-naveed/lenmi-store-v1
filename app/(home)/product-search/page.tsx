@@ -5,9 +5,15 @@ import { FaRegStar } from "react-icons/fa";
 import ProductCard from "@/app/components/products-cards/ProductCard";
 import { CiFilter } from "react-icons/ci";
 import { IoMdCloseCircle } from "react-icons/io";
+import { useSearchQuery } from "@/app/components/SearchContext";
 
 export default function page() {
+
+  const { query, setQuery } = useSearchQuery()
+
   const [toggleFilter, setToggleFilter] = useState(false);
+
+  
   return (
     <>
       <div className="container mx-auto py-3 md:flex grid md:gap-14 gap-5 font-opensans">
@@ -151,19 +157,9 @@ export default function page() {
 
         <main>
           <div className="product-search-items flex flex-wrap md:justify-start justify-center">
-            {/* <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard /> */}
+            {
+              <ProductCard />
+            }
           </div>
         </main>
       </div>
