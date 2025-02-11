@@ -9,8 +9,6 @@ export async function POST(req: NextRequest) {
   try {
     await dbConnection()
   
-    
-    
     const formData = await req.formData();
 
     const imageURL = formData.getAll("imgFile") as string[]
