@@ -9,7 +9,7 @@ export default function ProductCard({data}:any) {
         <div className='bg-white border border-gray-400 rounded-lg sm:w-52 w-[156px] sm:h-[310px] p-2 grid gap-3'>
             <div className='sm:w-[190px] w-[140px] sm:h-[170px] h-[120px] select-none group transition_2 rounded-lg overflow-hidden border relative cursor-pointer'>
                 <Image src={data.imgURL[0]} className='w-full h-full object-cover absolute transition_2 opacity-100 group-hover:opacity-0' alt="" width={500} height={500}/>
-                <Image src={data.imgURL[1]} className='w-full h-full object-cover transition_2  group-hover:opacity-100 opacity-0 absolute' alt="" width={500} height={500}/>
+                {/* <Image src={data.imgURL[1]} className='w-full h-full object-cover transition_2  group-hover:opacity-100 opacity-0 absolute' alt="" width={500} height={500}/> */}
             </div>
 
             <div className='select-none'>

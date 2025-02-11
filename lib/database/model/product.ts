@@ -55,4 +55,13 @@ productSchema.index({ name: 'text' });
 
 const Product = mongoose.models.Product || mongoose.model<IProduct>('Product', productSchema);
 
+Product.createIndexes()
+  .then(() => {
+    console.log('Text index created successfully!');
+  })
+  .catch(err => {
+    console.error('Error creating text index:', err);
+  });
+
+
 export default Product;
