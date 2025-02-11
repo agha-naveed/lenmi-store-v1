@@ -1,4 +1,5 @@
 import dbConnection from "@/lib/database/dbConnection"
+import Product from "@/lib/database/model/product";
 import { NextApiRequest } from "next"
 import { NextRequest, NextResponse } from "next/server"
 
@@ -8,15 +9,14 @@ export async function GET(req:NextRequest) {
     const url = new URL(req.url); // Convert req.url into a URL object
     const searchParams = url.searchParams;
 
-    console.log(req.url)
+    let q = searchParams.get('q') || ""
 
-    // let a = await req.json()
-    // let searchQuery = await a.data
-    
-    // let productData = await Product.find({ $text: { $search: searchQuery } })
+    let query = q?.split('+').join(" ")
+
+    let productData = await Product.find({ $text: { $search: query } })
 
     return NextResponse.json({
-        data: "",
+        data: productData,
         message: 'done'
     }, { status: 201 })
 

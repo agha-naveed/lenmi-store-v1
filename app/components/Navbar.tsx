@@ -90,13 +90,13 @@ export default function Navbar() {
     
     let router = useRouter()
     async function handleSearch(data:any) {
-        const res = await axios.get("/product-search/api", {data})
+        
+        let searchValue = await data.trim().replace(/\s+/g, "+");
+        const res = await axios.get(`/product-search/api/?q=${encodeURIComponent(searchValue)}`, {data})
+        router.push(`/product-search/?q=${searchValue}`)
         
         if(await res.data.message == "done") {
-
-            let searchValue = await data.trim().replace(/\s+/g, "+");
             setQuery(await res.data.data)
-            router.push(`/product-search/?q=${encodeURIComponent(searchValue)}`)
         }
     }
 
