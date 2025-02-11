@@ -1,19 +1,21 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaRegStar } from "react-icons/fa";
 import ProductCard from "@/app/components/products-cards/ProductCard";
 import { CiFilter } from "react-icons/ci";
 import { IoMdCloseCircle } from "react-icons/io";
 import { useSearchQuery } from "@/app/components/SearchContext";
 
+import { useSearchParams } from "next/navigation";
+
+
 export default function page() {
 
   const { query, setQuery }:any = useSearchQuery()
-
+  const searchParams = useSearchParams();
   const [toggleFilter, setToggleFilter] = useState(false);
 
-  
   return (
     <>
       <div className="container mx-auto py-3 md:flex grid md:gap-14 gap-5 font-opensans">
