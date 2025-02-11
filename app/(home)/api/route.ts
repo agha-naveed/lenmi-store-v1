@@ -27,7 +27,7 @@ export async function POST(req:NextRequest) {
     let a = await req.json()
     let searchQuery = a.data
 
-    let productData = await Product.find({name: searchQuery})
+    let productData = await Product.find({ $text: { $search: searchQuery } })
 
     return NextResponse.json({
         data: productData,
