@@ -48,6 +48,7 @@ export default function page() {
           <div>
             <CategoriesDesign />
           </div>
+          
           {
             productData ? 
             <div className="flex flex-wrap gap-5">

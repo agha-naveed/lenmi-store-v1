@@ -1,6 +1,6 @@
 import dbConnection from "@/lib/database/dbConnection";
 import Product from "@/lib/database/model/product";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET() {
     await dbConnection()
@@ -19,4 +19,11 @@ export async function GET() {
             data: response
         }, { status: 404 })
     }
+}
+
+export async function POST(req:NextRequest) {
+    let a = await req.json()
+    let searchQuery = a.data
+
+    
 }

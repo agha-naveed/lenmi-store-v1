@@ -21,7 +21,7 @@ interface ApiResponse {
 }
 
 
-export default function Navbar() {    
+export default function Navbar() {
     
     const { length, setLength } = useCart()
     const [message, setMessage] = useState<ApiResponse | null>(null);
@@ -83,8 +83,8 @@ export default function Navbar() {
         cartData()
     }, [length])
     
-    function handleSearch() {
-        console.log(searchInput)
+    async function handleSearch(data:any) {
+        const res = await axios.post("/api", {data})
     }
 
     return (
@@ -110,7 +110,7 @@ export default function Navbar() {
                         />
                         
                         <FiSearch title='Search' className='text-xl cursor-pointer p-2 top-[2px] rounded-md w-11 h-10 text-white bg-slate-800 relative -left-11'
-                        onClick={() => {handleSearch()}}
+                        onClick={() => {handleSearch(searchInput)}}
                     />
                     </div>
 
