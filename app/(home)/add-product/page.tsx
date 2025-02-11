@@ -77,8 +77,14 @@ export default function page() {
 
     const picData = new FormData();
 
+
+
     if(!files) {
-      console.log("No FIle")
+      console.log("No File")
+      return
+    }
+    if(files.length > 2) {
+      alert("Must Attached atleast Two Images")
       return
     }
 
@@ -87,7 +93,7 @@ export default function page() {
     let myFile;
     for (let i = 0; i < files.length; i++) {
       const picData = new FormData();
-      picData.append("file", files[i]); // Single file per request
+      picData.append("file", files[i]);
       picData.append("upload_preset", "my-images");
   
       try {
