@@ -9,7 +9,7 @@ import { useSearchQuery } from "@/app/components/SearchContext";
 
 export default function page() {
 
-  const { query, setQuery } = useSearchQuery()
+  const { query, setQuery }:any = useSearchQuery()
 
   const [toggleFilter, setToggleFilter] = useState(false);
 
@@ -158,7 +158,13 @@ export default function page() {
         <main>
           <div className="product-search-items flex flex-wrap md:justify-start justify-center">
             {
-              
+              query ?
+              query.map((item:any, index:number) => {
+                return (
+                  <ProductCard key={`search-items-${index}`} data={item} />
+                )
+              })
+              : <p>Loading...</p>
             }
           </div>
         </main>

@@ -90,12 +90,12 @@ export default function Navbar() {
     
     async function handleSearch(data:any) {
         const res = await axios.post("/api", {data})
-        console.log(await res.data.data)
+        console.log(await res.data)
      
-        // if(await res.data.message == "ok") {
-        //     setQuery(await res.data.data)
-        //     redirect("/product-search")
-        // }
+        if(await res.data.message == "done") {
+            setQuery(await res.data.data)
+            redirect("/product-search")
+        }
         
     }
 
