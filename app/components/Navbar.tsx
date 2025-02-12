@@ -89,6 +89,7 @@ export default function Navbar() {
     }, [length])
     
     let router = useRouter()
+    
     async function handleSearch(data:any) {
         
         let searchValue = await data.trim().replace(/\s+/g, "+");

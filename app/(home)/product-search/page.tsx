@@ -8,16 +8,44 @@ import { IoMdCloseCircle } from "react-icons/io";
 import { useSearchQuery } from "@/app/components/SearchContext";
 
 import { useRouter, useSearchParams } from "next/navigation";
+import axios from "axios";
 
 
 export default function page() {
+
+
+  const [category, setCategory] = useState('')
+  const [shippedOverseas, setShippedOverseas] = useState(false)
+  const [minPrice, setMinPrice] = useState(0)
+  const [maxPrice, setMaxPrice] = useState(0)
+  const [rating, setRating] = useState(0)
+  const [warrantyType, setWarrantyType] = useState('')
+  const [color, setColor] = useState('')
+
 
   const router = useRouter();
 
   const searchParams = useSearchParams();
 
+  // const qColor = searchParams.get("color") || "";
+
   const { query, setQuery }:any = useSearchQuery()
   const [toggleFilter, setToggleFilter] = useState(false);
+  
+  let q = searchParams.toString();
+
+  useEffect(() => {
+    const fetchData = async () => {
+
+      console.log(q)
+
+      // const res = await axios.get(`/product-search/api/?q=${encodeURIComponent(q)}`);
+
+    }
+
+    fetchData()
+  }, [q])
+  
 
   return (
     <>
@@ -42,13 +70,13 @@ export default function page() {
 
           <div className="grid gap-1 py-5 border-t-2">
             <span className="font-semibold">Category</span>
-            <select
+            <select onChange={(e) => {setCategory(e.target.value)}}
               name=""
               id=""
               className="bg-transparent cursor-pointer border-none outline-none text-gray-600 text-[14px]"
             >
               <option value="*">All Categories</option>
-              <option value="">Technology</option>
+              <option value="electronics">Electronics</option>
               <option value="">Grocery</option>
               <option value="">Fashion</option>
             </select>
@@ -137,21 +165,21 @@ export default function page() {
             <span className="font-semibold">Color Family</span>
             <div className="mt-1">
               <div className="text-gray-600 flex cursor-pointer text-[14px] w-fit">
-                <input type="checkbox" id="black-color" />
+                <input type="checkbox" id="black-color" name="color" onClick={() => setColor("black")} />
                 <label htmlFor="black-color" className="ml-2 cursor-pointer">
                   Black
                 </label>
               </div>
 
               <div className="text-gray-600 flex cursor-pointer text-[14px] w-fit">
-                <input type="checkbox" id="white-color" />
+                <input type="checkbox" id="white-color" name="color" onClick={() => setColor("white")} />
                 <label htmlFor="white-color" className="ml-2 cursor-pointer">
                   White
                 </label>
               </div>
 
               <div className="text-gray-600 flex cursor-pointer text-[14px] w-fit">
-                <input type="checkbox" id="multi-color" />
+                <input type="checkbox" id="multi-color" name="color" onClick={() => setColor("multicolor")} />
                 <label htmlFor="multi-color" className="ml-2 cursor-pointer">
                   Multicolor
                 </label>
