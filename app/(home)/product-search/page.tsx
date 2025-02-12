@@ -7,13 +7,16 @@ import { CiFilter } from "react-icons/ci";
 import { IoMdCloseCircle } from "react-icons/io";
 import { useSearchQuery } from "@/app/components/SearchContext";
 
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 
 export default function page() {
 
-  const { query, setQuery }:any = useSearchQuery()
+  const router = useRouter();
+
   const searchParams = useSearchParams();
+
+  const { query, setQuery }:any = useSearchQuery()
   const [toggleFilter, setToggleFilter] = useState(false);
 
   return (

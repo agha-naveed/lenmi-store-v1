@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from "next/server"
 export async function GET(req:NextRequest) {
     await dbConnection()
 
-    const url = new URL(req.url); // Convert req.url into a URL object
+    const url = new URL(req.url);
     const searchParams = url.searchParams;
 
     let q = searchParams.get('q') || ""
