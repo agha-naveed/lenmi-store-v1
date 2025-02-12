@@ -6,46 +6,54 @@ import ProductCard from "@/app/components/products-cards/ProductCard";
 import { CiFilter } from "react-icons/ci";
 import { IoMdCloseCircle } from "react-icons/io";
 import { useSearchQuery } from "@/app/components/SearchContext";
-
 import { useRouter, useSearchParams } from "next/navigation";
 import axios from "axios";
 
-
-export default function page() {
-
-
-  const [category, setCategory] = useState('')
-  const [shippedOverseas, setShippedOverseas] = useState(false)
-  const [minPrice, setMinPrice] = useState(0)
-  const [maxPrice, setMaxPrice] = useState(0)
-  const [rating, setRating] = useState(0)
-  const [warrantyType, setWarrantyType] = useState('')
-  const [color, setColor] = useState('')
-
-
+export default function Page() {
   const router = useRouter();
-
   const searchParams = useSearchParams();
-
-  // const qColor = searchParams.get("color") || "";
-
-  const { query, setQuery }:any = useSearchQuery()
+  const { query, setQuery }: any = useSearchQuery();
   const [toggleFilter, setToggleFilter] = useState(false);
-  
-  let q = searchParams.toString();
 
-  useEffect(() => {
-    const fetchData = async () => {
+  // ✅ Extract Filters from URL
+  const [category, setCategory] = useState(searchParams.get("category") || "");
+  const [shippedOverseas, setShippedOverseas] = useState(
+    searchParams.get("shippedOverseas") === "true"
+  );
+  const [minPrice, setMinPrice] = useState(
+    Number(searchParams.get("minPrice")) || 0
+  );
+  const [maxPrice, setMaxPrice] = useState(
+    Number(searchParams.get("maxPrice")) || 0
+  );
+  const [rating, setRating] = useState(Number(searchParams.get("rating")) || 0);
+  const [warrantyType, setWarrantyType] = useState(
+    searchParams.get("warrantyType") || ""
+  );
+  const [color, setColor] = useState(searchParams.get("color") || "");
 
-      console.log(q)
+  // ✅ Update URL When Filters Change
+  const updateFilters = (key: string, value: string | number | boolean) => {
+    const params = new URLSearchParams(searchParams);
 
-      // const res = await axios.get(`/product-search/api/?q=${encodeURIComponent(q)}`);
-
+    if (value) {
+      params.set(key, value.toString());
+    } else {
+      params.delete(key);
     }
 
-    fetchData()
-  }, [q])
-  
+    router.push(`/product-search?${params.toString()}`);
+  };
+
+  // ✅ Fetch Data Based on Query Parameters
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await axios.get(`/product-search/api/?${searchParams.toString()}`);
+      setQuery(res.data.data);
+    };
+
+    fetchData();
+  }, [searchParams]);
 
   return (
     <>
@@ -58,6 +66,7 @@ export default function page() {
           <span>Filter</span>
         </button>
 
+        {/* 🏷️ Sidebar Filters */}
         <aside
           className={`p-3 md:w-[250px] sm:w-[70%] w-full md:h-auto transition-all ${
             toggleFilter ? "left-0" : "left-[-100%]"
@@ -68,35 +77,43 @@ export default function page() {
             className="absolute right-2 md:hidden block text-3xl"
           />
 
+          {/* 📌 Category */}
           <div className="grid gap-1 py-5 border-t-2">
             <span className="font-semibold">Category</span>
-            <select onChange={(e) => {setCategory(e.target.value)}}
-              name=""
-              id=""
+            <select
+              value={category}
+              onChange={(e) => updateFilters("category", e.target.value)}
               className="bg-transparent cursor-pointer border-none outline-none text-gray-600 text-[14px]"
             >
-              <option value="*">All Categories</option>
+              <option value="">All Categories</option>
               <option value="electronics">Electronics</option>
-              <option value="">Grocery</option>
-              <option value="">Fashion</option>
+              <option value="grocery">Grocery</option>
+              <option value="fashion">Fashion</option>
             </select>
           </div>
 
+          {/* 🚚 Shipped Overseas */}
           <div className="grid gap-1 py-5 border-t-2">
             <span className="font-semibold">Shipped From</span>
             <div className="text-gray-600 flex cursor-pointer text-[14px] w-fit">
-              <input type="checkbox" id="overseas-check" />
-              <label htmlFor="overseas-check" className="ml-2 cursor-pointer">
-                Overseas
-              </label>
+              <input
+                type="checkbox"
+                checked={shippedOverseas}
+                onChange={(e) => updateFilters("shippedOverseas", e.target.checked)}
+              />
+              <label className="ml-2 cursor-pointer">Overseas</label>
             </div>
           </div>
 
+          {/* 💰 Price */}
           <div className="grid gap-1 py-5 border-t-2">
             <span className="font-semibold">Price</span>
             <div className="text-gray-600 flex gap-2 cursor-pointer font-medium mt-1 text-[14px] w-fit">
+
               <input
                 type="number"
+                value={minPrice}
+                onChange={(e) => updateFilters("minPrice", Number(e.target.value))}
                 className="border border-gray-600 rounded-md w-20 px-2 py-[6px]"
                 min={0}
                 placeholder="Min"
@@ -104,6 +121,8 @@ export default function page() {
               <span className="text-xl content-center text-gray-600">-</span>
               <input
                 type="number"
+                value={maxPrice}
+                onChange={(e) => updateFilters("maxPrice", Number(e.target.value))}
                 className="border border-gray-600 rounded-md w-20 px-2 py-[6px]"
                 min={0}
                 placeholder="Max"
@@ -111,94 +130,75 @@ export default function page() {
             </div>
           </div>
 
+          {/* ⭐ Rating */}
           <div className="grid gap-1 py-5 border-t-2">
             <span className="font-semibold">Rating</span>
-            <div className="text-gray-600 flex gap-1 cursor-pointer font-medium text-[14px] w-fit">
-              <FaRegStar />
-              <FaRegStar />
-              <FaRegStar />
-              <FaRegStar />
-              <FaRegStar />
-            </div>
+            <input
+              type="number"
+              value={rating}
+              onChange={(e) => updateFilters("rating", Number(e.target.value))}
+              className="border border-gray-600 rounded-md w-20 px-2 py-[6px]"
+              min={0}
+              max={5}
+              placeholder="Rating"
+            />
           </div>
 
+          {/* 🛡️ Warranty Type */}
           <div className="grid gap-1 py-5 border-t-2">
             <span className="font-semibold">Warranty Type</span>
-            <div className="mt-1">
-              <div className="text-gray-600 flex cursor-pointer text-[14px] w-fit">
-                <input type="checkbox" id="no-warranty" />
-                <label htmlFor="no-warranty" className="ml-2 cursor-pointer">
-                  No Warranty
-                </label>
-              </div>
-
-              <div className="text-gray-600 flex cursor-pointer text-[14px] w-fit">
-                <input type="checkbox" id="seller-warranty" />
-                <label
-                  htmlFor="seller-warranty"
-                  className="ml-2 cursor-pointer"
-                >
-                  Seller Warranty
-                </label>
-              </div>
-
-              <div className="text-gray-600 flex cursor-pointer text-[14px] w-fit">
-                <input type="checkbox" id="brand-warranty" />
-                <label htmlFor="brand-warranty" className="ml-2 cursor-pointer">
-                  Brand Warranty
-                </label>
-              </div>
-
-              <div className="text-gray-600 flex cursor-pointer text-[14px] w-fit">
-                <input type="checkbox" id="local-seller-warranty" />
-                <label
-                  htmlFor="local-seller-warranty"
-                  className="ml-2 cursor-pointer"
-                >
-                  Local Seller Warranty
-                </label>
-              </div>
-            </div>
+            <select
+              value={warrantyType}
+              onChange={(e) => updateFilters("warrantyType", e.target.value)}
+              className="bg-transparent cursor-pointer border-none outline-none text-gray-600 text-[14px]"
+            >
+              <option value="">Any</option>
+              <option value="no-warranty">No Warranty</option>
+              <option value="seller-warranty">Seller Warranty</option>
+              <option value="brand-warranty">Brand Warranty</option>
+            </select>
           </div>
 
+          {/* 🎨 Color Filter */}
           <div className="grid gap-1 py-5 border-t-2">
             <span className="font-semibold">Color Family</span>
-            <div className="mt-1">
-              <div className="text-gray-600 flex cursor-pointer text-[14px] w-fit">
-                <input type="checkbox" id="black-color" name="color" onClick={() => setColor("black")} />
-                <label htmlFor="black-color" className="ml-2 cursor-pointer">
-                  Black
-                </label>
-              </div>
-
-              <div className="text-gray-600 flex cursor-pointer text-[14px] w-fit">
-                <input type="checkbox" id="white-color" name="color" onClick={() => setColor("white")} />
-                <label htmlFor="white-color" className="ml-2 cursor-pointer">
-                  White
-                </label>
-              </div>
-
-              <div className="text-gray-600 flex cursor-pointer text-[14px] w-fit">
-                <input type="checkbox" id="multi-color" name="color" onClick={() => setColor("multicolor")} />
-                <label htmlFor="multi-color" className="ml-2 cursor-pointer">
-                  Multicolor
-                </label>
-              </div>
-            </div>
+            <label className="text-gray-600 flex cursor-pointer text-[14px] w-fit">
+              <input
+                type="checkbox"
+                checked={color === "black"}
+                onChange={() => updateFilters("color", color === "black" ? "" : "black")}
+              />
+              <span className="ml-2">Black</span>
+            </label>
+            <label className="text-gray-600 flex cursor-pointer text-[14px] w-fit">
+              <input
+                type="checkbox"
+                checked={color === "white"}
+                onChange={() => updateFilters("color", color === "white" ? "" : "white")}
+              />
+              <span className="ml-2">White</span>
+            </label>
+            <label className="text-gray-600 flex cursor-pointer text-[14px] w-fit">
+              <input
+                type="checkbox"
+                checked={color === "multicolor"}
+                onChange={() => updateFilters("color", color === "multicolor" ? "" : "multicolor")}
+              />
+              <span className="ml-2">Multicolor</span>
+            </label>
           </div>
         </aside>
 
+        {/* 📦 Product Results */}
         <main>
           <div className="product-search-items flex flex-wrap md:justify-start justify-center">
-            {
-              query ?
-              query.map((item:any, index:number) => {
-                return (
-                  <ProductCard key={`search-items-${index}`} data={item} />
-                )
-              })
-              : <p>Loading...</p>
-            }
+            {query ? (
+              query.map((item: any, index: number) => (
+                <ProductCard key={`search-items-${index}`} data={item} />
+              ))
+            ) : (
+              <p>Loading...</p>
+            )}
           </div>
         </main>
       </div>
