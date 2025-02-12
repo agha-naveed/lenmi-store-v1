@@ -30,6 +30,7 @@ export default function Page() {
   const [warrantyType, setWarrantyType] = useState(
     searchParams.get("warrantyType") || ""
   );
+  
   const [color, setColor] = useState(searchParams.get("color") || "");
 
   // ✅ Update URL When Filters Change
@@ -54,6 +55,7 @@ export default function Page() {
 
     fetchData();
   }, [searchParams]);
+  
 
   return (
     <>
@@ -171,32 +173,41 @@ export default function Page() {
 
             <div className="flex gap-2">
               <input
+                checked={color == "black"}
+                name="color-checkbox"
                 id="product-black-clr"
                 type="checkbox"
-                checked={color === "black"}
-                onChange={() => updateFilters("color", color === "black" ? "" : "black")}
+                onChange={() => {
+                  setColor('black')
+                  updateFilters("color", color === "black" ? "" : "black")
+                }}
               />
               <label htmlFor="product-black-clr" className="text-gray-600 flex cursor-pointer text-[14px] w-fit">Black</label>
             </div>
 
             <div className="flex gap-2">
               <input
+                checked={color == "white"}
+                name="color-checkbox"
                 id="product-white-clr"
                 type="checkbox"
-                checked={color === "white"}
-                onChange={() => updateFilters("color", color === "white" ? "" : "white")}
+                onChange={() => {setColor('white'); updateFilters("color", color === "white" ? "" : "white")}}
               />
-              <label className="text-gray-600 flex cursor-pointer text-[14px] w-fit">White</label>
+              <label htmlFor="product-white-clr" className="text-gray-600 flex cursor-pointer text-[14px] w-fit">White</label>
             </div>
             
             <div className="flex gap-2">
               <input
+                checked={color == "multicolor"}
                 id="product-multi-clr"
                 type="checkbox"
-                checked={color === "multicolor"}
-                onChange={() => updateFilters("color", color === "multicolor" ? "" : "multicolor")}
+                name="color-checkbox"
+                onChange={() => {
+                  updateFilters("color", color === "multicolor" ? "" : "multicolor");
+                  setColor("multicolor")
+                }}
               />
-              <label htmlFor="product-black-clr" className="text-gray-600 flex cursor-pointer text-[14px] w-fit">Multicolor
+              <label htmlFor="product-multi-clr" className="text-gray-600 flex cursor-pointer text-[14px] w-fit">Multicolor
               </label>
             </div>
             

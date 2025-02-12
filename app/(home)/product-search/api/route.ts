@@ -11,38 +11,44 @@ export async function GET(req:NextRequest) {
 
     let q = searchParams.get('q') || ""
     let category = searchParams.get('category') || "all"
+    let shippedOverseas = searchParams.get('shippedOverseas') || ""
+    let color = searchParams.get('color') || ""
+    let warrantyType = searchParams.get('warrantyType') || ""
 
 
     let query = q?.split('+').join(" ")
+
     
-    if(category == "all") {
-        let productData = await Product.find(
-            {
-                $text: {
-                    $search: query
-                },
-            }
-        )
-
-        return NextResponse.json({
-            data: productData,
-            message: 'done'
-        }, { status: 201 })
+    let queryConditions:any = {
+        $text: {
+            $search: query
+        }
+    };
+    
+    if (category !== "all") {
+        queryConditions.category = category;
     }
-    else {
-        let productData = await Product.find(
-            {
-                $text: {
-                    $search: query
-                },
-                category
-            }
-        )
-
+    
+    if (shippedOverseas) {
+        queryConditions.shippedOverseas = shippedOverseas;
+    }
+    
+    if (color) {
+        queryConditions.color = color;
+    }
+    
+    if (warrantyType) {
+        queryConditions.warrantyType = warrantyType;
+    }
+    
+    
+    let productData = await Product.find(queryConditions);
+    
+    console.log(productData)
     return NextResponse.json({
         data: productData,
         message: 'done'
-    }, { status: 201 })
+    }, { status: 201 });
 
-    }
+    
 }

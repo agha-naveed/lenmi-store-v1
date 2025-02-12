@@ -94,6 +94,7 @@ export default function Navbar() {
         
         let searchValue = await data.trim().replace(/\s+/g, "+");
         const res = await axios.get(`/product-search/api/?q=${encodeURIComponent(searchValue)}`, {data})
+
         router.push(`/product-search/?q=${searchValue}`)
         
         
