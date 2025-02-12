@@ -152,7 +152,10 @@ export default function Page() {
             <span className="font-semibold">Warranty Type</span>
             <select
               value={warrantyType}
-              onChange={(e) => updateFilters("warrantyType", e.target.value)}
+              onChange={(e) => {
+                updateFilters("warrantyType", e.target.value)
+                setWarrantyType(e.target.value)
+              }}
               className="bg-transparent cursor-pointer border-none outline-none text-gray-600 text-[14px]"
             >
               <option value="">Any</option>
@@ -165,30 +168,38 @@ export default function Page() {
           {/* 🎨 Color Filter */}
           <div className="grid gap-1 py-5 border-t-2">
             <span className="font-semibold">Color Family</span>
-            <label className="text-gray-600 flex cursor-pointer text-[14px] w-fit">
+
+            <div className="flex gap-2">
               <input
+                id="product-black-clr"
                 type="checkbox"
                 checked={color === "black"}
                 onChange={() => updateFilters("color", color === "black" ? "" : "black")}
               />
-              <span className="ml-2">Black</span>
-            </label>
-            <label className="text-gray-600 flex cursor-pointer text-[14px] w-fit">
+              <label htmlFor="product-black-clr" className="text-gray-600 flex cursor-pointer text-[14px] w-fit">Black</label>
+            </div>
+
+            <div className="flex gap-2">
               <input
+                id="product-white-clr"
                 type="checkbox"
                 checked={color === "white"}
                 onChange={() => updateFilters("color", color === "white" ? "" : "white")}
               />
-              <span className="ml-2">White</span>
-            </label>
-            <label className="text-gray-600 flex cursor-pointer text-[14px] w-fit">
+              <label className="text-gray-600 flex cursor-pointer text-[14px] w-fit">White</label>
+            </div>
+            
+            <div className="flex gap-2">
               <input
+                id="product-multi-clr"
                 type="checkbox"
                 checked={color === "multicolor"}
                 onChange={() => updateFilters("color", color === "multicolor" ? "" : "multicolor")}
               />
-              <span className="ml-2">Multicolor</span>
-            </label>
+              <label htmlFor="product-black-clr" className="text-gray-600 flex cursor-pointer text-[14px] w-fit">Multicolor
+              </label>
+            </div>
+            
           </div>
         </aside>
 
