@@ -82,10 +82,13 @@ export default function Page() {
             <span className="font-semibold">Category</span>
             <select
               value={category}
-              onChange={(e) => updateFilters("category", e.target.value)}
+              onChange={(e) => {
+                updateFilters("category", e.target.value);
+                setCategory(e.target.value)
+              }}
               className="bg-transparent cursor-pointer border-none outline-none text-gray-600 text-[14px]"
             >
-              <option value="">All Categories</option>
+              <option value="all">All Categories</option>
               <option value="electronics">Electronics</option>
               <option value="grocery">Grocery</option>
               <option value="fashion">Fashion</option>
@@ -97,11 +100,11 @@ export default function Page() {
             <span className="font-semibold">Shipped From</span>
             <div className="text-gray-600 flex cursor-pointer text-[14px] w-fit">
               <input
+                id="shipping-overseas"
                 type="checkbox"
-                checked={shippedOverseas}
                 onChange={(e) => updateFilters("shippedOverseas", e.target.checked)}
               />
-              <label className="ml-2 cursor-pointer">Overseas</label>
+              <label htmlFor="shipping-overseas" className="ml-2 cursor-pointer">Overseas</label>
             </div>
           </div>
 

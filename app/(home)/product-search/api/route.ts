@@ -10,14 +10,39 @@ export async function GET(req:NextRequest) {
     const searchParams = url.searchParams;
 
     let q = searchParams.get('q') || ""
+    let category = searchParams.get('category') || "all"
+
 
     let query = q?.split('+').join(" ")
+    
+    if(category == "all") {
+        let productData = await Product.find(
+            {
+                $text: {
+                    $search: query
+                },
+            }
+        )
 
-    let productData = await Product.find({ $text: { $search: query } })
+        return NextResponse.json({
+            data: productData,
+            message: 'done'
+        }, { status: 201 })
+    }
+    else {
+        let productData = await Product.find(
+            {
+                $text: {
+                    $search: query
+                },
+                category
+            }
+        )
 
     return NextResponse.json({
         data: productData,
         message: 'done'
     }, { status: 201 })
 
+    }
 }
