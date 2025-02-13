@@ -18,6 +18,7 @@ export async function GET(req:NextRequest) {
 
     let query = q?.split('+').join(" ")
 
+    console.log(searchParams)
     
     let queryConditions:any = {
         $text: {
@@ -44,7 +45,6 @@ export async function GET(req:NextRequest) {
     
     let productData = await Product.find(queryConditions);
     
-    console.log(productData)
     return NextResponse.json({
         data: productData,
         message: 'done'

@@ -229,6 +229,13 @@ export default function page() {
 
       </div>
 
+
+      <div className='w-full'>
+        <button className='py-2 px-6 bg-slate-400 rounded-full'>
+          Add a Review
+        </button>
+      </div>
+
     </section>
   )
 }
