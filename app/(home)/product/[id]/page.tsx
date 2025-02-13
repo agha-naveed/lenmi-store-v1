@@ -10,8 +10,9 @@ import axios from 'axios';
 import { useParams } from 'next/navigation';
 import { useCart } from '@/app/components/CartProvider';
 import { IoClose } from "react-icons/io5";
-import { IoIosStar, IoIosStarOutline } from "react-icons/io";
+import { IoIosStar } from "react-icons/io";
 import jethalal from '@/images/jethalal.jpeg'
+import ProductReviews from '@/app/components/ProductReviews';
 
 export default function page() {
 
@@ -60,7 +61,6 @@ export default function page() {
         setFetchData(await datas)
         setImages(datas.imgURL)
         setIsLogin(await res.data.login)
-        console.log(await res.data.login)
       }
       else {
         console.log("Nhi")
@@ -261,113 +261,128 @@ export default function page() {
       </div>
 
       {/* Review */}
-      <div className={`w-full ${isLogin ? "block" : "hidden"}`}>
-        <button className='py-2 px-6 bg-slate-400 rounded-full' onClick={() => setOpenReview(true)}>
-          Add a Review
-        </button>
-        <div className={`w-full h-full bg-zinc-800/50 backdrop-blur-[5px] fixed top-0 left-0 z-[200]
-          ${openReview ? "block" : "hidden"}`}>
-          <div className='fixed top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]'>
-            
-            
-            <div className={`w-[550px] h-96 bg-white shadow-xl rounded-lg p-4 font-opensans flex flex-col gap-5 overflow-hidden`}>
-              <div className='flex justify-between items-center'>
-                  <button className='w-7 h-7 flex justify-center items-center text-xl rounded-full' title='Cancel' onClick={() => setOpenReview(false)}>
-                      <IoClose />
-                  </button>
-
-                  <span className='font-semibold content-center'>Product Review</span>
-
-                  <button className='bg-slate-800 transition-all text-white px-4 py-1 rounded-full hover:bg-slate-900' title='Post your Review' onClick={() => onSubmit()}>Post</button>
-              </div>
-
-              <div className='flex gap-4'>
-                  <div className='w-14 h-14 rounded-full overflow-hidden'>
-                      <Image src={jethalal}
-                          alt='DP'
-                          className='w-full
-                              h-full
-                              object-cover
-                      '/>
-                  </div>
-                  <div className='grid self-center'>
-                      <span className='font-semibold text-[18px] h-[25px]'>Naveed Abbas</span>
-                      <p className='text-[15px] text-zinc-800 h-[20px] font-medium cursor-pointer' title='Your Review will be display Publicly'>
-                          Posting Publicly
-                          <span className='ml-1 text-[14px] font-semibold relative -top-[1px]'>ⓘ</span>
-                      </p>
-                  </div>
-              </div>
-
-              <div className='w-full mb-2 justify-center flex gap-6 text-4xl px-10 text-zinc-700'>
-                  
-                  <IoIosStar
-                      className={`
-                          cursor-pointer
-                          ${ratingClicked >= 1 ? "text-orangeClr" : ""}
-                          ${rating > 0 && rating <=5 ? "text-orangeClr" : ""}
-                      `}
-                      onMouseOver={() => setRating(1)} 
-                      onMouseLeave={() => setRating(0)}
-                      onClick={() => setRatingClicked(1)}
-                  />
-                  
-                  <IoIosStar
-                      className={`
-                          cursor-pointer
-                          ${ratingClicked >= 2 ? "text-orangeClr" : ""}
-                          ${rating > 1 && rating <=5 ? "text-orangeClr" : ""}
-                      `}
-                      onMouseOver={() => setRating(2)} 
-                      onMouseLeave={() => setRating(0)}
-                      onClick={() => setRatingClicked(2)}
-                  />
-                  
-                  <IoIosStar
-                      className={`
-                          cursor-pointer
-                          ${ratingClicked >= 3 ? "text-orangeClr" : ""}
-                          ${rating > 2 && rating <=5 ? "text-orangeClr" : ""}
-                      `}
-                      onMouseOver={() => setRating(3)} 
-                      onMouseLeave={() => setRating(0)}
-                      onClick={() => setRatingClicked(3)}
-                  />
-                  
-                  <IoIosStar
-                      className={`
-                          cursor-pointer
-                          ${ratingClicked >= 4 ? "text-orangeClr" : ""}
-                          ${rating > 3 && rating <=5 ? "text-orangeClr" : ""}
-                      `}
-                      onMouseOver={() => setRating(4)} 
-                      onMouseLeave={() => setRating(0)}
-                      onClick={() => setRatingClicked(4)}
-                  />
-                  
-                  <IoIosStar
-                      className={`
-                          cursor-pointer
-                          ${ratingClicked >= 5 ? "text-orangeClr" : ""}
-                          ${rating > 4 && rating <=5 ? "text-orangeClr" : ""}
-                      `}
-                      onMouseOver={() => setRating(5)} 
-                      onMouseLeave={() => setRating(0)}
-                      onClick={() => setRatingClicked(5)}
-                  />
-                  
-
-
-              </div>
-
-              <textarea className='review-txtarea border border-zinc-400 w-full h-[155px] resize-none rounded-[8px] py-2 px-3' ref={txtAreaRef} placeholder='How was the product?'></textarea>
+      <section className='justify-self-start'>
+        <div className={`w-full ${isLogin ? "block" : "hidden"}`}>
+          <button className='py-2 px-6 bg-slate-400 rounded-full' onClick={() => setOpenReview(true)}>
+            Add a Review
+          </button>
+          <div className={`w-full h-full bg-zinc-800/50 backdrop-blur-[5px] fixed top-0 left-0 z-[200]
+            ${openReview ? "block" : "hidden"}`}>
+            <div className='fixed top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]'>
               
+              
+              <div className={`w-[550px] h-96 bg-white shadow-xl rounded-lg p-4 font-opensans flex flex-col gap-5 overflow-hidden`}>
+                <div className='flex justify-between items-center'>
+                    <button className='w-7 h-7 flex justify-center items-center text-xl rounded-full' title='Cancel' onClick={() => setOpenReview(false)}>
+                        <IoClose />
+                    </button>
+
+                    <span className='font-semibold content-center'>Product Review</span>
+
+                    <button className='bg-slate-800 transition-all text-white px-4 py-1 rounded-full hover:bg-slate-900' title='Post your Review' onClick={() => onSubmit()}>Post</button>
+                </div>
+
+                <div className='flex gap-4'>
+                    <div className='w-14 h-14 rounded-full overflow-hidden'>
+                        <Image src={jethalal}
+                            alt='DP'
+                            className='w-full
+                                h-full
+                                object-cover
+                        '/>
+                    </div>
+                    <div className='grid self-center'>
+                        <span className='font-semibold text-[18px] h-[25px]'>Naveed Abbas</span>
+                        <p className='text-[15px] text-zinc-800 h-[20px] font-medium cursor-pointer' title='Your Review will be display Publicly'>
+                            Posting Publicly
+                            <span className='ml-1 text-[14px] font-semibold relative -top-[1px]'>ⓘ</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div className='w-full mb-2 justify-center flex gap-6 text-4xl px-10 text-zinc-700'>
+                    
+                    <IoIosStar
+                        className={`
+                            cursor-pointer
+                            ${ratingClicked >= 1 ? "text-orangeClr" : ""}
+                            ${rating > 0 && rating <=5 ? "text-orangeClr" : ""}
+                        `}
+                        onMouseOver={() => setRating(1)} 
+                        onMouseLeave={() => setRating(0)}
+                        onClick={() => setRatingClicked(1)}
+                    />
+                    
+                    <IoIosStar
+                        className={`
+                            cursor-pointer
+                            ${ratingClicked >= 2 ? "text-orangeClr" : ""}
+                            ${rating > 1 && rating <=5 ? "text-orangeClr" : ""}
+                        `}
+                        onMouseOver={() => setRating(2)} 
+                        onMouseLeave={() => setRating(0)}
+                        onClick={() => setRatingClicked(2)}
+                    />
+                    
+                    <IoIosStar
+                        className={`
+                            cursor-pointer
+                            ${ratingClicked >= 3 ? "text-orangeClr" : ""}
+                            ${rating > 2 && rating <=5 ? "text-orangeClr" : ""}
+                        `}
+                        onMouseOver={() => setRating(3)} 
+                        onMouseLeave={() => setRating(0)}
+                        onClick={() => setRatingClicked(3)}
+                    />
+                    
+                    <IoIosStar
+                        className={`
+                            cursor-pointer
+                            ${ratingClicked >= 4 ? "text-orangeClr" : ""}
+                            ${rating > 3 && rating <=5 ? "text-orangeClr" : ""}
+                        `}
+                        onMouseOver={() => setRating(4)} 
+                        onMouseLeave={() => setRating(0)}
+                        onClick={() => setRatingClicked(4)}
+                    />
+                    
+                    <IoIosStar
+                        className={`
+                            cursor-pointer
+                            ${ratingClicked >= 5 ? "text-orangeClr" : ""}
+                            ${rating > 4 && rating <=5 ? "text-orangeClr" : ""}
+                        `}
+                        onMouseOver={() => setRating(5)} 
+                        onMouseLeave={() => setRating(0)}
+                        onClick={() => setRatingClicked(5)}
+                    />
+                    
+
+
+                </div>
+
+                <textarea className='review-txtarea border border-zinc-400 w-full h-[155px] resize-none rounded-[8px] py-2 px-3' ref={txtAreaRef} placeholder='How was the product?'></textarea>
+                
+              </div>
+
+
             </div>
-
-
           </div>
+
+                  
+
         </div>
+
+        
+      <div className='w-full'>
+        <ProductReviews />
+
       </div>
+
+
+      </section>
+
+      
 
     </section>
   )
