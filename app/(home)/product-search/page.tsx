@@ -50,7 +50,7 @@ export default function Page() {
   useEffect(() => {
     const fetchData = async () => {
       const res = await axios.get(`/product-search/api/?${searchParams.toString()}`);
-      setQuery(res.data.data);
+      setQuery(await res.data.data);
     };
 
     fetchData();
@@ -90,7 +90,7 @@ export default function Page() {
               }}
               className="bg-transparent cursor-pointer border-none outline-none text-gray-600 text-[14px]"
             >
-              <option value="all">All Categories</option>
+              <option value="all" defaultChecked>All Categories</option>
               <option value="electronics">Electronics</option>
               <option value="grocery">Grocery</option>
               <option value="fashion">Fashion</option>

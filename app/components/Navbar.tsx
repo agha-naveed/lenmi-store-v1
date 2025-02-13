@@ -13,7 +13,7 @@ import { TbMessageDots } from "react-icons/tb";
 import { IoSettingsOutline } from "react-icons/io5"
 import axios from 'axios';
 import { useCart } from './CartProvider';
-import { redirect, useRouter } from 'next/navigation';
+import { redirect, useRouter, useSearchParams } from 'next/navigation';
 import { useSearchQuery } from './SearchContext';
 
 interface ApiResponse {
@@ -89,14 +89,14 @@ export default function Navbar() {
     }, [length])
     
     let router = useRouter()
-    
+    const searchParams = useSearchParams();
     async function handleSearch(data:any) {
+        const params = new URLSearchParams(searchParams.toString());
         
-        let searchValue = await data.trim().replace(/\s+/g, "+");
-        const res = await axios.get(`/product-search/api/?q=${encodeURIComponent(searchValue)}`, {data})
-
-        router.push(`/product-search/?q=${searchValue}`)
+        params.set('q', data);
+        router.push(`/product-search/?${params.toString()}`)
         
+        const res = await axios.get(`/product-search/api/?${params.toString()}`, {data})
         
         if(await res.data.message == "done") {
             setQuery(await res.data.data)
