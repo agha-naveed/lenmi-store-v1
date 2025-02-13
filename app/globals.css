@@ -229,3 +229,27 @@ input[type="number"] {
 .overlay-btn-inverse::before {
   background-color: #f08a06;
 }
+
+
+.review-txtarea::-webkit-scrollbar {
+  padding: 10px 0;
+  width: 10px;
+  border-radius: 10px;
+}
+
+.review-txtarea::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 5px;
+}
+
+/* Handle */
+.review-txtarea::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+.review-txtarea::-webkit-scrollbar-thumb:hover {
+  background: #555;
+  cursor: pointer;
+}
