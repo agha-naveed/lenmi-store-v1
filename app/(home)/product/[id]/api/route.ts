@@ -42,16 +42,28 @@ export async function PATCH(req:NextRequest, { params }: { params: Promise<{ id:
     let param = await params
     let productId = param.id
 
-    await ProductReview.insertMany([
-        {
-            userId: decodedData.obj_id,
-            productId,
-            rating: data.rating,
-            comment: data.data
-        }
-    ])
+    let isExist = await ProductReview.findOne({ userId: decodedData.obj_id, productId })
 
-    return NextResponse.json({
-        message: 'ok',
-    }, { status: 201 })
+
+    if(!isExist) {
+        await ProductReview.insertMany([
+            {
+                userId: decodedData.obj_id,
+                productId,
+                rating: data.rating,
+                comment: data.data
+            }
+        ])
+
+        return NextResponse.json({
+            message: 'ok',
+        }, { status: 201 })
+    }
+
+    else {
+        return NextResponse.json({
+            message: 'Duplicate Review',
+        }, { status: 409 })
+    }
+
 }
