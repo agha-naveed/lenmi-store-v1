@@ -9,6 +9,7 @@ import Link from 'next/link';
 import axios from 'axios';
 import { useParams } from 'next/navigation';
 import { useCart } from '@/app/components/CartProvider';
+import Review from '@/app/components/Review';
 
 export default function page() {
 
@@ -234,6 +235,11 @@ export default function page() {
         <button className='py-2 px-6 bg-slate-400 rounded-full'>
           Add a Review
         </button>
+        <div className='w-full h-full bg-zinc-800/50 backdrop-blur-[5px] fixed top-0 left-0 z-[200]'>
+          <div className='fixed top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]'>
+            <Review />
+          </div>
+        </div>
       </div>
 
     </section>
