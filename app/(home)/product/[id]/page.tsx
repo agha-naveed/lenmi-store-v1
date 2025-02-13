@@ -28,7 +28,7 @@ export default function page() {
   async function onSubmit() {
     let data = txtAreaRef.current?.value
 
-    const res = await axios.patch(`/product/${param.id}/api`, {data})
+    const res = await axios.patch(`/product/${param.id}/api`, {data, rating: ratingClicked})
     
   }
   

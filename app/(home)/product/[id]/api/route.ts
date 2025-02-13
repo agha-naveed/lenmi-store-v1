@@ -1,5 +1,6 @@
 import dbConnection from "@/lib/database/dbConnection";
 import Product from "@/lib/database/model/product";
+import ProductReview from "@/lib/database/model/product-review";
 import { NextRequest, NextResponse } from "next/server";
 
 
@@ -25,5 +26,13 @@ export async function GET(req:NextRequest, { params }: { params: Promise<{ id: s
 }
 
 export async function PATCH(req:NextRequest, { params }: { params: Promise<{ id: string }> }) {
+    await dbConnection()
+
     
+
+    await ProductReview.insertMany([
+        {
+
+        }
+    ])
 }
