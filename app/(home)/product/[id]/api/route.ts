@@ -23,3 +23,7 @@ export async function GET(req:NextRequest, { params }: { params: Promise<{ id: s
         return NextResponse.json({message: "No data with given ID"}, { status: 404 })
     }
 }
+
+export async function PATCH(req:NextRequest, { params }: { params: Promise<{ id: string }> }) {
+    
+}
