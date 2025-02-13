@@ -11,7 +11,7 @@ const productReview = new Schema<IReview>({
     userId: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-        required: true
+        required: true,
     },
     productId: {
         type: Schema.Types.ObjectId,
@@ -26,7 +26,7 @@ const productReview = new Schema<IReview>({
     }
 })
 
-const ProductReview = mongoose.models.ProductReview || mongoose.model<IReview>('ProductReview', productReview);
+const ProductReview = mongoose.models.Product_Review || mongoose.model<IReview>('Product_Review', productReview);
 
 
 export default ProductReview;
