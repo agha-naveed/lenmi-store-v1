@@ -13,13 +13,18 @@ export async function GET(req:NextRequest, { params }: { params: Promise<{ id: s
 
     let data = await Product.findById(p_id.id)
 
+    const cookie = await cookies()
+
+    let objId = cookie.get("u_obj_i")
+
     try {
         if(!data) {
             return NextResponse.json({message: "No data with given ID"}, { status: 404 })
         }
         return NextResponse.json({
             message: "ok",
-            data
+            data,
+            login: objId ? true : false
         }, { status: 200})
 
     } catch(err) {

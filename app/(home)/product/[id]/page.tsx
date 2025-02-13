@@ -17,11 +17,9 @@ export default function page() {
 
   const param = useParams()
   
-  // Review
+  // --------- Review ---------
   let [rating, setRating] = useState(0)
   let [ratingClicked, setRatingClicked] = useState(0)
-  
-  let [reviewComment, setReviewComment] = useState('')
   
   let txtAreaRef = useRef<any>(null)
 
@@ -35,16 +33,16 @@ export default function page() {
     catch(err) {
       alert("Only one Review per Product")
     }
-    
   }
   
-  // Review Ended
+  // --------- Review Ended ---------
 
   
 
   const { length, setLength } = useCart()
 
   const [openReview, setOpenReview] = useState(false)
+  const [isLogin, setIsLogin] = useState(false)
 
   const [quantity, setQuantity] = useState(1)
   
@@ -61,6 +59,8 @@ export default function page() {
       if(res.status === 200) {
         setFetchData(await datas)
         setImages(datas.imgURL)
+        setIsLogin(await res.data.login)
+        console.log(await res.data.login)
       }
       else {
         console.log("Nhi")
@@ -261,7 +261,7 @@ export default function page() {
       </div>
 
       {/* Review */}
-      <div className='w-full'>
+      <div className={`w-full ${isLogin ? "block" : "hidden"}`}>
         <button className='py-2 px-6 bg-slate-400 rounded-full' onClick={() => setOpenReview(true)}>
           Add a Review
         </button>
