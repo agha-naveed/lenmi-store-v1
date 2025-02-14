@@ -28,7 +28,7 @@ export default function page() {
 
 
 
-const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       setSelectedImage((prevImages) => [
@@ -51,7 +51,7 @@ const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
   };
 
 
-  let [fetchReviews, setFetchReviews] = useState<any>()
+  let [fetchReviews, setFetchReviews] = useState<any>([])
   
   let [rating, setRating] = useState(0)
   let [ratingClicked, setRatingClicked] = useState(0)
@@ -332,6 +332,7 @@ const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
 
       </div>
 
+
       {/* Review */}
       <section className='justify-self-start'>
         <div>
@@ -484,7 +485,16 @@ const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
         </div>
 
         <div className='w-full py-5 border-r'>
-          <ProductReviews value={fetchReviews} />
+          {
+            // fetchReviews ?
+            fetchReviews.map((item:any, index:number) => {
+              return (
+                <ProductReviews key={`product-review-${index}`} data={item} />
+              )
+            })
+            // :
+            // <p>Loading...</p>
+          }
         </div>
       </section>
 

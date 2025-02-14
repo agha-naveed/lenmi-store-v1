@@ -2,16 +2,25 @@
 
 import { IoStar } from "react-icons/io5";
 import { AiOutlineLike } from "react-icons/ai";
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import jethalal from '@/images/jethalal.jpeg'
 import Image from 'next/image'
 import Link from "next/link";
 
-export default function ProductReviews(value:any) {
+export default function ProductReviews({data}:any) {
   
   const [isLiked, setIsLiked] = useState(false)
 
-  
+  let ratingCount:number[] = []
+
+  useEffect(() => {
+      for(let i=0; i<data.rating; i++) {
+        ratingCount.push(i);
+      }
+
+      console.log(ratingCount)
+
+  }, [])
 
   return (
     <div className='font-opensans grid gap-4 max-h-[320px] overflow-auto border-y py-8 px-5'>
@@ -24,11 +33,15 @@ export default function ProductReviews(value:any) {
           <div className="grid">
             <span className='font-medium content-center'>Syed Naveed Abbas</span>
             <div className="flex gap-[1px] text-orangeClr">
-              <IoStar />
-              <IoStar />
-              <IoStar />
-              <IoStar />
-              <IoStar />
+              {
+                ratingCount ?
+                ratingCount.map<any>((item, index) => {
+                  return (
+                    <IoStar key={`rating-star-${index}`} />
+                  )
+                })
+                : <p>Loading...</p>
+              }
             </div>
           </div>
         </div>
