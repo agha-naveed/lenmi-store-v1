@@ -4,13 +4,12 @@ import { useState, useRef, useEffect, useInsertionEffect, ChangeEvent } from 're
 import Image from 'next/image'
 import { GoStarFill } from "react-icons/go";
 import { MdLocationOn } from "react-icons/md";
-import { IoIosArrowForward, IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowForward, IoIosArrowDown, IoIosStar } from "react-icons/io";
 import Link from 'next/link';
 import axios from 'axios';
 import { useParams } from 'next/navigation';
 import { useCart } from '@/app/components/CartProvider';
-import { IoClose } from "react-icons/io5";
-import { IoIosStar } from "react-icons/io";
+import { IoClose, IoCloseCircle } from "react-icons/io5";
 import jethalal from '@/images/jethalal.jpeg'
 import ProductReviews from '@/app/components/ProductReviews';
 
@@ -53,8 +52,6 @@ const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
 
 
 
-// ---------- Review Image Ended -------------
-
   
   let [rating, setRating] = useState(0)
   let [ratingClicked, setRatingClicked] = useState(0)
@@ -90,9 +87,13 @@ const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
       }
 
     }
-    
+
+
+  // ---------- Review Image Ended -------------
+
+
     try {
-      const res = await axios.patch(`/product/${param.id}/api`, {data, rating: ratingClicked})
+      const res = await axios.patch(`/product/${param.id}/api`, {data, rating: ratingClicked, images: uploadedUrls})
 
     }
     catch(err) {
@@ -335,7 +336,7 @@ const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
             <div className='fixed top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]'>
               
               
-              <div className={`w-[550px] h-96 bg-white shadow-xl rounded-lg p-4 font-opensans flex flex-col gap-3 overflow-hidden`}>
+              <div className={`w-[550px] h-fit bg-white shadow-xl rounded-lg p-4 font-opensans flex flex-col gap-3 overflow-hidden`}>
                 <div className='flex justify-between items-center'>
                     <button className='w-7 h-7 flex justify-center items-center text-xl rounded-full' title='Cancel' onClick={() => setOpenReview(false)}>
                         <IoClose />
@@ -425,9 +426,43 @@ const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
 
                 </div>
 
-                <textarea className='review-txtarea border-t w-full h-[155px] resize-none rounded-[8px] py-2 px-3' ref={txtAreaRef} placeholder='How was the product?'></textarea>
+                <textarea className='review-txtarea border-t w-full h-[155px] resize-none rounded-[8px] py-2 px-3 outline-none' ref={txtAreaRef} placeholder='How was the product?'></textarea>
                 
-                <button className='border border-slate-800 text-slate-800 w-fit py-[6px] px-3 rounded-full'>Add Photo</button>
+                <div className='h-fit content-end grid gap-2'>
+                  <div className='flex gap-2'>
+                    {selectedImage.map((imgs, index) => (
+                      <div
+                        key={`${imgs}-${index}`}
+                        className="flex justify-center items-center w-[100px] h-[100px] border border-gray-500 rounded-lg overflow-hidden relative"
+                      >
+                        <Image
+                          src={imgs}
+                          alt=""
+                          width={300}
+                          height={300}
+                          className="w-full h-full object-cover"
+                        />
+                        <IoCloseCircle
+                          title="remove picture"
+                          className="absolute w-5 h-5 top-0 right-0 z-20 cursor-pointer"
+                          onClick={() => handleRemoveImage(imgs)}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <label htmlFor="review-img" className='cursor-pointer border border-slate-800 text-slate-800 w-fit py-[6px] px-3 rounded-full'>
+                    Add Photo
+                    <input type="file"
+                      name=""
+                      className='hidden'
+                      id="review-img"
+                      accept="image/*"
+                      disabled={selectedImage.length === 3}
+                      onChange={handleImageChange}
+                    />
+                  </label>
+                </div>
               </div>
 
 

@@ -5,6 +5,7 @@ interface IReview extends Document {
     productId: Schema.Types.ObjectId;
     rating: string;
     comment: string;
+    images: string;
 }
 
 const productReview = new Schema<IReview>({
@@ -23,7 +24,10 @@ const productReview = new Schema<IReview>({
     },
     comment: {
         type: String
-    }
+    },
+    images: [{
+        type: String
+    }]
 })
 
 
