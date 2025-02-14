@@ -13,6 +13,18 @@ export default function ProductReviews({data}:any) {
 
   let [ratingCount, setRatingCount] = useState([])
 
+  let date = data.date.slice(0, 10)
+
+  let year = date.slice(0, 4)
+  let monthArray = date.slice(5, 7)
+  let onlyDate = date.slice(8, 10)
+
+  if(monthArray[0] == 0) {
+    monthArray = monthArray[1]
+  }
+
+  let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
   useEffect(() => {
     let newArray:any = []
     for(let i=0; i<data.rating; i++) {
@@ -45,7 +57,7 @@ export default function ProductReviews({data}:any) {
             </div>
           </div>
         </div>
-        <p className="text-[15px] text-zinc-800 content-center">Date: Feb 8, 2025</p>
+        <p className="text-[15px] text-zinc-800 content-center">Date: {months[monthArray - 1]} {onlyDate}, {year}</p>
       </div>
         
       <div className="grid gap-5">
