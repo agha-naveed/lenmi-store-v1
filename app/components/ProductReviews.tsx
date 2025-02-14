@@ -11,15 +11,14 @@ export default function ProductReviews({data}:any) {
   
   const [isLiked, setIsLiked] = useState(false)
 
-  let ratingCount:number[] = []
+  let [ratingCount, setRatingCount] = useState([])
 
   useEffect(() => {
-      for(let i=0; i<data.rating; i++) {
-        ratingCount.push(i);
-      }
-
-      console.log(ratingCount)
-
+    let newArray:any = []
+    for(let i=0; i<data.rating; i++) {
+      newArray.push(i)
+    }
+    setRatingCount(newArray)
   }, [])
 
   return (
@@ -34,8 +33,8 @@ export default function ProductReviews({data}:any) {
             <span className='font-medium content-center'>Syed Naveed Abbas</span>
             <div className="flex gap-[1px] text-orangeClr">
               {
-                ratingCount ?
-                ratingCount.map<any>((item, index) => {
+                ratingCount.length > 0 ?
+                ratingCount.map((item, index) => {
                   return (
                     <IoStar key={`rating-star-${index}`} />
                   )
