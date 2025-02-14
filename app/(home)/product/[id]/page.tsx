@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect, useInsertionEffect } from 'react';
+import { useState, useRef, useEffect, useInsertionEffect, ChangeEvent } from 'react';
 import Image from 'next/image'
 import { GoStarFill } from "react-icons/go";
 import { MdLocationOn } from "react-icons/md";
@@ -18,7 +18,44 @@ export default function page() {
 
   const param = useParams()
   
+
   // --------- Review ---------
+
+  // ---------- Review Image -------------
+
+
+  let [selectedImage, setSelectedImage] = useState<string[]>([]);
+  const [files, setFiles] = useState<File[]>([]);
+
+
+
+const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setSelectedImage((prevImages) => [
+        ...prevImages,
+        URL.createObjectURL(file),
+      ]);
+      setFiles((prevFiles) => [...prevFiles, file]);
+    }
+  };
+
+  const handleRemoveImage = (imageUrl: string) => {
+    setSelectedImage((prevImages) => {
+      const indexToRemove = prevImages.indexOf(imageUrl);
+      if (indexToRemove === -1) return prevImages;
+  
+      setFiles((prevFiles) => prevFiles.filter((_, index) => index !== indexToRemove));
+  
+      return prevImages.filter((image) => image !== imageUrl);
+    });
+  };
+
+
+
+// ---------- Review Image Ended -------------
+
+  
   let [rating, setRating] = useState(0)
   let [ratingClicked, setRatingClicked] = useState(0)
   
@@ -27,6 +64,33 @@ export default function page() {
   async function onSubmit() {
     let data = txtAreaRef.current?.value
 
+    const uploadedUrls: string[] = [];
+
+    let myFile;
+    for (let i = 0; i < files.length; i++) {
+      const picData = new FormData();
+      picData.append("file", files[i]);
+      picData.append("upload_preset", "my-images");
+  
+      try {
+        const cloudRes = await fetch(
+          `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+          {
+            method: "POST",
+            body: picData,
+          }
+        );
+  
+        myFile = await cloudRes.json();
+        if (myFile.secure_url) {
+          uploadedUrls.push(await myFile.secure_url);
+        }
+      } catch (error) {
+        console.error("Upload error:", error);
+      }
+
+    }
+    
     try {
       const res = await axios.patch(`/product/${param.id}/api`, {data, rating: ratingClicked})
 
@@ -35,7 +99,7 @@ export default function page() {
       alert("Only one Review per Product")
     }
   }
-  
+
   // --------- Review Ended ---------
 
   
@@ -267,11 +331,11 @@ export default function page() {
             Add a Review
           </button>
           <div className={`w-full h-full bg-zinc-800/50 backdrop-blur-[5px] fixed top-0 left-0 z-[200]
-            ${openReview ? "block" : "hidden"}`}>
+            ${openReview ? "hidden" : "block"}`}>
             <div className='fixed top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]'>
               
               
-              <div className={`w-[550px] h-96 bg-white shadow-xl rounded-lg p-4 font-opensans flex flex-col gap-5 overflow-hidden`}>
+              <div className={`w-[550px] h-96 bg-white shadow-xl rounded-lg p-4 font-opensans flex flex-col gap-3 overflow-hidden`}>
                 <div className='flex justify-between items-center'>
                     <button className='w-7 h-7 flex justify-center items-center text-xl rounded-full' title='Cancel' onClick={() => setOpenReview(false)}>
                         <IoClose />
@@ -361,8 +425,9 @@ export default function page() {
 
                 </div>
 
-                <textarea className='review-txtarea border border-zinc-400 w-full h-[155px] resize-none rounded-[8px] py-2 px-3' ref={txtAreaRef} placeholder='How was the product?'></textarea>
+                <textarea className='review-txtarea border-t w-full h-[155px] resize-none rounded-[8px] py-2 px-3' ref={txtAreaRef} placeholder='How was the product?'></textarea>
                 
+                <button className='border border-slate-800 text-slate-800 w-fit py-[6px] px-3 rounded-full'>Add Photo</button>
               </div>
 
 
@@ -373,13 +438,9 @@ export default function page() {
 
         </div>
 
-        
-      <div className='w-full py-5 border-r'>
-        <ProductReviews />
-
-      </div>
-
-
+        <div className='w-full py-5 border-r'>
+          <ProductReviews />
+        </div>
       </section>
 
       
