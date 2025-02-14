@@ -2,12 +2,15 @@
 
 import { IoStar } from "react-icons/io5";
 import { AiOutlineLike } from "react-icons/ai";
-import React from 'react'
+import React, { useState } from 'react'
 import jethalal from '@/images/jethalal.jpeg'
 import Image from 'next/image'
 import Link from "next/link";
 
 export default function ProductReviews() {
+  
+  const [isLiked, setIsLiked] = useState(false)
+
   return (
     <div className='font-opensans grid gap-4 max-h-[320px] overflow-auto border-y py-8 px-5'>
       
@@ -45,10 +48,15 @@ export default function ProductReviews() {
         </div>
       </div>
 
-      <button title="Like if you find Helpful" className="flex items-center gap-1 w-fit bg-slate-800 p-2 transition-all hover:px-4 group rounded-full text-white">
-        <AiOutlineLike className="text-2xl" />
-        <span className={`font-medium transition-all text-[18px] hidden group-hover:block`}>Like</span>
-      </button>
+      <div className="flex items-center">
+        <button title="Like if you find Helpful"
+        onClick={() => setIsLiked(!isLiked)}
+        className="relative flex items-center gap-1 w-fit p-2 transition-all group rounded-full text-white bg-slate-800 hover:px-4">
+          <AiOutlineLike className="text-2xl" />
+          <p className="hidden group-hover:block">Like</p>
+        </button>
+        <p className="font-medium text-xl ml-2">{isLiked ? 1 : 0}</p>
+      </div>
 
     </div>
   )
