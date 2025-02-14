@@ -59,45 +59,52 @@ const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
   let txtAreaRef = useRef<any>(null)
 
   async function onSubmit() {
+
     let data = txtAreaRef.current?.value
 
-    const uploadedUrls: string[] = [];
+    try {
+      const checkDuplication = await axios.post(`/product/${param.id}/api`)
 
-    let myFile;
-    for (let i = 0; i < files.length; i++) {
-      const picData = new FormData();
-      picData.append("file", files[i]);
-      picData.append("upload_preset", "my-images");
-  
-      try {
-        const cloudRes = await fetch(
-          `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
-          {
-            method: "POST",
-            body: picData,
+
+      const uploadedUrls: string[] = [];
+
+      let myFile;
+      for (let i = 0; i < files.length; i++) {
+        const picData = new FormData();
+        picData.append("file", files[i]);
+        picData.append("upload_preset", "my-images");
+    
+        try {
+          const cloudRes = await fetch(
+            `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+            {
+              method: "POST",
+              body: picData,
+            }
+          );
+    
+          myFile = await cloudRes.json();
+          if (myFile.secure_url) {
+            uploadedUrls.push(await myFile.secure_url);
           }
-        );
-  
-        myFile = await cloudRes.json();
-        if (myFile.secure_url) {
-          uploadedUrls.push(await myFile.secure_url);
+        } catch (error) {
+          console.error("Upload error:", error);
         }
-      } catch (error) {
-        console.error("Upload error:", error);
+
       }
 
-    }
+
+    // ---------- Review Image Ended -------------
 
 
-  // ---------- Review Image Ended -------------
-
-
-    try {
-      const res = await axios.patch(`/product/${param.id}/api`, {data, rating: ratingClicked, images: uploadedUrls})
-
-    }
-    catch(err) {
-      alert("Only one Review per Product")
+      try {
+        const res = await axios.patch(`/product/${param.id}/api`, {data, rating: ratingClicked, images: uploadedUrls})
+      }
+      catch(err) {
+        alert("Only one Review per Product")
+      }
+    } catch(err) {
+      alert("Duplicate Entry")
     }
   }
 
