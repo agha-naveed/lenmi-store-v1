@@ -374,7 +374,7 @@ export default function page() {
         </div>
 
         
-      <div className='w-full'>
+      <div className='w-full py-5 border-r'>
         <ProductReviews />
 
       </div>
