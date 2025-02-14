@@ -13,6 +13,8 @@ export async function GET(req:NextRequest, { params }: { params: Promise<{ id: s
 
     let data = await Product.findById(p_id.id)
 
+    let productReview = await ProductReview.find().limit(5)
+
     const cookie = await cookies()
 
     let objId = cookie.get("u_obj_i")
@@ -24,6 +26,7 @@ export async function GET(req:NextRequest, { params }: { params: Promise<{ id: s
         return NextResponse.json({
             message: "ok",
             data,
+            reviews: productReview,
             login: objId ? true : false
         }, { status: 200})
 
@@ -47,7 +50,6 @@ export async function POST(req:NextRequest, { params }: { params: Promise<{ id: 
     let param = await params
     let productId = param.id
 
-    
     let isExist = await ProductReview.findOne({ userId: decodedData.obj_id, productId })
 
     if(isExist) {

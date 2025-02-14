@@ -7,9 +7,11 @@ import jethalal from '@/images/jethalal.jpeg'
 import Image from 'next/image'
 import Link from "next/link";
 
-export default function ProductReviews() {
+export default function ProductReviews(value:any) {
   
   const [isLiked, setIsLiked] = useState(false)
+
+  
 
   return (
     <div className='font-opensans grid gap-4 max-h-[320px] overflow-auto border-y py-8 px-5'>

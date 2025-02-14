@@ -51,7 +51,7 @@ const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
   };
 
 
-
+  let [fetchReviews, setFetchReviews] = useState<any>()
   
   let [rating, setRating] = useState(0)
   let [ratingClicked, setRatingClicked] = useState(0)
@@ -96,7 +96,6 @@ const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
 
     // ---------- Review Image Ended -------------
 
-
       try {
         const res = await axios.patch(`/product/${param.id}/api`, {data, rating: ratingClicked, images: uploadedUrls})
       }
@@ -133,6 +132,7 @@ const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
         setFetchData(await datas)
         setImages(datas.imgURL)
         setIsLogin(await res.data.login)
+        setFetchReviews(await res.data.reviews)
       }
       else {
         console.log("Nhi")
@@ -334,12 +334,15 @@ const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
 
       {/* Review */}
       <section className='justify-self-start'>
-        <div className={`w-full ${isLogin ? "block" : "hidden"}`}>
+        <div>
           <button className='py-2 px-6 bg-slate-400 rounded-full' onClick={() => setOpenReview(true)}>
             Add a Review
           </button>
+
+
+          
           <div className={`w-full h-full bg-zinc-800/50 backdrop-blur-[5px] fixed top-0 left-0 z-[200]
-            ${openReview ? "hidden" : "block"}`}>
+            ${openReview ? "block" : "hidden"}`}>
             <div className='fixed top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]'>
               
               
@@ -481,7 +484,7 @@ const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
         </div>
 
         <div className='w-full py-5 border-r'>
-          <ProductReviews />
+          <ProductReviews value={fetchReviews} />
         </div>
       </section>
 
