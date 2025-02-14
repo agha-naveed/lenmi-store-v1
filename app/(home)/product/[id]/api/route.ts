@@ -13,7 +13,7 @@ export async function GET(req:NextRequest, { params }: { params: Promise<{ id: s
 
     let data = await Product.findById(p_id.id)
 
-    let productReview = await ProductReview.find().limit(5)
+    let productReview = await ProductReview.find().populate('userId', 'first_name last_name').limit(5)
 
     const cookie = await cookies()
 
@@ -85,7 +85,8 @@ export async function PATCH(req:NextRequest, { params }: { params: Promise<{ id:
                 productId,
                 rating: data.rating,
                 comment: data.data,
-                images: data.images
+                images: data.images,
+                date: Date.now()
             }
         ])
 

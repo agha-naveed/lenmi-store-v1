@@ -19,6 +19,7 @@ export default function ProductReviews({data}:any) {
       newArray.push(i)
     }
     setRatingCount(newArray)
+    console.log(data)
   }, [])
 
   return (
@@ -30,7 +31,7 @@ export default function ProductReviews({data}:any) {
               <Image src={jethalal} alt='' className='w-full h-full object-cover' />
           </div>
           <div className="grid">
-            <span className='font-medium content-center'>Syed Naveed Abbas</span>
+            <span className='font-medium content-center'>{data.userId.first_name} {data.userId.last_name}</span>
             <div className="flex gap-[1px] text-orangeClr">
               {
                 ratingCount.length > 0 ?

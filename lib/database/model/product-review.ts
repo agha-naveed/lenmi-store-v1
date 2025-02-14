@@ -6,6 +6,7 @@ interface IReview extends Document {
     rating: string;
     comment: string;
     images: string;
+    date: Date;
 }
 
 const productReview = new Schema<IReview>({
@@ -27,7 +28,11 @@ const productReview = new Schema<IReview>({
     },
     images: [{
         type: String
-    }]
+    }],
+    date: {
+        type: Date,
+        default: Date.now()
+    }
 })
 
 
