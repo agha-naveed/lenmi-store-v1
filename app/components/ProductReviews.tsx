@@ -57,7 +57,7 @@ export default function ProductReviews({data}:any) {
             </div>
           </div>
         </div>
-        <p className="text-[15px] text-zinc-800 content-center">Date: {months[monthArray - 1]} {onlyDate}, {year}</p>
+        <p className="text-[15px] text-zinc-800 content-center">Date: {months[monthArray - 1]}{onlyDate}, {year}</p>
       </div>
         
       <div className="grid gap-5">

@@ -163,7 +163,7 @@ export default function Navbar() {
                                                     <TbMessageDots className='text-[18px]' />Messages
                                                 </li>
                                                 <li>
-                                                    <Link href={"setting"} className='p-[10px] rounded-lg hover:bg-gray-200 cursor-pointer transition-all flex items-center gap-2 text-[16px]'>
+                                                    <Link href={"/setting"} className='p-[10px] rounded-lg hover:bg-gray-200 cursor-pointer transition-all flex items-center gap-2 text-[16px]'>
                                                         <IoSettingsOutline className='text-[18px]' />Settings
                                                     </Link>
                                                 </li>
