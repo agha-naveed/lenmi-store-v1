@@ -10,7 +10,10 @@ import { redirect } from "next/navigation";
 
 export default function page() {
 
-  const [image, setImage] = useState<File | null>(null)
+  const [image, setImage] = useState<File>()
+
+ 
+  
   const [message, setMessage] = useState<APIData>({
     first_name: "",
     last_name: "",
@@ -48,7 +51,7 @@ export default function page() {
     email: string;
     password: string;
     account_type: string;
-    profile_pic: File | null;
+    profile_pic: File[];
   }
 
   interface APIData {
@@ -95,11 +98,37 @@ export default function page() {
   }
   
 
+  async function dpChange() {
+    
+
+    let imgForm = new FormData()
+
+    if(image) {
+      imgForm.append("file", image);
+      imgForm.append("upload_preset", "my-images");
+    }
+
+    try {
+      const cloudRes = await fetch(`https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+        {
+          method: "POST",
+          body: imgForm,
+        }
+      );
+      
+      let myFile = await cloudRes.json();
+
+      console.log(myFile.secure_url)
+    } catch(err) {
+      console.log(err)
+    }
+  }
+
 
   const onSubmit = async (data: IFormInputs) => {
 
       let myData = data
-      myData['profile_pic'] = image
+      // myData['profile_pic'] = image
 
       const res = await axios.post("/setting/api", myData, {
         withCredentials: true
@@ -152,7 +181,10 @@ export default function page() {
                 type="file"
                 id="fileToUpload"
                 accept="image/*" className="hidden"
-                onChange={(e: ChangeEvent<HTMLInputElement>) => {e.target?.files?.[0] ? setImage(e.target?.files?.[0]) : setImage(null)}}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  e.target?.files?.[0] ? setImage(e.target?.files?.[0]) : setImage(undefined);
+                  dpChange()
+                }}
               />
             </div>
 
