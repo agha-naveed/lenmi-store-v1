@@ -198,7 +198,6 @@ export default function page() {
               disabled={selectedImage.length === 5}
               className="hidden"
               onChange={handleImageChange}
-            // {...register('files')}
             />
           </div>
 

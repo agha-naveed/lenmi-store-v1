@@ -10,7 +10,7 @@ import { redirect } from "next/navigation";
 
 export default function page() {
 
-  const [image, setImage] = useState<File>()
+  const [image, setImage] = useState<File[]>([])
 
  
   
@@ -98,13 +98,14 @@ export default function page() {
   }
   
 
+
   async function dpChange() {
     
 
     let imgForm = new FormData()
 
     if(image) {
-      imgForm.append("file", image);
+      imgForm.append("file", image[0]);
       imgForm.append("upload_preset", "my-images");
     }
 
@@ -181,9 +182,13 @@ export default function page() {
                 type="file"
                 id="fileToUpload"
                 accept="image/*" className="hidden"
-                onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                  e.target?.files?.[0] ? setImage(e.target?.files?.[0]) : setImage(undefined);
-                  dpChange()
+                onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                  const file = event.target.files?.[0];
+                  if(file) {
+                    setImage(() => [file]);
+                    dpChange()
+                  }
+
                 }}
               />
             </div>

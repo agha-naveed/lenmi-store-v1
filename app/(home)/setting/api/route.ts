@@ -8,13 +8,13 @@ import { cookies } from 'next/headers';
 export async function POST(req: NextRequest) {
     
     await dbConnection()
-    const {first_name, last_name, phone_number, email, password, profile_pic} : {
+    const {first_name, last_name, phone_number, email, password} : {
         first_name: string,
         last_name: string,
         phone_number: number
         email: string,
         password: string
-        profile_pic: File
+        // profile_pic: File
     } = await req.json()
 
 
@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
                 first_name,
                 last_name,
                 phone_number,
-                profile_pic,
+                // profile_pic,
                 password: hashedPassword
             }
         })
