@@ -34,6 +34,11 @@ export default function Navbar() {
     const [searchInput, setSearchInput] = useState<string>('')
     const [logOut, setLogOut] = useState(false)
 
+    useEffect(() => {
+        if(!window.location.pathname.includes("/product-search")) {
+            setSearchInput("")
+        }
+    }, [])
 
     useEffect(() => {
         
@@ -120,6 +125,7 @@ export default function Navbar() {
                             outline-none
                             font-opensans
                             font-medium'
+                            value={searchInput}
                             onInput={(e:React.ChangeEvent<HTMLInputElement>) => {
                                 setSearchInput(e.target.value)
                             }}

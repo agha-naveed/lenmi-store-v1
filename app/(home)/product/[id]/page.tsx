@@ -185,13 +185,13 @@ export default function page() {
         <div className='grid gap-10'>
           <div className='md:flex grid sm:border xl:border-transparent rounded-xl md:border-black md:w-full w-fit h-fit xl:gap-5 gap-3 justify-items-center'>
             
-            <div onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} className='md:w-[400px] md:h-[400px] w-[300px] h-auto p-3 overflow-hidden cursor-pointer border border-gray-400 rounded-xl'>
+            <div onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} className='md:w-[400px] md:h-[400px] w-[300px] h-auto overflow-hidden cursor-pointer border border-gray-400 rounded-xl'>
               {
                 images[selectImage] && images[selectImage].trim() !== "" ?
                   <img ref={imageRef}
                   src={images[selectImage]}
-                  alt='Jacket' style={{transform: `scale(${zoom})`, transformOrigin: `${offset.x}px ${offset.y}px`, transition: 'tranform 0.3s ease-out'}} width={1000} height={1000} className='w-full h-full object-contain' />
-                : <h2>Loading...</h2>
+                  alt='Jacket' style={{transform: `scale(${zoom})`, transformOrigin: `${offset.x}px ${offset.y}px`, transition: 'tranform 0.3s ease-out'}} width={500} height={500} className='w-full h-full object-contain' />
+                : <h2 className='h-full w-full flex justify-center items-center'>Loading...</h2>
               }
             </div>
 

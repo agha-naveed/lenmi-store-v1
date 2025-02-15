@@ -97,7 +97,6 @@ export default function page() {
 
 
   const onSubmit = async (data: IFormInputs) => {
-      // data['profile_pic'] = image
 
       let myData = data
       myData['profile_pic'] = image
