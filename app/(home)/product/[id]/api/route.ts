@@ -13,7 +13,7 @@ export async function GET(req:NextRequest, { params }: { params: Promise<{ id: s
 
     let data = await Product.findById(p_id.id)
 
-    let productReview = await ProductReview.find().populate('userId', 'first_name last_name').limit(5)
+    let productReview = await ProductReview.find({productId: data}).populate('userId', 'first_name last_name').limit(5)
 
     const cookie = await cookies()
 

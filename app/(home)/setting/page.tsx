@@ -162,7 +162,6 @@ export default function page() {
   const onSubmit = async (data: IFormInputs) => {
 
       let myData = data
-      // myData['profile_pic'] = image
 
       const res = await axios.post("/setting/api", myData, {
         withCredentials: true
