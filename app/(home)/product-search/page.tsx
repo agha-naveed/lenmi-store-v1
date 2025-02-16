@@ -215,9 +215,15 @@ export default function Page() {
         </aside>
 
         {/* 📦 Product Results */}
-        <main>
-          <div className="product-search-items flex flex-wrap md:justify-start justify-center">
+        <main className="w-full">
+          <div className="w-full h-full product-search-items flex flex-wrap md:justify-start justify-center">
             {query ? (
+              query.length == 0 ?
+              <div className="w-full h-full content-center text-center">
+                <h2 className="font-semibold text-5xl">404!</h2>
+                <span className="font-medium">No Data Found!</span>
+              </div>
+              :
               query.map((item: any, index: number) => (
                 <ProductCard key={`search-items-${index}`} data={item} />
               ))
