@@ -2,8 +2,7 @@
 import React, { useInsertionEffect, useState, ChangeEvent, useEffect } from "react";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
-import defaultPic from "@/images/jethalal.jpeg";
-// import defaultPic from "@/images/account/default-pic.jpg";
+import defaultPic from "@/images/account/default-pic.jpg";
 import axios from "axios";
 import Form from "next/form";
 import { redirect } from "next/navigation";
@@ -19,7 +18,7 @@ export default function page() {
     email: "",
     password: "",
     account_type: "",
-    profile_pic: null
+    profile_pic: ""
   });
 
   const [update, setUpdate] = useState("")
@@ -59,7 +58,7 @@ export default function page() {
     email: string;
     password: string;
     account_type: string;
-    profile_pic: File | null;
+    profile_pic: File | "";
   }
   
   let [imageURL, setImageURL] = useState<string | undefined>(undefined)
@@ -68,7 +67,7 @@ export default function page() {
     if(imageURL) {
       const data = async () => {
         const res = await axios.patch("/setting/api", {imageURL})
-        console.log()
+        console.log(message)
       }
       data()
     }
@@ -98,6 +97,7 @@ export default function page() {
       }
       if (res.data != "error") {
         setMessage(res.data);
+        setImageURL(await res.data.profile_pic)
         reset({
           first_name: res.data.first_name,
           last_name: res.data.last_name,
@@ -192,12 +192,24 @@ export default function page() {
       >
         <div className="w-[200px] justify-items-center grid gap-5 content-start px-1">
           <div className="w-[135px] h-[135px] rounded-full overflow-hidden border-2 p-1">
-            <Image
+            {
+              imageURL ? 
+              <Image
+              src={imageURL}
+              className="rounded-full h-full w-full object-cover"
+              alt="Default Profile picture"
+              width={300}
+              height={300}
+            />
+            : <Image
               src={defaultPic}
               placeholder="blur"
               className="rounded-full h-full w-full object-cover"
               alt="Default Profile picture"
-            />
+              width={300}
+              height={300}
+              />
+            }
           </div>
           <div className="flex flex-col gap-1">
             <div className="grid text-center">
