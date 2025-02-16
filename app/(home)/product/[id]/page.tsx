@@ -131,7 +131,6 @@ export default function page() {
       let datas = await res.data.data
 
       if(res.status === 200) {
-        console.log(await res.data.userData)
         setDp(await res.data.userData)
         setFetchData(await datas)
         setImages(datas.imgURL)

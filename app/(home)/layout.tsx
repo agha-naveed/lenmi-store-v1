@@ -5,6 +5,7 @@ import { Suspense } from "react";
 import Loader from "../components/Loading";
 import { CartProvider } from "../components/CartProvider";
 import { SearchProvider } from "../components/SearchContext";
+import Footer from "../components/Footer";
 
 export const metadata: Metadata = {
   title: "Lenmi Store Online Shopping Platform",
@@ -25,6 +26,7 @@ export default function RootLayout(props: {
                 <Suspense fallback={<Loader />}>
                   {props.children}
                   {props.modal}
+                  <Footer />
                 </Suspense>
               </Suspense>
           </body>
