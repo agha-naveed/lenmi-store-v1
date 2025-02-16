@@ -77,11 +77,20 @@ export async function PATCH(req: NextRequest) {
     const image = await req.json()
     
     const cookie = await cookies()
-    await User.findOneAndUpdate({email: cookie.get("email")?.value}, {
-        $set: {
-            profile_pic: image.imageURL
-        }
-    })
+    if(image.message == 'upload') {
+        await User.findOneAndUpdate({email: cookie.get("email")?.value}, {
+            $set: {
+                profile_pic: image.imageURL
+            }
+        })
+    }
+    else {
+        await User.findOneAndUpdate({email: cookie.get("email")?.value}, {
+            $set: {
+                profile_pic: null
+            }
+        })
+    }
     return Response.json({message: "done"})
 
 

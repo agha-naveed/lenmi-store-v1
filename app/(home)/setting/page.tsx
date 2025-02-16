@@ -66,8 +66,7 @@ export default function page() {
   useEffect(() => {
     if(imageURL) {
       const data = async () => {
-        const res = await axios.patch("/setting/api", {imageURL})
-        console.log(message)
+        const res = await axios.patch("/setting/api", {imageURL, message: "upload"})
       }
       data()
     }
@@ -84,6 +83,11 @@ export default function page() {
     if(file) {
       setImage(file)
     }
+  }
+
+  const handleImageRemove = async () => {
+    const res = await axios.patch("/setting/api", {imageURL, message: "remove"})
+    setImageURL(undefined)
   }
 
   useInsertionEffect(() => {
@@ -227,7 +231,7 @@ export default function page() {
               />
             </div>
 
-            <button className="bg-slate-800 hover:bg-slate-900 transition-all text-white text-[15px] py-[6px] px-4 rounded-[8px] h-[42px]">
+            <button type="button" className="bg-slate-800 hover:bg-slate-900 transition-all text-white text-[15px] py-[6px] px-4 rounded-[8px] h-[42px]" onClick={handleImageRemove}>
               Remove Picture
             </button>
           </div>
