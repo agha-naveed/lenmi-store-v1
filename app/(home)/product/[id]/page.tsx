@@ -128,6 +128,7 @@ export default function page() {
     const gettingData = async () => {
       const res = await axios.get(`/product/${param.id}/api`)
       let datas = await res.data.data
+      console.log(await res.data.reviews.userId)
       if(res.status === 200) {
         setFetchData(await datas)
         setImages(datas.imgURL)
@@ -361,12 +362,22 @@ export default function page() {
 
                   <div className='flex gap-4'>
                       <div className='w-14 h-14 rounded-full overflow-hidden'>
-                          <Image src={jethalal}
+                          {
+                            fetchReviews?.userId?.profile_pic ?
+                            <Image src={fetchReviews?.userId?.profile_pic}
+                                alt='DP'
+                                className='w-full
+                                    h-full
+                                    object-cover
+                            '/>
+                            :
+                            <Image src={jethalal}
                               alt='DP'
                               className='w-full
                                   h-full
                                   object-cover
-                          '/>
+                            '/>
+                          }
                       </div>
                       <div className='grid self-center'>
                           <span className='font-semibold text-[18px] h-[25px]'>Naveed Abbas</span>

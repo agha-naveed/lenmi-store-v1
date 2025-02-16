@@ -31,7 +31,6 @@ export default function ProductReviews({data}:any) {
       newArray.push(i)
     }
     setRatingCount(newArray)
-    console.log(data)
   }, [])
 
   return (
@@ -40,7 +39,7 @@ export default function ProductReviews({data}:any) {
       <div className="flex justify-between">
         <div className='flex gap-2'>
           <div className='w-10 h-10 overflow-hidden rounded-full'>
-              <Image src={jethalal} alt='' className='w-full h-full object-cover' />
+              <Image src={data.userId.profile_pic} width={200} height={200} alt='' className='w-full h-full object-cover' />
           </div>
           <div className="grid">
             <span className='font-medium content-center'>{data.userId.first_name} {data.userId.last_name}</span>
