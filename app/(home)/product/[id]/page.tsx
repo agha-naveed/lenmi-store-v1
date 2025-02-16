@@ -115,6 +115,7 @@ export default function page() {
 
   const [openReview, setOpenReview] = useState(false)
   const [isLogin, setIsLogin] = useState(false)
+  const [dp, setDp] = useState<any>()
 
   const [quantity, setQuantity] = useState(1)
   
@@ -128,8 +129,10 @@ export default function page() {
     const gettingData = async () => {
       const res = await axios.get(`/product/${param.id}/api`)
       let datas = await res.data.data
-      console.log(await res.data.reviews.userId)
+
       if(res.status === 200) {
+        console.log(await res.data.userData)
+        setDp(await res.data.userData)
         setFetchData(await datas)
         setImages(datas.imgURL)
         setIsLogin(await res.data.login)
@@ -363,13 +366,16 @@ export default function page() {
                   <div className='flex gap-4'>
                       <div className='w-14 h-14 rounded-full overflow-hidden'>
                           {
-                            fetchReviews?.userId?.profile_pic ?
-                            <Image src={fetchReviews?.userId?.profile_pic}
+                            dp ?
+                            <Image src={dp?.profile_pic}
                                 alt='DP'
                                 className='w-full
                                     h-full
                                     object-cover
-                            '/>
+                                '
+                                width={200}
+                                height={200}
+                            />
                             :
                             <Image src={jethalal}
                               alt='DP'
@@ -380,7 +386,7 @@ export default function page() {
                           }
                       </div>
                       <div className='grid self-center'>
-                          <span className='font-semibold text-[18px] h-[25px]'>Naveed Abbas</span>
+                          <span className='font-semibold text-[18px] h-[25px]'>{dp?.first_name} {dp?.last_name}</span>
                           <p className='text-[15px] text-zinc-800 h-[20px] font-medium cursor-pointer' title='Your Review will be display Publicly'>
                               Posting Publicly
                               <span className='ml-1 text-[14px] font-semibold relative -top-[1px]'>ⓘ</span>
@@ -445,8 +451,6 @@ export default function page() {
                           onClick={() => setRatingClicked(5)}
                       />
                       
-
-
                   </div>
 
                   <textarea className='review-txtarea border-t w-full h-[155px] resize-none rounded-[8px] py-2 px-3 outline-none' ref={txtAreaRef} placeholder='How was the product?'></textarea>

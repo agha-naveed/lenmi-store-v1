@@ -4,6 +4,7 @@ import ProductReview from "@/lib/database/model/product-review";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import jwt from 'jsonwebtoken'
+import User from "@/lib/database/model/user";
 
 
 export async function GET(req:NextRequest, { params }: { params: Promise<{ id: string }> }) {
@@ -19,16 +20,33 @@ export async function GET(req:NextRequest, { params }: { params: Promise<{ id: s
 
     let objId = cookie.get("u_obj_i")
 
+    let decodedData = jwt.verify(objId?.value || "", process.env.JWT_CODE || "") as { obj_id: string };
+
+    
     try {
         if(!data) {
             return NextResponse.json({message: "No data with given ID"}, { status: 404 })
         }
-        return NextResponse.json({
-            message: "ok",
-            data,
-            reviews: productReview,
-            login: objId ? true : false
-        }, { status: 200})
+
+        let user = await User.findById(decodedData.obj_id)
+
+        if(user) {
+            return NextResponse.json({
+                message: "ok",
+                data,
+                reviews: productReview,
+                userData: user,
+                login: true,
+            }, { status: 200})
+        }
+        else {
+            return NextResponse.json({
+                message: "ok",
+                data,
+                reviews: productReview,
+                login: false
+            }, { status: 200})
+        }
 
     } catch(err) {
         return NextResponse.json({message: "No data with given ID"}, { status: 404 })
