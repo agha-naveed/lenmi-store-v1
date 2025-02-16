@@ -10,7 +10,7 @@ import { redirect } from "next/navigation";
 
 export default function page() {
 
-  const [image, setImage] = useState<File[]>([])
+  const [image, setImage] = useState<File>()
 
  
   
@@ -64,6 +64,15 @@ export default function page() {
     profile_pic: File | null;
   }
 
+  const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if(file) {
+      setImage(file)
+      dpChange()
+    }
+    console.log(image)
+  }
+
   useInsertionEffect(() => {
     const getData = async () => {
       const res = await axios.get("/setting/api", {
@@ -105,24 +114,27 @@ export default function page() {
     let imgForm = new FormData()
 
     if(image) {
-      imgForm.append("file", image[0]);
-      imgForm.append("upload_preset", "my-images");
+      imgForm.append("file", image);
+      imgForm.append("upload_preset", "my-images");  
+
+      try {
+        const cloudRes = await fetch(`https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+          {
+            method: "POST",
+            body: imgForm,
+          }
+        );
+        
+        let myFile = await cloudRes.json();
+
+        console.log(myFile.secure_url)
+      } catch(err) {
+        console.log(err)
+      }
+
     }
 
-    try {
-      const cloudRes = await fetch(`https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
-        {
-          method: "POST",
-          body: imgForm,
-        }
-      );
-      
-      let myFile = await cloudRes.json();
-
-      console.log(myFile.secure_url)
-    } catch(err) {
-      console.log(err)
-    }
+    
   }
 
 
@@ -182,14 +194,7 @@ export default function page() {
                 type="file"
                 id="fileToUpload"
                 accept="image/*" className="hidden"
-                onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                  const file = event.target.files?.[0];
-                  if(file) {
-                    setImage(() => [file]);
-                    dpChange()
-                  }
-
-                }}
+                onChange={handleImageChange}
               />
             </div>
 
@@ -228,7 +233,7 @@ export default function page() {
               onKeyDown={(e) => restrictSigns(e)}
               className="h-9 md:w-[300px] px-2 rounded-md border border-gray-300"
               required
-              {...register("phone_number", { min: 11 })}
+              {...register("phone_number", { minLength: 11, maxLength: 11 })}
             />
           </div>
           <div className="md:flex grid content-center justify-between">
