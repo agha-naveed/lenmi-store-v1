@@ -72,10 +72,17 @@ export async function GET(req: NextRequest) {
 
 
 
-// export async function PATCH(req: NextRequest) {
-    
-//     const cookie = await cookies()
-//     cookie.delete("email")
+export async function PATCH(req: NextRequest) {
 
-//     return Response.json({message: "done"})
-// }
+    const image = await req.json()
+    
+    const cookie = await cookies()
+    await User.findOneAndUpdate({email: cookie.get("email")?.value}, {
+        $set: {
+            profile_pic: image.imageURL
+        }
+    })
+    return Response.json({message: "done"})
+
+
+}

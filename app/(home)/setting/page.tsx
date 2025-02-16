@@ -11,8 +11,6 @@ import { redirect } from "next/navigation";
 export default function page() {
 
   const [image, setImage] = useState<File>()
-
- 
   
   const [message, setMessage] = useState<APIData>({
     first_name: "",
@@ -51,7 +49,7 @@ export default function page() {
     email: string;
     password: string;
     account_type: string;
-    profile_pic: File[];
+    profile_pic: File;
   }
 
   interface APIData {
@@ -63,14 +61,30 @@ export default function page() {
     account_type: string;
     profile_pic: File | null;
   }
+  
+  let [imageURL, setImageURL] = useState<string | undefined>(undefined)
+  
+  useEffect(() => {
+    if(imageURL) {
+      const data = async () => {
+        const res = await axios.patch("/setting/api", {imageURL})
+        console.log()
+      }
+      data()
+    }
+  }, [imageURL])
+
+  useEffect(() => {
+    if(image)
+      dpChange()
+
+  }, [image])
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if(file) {
       setImage(file)
-      dpChange()
     }
-    console.log(image)
   }
 
   useInsertionEffect(() => {
@@ -127,7 +141,10 @@ export default function page() {
         
         let myFile = await cloudRes.json();
 
-        console.log(myFile.secure_url)
+        if(myFile.secure_url) {
+          setImageURL(await myFile.secure_url)
+        }
+        
       } catch(err) {
         console.log(err)
       }
@@ -171,7 +188,7 @@ export default function page() {
       <Form onSubmit={handleSubmit(onSubmit)}
         action={""}
         className="lg:flex grid gap-10 font-muli-regular md:p-5 items-center w-full justify-items-center justify-center rounded-md"
-        formMethod="PATCH"
+        formMethod="POST"
       >
         <div className="w-[200px] justify-items-center grid gap-5 content-start px-1">
           <div className="w-[135px] h-[135px] rounded-full overflow-hidden border-2 p-1">

@@ -7,7 +7,7 @@ interface IUser extends Document {
     email: string;
     password: string;
     account_type: 'personal' | 'business';
-    profile_pic: Buffer
+    profile_pic: String
 }
 
 const userSchema: Schema<IUser> = new mongoose.Schema({
@@ -39,7 +39,7 @@ const userSchema: Schema<IUser> = new mongoose.Schema({
         default: 'personal'
     },
     profile_pic: {
-        type: Buffer
+        type: String
     }
 }, { timestamps: true });
 
