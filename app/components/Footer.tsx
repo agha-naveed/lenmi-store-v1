@@ -9,6 +9,8 @@ import easypaisa from '@/images/payment-methods/Easypaisa-logo.png'
 import card from '@/images/payment-methods/Credit_or_Debit_Card.png'
 import cod from '@/images/payment-methods/cod.png'
 import jazzcash from '@/images/payment-methods/new-Jazzcash-logo.png'
+import playstore from '@/images/app-downloads/playstore.png'
+import appstore from '@/images/app-downloads/appstore.png'
 
 export default function Footer() {
     return (
@@ -20,10 +22,20 @@ export default function Footer() {
                     </Link>
 
                     <div className="flex text-[22px] justify-evenly text-white">
-                        <FaFacebook />
-                        <PiXLogo />
-                        <FaLinkedinIn />
-                        <FaGithub />
+                        <Link href={'https://facebook.com/naveedbalti31'} target="_blank">
+                            <FaFacebook />
+                        </Link>
+                        <Link href={"https://x.com/naveed_kazmi31"} target="_blank">
+                            <PiXLogo />
+                        
+                        </Link>
+                        <Link href={'https://linkedin.com/agha-naveed'} target="_blank">
+                            <FaLinkedinIn />
+                        
+                        </Link>
+                        <Link href={'https://github.com/agha-naveed'} target="_blank">
+                            <FaGithub />
+                        </Link>
                     </div>
 
                 </div>
@@ -53,6 +65,13 @@ export default function Footer() {
                             <Image className="h-10 w-fit bg-white rounded-md p-1" src={card} alt="Debit/Credit Card" title="Debit/Credit Card" />
                         </div>
 
+                    </div>
+                    <div className="grid gap-2">
+                        <span className="font-bold text-white">Get App from:</span>
+                        <div className="flex flex-col gap-1">
+                            <Image src={playstore} className="w-36 cursor-pointer" alt="Get it from PlayStore" />
+                            <Image src={appstore} className="w-36 cursor-pointer" alt="Get it from AppStore" />
+                        </div>
                     </div>
                 </div>
             </div>
