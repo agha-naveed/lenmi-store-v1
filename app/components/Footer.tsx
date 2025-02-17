@@ -31,17 +31,17 @@ export default function Footer() {
                 <div className="flex flex-wrap gap-8">
                     <div className="text-white flex flex-col text-[14px] gap-1">
                         <h4 className="font-bold text-[16px] pb-1">Customer Service</h4>
-                        <Link href={""}>Help Center</Link>
-                        <Link href={""}>Transaction Services</Link>
-                        <Link href={""}>How to Buy</Link>
-                        <Link href={""}>Returns & Refunds</Link>
+                        <Link className="w-fit" href={""}>Help Center</Link>
+                        <Link className="w-fit" href={""}>Transaction Services</Link>
+                        <Link className="w-fit" href={""}>How to Buy</Link>
+                        <Link className="w-fit" href={""}>Returns & Refunds</Link>
                     </div>
                     
                     <div className="text-white flex flex-col text-[14px] gap-1">
                         <h4 className="font-bold text-[16px] pb-1">Shopping with us</h4>
-                        <Link href={""}>Making Payments</Link>
-                        <Link href={""}>Delivery Options</Link>
-                        <Link href={""}>Buyer Protection</Link>
+                        <Link className="w-fit" href={""}>Making Payments</Link>
+                        <Link className="w-fit" href={""}>Delivery Options</Link>
+                        <Link className="w-fit" href={""}>Buyer Protection</Link>
                     </div>
 
                     <div className="text-white flex flex-col text-[14px] gap-1">
@@ -56,7 +56,7 @@ export default function Footer() {
                     </div>
                 </div>
             </div>
-            <span className="w-full block font-medium text-white text-[14px] text-center">Developed @AghaNaveed_ 2025</span>
+            <span className="w-full block py-1 font-medium text-white text-[14px] text-center">Developed @AghaNaveed_ 2025</span>
         </footer>
     );
 }
