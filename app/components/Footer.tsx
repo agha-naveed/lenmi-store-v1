@@ -27,11 +27,9 @@ export default function Footer() {
                         </Link>
                         <Link href={"https://x.com/naveed_kazmi31"} target="_blank">
                             <PiXLogo />
-                        
                         </Link>
                         <Link href={'https://linkedin.com/agha-naveed'} target="_blank">
                             <FaLinkedinIn />
-                        
                         </Link>
                         <Link href={'https://github.com/agha-naveed'} target="_blank">
                             <FaGithub />
@@ -40,20 +38,22 @@ export default function Footer() {
 
                 </div>
 
-                <div className="flex flex-wrap gap-8">
-                    <div className="text-white flex flex-col text-[14px] gap-1">
-                        <h4 className="font-bold text-[16px] pb-1">Customer Service</h4>
-                        <Link className="w-fit" href={""}>Help Center</Link>
-                        <Link className="w-fit" href={""}>Transaction Services</Link>
-                        <Link className="w-fit" href={""}>How to Buy</Link>
-                        <Link className="w-fit" href={""}>Returns & Refunds</Link>
-                    </div>
-                    
-                    <div className="text-white flex flex-col text-[14px] gap-1">
-                        <h4 className="font-bold text-[16px] pb-1">Shopping with us</h4>
-                        <Link className="w-fit" href={""}>Making Payments</Link>
-                        <Link className="w-fit" href={""}>Delivery Options</Link>
-                        <Link className="w-fit" href={""}>Buyer Protection</Link>
+                <div className="flex flex-wrap gap-10">
+                    <div className="flex gap-8">
+                        <div className="text-white flex flex-col text-[14px] gap-1">
+                            <h4 className="font-bold text-[16px] pb-1">Customer Service</h4>
+                            <Link className="w-fit" href={""}>Help Center</Link>
+                            <Link className="w-fit" href={""}>Transaction Services</Link>
+                            <Link className="w-fit" href={""}>How to Buy</Link>
+                            <Link className="w-fit" href={""}>Returns & Refunds</Link>
+                        </div>
+                        
+                        <div className="text-white flex flex-col text-[14px] gap-1">
+                            <h4 className="font-bold text-[16px] pb-1">Shopping with us</h4>
+                            <Link className="w-fit" href={""}>Making Payments</Link>
+                            <Link className="w-fit" href={""}>Delivery Options</Link>
+                            <Link className="w-fit" href={""}>Buyer Protection</Link>
+                        </div>
                     </div>
 
                     <div className="text-white flex flex-col text-[14px] gap-1">
