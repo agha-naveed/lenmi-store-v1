@@ -15,7 +15,7 @@ import appstore from '@/images/app-downloads/appstore.png'
 export default function Footer() {
     return (
         <footer className="bg-slate-800 font-opensans mt-10">
-            <div className="container mx-auto py-10 flex gap-10">
+            <div className="container mx-auto py-10 flex gap-16">
                 <div className="flex flex-col gap-10">
                     <Link href={"/"} className="w-36">
                         <Image src={logo} alt="Lenmi Store Logo" width={300} height={300} className="w-full h-full" />
