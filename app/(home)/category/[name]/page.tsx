@@ -20,8 +20,9 @@ export default function page() {
 
   return (
     <section className='font-opensans'>
-      <div className='category-bg h-72 bg-electronics bg-cover bg-center text-white'>
-        <h3 className='font-bold text-4xl text-center h-full place-content-center'>Electronics</h3>
+      <div className='flex flex-col justify-center items-center h-72 bg-electronics bg-cover bg-center text-white'>
+        <span className='font-semibold text-xl'>Category</span>
+        <h3 className='font-bold text-[42px] relative -top-2'>Electronics</h3>
       </div>
 
       <div className='container mx-auto flex flex-wrap gap-5 px-3 py-8'>
