@@ -253,3 +253,7 @@ input[type="number"] {
   background: #555;
   cursor: pointer;
 }
+
+.category-bg {
+  background-image: url("../public/img/categories/sample.jpg");
+}
