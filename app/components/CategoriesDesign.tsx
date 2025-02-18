@@ -62,7 +62,6 @@ export default function CategoriesDesign() {
                     </div>
                 </Link>
                 
-                
             </div>
         </div>
   )
