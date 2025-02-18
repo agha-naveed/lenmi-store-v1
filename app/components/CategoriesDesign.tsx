@@ -26,7 +26,7 @@ export default function CategoriesDesign() {
                         <Image src={plantRender} alt='Plant render' className='absolute left-32 transition_2 group-hover:left-10 blur-[2px] z-[0] -top-2 w-[450px] h-fit opacity-50' />
                     </div>
                 </Link>
-                <Link href={""} className='bg-zinc-200 w-72 h-36 flex overflow-hidden transition-all cursor-pointer hover:bg-gray-300 hover:scale-105 relative text-black hover:shadow-custom-light group'>
+                <Link href={"/category/electronics"} className='bg-zinc-200 w-72 h-36 flex overflow-hidden transition-all cursor-pointer hover:bg-gray-300 hover:scale-105 relative text-black hover:shadow-custom-light group'>
                     <span className='flex text-[19px] font-semibold pt-5 pl-5'>Electronics Accessories</span>
                     <div className='content-center relative'>
                         <Image src={electronicRender} alt='Plant render' className='relative z-10 w-auto !h-[130px]' />
