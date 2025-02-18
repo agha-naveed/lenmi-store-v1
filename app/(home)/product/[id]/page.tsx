@@ -51,6 +51,7 @@ export default function page() {
   };
 
 
+  let [btnVisible, setBtnVisible] = useState<boolean>(false)
   let [fetchReviews, setFetchReviews] = useState<any>([])
   
   let [rating, setRating] = useState(0)
@@ -109,6 +110,17 @@ export default function page() {
 
   // --------- Review Ended ---------
 
+  function checkHeight() {
+    let h_desc = document.getElementById("description_h")
+    if(h_desc) {
+      if(h_desc?.offsetHeight < 400) {
+        setBtnVisible(false)
+      }
+      else {
+        setBtnVisible(true)
+      }
+    }
+  }
   
 
   const { length, setLength } = useCart()
@@ -144,6 +156,10 @@ export default function page() {
     }
     gettingData()
   }, [])
+
+  useEffect(() => {
+    checkHeight()
+  }, [fetchData])
 
 
   const postData = async () => {
@@ -261,9 +277,9 @@ export default function page() {
           
           <div className='grid gap-2 relative lg:place-self-start place-self-center'>
             <span className='text-xl font-semibold'>Description:</span>
-            <div className={`xl:w-[880px] w-[92vw] pb-5 ${showMore ? "h-auto" : "max-h-[400px] h-fit"} overflow-hidden border border-black rounded-md`} dangerouslySetInnerHTML={{ __html: fetchData.description }} />
+            <div id='description_h' className={`xl:w-[880px] w-[92vw] px-5 pt-4 pb-5 ${showMore ? "h-auto" : "max-h-[400px] h-fit"} overflow-hidden border border-black rounded-md`} dangerouslySetInnerHTML={{ __html: fetchData.description }} />
             <button
-              className='animate-up_down absolute bottom-[6px] bg-slate-800 hover:bg-slate-900 transition-all left-1/2 w-fit rounded-full flex py-2 sm:px-[18px] px-3 justify-center items-center gap-1 text-white'
+              className={`animate-up_down absolute bottom-[6px] bg-slate-800 hover:bg-slate-900 transition-all left-1/2 w-fit rounded-full flex py-2 sm:px-[18px] px-3 justify-center items-center gap-1 text-white ${btnVisible ? "block" : "hidden"}`}
               onClick={() => setShowMore(!showMore)}
               title={`${showMore ? "Click to Collapse" : "Click to show full details"}`}
               >
