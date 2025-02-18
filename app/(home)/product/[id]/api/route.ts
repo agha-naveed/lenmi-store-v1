@@ -20,15 +20,20 @@ export async function GET(req:NextRequest, { params }: { params: Promise<{ id: s
 
     let objId = cookie.get("u_obj_i")
 
-    let decodedData = jwt.verify(objId?.value || "", process.env.JWT_CODE || "") as { obj_id: string };
-
+    
+    var user;
     
     try {
         if(!data) {
             return NextResponse.json({message: "No data with given ID"}, { status: 404 })
         }
 
-        let user = await User.findById(decodedData.obj_id)
+
+        if(objId) {
+            let decodedData = jwt.verify(objId?.value || "", process.env.JWT_CODE || "") as { obj_id: string };
+            user = await User.findById(decodedData.obj_id)
+        }
+        
 
         if(user) {
             return NextResponse.json({

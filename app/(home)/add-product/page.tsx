@@ -253,6 +253,10 @@ export default function page() {
               >
                 <option value="">-- select --</option>
                 <option value={`electronics`}>Electronics</option>
+                <option value={`mens_clothing`}>Men's Clothing</option>
+                <option value={`accessories`}>Accessories</option>
+                <option value={`grocery`}>Grocery</option>
+                <option value={`food`}>Food</option>
               </select>
             </div>
           </div>

@@ -129,7 +129,7 @@ export default function page() {
     const gettingData = async () => {
       const res = await axios.get(`/product/${param.id}/api`)
       let datas = await res.data.data
-
+      
       if(res.status === 200) {
         setDp(await res.data.userData)
         setFetchData(await datas)
@@ -261,7 +261,7 @@ export default function page() {
           
           <div className='grid gap-2 relative lg:place-self-start place-self-center'>
             <span className='text-xl font-semibold'>Description:</span>
-            <div className={`xl:w-[880px] w-[92vw] pb-5 ${showMore ? "h-auto" : "h-[400px]"} overflow-hidden border border-black rounded-md`} dangerouslySetInnerHTML={{ __html: fetchData.description }} />
+            <div className={`xl:w-[880px] w-[92vw] pb-5 ${showMore ? "h-auto" : "max-h-[400px] h-fit"} overflow-hidden border border-black rounded-md`} dangerouslySetInnerHTML={{ __html: fetchData.description }} />
             <button
               className='animate-up_down absolute bottom-[6px] bg-slate-800 hover:bg-slate-900 transition-all left-1/2 w-fit rounded-full flex py-2 sm:px-[18px] px-3 justify-center items-center gap-1 text-white'
               onClick={() => setShowMore(!showMore)}
