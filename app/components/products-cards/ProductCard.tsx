@@ -20,7 +20,7 @@ export default function ProductCard({data}:any) {
                 <h2 className='text-[16.3px] tracking-[-1.2px] leading-5 font-opensans font-semibold line-clamp-2'><Link href={`/product/${data._id}`}>{data.name}</Link></h2>
 
                 <div className='flex gap-2'>
-                    <div className='font-opensans font-bold tracking-[-2px]'>PKR <span className='text-[28px] font-opensans'>{data.price}</span></div>
+                    <div className='font-opensans font-bold tracking-[-2px]'>PKR <span className='text-[28px] font-opensans'>{(data.price).toLocaleString()}</span></div>
                     <span className='line-through content-end text-[14px] relative bottom-1 text-gray-500 font-opensans'>PKR 980</span>
                 </div>
 
