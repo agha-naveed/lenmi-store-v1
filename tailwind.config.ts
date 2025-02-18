@@ -9,6 +9,9 @@ export default {
   ],
   theme: {
   	extend: {
+		backgroundImage: {
+			'electronics': "url('/img/categories/sample.jpg')"
+		},
 		boxShadow: {
 			'custom-light': '1px 10px 15px rgba(43, 43, 43, 0.438)',
 		},

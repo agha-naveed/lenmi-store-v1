@@ -18,9 +18,13 @@ export default function page() {
   }, [])
 
   return (
-    <section>
-      <div className='category-bg h-48 bg-slate-800 text-white'>
-        <h3>Electronics</h3>
+    <section className='font-opensans'>
+      <div className='category-bg h-60 bg-electronics bg-cover bg-center text-white'>
+        <h3 className='font-bold text-4xl text-center h-full place-content-center'>Electronics</h3>
+      </div>
+
+      <div className='container mx-auto'>
+        
       </div>
     </section>
   )
