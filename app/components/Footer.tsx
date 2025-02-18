@@ -56,7 +56,7 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    <div className="flex md:flex-row flex-col gap-10 items-center md:text-start text-center">
+                    <div className="flex md:flex-row flex-col gap-10 md:items-start items-center md:text-start text-center">
                         <div className="text-white flex flex-col text-[14px] gap-1">
                             <h4 className="font-bold text-[16px] pb-1">Payment Methods</h4>
                             <div className="flex items-center gap-1">

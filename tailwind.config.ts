@@ -11,6 +11,7 @@ export default {
   	extend: {
 		backgroundImage: {
 			'electronics': "url('/img/categories/electronics.png')",
+			'accessories': "url('/img/categories/accessories.png')"
 		},
 		boxShadow: {
 			'custom-light': '1px 10px 15px rgba(43, 43, 43, 0.438)',

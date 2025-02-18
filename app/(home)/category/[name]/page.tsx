@@ -8,6 +8,8 @@ export default function page() {
   const param = useParams()
   const [products, setProducts] = useState([])
 
+  const paramName = param.name?.toString()
+
   useEffect(() => {
     const fetchData = async () => {
       const res = await axios.get(`/category/${param.name}/api`)
@@ -20,9 +22,9 @@ export default function page() {
 
   return (
     <section className='font-opensans'>
-      <div className='flex flex-col justify-center items-center h-72 bg-electronics bg-cover bg-center text-white'>
+      <div className={`flex flex-col justify-center items-center h-72 bg-electronics bg-cover bg-center text-white`}>
         <span className='font-semibold text-xl'>Category</span>
-        <h3 className='font-bold text-[42px] relative -top-2'>Electronics</h3>
+        <h3 className='font-bold text-[42px] relative -top-2'>{paramName?.[0].toUpperCase()}{paramName?.slice(1)}</h3>
       </div>
 
       <div className='container mx-auto flex flex-wrap gap-5 px-3 py-8'>
