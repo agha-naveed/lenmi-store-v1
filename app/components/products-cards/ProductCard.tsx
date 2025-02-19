@@ -6,8 +6,8 @@ import Image from 'next/image';
 export default function ProductCard({data}:any) {
   return (
     <div className='product-card w-fit transition-all'>
-        <div className='bg-white border border-gray-400 rounded-lg sm:w-52 w-[42vmin] sm:h-[310px] p-2 grid gap-3'>
-            <div className='sm:w-[190px] w-[140px] sm:h-[170px] h-[120px] select-none group transition_2 rounded-lg overflow-hidden border relative cursor-pointer'>
+        <div className='bg-white border border-gray-400 rounded-lg sm:w-52 w-[260px] h-[370px] sm:h-[310px] p-2 grid gap-3'>
+            <div className='md:w-[190px] w-full md:h-[170px] h-[200px] select-none group transition_2 rounded-lg overflow-hidden border relative cursor-pointer'>
                 <Image src={data.imgURL[0]} className='w-full h-full object-cover absolute transition_2 opacity-100 group-hover:opacity-0' alt="" width={500} height={500}/>
                 {
                     data.imgURL.length > 1 ?
