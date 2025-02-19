@@ -218,8 +218,17 @@ export default function Navbar() {
                 <div className='md:hidden flex py-5 px-3 items-center'>
                     <FaBars className='text-white text-[34px] relative left-1' />
                     <div className='flex w-full'>
-                        <input type="text" placeholder='What are you looking for?' className='relative left-7 pl-3 pr-[53px] h-[44px] w-full rounded-md outline-none font-opensans  font-medium' />
-                        <FiSearch title='Search' className='text-xl cursor-pointer p-2 top-[2px] rounded-md w-11 h-10 text-white bg-slate-800 relative -left-4' />
+                        <input type="text" placeholder='What are you looking for?' className='relative left-7 pl-3 pr-[53px] h-[44px] w-full rounded-md outline-none font-opensans  font-medium'
+                        value={searchInput}
+                        onInput={(e:React.ChangeEvent<HTMLInputElement>) => {
+                            setSearchInput(e.target.value)
+                        }}
+                        onKeyDown={(e) => {
+                            if(e.key == "Enter")
+                                handleSearch(searchInput)
+                        }}
+                        />
+                        <FiSearch title='Search' onClick={() => handleSearch(searchInput)} className='text-xl cursor-pointer p-2 top-[2px] rounded-md w-11 h-10 text-white bg-slate-800 relative -left-4' />
                     </div>
                 </div>
 
