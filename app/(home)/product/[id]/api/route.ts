@@ -102,6 +102,19 @@ export async function PATCH(req:NextRequest, { params }: { params: Promise<{ id:
     let param = await params
     let productId = param.id
 
+    let totalRating = await ProductReview.find({productId})
+    let totalReviews = 0;
+
+    let ratingSum = 0;
+    
+    for(let i=0; i<totalRating.length; i++) {
+        totalReviews++;
+        ratingSum += totalRating[i].rating;
+    }
+
+    let ratingAvg = ratingSum/totalReviews;
+
+    console.log(ratingAvg)
         await ProductReview.insertMany([
             {
                 userId: decodedData.obj_id,
