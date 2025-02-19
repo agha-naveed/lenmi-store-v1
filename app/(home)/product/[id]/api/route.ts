@@ -73,6 +73,7 @@ export async function POST(req:NextRequest, { params }: { params: Promise<{ id: 
     let param = await params
     let productId = param.id
 
+
     let isExist = await ProductReview.findOne({ userId: decodedData.obj_id, productId })
 
     if(isExist) {
@@ -102,6 +103,17 @@ export async function PATCH(req:NextRequest, { params }: { params: Promise<{ id:
     let param = await params
     let productId = param.id
 
+    await ProductReview.insertMany([
+        {
+            userId: decodedData.obj_id,
+            productId,
+            rating: data.rating,
+            comment: data.data,
+            images: data.images,
+            date: Date.now()
+        }
+    ])
+
     let totalRating = await ProductReview.find({productId})
     let totalReviews = 0;
 
@@ -114,19 +126,17 @@ export async function PATCH(req:NextRequest, { params }: { params: Promise<{ id:
 
     let ratingAvg = ratingSum/totalReviews;
 
-    console.log(ratingAvg)
-        await ProductReview.insertMany([
-            {
-                userId: decodedData.obj_id,
-                productId,
-                rating: data.rating,
-                comment: data.data,
-                images: data.images,
-                date: Date.now()
-            }
-        ])
 
-        return NextResponse.json({
-            message: 'ok',
-        }, { status: 201 })
+    await Product.updateOne({
+        _id: productId
+    },
+    {
+        $set: {
+            rating: ratingAvg
+        }
+    })
+
+    return NextResponse.json({
+        message: 'ok',
+    }, { status: 201 })
 }
