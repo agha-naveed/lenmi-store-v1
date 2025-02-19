@@ -40,7 +40,7 @@ export default function page() {
         <h3 className='font-bold text-[42px] relative -top-2'>{paramName?.[0].toUpperCase()}{paramName?.slice(1)}</h3>
       </div>
 
-      <div className='container mx-auto flex flex-wrap gap-5 px-3 py-8'>
+      <div className='container mx-auto flex flex-wrap sm:gap-5 gap-2 sm:px-3 px-1 py-8 md:justify-start justify-center'>
         {
           products.map((item, index) => {
             return (
