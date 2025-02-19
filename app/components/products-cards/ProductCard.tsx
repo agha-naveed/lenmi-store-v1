@@ -6,7 +6,7 @@ import Image from 'next/image';
 export default function ProductCard({data}:any) {
   return (
     <div className='product-card w-fit transition-all'>
-        <div className='bg-white border border-gray-400 rounded-lg sm:w-52 w-[156px] sm:h-[310px] p-2 grid gap-3'>
+        <div className='bg-white border border-gray-400 rounded-lg sm:w-52 w-[42vmin] sm:h-[310px] p-2 grid gap-3'>
             <div className='sm:w-[190px] w-[140px] sm:h-[170px] h-[120px] select-none group transition_2 rounded-lg overflow-hidden border relative cursor-pointer'>
                 <Image src={data.imgURL[0]} className='w-full h-full object-cover absolute transition_2 opacity-100 group-hover:opacity-0' alt="" width={500} height={500}/>
                 {
@@ -17,11 +17,11 @@ export default function ProductCard({data}:any) {
             </div>
 
             <div className='select-none'>
-                <h2 className='text-[16.3px] tracking-[-1.2px] leading-5 font-opensans font-semibold line-clamp-2'><Link href={`/product/${data._id}`}>{data.name}</Link></h2>
+                <h2 className='text-[16.3px] min-h-10 tracking-[-1.2px] leading-5 font-opensans font-semibold line-clamp-2'><Link href={`/product/${data._id}`}>{data.name}</Link></h2>
 
                 <div className='flex gap-2'>
                     <div className='font-opensans font-bold tracking-[-2px]'>PKR <span className='text-[28px] font-opensans'>{(data.price).toLocaleString()}</span></div>
-                    <span className='line-through content-end text-[14px] relative bottom-1 text-gray-500 font-opensans'>PKR 980</span>
+                    <span className='line-through sm:block hidden content-end text-[14px] relative bottom-1 text-gray-500 font-opensans'>PKR 980</span>
                 </div>
 
                 <div className='flex items-center text-[13px] my-1 gap-1'>
