@@ -3,6 +3,7 @@ import "../globals.css";
 import Navbar from '@/components/Navbar'
 import { Suspense } from "react";
 import Loader from "../components/Loading";
+import { LoginProvider } from "../components/LoginContext";
 import { CartProvider } from "../components/CartProvider";
 import { SearchProvider } from "../components/SearchContext";
 import Footer from "../components/Footer";
@@ -35,20 +36,22 @@ export default function RootLayout(props: {
 }) {
   return (
     <html lang="en">
-      <CartProvider>
-        <SearchProvider>
-          <body>
-              <Suspense fallback={<Loader />}>
-                <Navbar />
+      <LoginProvider>
+        <CartProvider>
+          <SearchProvider>
+            <body>
                 <Suspense fallback={<Loader />}>
-                  {props.children}
-                  {props.modal}
+                  <Navbar />
+                  <Suspense fallback={<Loader />}>
+                    {props.children}
+                    {props.modal}
+                  </Suspense>
+                  <Footer />
                 </Suspense>
-                <Footer />
-              </Suspense>
-          </body>
-        </SearchProvider>
-      </CartProvider>
+            </body>
+          </SearchProvider>
+        </CartProvider>
+      </LoginProvider>
     </html>
   );
 }

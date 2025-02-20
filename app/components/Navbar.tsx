@@ -15,6 +15,7 @@ import axios from 'axios';
 import { useCart } from './CartProvider';
 import { redirect, useRouter, useSearchParams } from 'next/navigation';
 import { useSearchQuery } from './SearchContext';
+import { useLoginData } from './LoginContext';
 
 interface ApiResponse {
     first_name: string;
@@ -25,6 +26,7 @@ interface ApiResponse {
 
 export default function Navbar() {
     
+    let { loggedin, setLoggedin } = useLoginData()
 
     const { query, setQuery } = useSearchQuery()
 
@@ -52,6 +54,7 @@ export default function Navbar() {
                 if(fetchData != null) {
                     let Data = await fetchData.data
                     setMessage(Data)
+                    setLoggedin(true)
                 }
                 else {
                     setMessage(null)
@@ -65,7 +68,7 @@ export default function Navbar() {
                 await axios.patch("/account/api")
                     setMessage(null)
             }
-
+            setLoggedin(false)
             logout()
         }
 

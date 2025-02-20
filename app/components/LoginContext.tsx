@@ -16,7 +16,7 @@ const defaultLoginData: loginData = {
 
 const loginContext = createContext<loginData>(defaultLoginData)
 
-export function loginProvider({ children }: { children: React.ReactNode }) {
+export function LoginProvider({ children }: { children: React.ReactNode }) {
 
   const [loggedin, setLoggedin] = useState<boolean>(false);
 

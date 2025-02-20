@@ -12,11 +12,14 @@ import { useCart } from '@/app/components/CartProvider';
 import { IoClose, IoCloseCircle } from "react-icons/io5";
 import jethalal from '@/images/jethalal.jpeg'
 import ProductReviews from '@/app/components/ProductReviews';
+import { useLoginData } from '@/app/components/LoginContext';
 
 export default function page() {
 
   const param = useParams()
   const router = useRouter()  
+
+  let { loggedin, setLoggedin } = useLoginData()
 
   // --------- Review ---------
 
@@ -126,7 +129,6 @@ export default function page() {
   const { length, setLength } = useCart()
 
   const [openReview, setOpenReview] = useState(false)
-  const [isLogin, setIsLogin] = useState(false)
   const [dp, setDp] = useState<any>()
 
   const [quantity, setQuantity] = useState(1)
@@ -146,7 +148,7 @@ export default function page() {
         setDp(await res.data.userData)
         setFetchData(await datas)
         setImages(datas.imgURL)
-        setIsLogin(await res.data.login)
+        setLoggedin(await res.data.login)
         setFetchReviews(await res.data.reviews)
       }
       else {
@@ -357,7 +359,7 @@ export default function page() {
         <section className='justify-self-start'>
           <div>
             <button className='py-2 px-6 bg-slate-400 rounded-full' onClick={() => {
-              if(isLogin)
+              if(loggedin)
                 setOpenReview(true)
 
               else {
