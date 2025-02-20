@@ -367,7 +367,7 @@ export default function page() {
               <div className='fixed top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]'>
                 
                 
-                <div className={`w-[550px] h-fit bg-white shadow-xl rounded-lg p-4 font-opensans flex flex-col gap-3 overflow-hidden`}>
+                <div className={`md:w-[550px] w-[90vmin] h-fit bg-white shadow-xl rounded-lg p-4 font-opensans flex flex-col gap-3 overflow-hidden`}>
                   <div className='flex justify-between items-center'>
                       <button className='w-7 h-7 flex justify-center items-center text-xl rounded-full' title='Cancel' onClick={() => setOpenReview(false)}>
                           <IoClose />
@@ -409,7 +409,7 @@ export default function page() {
                       </div>
                   </div>
 
-                  <div className='w-full mb-2 justify-center flex gap-6 text-4xl px-10 text-zinc-700'>
+                  <div className='w-full mb-2 justify-center flex md:gap-6 gap-3 sm:text-4xl text-[27px] md:px-10 px-4 text-zinc-700'>
                       
                       <IoIosStar
                           className={`
