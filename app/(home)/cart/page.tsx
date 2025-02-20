@@ -35,7 +35,7 @@ export default function page() {
 
     async function removeProduct(id:number) {
 
-        setLength(length)
+        setLength(length - 1)
 
         setCartItems((prevItems):any => {
             return prevItems.filter((item, index) => index !== selectProduct)
