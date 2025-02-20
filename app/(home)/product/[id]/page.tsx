@@ -7,7 +7,7 @@ import { MdLocationOn } from "react-icons/md";
 import { IoIosArrowForward, IoIosArrowDown, IoIosStar } from "react-icons/io";
 import Link from 'next/link';
 import axios from 'axios';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { useCart } from '@/app/components/CartProvider';
 import { IoClose, IoCloseCircle } from "react-icons/io5";
 import jethalal from '@/images/jethalal.jpeg'
@@ -16,7 +16,7 @@ import ProductReviews from '@/app/components/ProductReviews';
 export default function page() {
 
   const param = useParams()
-  
+  const router = useRouter()  
 
   // --------- Review ---------
 
@@ -356,7 +356,15 @@ export default function page() {
         {/* Review */}
         <section className='justify-self-start'>
           <div>
-            <button className='py-2 px-6 bg-slate-400 rounded-full' onClick={() => setOpenReview(true)}>
+            <button className='py-2 px-6 bg-slate-400 rounded-full' onClick={() => {
+              if(isLogin)
+                setOpenReview(true)
+
+              else {
+                alert("Please Login First!");
+                router.push("/account")
+              }
+            }}>
               Add a Review
             </button>
 
