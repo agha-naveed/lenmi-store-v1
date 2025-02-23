@@ -22,12 +22,16 @@ export default function page() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const res = await axios.get("/cart/cart-data/api")
-            if(res.data.message !== 'ok') {
-                redirect('/')
-            }
-            if(res.status == 200) {
-                setCartItems(await res.data.data)
+            try {
+                const res = await axios.get("/cart/cart-data/api")
+                if(res.data.message !== 'ok') {
+                    redirect('/')
+                }
+                if(res.status == 200) {
+                    setCartItems(await res.data.data)
+                }
+            } catch(err) {
+                console.log("error: "+err)
             }
         }
         fetchData()

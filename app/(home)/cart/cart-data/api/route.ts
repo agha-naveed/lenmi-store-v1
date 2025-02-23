@@ -18,22 +18,31 @@ export async function GET() {
         let originalId = jwt.verify(user_id ?? "", process.env.JWT_CODE ?? "") as { obj_id: string }
 
         let objdata = await Cart.findOne({ userId: originalId.obj_id })
-        let items = objdata.items
         
-        let cartDatas:any = []
+        if(objdata) {
+            let items = objdata.items
+            let cartDatas:any = []
 
-        await Promise.all(
-            items.map(async (item:any) => {
-                let data = await Product.findById(item.productId)
-                cartDatas.push({data, itemQuantity: item.quantity})
+            await Promise.all(
+                items.map(async (item:any) => {
+                    let data = await Product.findById(item.productId)
+                    cartDatas.push({data, itemQuantity: item.quantity})
+                })
+            )
+            
+            return NextResponse.json({
+                message: "ok",
+                data: cartDatas
+            }, { status: 200 })
+
+        }
+
+        else {
+            return NextResponse.json({
+                message: "some error occurred"
             })
-        )
+        }
 
-        
-        return NextResponse.json({
-            message: "ok",
-            data: cartDatas
-        }, { status: 200 })
     }
     else {
         return NextResponse.json({
