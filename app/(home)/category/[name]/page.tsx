@@ -41,7 +41,7 @@ export default function page() {
         paramName == 'home-and-garden' ?
         "bg-home-garden" :
         paramName == "home-improvement-%26-lighting" ?
-        "bg-home-improvement" : ""
+        "bg-home-improvement" : "bg-sports"
         }
         bg-cover
         bg-center

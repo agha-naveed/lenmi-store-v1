@@ -15,6 +15,7 @@ export default {
 			'clothes': "url('/img/categories/clothes.png')",
 			'home-garden': "url('/img/categories/home-garden.png')",
 			'home-improvement': "url('/img/categories/home-improvement.png')",
+			'sports': "url('/img/categories/sports.png')",
 		},
 		boxShadow: {
 			'custom-light': '1px 10px 15px rgba(43, 43, 43, 0.438)',
