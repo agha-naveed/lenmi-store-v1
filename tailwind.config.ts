@@ -12,7 +12,9 @@ export default {
 		backgroundImage: {
 			'electronics': "url('/img/categories/electronics.png')",
 			'accessories': "url('/img/categories/accessories.png')",
-			'clothes': "url('/img/categories/clothes.png')"
+			'clothes': "url('/img/categories/clothes.png')",
+			'home-garden': "url('/img/categories/home-garden.png')",
+			'home-improvement': "url('/img/categories/home-improvement.png')",
 		},
 		boxShadow: {
 			'custom-light': '1px 10px 15px rgba(43, 43, 43, 0.438)',

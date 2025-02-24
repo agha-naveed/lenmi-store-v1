@@ -9,6 +9,11 @@ export default function page() {
   const [products, setProducts] = useState([])
 
   const paramName = param.name?.toString()
+  let titleName = paramName?.split("-").join(" ")
+
+  if(titleName?.includes("%26")) {
+    titleName = titleName.split("%26").join("&")
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,7 +27,7 @@ export default function page() {
 
   return (
     <section className='font-opensans'>
-      <div className={`
+      <div className={` 
         flex flex-col
         justify-center
         items-center
@@ -32,14 +37,18 @@ export default function page() {
         paramName == "accessories" ?
         "bg-accessories" :
         paramName == "clothes" ?
-        "bg-clothes"
-        : ""}
+        "bg-clothes" :
+        paramName == 'home-and-garden' ?
+        "bg-home-garden" :
+        paramName == "home-improvement-%26-lighting" ?
+        "bg-home-improvement" : ""
+        }
         bg-cover
         bg-center
         text-white
       `}>
         <span className='font-semibold text-xl'>Category</span>
-        <h3 className='font-bold text-[42px] relative -top-2'>{paramName?.[0].toUpperCase()}{paramName?.slice(1)}</h3>
+        <h3 className='font-bold text-[42px] relative -top-2'>{titleName?.[0].toUpperCase()}{titleName?.slice(1)}</h3>
       </div>
 
       <div className='container mx-auto flex flex-wrap sm:gap-5 gap-2 sm:px-3 px-1 py-8 md:justify-start justify-center'>
