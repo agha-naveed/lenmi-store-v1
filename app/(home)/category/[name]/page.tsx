@@ -31,7 +31,9 @@ export default function page() {
         "bg-electronics" :
         paramName == "accessories" ?
         "bg-accessories" :
-        ""}
+        paramName == "clothes" ?
+        "bg-clothes"
+        : ""}
         bg-cover
         bg-center
         text-white
