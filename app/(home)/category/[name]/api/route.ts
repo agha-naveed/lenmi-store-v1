@@ -8,7 +8,13 @@ export async function GET(req:NextRequest, { params }: { params: Promise<{ name:
     const categ_name = await params
 
     try {
-        let data = await Product.find({category: categ_name.name})
+        let data = await Product.aggregate([
+            {
+                $match: {
+                    category: categ_name.name
+                }
+            }
+        ])
 
         return NextResponse.json({
             message: "ok",

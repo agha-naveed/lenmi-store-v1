@@ -2,8 +2,23 @@ import React from 'react'
 import Link from 'next/link';
 import { FaStar, FaCartPlus } from "react-icons/fa";
 import Image from 'next/image';
+import axios from 'axios';
+import { useCart } from '../CartProvider';
 
 export default function ProductCard({data}:any) {
+
+    let {length, setLength} = useCart();
+
+  const postData = async () => {
+    let sendDetail = {
+      id: data._id,
+      quantity: 1
+    }
+    const sendData = await axios.post(`/cart/api`, sendDetail)
+    setLength(length + 1)
+  }
+
+
   return (
     <div className='product-card w-fit transition-all'>
         <div className='bg-white border border-gray-400 rounded-lg w-[47vmin] md:w-52 sm:w-[260px] sm:h-[370px] md:h-[auto] p-2 grid gap-3'>
@@ -40,7 +55,7 @@ export default function ProductCard({data}:any) {
         </div>
 
         <div className='relative pt-2'>
-            <button className='bg-slate-800 text-white absolute top-[2px] left-[50%] -translate-x-[50%] hidden justify-center group items-center h-9 w-full rounded-md z-20 overflow-hidden  shadow-custom-light'>
+            <button className='bg-slate-800 text-white absolute top-[2px] left-[50%] -translate-x-[50%] hidden justify-center group items-center h-9 w-full rounded-md z-20 overflow-hidden  shadow-custom-light' onClick={postData}>
                 <span className='w-full absolute left-[50%] -translate-x-[50%] group-hover:-left-[50%] transition-all'>Add to Cart</span>
                 <FaCartPlus className='absolute -right-[50%] group-hover:right-[50%] translate-x-[50%] transition-all' />
             </button>
