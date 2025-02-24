@@ -19,6 +19,7 @@ export async function POST(req: NextRequest) {
     const category = formData.get("category") as string
     const color = JSON.parse(formData.get("color") as string)
     const stock = formData.get("stock") as string
+    const paymentMethod = formData.get("payment_method") as string
 
 
     if (!imageURL) {
@@ -44,7 +45,8 @@ export async function POST(req: NextRequest) {
         category,
         color,
         stock,
-        imgURL: imageURL  
+        imgURL: imageURL,
+        paymentMethod
       }
     ])
 

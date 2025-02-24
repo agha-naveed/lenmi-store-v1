@@ -14,9 +14,15 @@ export async function POST(req:NextRequest) {
     let cookie = await cookies()
     
     let user_id = cookie.get("u_obj_i")?.value
-    let originalId = jwt.verify(user_id ?? "", process.env.JWT_CODE ?? "") as { obj_id: string }
+    if(!user_id) {
+        return NextResponse.json({
+            message: "Some Error Occurred!",
+        }, { status: 400 })
+    }
 
-    if(originalId) {
+    if(user_id) {
+        let originalId = jwt.verify(user_id ?? "", process.env.JWT_CODE ?? "") as { obj_id: string }
+
         let isExist = await Cart.findOne({userId: originalId.obj_id})
         
         if(!isExist) {
@@ -69,9 +75,7 @@ export async function POST(req:NextRequest) {
         }
     }
     
-    return NextResponse.json({
-        message: "Some Error Occurred!",
-    }, { status: 400 })
+   
 }
 
 
