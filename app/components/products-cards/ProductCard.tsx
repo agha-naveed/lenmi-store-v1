@@ -14,8 +14,12 @@ export default function ProductCard({data}:any) {
       id: data._id,
       quantity: 1
     }
-    const sendData = await axios.post(`/cart/api`, sendDetail)
-    setLength(length + 1)
+    try {
+        const sendData = await axios.post(`/cart/api`, sendDetail)
+        setLength(length + 1)
+    } catch(err) {
+        alert("Please Login First!")
+    }
   }
 
 

@@ -16,56 +16,62 @@ export async function POST(req:NextRequest) {
     let user_id = cookie.get("u_obj_i")?.value
     let originalId = jwt.verify(user_id ?? "", process.env.JWT_CODE ?? "") as { obj_id: string }
 
-    let isExist = await Cart.findOne({userId: originalId.obj_id})
-    
-    if(!isExist) {
-        let dbData = await Cart.insertMany([
-            {
-                userId: originalId.obj_id,
-                items: [{
-                    productId: product_objId,
-                    quantity: product_quantity
-                }]
-            }
-        ])
-
-        if(dbData) {
-            return NextResponse.json({
-                message: "Successfully Added Data",
-            }, { status: 201 })
-        }
-
-        else {
-            return NextResponse.json({
-                message: "Some Error Occurred!",
-            }, { status: 400 })
-        }
+    if(originalId) {
+        let isExist = await Cart.findOne({userId: originalId.obj_id})
         
-    }
-
-    else {
-        let dbData = await Cart.updateOne({
-             userId: originalId.obj_id
-        }, {
-            $addToSet: {
-                items: {
-                    productId: product_objId,
-                    quantity: product_quantity
+        if(!isExist) {
+            let dbData = await Cart.insertMany([
+                {
+                    userId: originalId.obj_id,
+                    items: [{
+                        productId: product_objId,
+                        quantity: product_quantity
+                    }]
                 }
+            ])
+
+            if(dbData) {
+                return NextResponse.json({
+                    message: "Successfully Added Data",
+                }, { status: 201 })
             }
-        })
-        
-        if(dbData) {
-            return NextResponse.json({
-                message: "Successfully Added Data",
-            }, { status: 201 })
+
+            else {
+                return NextResponse.json({
+                    message: "Some Error Occurred!",
+                }, { status: 400 })
+            }
+            
         }
+
         else {
-            return NextResponse.json({
-                message: "Some Error Occurred!",
-            }, { status: 400 })
+            let dbData = await Cart.updateOne({
+                userId: originalId.obj_id
+            }, {
+                $addToSet: {
+                    items: {
+                        productId: product_objId,
+                        quantity: product_quantity
+                    }
+                }
+            })
+            
+            if(dbData) {
+                return NextResponse.json({
+                    message: "Successfully Added Data",
+                }, { status: 201 })
+            }
+            else {
+                return NextResponse.json({
+                    message: "Some Error Occurred!",
+                }, { status: 400 })
+            }
         }
     }
+    
+    return NextResponse.json({
+        message: "Some Error Occurred!",
+    }, { status: 400 })
 }
 
 
