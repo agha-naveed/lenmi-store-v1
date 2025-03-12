@@ -37,6 +37,12 @@ export default function page() {
         fetchData()
     }, [])
 
+    useEffect(() => {
+        if(cartItems.length == 0) {
+            setSelectProduct(null)
+        }
+    }, [cartItems])
+
     async function removeProduct(id:number) {
 
         setLength(length - 1)
