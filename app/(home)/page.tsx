@@ -39,7 +39,7 @@ export default function page() {
               // trending ?
               // trending.map((item, index) => {
                 // return (
-                  <TrendingProducts data={trending?.[0]} />
+                  <TrendingProducts data={trending?.[0] ? trending[0] : undefined} />
                 // )
               // }) : "Loading..."
             }
@@ -51,7 +51,7 @@ export default function page() {
               </span>
             </div>
             <span className='sm:block hidden'>
-              <TrendingProducts data={trending?.[1]} />
+              <TrendingProducts data={trending ? trending[1] : undefined} />
             </span>
           </div>
 

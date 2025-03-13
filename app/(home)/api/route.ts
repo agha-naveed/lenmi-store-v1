@@ -10,11 +10,11 @@ export async function GET() {
     const trending = await Product.find().limit(2)
     
     
-    if(response){
+    if(response && trending){
         return NextResponse.json({
             message: "ok",
+            trending,
             data: response,
-            trending
         }, { status: 200 })
     }
     else {

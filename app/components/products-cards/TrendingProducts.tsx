@@ -5,8 +5,12 @@ import Image from 'next/image'
 
 export default function TrendingProducts({data}:any) {
     useEffect(() => {
-        console.log(data)
-    })
+        setTimeout(() => {
+
+            console.log(data)
+        }, 2000)
+    }, [])
+
   return (
     <div className='w-[380px] h-full rounded-[22px] sm:p-8 p-5 bg-lightGray'>
         <div className='w-full justify-items-center grid gap-5'>
