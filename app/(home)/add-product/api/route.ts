@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
         color,
         stock,
         imgURL: imageURL,
-        paymentMethod
+        pay_method: paymentMethod
       }
     ])
 
