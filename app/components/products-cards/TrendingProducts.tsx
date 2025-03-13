@@ -1,15 +1,14 @@
 'use client'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
 export default function TrendingProducts({data}:any) {
-    useEffect(() => {
-        setTimeout(() => {
+    const [detail, setDetail] = useState<any>({})
 
-            console.log(data)
-        }, 2000)
-    }, [])
+    useEffect(() => {
+        setDetail(data)
+    }, [data])
 
   return (
     <div className='w-[380px] h-full rounded-[22px] sm:p-8 p-5 bg-lightGray'>
@@ -22,9 +21,19 @@ export default function TrendingProducts({data}:any) {
             <div className='w-full h-auto rounded-[22px] bg-white'>
                 <div className='sm:p-6 p-4 grid gap-5 justify-center'>
                     
-                    <Link href={""} className='justify-items-center w-fit'>
+                    <Link href={`/product/${detail?._id}`} className='justify-items-center w-fit'>
                         <div className='sm:w-full sm:h-[260px] w-fit h-[200px] rounded-[22px] overflow-hidden'>
-                            {/* <Image width={500} height={500} src={data.imgURL[0]} alt="" className='w-full h-full object-cover' /> */}
+                            {
+                                detail?.imgURL ?
+                                <Image
+                                width={500}
+                                height={500}
+                                src={detail.imgURL[0]} alt=""
+                                className='w-full h-full object-cover' />
+                                : <div className='flex justify-center items-center w-full h-full'>
+                                    Loading...
+                                </div>
+                            }
                         </div>
                         <span className='text-black w-full flex gap-[2px] py-2 items-end justify-center font-opensans font-medium'>
                             PKR

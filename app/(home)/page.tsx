@@ -10,7 +10,7 @@ import axios from 'axios'
 export default function page() {
 
   const [productData, setProductData] = useState<object[]>()
-  const [trending, setTrending] = useState<object[]>()
+  const [trending, setTrending] = useState<any>([{}])
 
   useEffect(() => {
     let productCardData = async () => {
@@ -35,15 +35,9 @@ export default function page() {
         
         <div className='py-5'>
           <div className='flex gap-2 justify-around flex-wrap'>
-            {
-              // trending ?
-              // trending.map((item, index) => {
-                // return (
-                  <TrendingProducts data={trending?.[0] ? trending[0] : undefined} />
-                // )
-              // }) : "Loading..."
-            }
-
+            
+            <TrendingProducts data={trending[0]} />
+            
             <div className='grid gap-2'>
               <HorizontalCard />
               <span className='sm:block hidden'>
@@ -51,7 +45,7 @@ export default function page() {
               </span>
             </div>
             <span className='sm:block hidden'>
-              <TrendingProducts data={trending ? trending[1] : undefined} />
+              <TrendingProducts data={trending[1]} />
             </span>
           </div>
 

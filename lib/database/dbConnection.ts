@@ -1,6 +1,10 @@
 import mongoose, { ConnectOptions } from 'mongoose';
 
-const URI = 'mongodb://127.0.0.1:27017/lenmi-store';
+// const URI = 'mongodb://127.0.0.1:27017/lenmi-store';
+
+
+const URI:any = process.env.MONGODB_URI;
+
 mongoose.set('bufferCommands', false);
 let isConnected = false;
 
