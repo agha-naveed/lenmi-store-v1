@@ -7,7 +7,7 @@ interface IUser extends Document {
     email: string;
     password: string;
     account_type: 'personal' | 'business';
-    profile_pic: String
+    profile_pic: string
 }
 
 const userSchema: Schema<IUser> = new mongoose.Schema({
