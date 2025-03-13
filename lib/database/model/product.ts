@@ -11,7 +11,7 @@ interface IProduct extends Document {
     sold: number;
     imgURL : string;
     stock: number;
-    pay_method: string;
+    pay_method: [string];
 }
 
 const productSchema = new Schema<IProduct>({
@@ -51,7 +51,7 @@ const productSchema = new Schema<IProduct>({
         type: Number
     },
     pay_method: {
-        type: String
+        type: [String]
     }
 })
 

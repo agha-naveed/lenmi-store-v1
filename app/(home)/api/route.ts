@@ -7,17 +7,19 @@ export async function GET() {
     await dbConnection()
 
     const response = await Product.find().limit(3)
-
+    const trending = await Product.find().limit(2)
+    
+    
     if(response){
         return NextResponse.json({
             message: "ok",
-            data: response
+            data: response,
+            trending
         }, { status: 200 })
     }
     else {
         return NextResponse.json({
             message: "some problem occurred!",
-            data: response
         }, { status: 404 })
     }
 }

@@ -31,7 +31,7 @@ export default function page() {
     const getData = async () => {
         
         let fetchData = await axios.get("/account/api", {
-            withCredentials: true
+          withCredentials: true
         })
 
         if(fetchData == null) {

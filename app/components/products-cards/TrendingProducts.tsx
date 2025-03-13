@@ -1,8 +1,12 @@
-import React from 'react'
+'use client'
+import { useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-export default function TrendingProducts() {
+export default function TrendingProducts({data}:any) {
+    useEffect(() => {
+        console.log(data)
+    })
   return (
     <div className='w-[380px] h-full rounded-[22px] sm:p-8 p-5 bg-lightGray'>
         <div className='w-full justify-items-center grid gap-5'>
@@ -16,7 +20,7 @@ export default function TrendingProducts() {
                     
                     <Link href={""} className='justify-items-center w-fit'>
                         <div className='sm:w-full sm:h-[260px] w-fit h-[200px] rounded-[22px] overflow-hidden'>
-                            <Image  width={200} height={200} src="https://www.space-tech.co/cdn/shop/files/LE-30-Lifestyle_c501ee74-78ea-4157-8b02-e723ca8eab44_2048x2048.jpg?v=1735718661" alt="" className='w-full h-full object-cover' />
+                            {/* <Image width={500} height={500} src={data.imgURL[0]} alt="" className='w-full h-full object-cover' /> */}
                         </div>
                         <span className='text-black w-full flex gap-[2px] py-2 items-end justify-center font-opensans font-medium'>
                             PKR
