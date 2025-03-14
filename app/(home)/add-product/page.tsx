@@ -24,7 +24,7 @@ interface IFormInputs {
   payment_method: string[];
 }
 
-export default function page() {
+export default function() {
   
   useEffect(() => {
         
