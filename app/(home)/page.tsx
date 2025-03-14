@@ -10,10 +10,10 @@ import axios from 'axios'
 export default function page() {
 
   const [productData, setProductData] = useState<object[]>()
-  const [trending, setTrending] = useState<any>([{}])
+  const [trending, setTrending] = useState([{}])
 
   useEffect(() => {
-    let productCardData = async () => {
+    const productCardData = async () => {
       const res = await axios.get("/api")
       if(res.status == 200) {
         setProductData(await res.data.data)

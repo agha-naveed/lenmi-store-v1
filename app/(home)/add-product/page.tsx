@@ -30,7 +30,7 @@ export default function page() {
         
     const getData = async () => {
         
-        let fetchData = await axios.get("/account/api", {
+        const fetchData = await axios.get("/account/api", {
           withCredentials: true
         })
 
@@ -43,9 +43,9 @@ export default function page() {
   }, [])
 
 
-  let [message, setMessage] = useState("");
+  const [message, setMessage] = useState("");
 
-  let [selectedImage, setSelectedImage] = useState<string[]>([]);
+  const [selectedImage, setSelectedImage] = useState<string[]>([]);
   const [files, setFiles] = useState<File[]>([]);
 
   const [customColors, setCustomColors] = useState<string[]>([]);
@@ -59,7 +59,7 @@ export default function page() {
   const handleAddColor = () => {
     if (newColor.trim()) {
       setCustomColors([...customColors, newColor.trim()]);
-      setNewColor(""); // Reset input
+      setNewColor("");
     }
   };
 
@@ -74,10 +74,6 @@ export default function page() {
   const contentValue = watch("content");
 
   const onSubmit = async (data: IFormInputs) => {
-
-    const picData = new FormData();
-
-
 
     if(!files) {
       console.log("No File")
@@ -266,7 +262,7 @@ export default function page() {
             </label>
             <RichTextEditor
               value={contentValue}
-              onChange={(value: any) => setValue("content", value)}
+              onChange={(value: string) => setValue("content", value)}
             />
           </div>
 
@@ -279,7 +275,7 @@ export default function page() {
                 type="number"
                 className="border border-gray-400 rounded-md py-2 px-3"
                 value={originalPrice}
-                onInput={(e: any) => {
+                onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
                   setOriginalPrice(Number(e.target.value));
                 }}
                 {...register("price")}

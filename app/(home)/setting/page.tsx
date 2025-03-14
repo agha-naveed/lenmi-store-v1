@@ -21,15 +21,11 @@ export default function page() {
     profile_pic: ""
   });
 
-  const [update, setUpdate] = useState("")
 
-  const [emailError, setEmailError] = useState("");
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    setValue,
     reset,
   } = useForm<IFormInputs>({
     defaultValues: {
@@ -117,7 +113,7 @@ export default function page() {
 
   }, [reset]);
 
-  function restrictSigns(e: any): void {
+  function restrictSigns(e: React.KeyboardEvent): void {
     const char = e.key;
     if (char === "+" || char === "-") {
       e.preventDefault();
@@ -278,11 +274,11 @@ export default function page() {
               {...register("email")}
               readOnly
             />
-            {emailError ? (
+            {/* {emailError ? (
               <span className="text-red-600 text-[15px]"> {emailError} </span>
             ) : (
               ""
-            )}
+            )} */}
           </div>
           <div className="md:flex grid content-center justify-between">
             <label htmlFor="">Password</label>

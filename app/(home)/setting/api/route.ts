@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
 
     const cookie = await cookies()    
     const userData = await User.findOne({email});
-    let result = await bcrypt.compare(password, userData.password)
+    const result = await bcrypt.compare(password, userData.password)
     
     if(!result) {
         const salt = await bcrypt.genSalt(10);
@@ -62,7 +62,7 @@ export async function GET(req: NextRequest) {
     const cookie = await cookies()
     
     if(cookie) {
-        let datafromCookie_DB = await User.findOne({email: cookie.get("email")?.value})
+        const datafromCookie_DB = await User.findOne({email: cookie.get("email")?.value})
         return NextResponse.json(datafromCookie_DB)
     }
     else {

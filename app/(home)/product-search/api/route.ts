@@ -1,6 +1,5 @@
 import dbConnection from "@/lib/database/dbConnection"
 import Product from "@/lib/database/model/product";
-import { NextApiRequest } from "next"
 import { NextRequest, NextResponse } from "next/server"
 
 export async function GET(req:NextRequest) {
@@ -9,18 +8,18 @@ export async function GET(req:NextRequest) {
     const url = new URL(req.url);
     const searchParams = url.searchParams;
 
-    let q = searchParams.get('q') || ""
-    let category = searchParams.get('category') || "all"
-    let shippedOverseas = searchParams.get('shippedOverseas') || ""
-    let color = searchParams.get('color') || ""
-    let warrantyType = searchParams.get('warrantyType') || ""
+    const q = searchParams.get('q') || ""
+    const category = searchParams.get('category') || "all"
+    const shippedOverseas = searchParams.get('shippedOverseas') || ""
+    const color = searchParams.get('color') || ""
+    const warrantyType = searchParams.get('warrantyType') || ""
 
 
-    let query = q?.split('+').join(" ")
+    const query = q?.split('+').join(" ")
 
     console.log(searchParams)
     
-    let queryConditions:any = {
+    const queryConditions:any = {
         $text: {
             $search: query
         }
@@ -43,12 +42,10 @@ export async function GET(req:NextRequest) {
     }
     
     
-    let productData = await Product.find(queryConditions);
+    const productData = await Product.find(queryConditions);
     
     return NextResponse.json({
         data: productData,
         message: 'done'
     }, { status: 201 });
-
-    
 }

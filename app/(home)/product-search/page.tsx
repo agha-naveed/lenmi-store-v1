@@ -9,10 +9,11 @@ import { useSearchQuery } from "@/app/components/SearchContext";
 import { useRouter, useSearchParams } from "next/navigation";
 import axios from "axios";
 
-export default function Page() {
+
+export default function page() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { query, setQuery }:any = useSearchQuery();
+  const { query, setQuery } = useSearchQuery();
   const [toggleFilter, setToggleFilter] = useState(false);
 
   // ✅ Extract Filters from URL
@@ -51,7 +52,7 @@ export default function Page() {
     const fetchData = async () => {
       const res = await axios.get(`/product-search/api/?${searchParams.toString()}`);
       setQuery(await res.data.data);
-      console.log(query)
+      console.log("searchquery: "+JSON.stringify(await res.data.data))
     };
 
     fetchData();
@@ -218,7 +219,7 @@ export default function Page() {
         {/* 📦 Product Results */}
         <main className="w-full">
           <div className="w-full h-full product-search-items flex flex-wrap md:justify-start justify-center">
-            {query ? (
+            {query && Array.isArray(query) ? (
               query.length == 0 ?
               <div className="w-full h-full content-center text-center">
                 <h2 className="font-semibold text-5xl">404!</h2>
