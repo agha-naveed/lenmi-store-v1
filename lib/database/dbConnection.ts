@@ -1,6 +1,6 @@
 import mongoose, { ConnectOptions } from 'mongoose';
 
-const URI = process.env.MONGODB_URI;
+const URI = "mongodb+srv://naveedabs31:Yaali110@cluster0.oqtmw.mongodb.net/lenmi-store?retryWrites=true&w=majority&appName=Cluster0";
 
 mongoose.set('bufferCommands', false);
 let isConnected = false;
