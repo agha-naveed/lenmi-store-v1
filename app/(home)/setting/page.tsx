@@ -57,7 +57,7 @@ export default function Page() {
     profile_pic: File | "";
   }
   
-  let [imageURL, setImageURL] = useState<string | undefined>(undefined)
+  const [imageURL, setImageURL] = useState<string | undefined>(undefined)
   
   useEffect(() => {
     if(imageURL) {
@@ -125,7 +125,7 @@ export default function Page() {
   async function dpChange() {
     
 
-    let imgForm = new FormData()
+    const imgForm = new FormData()
 
     if(image) {
       imgForm.append("file", image);
@@ -139,7 +139,7 @@ export default function Page() {
           }
         );
         
-        let myFile = await cloudRes.json();
+        const myFile = await cloudRes.json();
 
         if(myFile.secure_url) {
           setImageURL(await myFile.secure_url)
@@ -157,7 +157,7 @@ export default function Page() {
 
   const onSubmit = async (data: IFormInputs) => {
 
-      let myData = data
+    const myData = data
 
       const res = await axios.post("/setting/api", myData, {
         withCredentials: true

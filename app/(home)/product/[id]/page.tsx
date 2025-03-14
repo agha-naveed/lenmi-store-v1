@@ -19,7 +19,7 @@ export default function Page() {
   const param = useParams()
   const router = useRouter()  
 
-  let { loggedin, setLoggedin } = useLoginData()
+  const { loggedin, setLoggedin } = useLoginData()
 
   // --------- Review ---------
 
@@ -57,8 +57,8 @@ export default function Page() {
   const [btnVisible, setBtnVisible] = useState<boolean>(false)
   const [fetchReviews, setFetchReviews] = useState([])
   
-  let [rating, setRating] = useState(0)
-  let [ratingClicked, setRatingClicked] = useState(0)
+  const [rating, setRating] = useState(0)
+  const [ratingClicked, setRatingClicked] = useState(0)
   
   const txtAreaRef = useRef(null)
 
@@ -177,11 +177,11 @@ export default function Page() {
 
 
   const postData = async () => {
-    let sendDetail = {
+    const sendDetail = {
       id: fetchData._id,
       quantity
     }
-    const data = await axios.post(`/cart/api`, sendDetail)
+    await axios.post(`/cart/api`, sendDetail)
     setLength(length + 1)
   }
 

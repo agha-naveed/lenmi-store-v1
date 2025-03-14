@@ -7,15 +7,15 @@ import { useCart } from '../CartProvider';
 
 export default function ProductCard({data}:any) {
 
-    let {length, setLength} = useCart();
+    const {length, setLength} = useCart();
 
   const postData = async () => {
-    let sendDetail = {
+    const sendDetail = {
       id: data._id,
       quantity: 1
     }
     try {
-        const sendData = await axios.post(`/cart/api`, sendDetail)
+        await axios.post(`/cart/api`, sendDetail)
         setLength(length + 1)
     } catch(err) {
         alert("Please Login First!")

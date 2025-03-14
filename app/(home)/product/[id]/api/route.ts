@@ -21,7 +21,7 @@ export async function GET(req:NextRequest, { params }: { params: Promise<{ id: s
     const objId = cookie.get("u_obj_i")
 
     
-    var user;
+    let user = "";
     
     try {
         if(!data) {

@@ -47,12 +47,12 @@ export default function Navbar() {
         if(logOut == false) {
             const getData = async () => {
                 
-                let fetchData = await axios.get("/account/api", {
+                const fetchData = await axios.get("/account/api", {
                     withCredentials: true
                 })
 
                 if(fetchData != null) {
-                    let Data = await fetchData.data
+                    const Data = await fetchData.data
                     setMessage(Data)
                     setLoggedin(true)
                 }
@@ -79,7 +79,7 @@ export default function Navbar() {
         
         async function cartData() {
             try {
-                let res = await axios.get("/cart/api")
+                const res = await axios.get("/cart/api")
                 
                 if(res.status == 201) {
                     setLength(await res.data.data)
@@ -96,7 +96,7 @@ export default function Navbar() {
         cartData()
     }, [length])
     
-    let router = useRouter()
+    const router = useRouter()
     const searchParams = useSearchParams();
     async function handleSearch(data:any) {
         const params = new URLSearchParams(searchParams.toString());
