@@ -19,13 +19,13 @@ interface IFormInputs {
   expiryDate: Date;
 }
 
-export default function page() {
+export default function Page() {
 
-  let param = useParams()
+  const param = useParams()
   
-  const { register, handleSubmit, formState: { errors } } = useForm<IFormInputs>();
+  const { register, handleSubmit } = useForm<IFormInputs>();
  
-  const { buyData, setBuyData }: any = useBuyContext();
+  const { buyData } = useBuyContext();
   
   useEffect(() => {
     // if(buyData.userId == 0) {
@@ -35,7 +35,7 @@ export default function page() {
   }, [])
 
   const onSubmit = async (data: IFormInputs) => {
-    let obj = {
+    const obj = {
       buyData,
       paymentData: data
     }

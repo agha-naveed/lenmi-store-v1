@@ -22,9 +22,9 @@ interface IFormInputs {
   address: string;
 }
 
-export default function page() {
+export default function Page() {
 
-  const { register, handleSubmit, formState: { errors } } = useForm<IFormInputs>();
+  const { register, handleSubmit } = useForm<IFormInputs>();
  
   const param = useParams()
   const [productDetails, setProductDetails] = useState<any>();
@@ -183,7 +183,7 @@ export default function page() {
                 <Form action={""} onSubmit={handleSubmit(onSubmit)}>
                   <div className="flex flex-wrap gap-3 mb-3">
                     <div className="grid gap-1 md:w-fit w-full">
-                        <label htmlFor="">Recipient's Name</label>
+                        <label htmlFor="">Recipients Name</label>
                         <input
                           type="text"
                           className="border h-9 px-3 rounded-lg"
