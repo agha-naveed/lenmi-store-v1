@@ -1,16 +1,11 @@
 import React, { useRef } from 'react';
 
-const RichTextEditor = ({ value, onChange }: any) => {
+const RichTextEditor = ({ onChange }) => {
   const editorRef = useRef<HTMLDivElement>(null);
 
   const handleFormat = (command: string, value?: string) => {
     document.execCommand(command, false, value);
     editorRef.current?.focus();
-  };
-
-  const handleInput = (e: React.FormEvent<HTMLDivElement>) => {
-    const newValue = e.currentTarget.innerHTML;
-    onChange(newValue); // Send updated HTML to parent
   };
 
   const handleFontSize = (operation: 'increase' | 'decrease') => {

@@ -10,16 +10,16 @@ export async function POST(req: NextRequest) {
     await dbConnection()
     const {email, password} : {email: string, password: string} = await req.json()
 
-    let isExist = await User.findOne({email})
+    const isExist = await User.findOne({email})
 
     const cookie = await cookies()
 
     try {
         if(isExist) {
-            let result = await bcrypt.compare(password, isExist.password)
+            const result = await bcrypt.compare(password, isExist.password)
 
             if(result) {
-                let token = jwt.sign({obj_id: isExist._id}, process.env.JWT_CODE || '')
+                const token = jwt.sign({obj_id: isExist._id}, process.env.JWT_CODE || '')
                 cookie.set("u_obj_i", token, {secure: true, httpOnly: true})
                 cookie.set("email", email, {secure: true, httpOnly: true})
                 return NextResponse.json(isExist)
@@ -42,7 +42,7 @@ export async function GET(req: NextRequest) {
     const cookie = await cookies()
     
     if(cookie) {
-        let datafromCookie_DB = await User.findOne({email: cookie.get("email")?.value})
+        const datafromCookie_DB = await User.findOne({email: cookie.get("email")?.value})
         return NextResponse.json(datafromCookie_DB)
     }
     else {

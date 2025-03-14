@@ -14,7 +14,7 @@ import jethalal from '@/images/jethalal.jpeg'
 import ProductReviews from '@/app/components/ProductReviews';
 import { useLoginData } from '@/app/components/LoginContext';
 
-export default function page() {
+export default function Page() {
 
   const param = useParams()
   const router = useRouter()  
@@ -26,7 +26,7 @@ export default function page() {
   // ---------- Review Image -------------
 
 
-  let [selectedImage, setSelectedImage] = useState<string[]>([]);
+  const [selectedImage, setSelectedImage] = useState<string[]>([]);
   const [files, setFiles] = useState<File[]>([]);
 
 
@@ -54,17 +54,17 @@ export default function page() {
   };
 
 
-  let [btnVisible, setBtnVisible] = useState<boolean>(false)
-  let [fetchReviews, setFetchReviews] = useState([])
+  const [btnVisible, setBtnVisible] = useState<boolean>(false)
+  const [fetchReviews, setFetchReviews] = useState([])
   
   let [rating, setRating] = useState(0)
   let [ratingClicked, setRatingClicked] = useState(0)
   
-  let txtAreaRef = useRef(null)
+  const txtAreaRef = useRef(null)
 
   async function onSubmit() {
 
-    let data = txtAreaRef.current?.value
+    const data = txtAreaRef.current?.value
 
     try {
       const checkDuplication = await axios.post(`/product/${param.id}/api`)
@@ -114,7 +114,7 @@ export default function page() {
   // --------- Review Ended ---------
 
   function checkHeight() {
-    let h_desc = document.getElementById("description_h")
+    const h_desc = document.getElementById("description_h")
     if(h_desc) {
       if(h_desc?.offsetHeight < 400) {
         setBtnVisible(false)
@@ -154,7 +154,7 @@ export default function page() {
   useInsertionEffect(() => {
     const gettingData = async () => {
       const res = await axios.get(`/product/${param.id}/api`)
-      let datas = await res.data.data
+      const datas = await res.data.data
       
       if(res.status === 200) {
         setDp(await res.data.userData)

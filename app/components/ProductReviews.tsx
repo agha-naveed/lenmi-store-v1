@@ -3,30 +3,29 @@
 import { IoStar } from "react-icons/io5";
 import { AiOutlineLike } from "react-icons/ai";
 import React, { useEffect, useState } from 'react'
-import jethalal from '@/images/jethalal.jpeg'
 import Image from 'next/image'
 import Link from "next/link";
 
-export default function ProductReviews({data}:any) {
+export default function ProductReviews({data}) {
   
   const [isLiked, setIsLiked] = useState(false)
 
-  let [ratingCount, setRatingCount] = useState([])
+  const [ratingCount, setRatingCount] = useState([])
 
-  let date = data.date.slice(0, 10)
+  const date = data.date.slice(0, 10)
 
-  let year = date.slice(0, 4)
+  const year = date.slice(0, 4)
   let monthArray = date.slice(5, 7)
-  let onlyDate = date.slice(8, 10)
+  const onlyDate = date.slice(8, 10)
 
   if(monthArray[0] == 0) {
     monthArray = monthArray[1]
   }
 
-  let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
   useEffect(() => {
-    let newArray:any = []
+    const newArray:any = []
     for(let i=0; i<data.rating; i++) {
       newArray.push(i)
     }

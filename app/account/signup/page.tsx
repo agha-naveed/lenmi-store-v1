@@ -8,10 +8,10 @@ import { redirect } from 'next/navigation'
 
 export default function Signup() {
     
-    const { register, handleSubmit, formState: { errors } } = useForm<IFormInputs>();
+    const { register, handleSubmit } = useForm<IFormInputs>();
     
-    let [message, setMessage] = useState("")
-    let [emailError, setEmailError] = useState("")
+    const [message, setMessage] = useState("")
+    const [emailError, setEmailError] = useState("")
 
 
     interface IFormInputs {
@@ -53,7 +53,7 @@ export default function Signup() {
     }
     
 
-    function restrictSigns(e:any): void {
+    function restrictSigns(e:React.KeyboardEvent): void {
         const char = e.key;
         if (char === '+' || char === '-') {
             e.preventDefault()

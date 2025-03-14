@@ -10,7 +10,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import axios from "axios";
 
 
-export default function page() {
+export default function Page() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { query, setQuery } = useSearchQuery();

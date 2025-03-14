@@ -4,7 +4,7 @@ import { useParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import ProductCard from '@/app/components/products-cards/ProductCard'
 
-export default function page() {
+export default function Page() {
   const param = useParams()
   const [products, setProducts] = useState([])
 

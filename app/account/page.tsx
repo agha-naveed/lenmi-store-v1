@@ -15,9 +15,9 @@ interface IFormInputs {
 
 export default function Login() {
 
-    const { register, handleSubmit, formState: { errors } } = useForm<IFormInputs>();
+    const { register, handleSubmit } = useForm<IFormInputs>();
     
-    const [message, setMessage] = useState("")
+    // const [message, setMessage] = useState("")
     const [error, setError] = useState("")
 
 
@@ -31,11 +31,11 @@ export default function Login() {
 
 
         if(res.ok) {
-          setMessage(await res.json())
+          // setMessage(await res.json())
           redirect("/")
         }
         else {
-          setMessage("error")
+          // setMessage("error")
           setError("Invalid Email or Password")
         }
 

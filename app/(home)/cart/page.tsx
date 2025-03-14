@@ -5,12 +5,11 @@ import Image from 'next/image'
 import { GoStarFill } from "react-icons/go";
 import { IoArrowForwardCircleOutline } from "react-icons/io5";
 import { useCart } from '@/components/CartProvider';
-
 import Link from 'next/link';
 import axios from 'axios';
 import { redirect } from 'next/navigation';
 
-export default function page() {
+export default function Page() {
 
     const { length, setLength } = useCart()
     const [quantity, setQuantity] = useState(1)

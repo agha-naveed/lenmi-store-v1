@@ -7,7 +7,7 @@ import axios from "axios";
 import Form from "next/form";
 import { redirect } from "next/navigation";
 
-export default function page() {
+export default function Page() {
 
   const [image, setImage] = useState<File>()
   

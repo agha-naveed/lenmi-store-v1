@@ -1,7 +1,6 @@
 'use client'
 import React, { useState } from 'react'
 import { VscAccount } from "react-icons/vsc";
-import { AiOutlineHistory } from "react-icons/ai";
 import Link from 'next/link';
 
 export default function SettingMenu() {

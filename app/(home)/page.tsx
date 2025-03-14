@@ -7,7 +7,7 @@ import HorizontalCard from '@/components/products-cards/HorizontalCard'
 import CategoriesDesign from '../components/CategoriesDesign'
 import axios from 'axios'
 
-export default function page() {
+export default function Page() {
 
   const [productData, setProductData] = useState<object[]>()
   const [trending, setTrending] = useState([{}])

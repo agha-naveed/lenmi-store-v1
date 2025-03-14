@@ -26,9 +26,9 @@ interface ApiResponse {
 
 export default function Navbar() {
     
-    let { loggedin, setLoggedin } = useLoginData()
+    const { setLoggedin } = useLoginData()
 
-    const { query, setQuery } = useSearchQuery()
+    const { setQuery } = useSearchQuery()
 
     const { length, setLength } = useCart()
     const [message, setMessage] = useState<ApiResponse | null>(null);

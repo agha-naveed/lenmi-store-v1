@@ -8,7 +8,7 @@ export async function GET({ params }: { params: Promise<{ name: string }> }) {
     const categ_name = await params
 
     try {
-        let data = await Product.aggregate([
+        const data = await Product.aggregate([
             {
                 $match: {
                     category: categ_name.name
