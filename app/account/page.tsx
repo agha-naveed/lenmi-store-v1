@@ -22,7 +22,7 @@ export default function Login() {
 
 
     const onSubmit = async (data: IFormInputs) => {
-        const res = await fetch("/account/api", {
+        const res = await fetch("/api/account", {
           method: "POST",
           body: JSON.stringify(data),
           credentials: "include"
