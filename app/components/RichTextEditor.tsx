@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 
-const RichTextEditor = ({ onChange }) => {
+const RichTextEditor = ({ value, onChange }) => {
   const editorRef = useRef<HTMLDivElement>(null);
 
   const handleFormat = (command: string, value?: string) => {
