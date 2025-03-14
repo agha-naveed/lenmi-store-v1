@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 import { useForm } from 'react-hook-form'
 import { IoMdCloseCircle } from "react-icons/io"
 import { useRouter } from 'next/navigation'
@@ -15,7 +15,7 @@ interface IFormInputs {
     account_type: string
 }
 
-export default function Login() {
+export default function Signup() {
   const router = useRouter()
   
   const { register, handleSubmit, formState: { errors } } = useForm<IFormInputs>()
