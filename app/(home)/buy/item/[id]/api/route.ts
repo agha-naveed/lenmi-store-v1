@@ -9,23 +9,23 @@ import Buy from "@/lib/database/model/buy";
 export async function GET(req:NextRequest, { params }: { params: Promise<{ id: string }> }) {
     await dbConnection()
 
-    let p_id = await params
+    const p_id = await params
     
-    let cookie = await cookies()
-    let userIdCookie = cookie.get("u_obj_i")?.value
+    const cookie = await cookies()
+    const userIdCookie = cookie.get("u_obj_i")?.value
     
     
     if(userIdCookie) {
-        let userId = jwt.verify(userIdCookie, process.env.JWT_CODE ?? "") as { obj_id: string }
+        const userId = jwt.verify(userIdCookie, process.env.JWT_CODE ?? "") as { obj_id: string }
         
-        let userDetails = await Cart.findOne({userId: userId.obj_id})
+        const userDetails = await Cart.findOne({userId: userId.obj_id})
 
-        let cartItems = await userDetails.items
+        const cartItems = await userDetails.items
     
         if(cartItems.length > 0) {
             for(let i=0; i<cartItems.length; i++) {
                 if(p_id.id == cartItems[i].productId) {
-                    let productDetails = await Product.findById(cartItems[i].productId)
+                    const productDetails = await Product.findById(cartItems[i].productId)
 
                     return NextResponse.json({
                         message: "done",
@@ -60,7 +60,7 @@ export async function GET(req:NextRequest, { params }: { params: Promise<{ id: s
 export async function POST(req:NextRequest) {
     await dbConnection()
 
-    let { productId, recipients_name, phone_number, district, address, userId, itemQuantity } = await req.json()
+    const { productId, recipients_name, phone_number, district, address, userId, itemQuantity } = await req.json()
 
     await Buy.insertMany([{
         userId,

@@ -7,13 +7,13 @@ import jwt from 'jsonwebtoken'
 export async function POST(req:NextRequest) {
     await dbConnection()
 
-    let data = await req.json();
-    let product_objId = await data.id
-    let product_quantity = await data.quantity
+    const data = await req.json();
+    const product_objId = await data.id
+    const product_quantity = await data.quantity
     
-    let cookie = await cookies()
+    const cookie = await cookies()
     
-    let user_id = cookie.get("u_obj_i")?.value
+    const user_id = cookie.get("u_obj_i")?.value
     if(!user_id) {
         return NextResponse.json({
             message: "Some Error Occurred!",
@@ -21,12 +21,12 @@ export async function POST(req:NextRequest) {
     }
 
     if(user_id) {
-        let originalId = jwt.verify(user_id ?? "", process.env.JWT_CODE ?? "") as { obj_id: string }
+        const originalId = jwt.verify(user_id ?? "", process.env.JWT_CODE ?? "") as { obj_id: string }
 
-        let isExist = await Cart.findOne({userId: originalId.obj_id})
+        const isExist = await Cart.findOne({userId: originalId.obj_id})
         
         if(!isExist) {
-            let dbData = await Cart.insertMany([
+            const dbData = await Cart.insertMany([
                 {
                     userId: originalId.obj_id,
                     items: [{
@@ -51,7 +51,7 @@ export async function POST(req:NextRequest) {
         }
 
         else {
-            let dbData = await Cart.updateOne({
+            const dbData = await Cart.updateOne({
                 userId: originalId.obj_id
             }, {
                 $addToSet: {
@@ -82,14 +82,14 @@ export async function POST(req:NextRequest) {
 export async function GET() {
     await dbConnection()
 
-    let cookie = await cookies()
+    const cookie = await cookies()
 
-    let user_id = cookie.get("u_obj_i")?.value
+    const user_id = cookie.get("u_obj_i")?.value
 
     if(user_id) {
-        let originalId = jwt.verify(user_id ?? "", process.env.JWT_CODE ?? "") as { obj_id: string }
+        const originalId = jwt.verify(user_id ?? "", process.env.JWT_CODE ?? "") as { obj_id: string }
 
-        let data = await Cart.findOne({ userId: originalId.obj_id })
+        const data = await Cart.findOne({ userId: originalId.obj_id })
 
         if(data) {
             return NextResponse.json({

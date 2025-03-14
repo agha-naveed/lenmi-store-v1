@@ -1,8 +1,8 @@
 import dbConnection from "@/lib/database/dbConnection";
 import Product from "@/lib/database/model/product";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export async function GET(req:NextRequest, { params }: { params: Promise<{ name: string }> }) {
+export async function GET({ params }: { params: Promise<{ name: string }> }) {
     await dbConnection()
 
     const categ_name = await params

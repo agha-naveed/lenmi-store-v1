@@ -8,7 +8,7 @@ import { useCart } from '@/components/CartProvider';
 
 import Link from 'next/link';
 import axios from 'axios';
-import { redirect, useRouter } from 'next/navigation';
+import { redirect } from 'next/navigation';
 
 export default function page() {
 

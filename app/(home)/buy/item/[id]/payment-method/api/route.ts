@@ -5,13 +5,13 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req:NextRequest) {
     await dbConnection()
 
-    let {
+    const {
         buyData, paymentData
     } = await req.json()
 
-    let delivery_address = buyData.deliveryAddress;
+    const delivery_address = buyData.deliveryAddress;
     
-    let isExist = await Buy.findOne({ userId: buyData.userId })
+    const isExist = await Buy.findOne({ userId: buyData.userId })
 
     if(!isExist) {
         await Buy.insertMany([

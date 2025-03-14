@@ -10,22 +10,22 @@ export async function GET() {
     await dbConnection()
     
 
-    let cookie = await cookies()
+    const cookie = await cookies()
 
-    let user_id = cookie.get("u_obj_i")?.value
+    const user_id = cookie.get("u_obj_i")?.value
 
     if(user_id) {
-        let originalId = jwt.verify(user_id ?? "", process.env.JWT_CODE ?? "") as { obj_id: string }
+        const originalId = jwt.verify(user_id ?? "", process.env.JWT_CODE ?? "") as { obj_id: string }
 
-        let objdata = await Cart.findOne({ userId: originalId.obj_id })
+        const objdata = await Cart.findOne({ userId: originalId.obj_id })
         
         if(objdata) {
-            let items = objdata.items
-            let cartDatas:any = []
+            const items = objdata.items
+            const cartDatas:any = []
 
             await Promise.all(
                 items.map(async (item:any) => {
-                    let data = await Product.findById(item.productId)
+                    const data = await Product.findById(item.productId)
                     cartDatas.push({data, itemQuantity: item.quantity})
                 })
             )
@@ -54,16 +54,16 @@ export async function GET() {
 export async function POST(req:NextRequest) {
     await dbConnection()
 
-    let fetchId = await req.json()
+    const fetchId = await req.json()
     const id = fetchId.id
 
-    let cookie = await cookies()
+    const cookie = await cookies()
 
-    let user_id = cookie.get("u_obj_i")?.value
-    let originalId = jwt.verify(user_id ?? "", process.env.JWT_CODE ?? "") as { obj_id: string }
+    const user_id = cookie.get("u_obj_i")?.value
+    const originalId = jwt.verify(user_id ?? "", process.env.JWT_CODE ?? "") as { obj_id: string }
 
 
-    let data = await Cart.findOne({userId: originalId.obj_id})
+    const data = await Cart.findOne({userId: originalId.obj_id})
 
     console.log(data.items.length)
     if(data.items.length == 1) {

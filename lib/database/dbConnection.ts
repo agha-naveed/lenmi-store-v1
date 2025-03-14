@@ -5,7 +5,7 @@ const URI:any = process.env.MONGODB_URI;
 mongoose.set('bufferCommands', false);
 let isConnected = false;
 
-export default async function dbConnection(): Promise<any> {
+export default async function dbConnection(): Promise<void> {
   if (isConnected) {
     console.log('Already connected to MongoDB');
     return;
