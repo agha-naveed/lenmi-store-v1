@@ -39,3 +39,11 @@ export async function POST(request: NextRequest) {
         }, { status: 405 });
     }
 }
+
+export async function GET() {
+    const details = await User.find()
+    
+    return NextResponse.json({
+        details
+    })
+}
