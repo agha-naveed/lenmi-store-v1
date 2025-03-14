@@ -10,15 +10,15 @@ import User from "@/lib/database/model/user";
 export async function GET(req:NextRequest, { params }: { params: Promise<{ id: string }> }) {
     await dbConnection()
 
-    let p_id = await params
+    const p_id = await params
 
-    let data = await Product.findById(p_id.id)
+    const data = await Product.findById(p_id.id)
 
-    let productReview = await ProductReview.find({productId: data}).populate('userId', 'first_name last_name profile_pic').limit(5)
+    const productReview = await ProductReview.find({productId: data}).populate('userId', 'first_name last_name profile_pic').limit(5)
 
     const cookie = await cookies()
 
-    let objId = cookie.get("u_obj_i")
+    const objId = cookie.get("u_obj_i")
 
     
     var user;
@@ -30,7 +30,7 @@ export async function GET(req:NextRequest, { params }: { params: Promise<{ id: s
 
 
         if(objId) {
-            let decodedData = jwt.verify(objId?.value || "", process.env.JWT_CODE || "") as { obj_id: string };
+            const decodedData = jwt.verify(objId?.value || "", process.env.JWT_CODE || "") as { obj_id: string };
             user = await User.findById(decodedData.obj_id)
         }
         
@@ -66,15 +66,15 @@ export async function POST(req:NextRequest, { params }: { params: Promise<{ id: 
 
     const cookie = await cookies()
 
-    let objId = cookie.get("u_obj_i")?.value
+    const objId = cookie.get("u_obj_i")?.value
 
-    let decodedData = jwt.verify(objId || "", process.env.JWT_CODE || "") as { obj_id: string };
+    const decodedData = jwt.verify(objId || "", process.env.JWT_CODE || "") as { obj_id: string };
 
-    let param = await params
-    let productId = param.id
+    const param = await params
+    const productId = param.id
 
 
-    let isExist = await ProductReview.findOne({ userId: decodedData.obj_id, productId })
+    const isExist = await ProductReview.findOne({ userId: decodedData.obj_id, productId })
 
     if(isExist) {
         return NextResponse.json({
@@ -92,16 +92,16 @@ export async function PATCH(req:NextRequest, { params }: { params: Promise<{ id:
     
     await dbConnection()
 
-    let data = await req.json()
+    const data = await req.json()
 
     const cookie = await cookies()
 
-    let objId = cookie.get("u_obj_i")?.value
+    const objId = cookie.get("u_obj_i")?.value
 
-    let decodedData = jwt.verify(objId || "", process.env.JWT_CODE || "") as { obj_id: string };
+    const decodedData = jwt.verify(objId || "", process.env.JWT_CODE || "") as { obj_id: string };
 
-    let param = await params
-    let productId = param.id
+    const param = await params
+    const productId = param.id
 
     await ProductReview.insertMany([
         {
@@ -114,7 +114,7 @@ export async function PATCH(req:NextRequest, { params }: { params: Promise<{ id:
         }
     ])
 
-    let totalRating = await ProductReview.find({productId})
+    const totalRating = await ProductReview.find({productId})
     let totalReviews = 0;
 
     let ratingSum = 0;
@@ -124,7 +124,7 @@ export async function PATCH(req:NextRequest, { params }: { params: Promise<{ id:
         ratingSum += totalRating[i].rating;
     }
 
-    let ratingAvg = ratingSum/totalReviews;
+    const ratingAvg = ratingSum/totalReviews;
 
 
     await Product.updateOne({

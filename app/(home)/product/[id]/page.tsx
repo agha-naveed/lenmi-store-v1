@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect, useInsertionEffect, ChangeEvent } from 'react';
+import { useState, useRef, useEffect, useInsertionEffect, ChangeEvent, Ref } from 'react';
 import Image from 'next/image'
 import { GoStarFill } from "react-icons/go";
 import { MdLocationOn } from "react-icons/md";
@@ -55,12 +55,12 @@ export default function page() {
 
 
   let [btnVisible, setBtnVisible] = useState<boolean>(false)
-  let [fetchReviews, setFetchReviews] = useState<any>([])
+  let [fetchReviews, setFetchReviews] = useState([])
   
   let [rating, setRating] = useState(0)
   let [ratingClicked, setRatingClicked] = useState(0)
   
-  let txtAreaRef = useRef<any>(null)
+  let txtAreaRef = useRef(null)
 
   async function onSubmit() {
 
@@ -125,15 +125,27 @@ export default function page() {
     }
   }
   
+  interface fetchingData {
+    _id: string,
+    name: string,
+    category: string,
+    price: number,
+    description: string
+  }
+  interface dpData {
+    profile_pic: string,
+    first_name: string,
+    last_name: string
+  }
 
   const { length, setLength } = useCart()
 
   const [openReview, setOpenReview] = useState(false)
-  const [dp, setDp] = useState<any>()
+  const [dp, setDp] = useState<dpData>()
 
   const [quantity, setQuantity] = useState(1)
   
-  const [fetchData, setFetchData] = useState<any>({})
+  const [fetchData, setFetchData] = useState<fetchingData>()
   const [images, setImages] = useState<string[]>([])
   const [selectImage, setSelectImages] = useState<number>(0)
   
@@ -180,7 +192,7 @@ export default function page() {
   const imageRef = useRef<HTMLImageElement>(null);
 
 
-  const handleMouseMove = (event: any) => {
+  const handleMouseMove = (event: React.MouseEvent<HTMLInputElement>) => {
     if (!imageRef.current) return;
 
     const rect = imageRef.current.getBoundingClientRect();
@@ -531,7 +543,7 @@ export default function page() {
       
       <div className='w-full py-5 border-r'>
         {
-          fetchReviews.map((item:any, index:number) => {
+          fetchReviews.map((item:unknown, index:number) => {
             return (
               <ProductReviews key={`product-review-${index}`} data={item} />
             )

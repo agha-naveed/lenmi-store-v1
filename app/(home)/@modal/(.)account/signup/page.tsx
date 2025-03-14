@@ -37,7 +37,7 @@ export default function Login() {
     }
   }
 
-    function restrictSigns(e:any): void {
+    function restrictSigns(e:React.KeyboardEvent<HTMLInputElement>): void {
         const char = e.key;
         if (char === '+' || char === '-') {
             e.preventDefault()

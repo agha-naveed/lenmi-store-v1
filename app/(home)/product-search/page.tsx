@@ -12,21 +12,21 @@ import axios from "axios";
 export default function Page() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { query, setQuery }: any = useSearchQuery();
+  const { query, setQuery }:any = useSearchQuery();
   const [toggleFilter, setToggleFilter] = useState(false);
 
   // ✅ Extract Filters from URL
   const [category, setCategory] = useState(searchParams.get("category") || "");
-  const [shippedOverseas, setShippedOverseas] = useState(
-    searchParams.get("shippedOverseas") === "true"
-  );
-  const [minPrice, setMinPrice] = useState(
-    Number(searchParams.get("minPrice")) || 0
-  );
-  const [maxPrice, setMaxPrice] = useState(
-    Number(searchParams.get("maxPrice")) || 0
-  );
-  const [rating, setRating] = useState(Number(searchParams.get("rating")) || 0);
+  // const [shippedOverseas, setShippedOverseas] = useState(
+  //   searchParams.get("shippedOverseas") === "true"
+  // );
+  // const [minPrice, setMinPrice] = useState(
+  //   Number(searchParams.get("minPrice")) || 0
+  // );
+  // const [maxPrice, setMaxPrice] = useState(
+  //   Number(searchParams.get("maxPrice")) || 0
+  // );
+  // const [rating, setRating] = useState(Number(searchParams.get("rating")) || 0);
   const [warrantyType, setWarrantyType] = useState(
     searchParams.get("warrantyType") || ""
   );
@@ -51,6 +51,7 @@ export default function Page() {
     const fetchData = async () => {
       const res = await axios.get(`/product-search/api/?${searchParams.toString()}`);
       setQuery(await res.data.data);
+      console.log(query)
     };
 
     fetchData();
@@ -117,7 +118,7 @@ export default function Page() {
 
               <input
                 type="number"
-                value={minPrice}
+                // value={minPrice}
                 onChange={(e) => updateFilters("minPrice", Number(e.target.value))}
                 className="border border-gray-600 rounded-md w-20 px-2 py-[6px]"
                 min={0}
@@ -126,7 +127,7 @@ export default function Page() {
               <span className="text-xl content-center text-gray-600">-</span>
               <input
                 type="number"
-                value={maxPrice}
+                // value={maxPrice}
                 onChange={(e) => updateFilters("maxPrice", Number(e.target.value))}
                 className="border border-gray-600 rounded-md w-20 px-2 py-[6px]"
                 min={0}
@@ -140,7 +141,7 @@ export default function Page() {
             <span className="font-semibold">Rating</span>
             <input
               type="number"
-              value={rating}
+              // value={rating}
               onChange={(e) => updateFilters("rating", Number(e.target.value))}
               className="border border-gray-600 rounded-md w-20 px-2 py-[6px]"
               min={0}
@@ -224,7 +225,7 @@ export default function Page() {
                 <span className="font-medium">No Data Found!</span>
               </div>
               :
-              query.map((item: any, index: number) => (
+              query.map((item: unknown, index: number) => (
                 <ProductCard key={`search-items-${index}`} data={item} />
               ))
             ) : (
