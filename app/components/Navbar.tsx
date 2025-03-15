@@ -47,7 +47,7 @@ export default function Navbar() {
         if(logOut == false) {
             const getData = async () => {
                 
-                const fetchData = await axios.get("http://localhost:3000/api/account", {
+                const fetchData = await axios.get("/account/api", {
                     withCredentials: true
                 })
 
@@ -79,7 +79,7 @@ export default function Navbar() {
         
         async function cartData() {
             try {
-                const res = await axios.get("http://localhost:3000/cart/api")
+                const res = await axios.get("/cart/api")
                 
                 if(res.status == 201) {
                     setLength(await res.data.data)
@@ -104,7 +104,7 @@ export default function Navbar() {
         params.set('q', data);
         router.push(`/product-search/?${params.toString()}`)
         
-        const res = await axios.get(`http://localhost:3000/product-search/api/?${params.toString()}`, {data})
+        const res = await axios.get(`/product-search/api/?${params.toString()}`, {data})
         
         if(await res.data.message == "done") {
             setQuery(await res.data.data)
