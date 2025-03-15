@@ -47,7 +47,7 @@ export default function Navbar() {
         if(logOut == false) {
             const getData = async () => {
                 
-                const fetchData = await axios.get("/api/account", {
+                const fetchData = await axios.get("/account/api", {
                     withCredentials: true
                 })
 
@@ -65,7 +65,7 @@ export default function Navbar() {
 
         if(logOut == true) {
             async function logout() {
-                await axios.patch("/api/account")
+                await axios.patch("/account/api")
                     setMessage(null)
             }
             setLoggedin(false)
