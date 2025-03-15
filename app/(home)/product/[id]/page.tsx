@@ -157,6 +157,7 @@ export default function Page() {
       const datas = await res.data.data
       
       if(res.status === 200) {
+        console.log(await res.data)
         setDp(await res.data.userData)
         setFetchData(await datas)
         setImages(datas.imgURL)
@@ -291,7 +292,7 @@ export default function Page() {
           
           <div className='grid gap-2 relative lg:place-self-start place-self-center'>
             <span className='text-xl font-semibold'>Description:</span>
-            <div id='description_h' className={`xl:w-[880px] w-[92vw] px-5 pt-4 pb-5 ${showMore ? "h-auto" : "max-h-[400px] h-fit"} overflow-hidden border border-black rounded-md`} dangerouslySetInnerHTML={{ __html: fetchData.description }} />
+            <div id='description_h' className={`xl:w-[880px] w-[92vw] px-5 pt-4 pb-5 ${showMore ? "h-auto" : "max-h-[400px] h-fit"} overflow-hidden border border-black rounded-md`} dangerouslySetInnerHTML={{ __html: fetchData?.description }} />
             <button
               className={`animate-up_down absolute bottom-[6px] bg-slate-800 hover:bg-slate-900 transition-all left-1/2 w-fit rounded-full flex py-2 sm:px-[18px] px-3 justify-center items-center gap-1 text-white ${btnVisible ? "block" : "hidden"}`}
               onClick={() => setShowMore(!showMore)}
