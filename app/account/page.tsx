@@ -27,7 +27,7 @@ export default function Login() {
           body: JSON.stringify(data),
           credentials: "include"
         })
-        console.log("this is response"+res)
+        console.log("this is response"+JSON.stringify(res))
 
 
         if(res.ok) {
