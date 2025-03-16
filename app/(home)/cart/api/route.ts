@@ -21,7 +21,7 @@ export async function POST(req:NextRequest) {
     }
 
     if(user_id) {
-        const originalId = jwt.verify(user_id ?? "", process.env.JWT_CODE ?? "") as { obj_id: string }
+        const originalId = jwt.verify(user_id ?? "", process.env.JWT_CODE) as { obj_id: string }
 
         const isExist = await Cart.findOne({userId: originalId.obj_id})
         

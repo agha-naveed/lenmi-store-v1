@@ -222,7 +222,7 @@ export default function Page() {
             <div onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} className='md:w-[400px] md:h-[400px] w-[300px] h-auto overflow-hidden cursor-pointer border border-gray-400 rounded-xl'>
               {
                 images[selectImage] && images[selectImage].trim() !== "" ?
-                  <img ref={imageRef}
+                  <Image ref={imageRef}
                   src={images[selectImage]}
                   alt='Jacket' style={{transform: `scale(${zoom})`, transformOrigin: `${offset.x}px ${offset.y}px`, transition: 'tranform 0.3s ease-out'}} width={500} height={500} className='w-full h-full object-contain' />
                 : <h2 className='h-full w-full flex justify-center items-center'>Loading...</h2>

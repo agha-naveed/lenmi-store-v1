@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
             const result = await bcrypt.compare(password, isExist.password)
 
             if(result) {
-                const token = jwt.sign({obj_id: isExist._id}, process.env.JWT_CODE || '')
+                const token = jwt.sign({obj_id: isExist._id}, "user_object_id")
                 cookie.set("u_obj_i", token, {secure: true, httpOnly: true})
                 cookie.set("email", email, {secure: true, httpOnly: true})
                 return NextResponse.json(isExist)

@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
 
     const objId = cookie.get("u_obj_i")?.value
 
-    const decodedData = jwt.verify(objId || "", process.env.JWT_CODE || "") as { obj_id: string };
+    const decodedData = jwt.verify(objId || "", process.env.JWT_CODE ?? "") as { obj_id: string };
 
     await Product.insertMany([
       {
