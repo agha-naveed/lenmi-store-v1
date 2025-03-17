@@ -67,8 +67,7 @@ export default function Page() {
     const data = txtAreaRef.current?.value
 
     try {
-      const checkDuplication = await axios.post(`/product/${param.id}/api`)
-
+      await axios.post(`/product/${param.id}/api`)
 
       const uploadedUrls: string[] = [];
 
@@ -130,6 +129,7 @@ export default function Page() {
     name: string,
     category: string,
     price: number,
+    discounted_price: number,
     description: string
   }
   interface dpData {
@@ -259,7 +259,7 @@ export default function Page() {
 
               <div className='flex gap-[6px] my-2 items-end'>
                 <span className='font-opensans font-bold text-[32px]'>PKR {fetchData?.price}</span>
-                <span className='text-gray-700 line-through relative bottom-[6px]'>PKR 999</span>
+                <span className='text-gray-700 line-through relative bottom-[6px]'>PKR {fetchData?.discounted_price}</span>
               </div>
 
               <div className='grid'>
