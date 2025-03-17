@@ -16,7 +16,7 @@ interface IFormInputs {
   category: string;
   description: string;
   price: string;
-  d_price: number;
+  d_price: string;
   stock: string;
   color: string[];
   content: string;
@@ -119,6 +119,7 @@ export default function Page() {
 
     formData.append("name", data.product_name);
     formData.append("price", data.price);
+    formData.append("discounted_price", data.d_price);
     formData.append("description", data.description);
     formData.append("payment_method", JSON.stringify(data.payment_method));
     formData.append("category", data.category);
