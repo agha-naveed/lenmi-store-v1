@@ -79,7 +79,7 @@ export default function Page() {
       console.log("No File")
       return
     }
-    if(files.length > 2) {
+    if(files.length < 2) {
       alert("Must Attached atleast Two Images")
       return
     }

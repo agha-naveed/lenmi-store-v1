@@ -26,10 +26,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ message: "No file uploaded" }, { status: 400 });
     }
 
-
-
-    // Get User Object
-  
+    // Get User Object  
     const cookie = await cookies()
 
     const objId = cookie.get("u_obj_i")?.value
