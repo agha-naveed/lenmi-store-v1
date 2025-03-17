@@ -39,6 +39,7 @@ export async function POST(req: NextRequest) {
         userId: decodedData?.obj_id,
         name,
         price,
+        discounted_price,
         description,
         category,
         color,
