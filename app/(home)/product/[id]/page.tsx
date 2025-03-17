@@ -219,7 +219,7 @@ export default function Page() {
         <div className='grid gap-10'>
           <div className='md:flex grid sm:border xl:border-transparent rounded-xl md:border-black md:w-full w-fit h-fit xl:gap-5 gap-3 justify-items-center'>
             
-            <div onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} className='md:w-[400px] md:h-[400px] w-[300px] h-auto overflow-hidden cursor-pointer border border-gray-400 rounded-xl'>
+            <div onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} className='md:min-w-[400px] md:min-h-[400px] min-w-[300px] h-auto overflow-hidden cursor-pointer border border-gray-400 rounded-xl'>
               {
                 images[selectImage] && images[selectImage].trim() !== "" ?
                   <Image ref={imageRef}
