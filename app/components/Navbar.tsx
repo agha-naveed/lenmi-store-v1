@@ -13,7 +13,7 @@ import { TbMessageDots } from "react-icons/tb";
 import { IoSettingsOutline } from "react-icons/io5"
 import axios from 'axios';
 import { useCart } from './CartProvider';
-import { redirect, useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useSearchQuery } from './SearchContext';
 import { useLoginData } from './LoginContext';
 

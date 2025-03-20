@@ -160,7 +160,7 @@ export default function Page() {
         console.log(await res.data)
         setDp(await res.data.userData)
         setFetchData(await datas)
-        setImages(datas.imgURL)
+        setImages(await datas.imgURL)
         setLoggedin(await res.data.login)
         setFetchReviews(await res.data.reviews)
       }
@@ -170,23 +170,8 @@ export default function Page() {
       
     }
     gettingData()
-  }, [])
-  useInsertionEffect(() => {
-    const gettingData = async () => {
-      const res = await axios.get(`/product/${param.id}/api`)
-      const datas = await res.data.data
-      
-      if(res.status === 200) {
-        console.log(await res.data)
-        
-      }
-      else {
-        console.log("Nhi")
-      }
-      
-    }
-    gettingData()
-  }, [])
+  }, [loggedin])
+
 
   useEffect(() => {
     checkHeight()
@@ -275,7 +260,7 @@ export default function Page() {
 
               <div className='flex gap-[6px] my-2 items-end'>
                 <span className='font-opensans font-bold text-[32px]'>PKR {fetchData?.price.toLocaleString()}</span>
-                <span className='text-gray-700 line-through relative bottom-[6px]'>PKR {fetchData?.discounted_price.toLocaleString()}</span>
+                {/* <span className='text-gray-700 line-through relative bottom-[6px]'>PKR {fetchData?.discounted_price.toLocaleString()}</span> */}
               </div>
 
               <div className='grid'>
