@@ -171,6 +171,22 @@ export default function Page() {
     }
     gettingData()
   }, [])
+  useInsertionEffect(() => {
+    const gettingData = async () => {
+      const res = await axios.get(`/product/${param.id}/api`)
+      const datas = await res.data.data
+      
+      if(res.status === 200) {
+        console.log(await res.data)
+        
+      }
+      else {
+        console.log("Nhi")
+      }
+      
+    }
+    gettingData()
+  }, [])
 
   useEffect(() => {
     checkHeight()
@@ -258,8 +274,8 @@ export default function Page() {
               </div>
 
               <div className='flex gap-[6px] my-2 items-end'>
-                <span className='font-opensans font-bold text-[32px]'>PKR {fetchData?.price}</span>
-                <span className='text-gray-700 line-through relative bottom-[6px]'>PKR {fetchData?.discounted_price}</span>
+                <span className='font-opensans font-bold text-[32px]'>PKR {fetchData?.price.toLocaleString()}</span>
+                <span className='text-gray-700 line-through relative bottom-[6px]'>PKR {fetchData?.discounted_price.toLocaleString()}</span>
               </div>
 
               <div className='grid'>
