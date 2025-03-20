@@ -17,6 +17,13 @@ export async function GET(req:NextRequest, { params }: { params: Promise<{ id: s
     const productReview = await ProductReview.find({productId: data}).populate('userId', 'first_name last_name profile_pic').limit(5)
 
     const productRating = await ProductReview.find({productId: data})
+
+    let rate = 0
+    let count = 0
+    productRating.map(i => {
+        rate += i.rating
+        count++
+    })
     
 
     const cookie = await cookies()
@@ -44,7 +51,7 @@ export async function GET(req:NextRequest, { params }: { params: Promise<{ id: s
                 message: "ok",
                 data,
                 reviews: productReview,
-                rating: productRating,
+                rating: rate / count,
                 userData: user,
                 login: true,
             }, { status: 200})
@@ -53,7 +60,7 @@ export async function GET(req:NextRequest, { params }: { params: Promise<{ id: s
             return NextResponse.json({
                 message: "ok",
                 data,
-                rating: productRating,
+                rating: rate / count,
                 reviews: productReview,
                 login: false
             }, { status: 200})

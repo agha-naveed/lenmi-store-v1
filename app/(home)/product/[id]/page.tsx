@@ -58,6 +58,7 @@ export default function Page() {
   const [fetchReviews, setFetchReviews] = useState([])
   
   const [rating, setRating] = useState(0)
+  const [rate, setRate] = useState(0)
   const [ratingClicked, setRatingClicked] = useState(0)
   
   const txtAreaRef = useRef(null)
@@ -157,12 +158,12 @@ export default function Page() {
       const datas = await res.data.data
       
       if(res.status === 200) {
-        console.log(await res.data)
         setDp(await res.data.userData)
         setFetchData(await datas)
         setImages(await datas.imgURL)
         setLoggedin(await res.data.login)
         setFetchReviews(await res.data.reviews)
+        setRate(await res.data.rating)
       }
       else {
         console.log("Nhi")
