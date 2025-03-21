@@ -59,6 +59,7 @@ export default function Page() {
   
   const [rating, setRating] = useState(0)
   const [rate, setRate] = useState(0)
+  const [totalRate, setTotalRate] = useState(0)
   const [ratingClicked, setRatingClicked] = useState(0)
   
   const txtAreaRef = useRef(null)
@@ -151,6 +152,7 @@ export default function Page() {
   const [selectImage, setSelectImages] = useState<number>(0)
   
   const [showMore, setShowMore] = useState<boolean>(false)
+  const [rateArr, setRateArr] = useState([])
   
   useInsertionEffect(() => {
     const gettingData = async () => {
@@ -173,6 +175,15 @@ export default function Page() {
     gettingData()
   }, [loggedin])
 
+  useEffect(() => {
+    if(rate) {
+      let arr = []
+      for(let i=0; i<rate; i++) {
+        arr.push(i)
+      }
+      setRateArr(arr)
+    }
+  }, [rate])
 
   useEffect(() => {
     checkHeight()
@@ -240,11 +251,11 @@ export default function Page() {
                   <div className='flex gap-1 items-center'>
                     <span>Rating:</span>
                     <span className='flex text-orangeClr'>
-                      <GoStarFill />
-                      <GoStarFill />
-                      <GoStarFill />
-                      <GoStarFill />
-                      <GoStarFill />
+                    {
+                      rateArr ? rateArr.map((i:any, idx:Number) => (
+                        <GoStarFill key={"review-star-"+idx} />
+                      )) : ""
+                    }
                     </span>
                   </div>
                   <div>|</div>

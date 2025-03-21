@@ -52,6 +52,7 @@ export async function GET(req:NextRequest, { params }: { params: Promise<{ id: s
                 data,
                 reviews: productReview,
                 rating: rate / count,
+                totalRate: count,
                 userData: user,
                 login: true,
             }, { status: 200})
@@ -60,6 +61,7 @@ export async function GET(req:NextRequest, { params }: { params: Promise<{ id: s
             return NextResponse.json({
                 message: "ok",
                 data,
+                totalRate: count,
                 rating: rate / count,
                 reviews: productReview,
                 login: false
