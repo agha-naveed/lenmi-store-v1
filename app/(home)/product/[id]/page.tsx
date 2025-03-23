@@ -160,13 +160,14 @@ export default function Page() {
       const datas = await res.data.data
       
       if(res.status === 200) {
-        console.log(datas)
+        console.log(await res.data)
         setDp(await res.data.userData)
         setFetchData(await datas)
         setImages(await datas.imgURL)
         setLoggedin(await res.data.login)
         setFetchReviews(await res.data.reviews)
         setRate(await res.data.rating)
+        setTotalRate(await res.data.totalRate)
       }
       else {
         console.log("Nhi")
@@ -251,12 +252,15 @@ export default function Page() {
                 <div className='flex gap-3'>
                   <div className='flex gap-1 items-center'>
                     <span>Rating:</span>
-                    <span className='flex text-orangeClr'>
+                    <span className='flex text-orangeClr items-center'>
                     {
                       rateArr ? rateArr.map((i:any, idx:Number) => (
                         <GoStarFill key={"review-star-"+idx} />
                       )) : ""
                     }
+                    </span>
+                    <span>
+                      ({totalRate})
                     </span>
                   </div>
                   <div>|</div>
