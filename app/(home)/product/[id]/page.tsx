@@ -179,7 +179,7 @@ export default function Page() {
 
   useEffect(() => {
     if(rate) {
-      let arr = []
+      const arr = []
       for(let i=0; i<rate; i++) {
         arr.push(i)
       }
@@ -254,7 +254,7 @@ export default function Page() {
                     <span>Rating:</span>
                     <span className='flex text-orangeClr items-center'>
                     {
-                      rateArr ? rateArr.map((i:any, idx:Number) => (
+                      rateArr ? rateArr.map((i:any, idx:number) => (
                         <GoStarFill key={"review-star-"+idx} />
                       )) : ""
                     }
