@@ -160,7 +160,6 @@ export default function Page() {
       const datas = await res.data.data
       
       if(res.status === 200) {
-        console.log(await res.data)
         setDp(await res.data.userData)
         setFetchData(await datas)
         setImages(await datas.imgURL)
@@ -170,7 +169,7 @@ export default function Page() {
         setTotalRate(await res.data.totalRate)
       }
       else {
-        console.log("Nhi")
+        console.log("Failed to Load Data!")
       }
       
     }

@@ -78,7 +78,6 @@ export async function POST(req:NextRequest, { params }: { params: Promise<{ id: 
     
     await dbConnection()
 
-
     const cookie = await cookies()
 
     const objId = cookie.get("u_obj_i")?.value
