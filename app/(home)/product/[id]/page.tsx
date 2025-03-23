@@ -160,6 +160,7 @@ export default function Page() {
       const datas = await res.data.data
       
       if(res.status === 200) {
+        console.log(datas)
         setDp(await res.data.userData)
         setFetchData(await datas)
         setImages(await datas.imgURL)
@@ -272,7 +273,9 @@ export default function Page() {
 
               <div className='flex gap-[6px] my-2 items-end'>
                 <span className='font-opensans font-bold text-[32px]'>PKR {fetchData?.price.toLocaleString()}</span>
-                {/* <span className='text-gray-700 line-through relative bottom-[6px]'>PKR {fetchData?.discounted_price.toLocaleString()}</span> */}
+                <span className='text-gray-700 line-through relative bottom-[6px]'>
+                  PKR {(fetchData?.price + fetchData?.discounted_price).toLocaleString()}
+                </span>
               </div>
 
               <div className='grid'>
