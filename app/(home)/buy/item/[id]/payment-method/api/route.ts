@@ -14,7 +14,7 @@ export async function POST(req:NextRequest) {
     const isExist = await Buy.findOne({ userId: buyData.userId })
 
     if(!isExist) {
-        await Buy.insertMany([
+        const A = await Buy.insertMany([
             {
                 userId: buyData.userId,
                 items: {
@@ -36,10 +36,11 @@ export async function POST(req:NextRequest) {
                 }
             }
         ])
+        console.log(A)
     }
 
     else {
-        await Buy.updateOne({
+        const A = await Buy.updateOne({
             userId: buyData.userId
         },
         {
@@ -63,6 +64,7 @@ export async function POST(req:NextRequest) {
                 }
             }        
         })
+        console.log(A)
     }
 
     return NextResponse.json({

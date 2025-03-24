@@ -34,7 +34,7 @@ export default function Page() {
     console.log(buyData)
   }, [])
 
-  const onSubmit = async (data: IFormInputs) => {
+  const onSubmit = async (data: IFormInputs | string) => {
     const obj = {
       buyData,
       paymentData: data
@@ -187,7 +187,7 @@ export default function Page() {
                 overflow-hidden
               `}
             >
-              <span className='transition-all relative z-10 '>Click to Finish</span>
+              <span className='transition-all relative z-10' onClick={() => onSubmit("cod")}>Click to Finish</span>
             </button>
           </div>
           :
