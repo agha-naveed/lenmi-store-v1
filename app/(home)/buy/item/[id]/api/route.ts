@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken"
 import Cart from "@/lib/database/model/cart";
 import Product from "@/lib/database/model/product";
 import Buy from "@/lib/database/model/buy";
+import User from "@/lib/database/model/user";
 
 export async function GET(req:NextRequest, { params }: { params: Promise<{ id: string }> }) {
     await dbConnection()
@@ -61,6 +62,8 @@ export async function POST(req:NextRequest) {
     await dbConnection()
 
     const { productId, recipients_name, phone_number, district, address, userId, itemQuantity } = await req.json()
+
+    await User.findByIdAndUpdate()
 
     await Buy.insertMany([{
         userId,
