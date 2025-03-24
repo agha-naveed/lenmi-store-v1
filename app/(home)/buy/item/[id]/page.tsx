@@ -33,15 +33,18 @@ export default function Page() {
   
   useEffect(() => {
     const fetchData = async () => {
-
+      try {
       const res = await axios.get(`/buy/item/${param.id}/api`);
 
-        if (res.status == 200) {
+        if(res.status == 200) {
             setProductDetails(await res.data.data);
         }
-        if(res.data.message != "done") {
+        else {
             redirect("/")
         }
+      } catch(err) {
+        console.log(err)
+      }
     };
     fetchData();
   }, []);

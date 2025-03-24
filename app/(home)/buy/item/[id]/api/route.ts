@@ -63,20 +63,33 @@ export async function POST(req:NextRequest) {
 
     const cookie = await cookies()
     const user_id = cookie.get("u_obj_i")?.value
-    const originalId = jwt.verify(user_id ?? "", process.env.JWT_CODE ?? "") as { obj_id: string }
-
-
-    await User.findByIdAndUpdate(
-        originalId,
-        {
-            address: {
-                district,
-                full_address: address
+    if(user_id) {
+        const originalId = jwt.verify(user_id ?? "", process.env.JWT_CODE ?? "") as { obj_id: string }
+        const data = await User.findByIdAndUpdate(
+            originalId,
+            {
+                address: {
+                    district,
+                    full_address: address
+                }
             }
+        )
+        if(data) {
+            return NextResponse.json({ 
+                message: "ok"
+            }, { status: 201 })
         }
-    )
+        else {
+            return NextResponse.json({ 
+                message: "error"
+            }, { status: 500 })
+        }
+    }
+    else {
+        return NextResponse.json({ 
+            message: "error"
+        }, { status: 404 })
+    }
 
-    return NextResponse.json({ 
-        message: "done"
-    }, { status: 201 })
+    
 }
