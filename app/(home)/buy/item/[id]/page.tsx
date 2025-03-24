@@ -61,6 +61,8 @@ export default function Page() {
         address: data.address
       }
     })
+
+    // const res = await axios.post()
 } 
 
   useEffect(() => {
@@ -174,7 +176,7 @@ export default function Page() {
              </div>
            </div>
      
-             </div>
+      </div>
      
       <section className="lg:justify-items-start justify-items-center">
             <div className="lg:w-[80%] w-full h-full mt-5 rounded-2xl shadow-xl bg-white md:p-7 px-4 py-9">

@@ -27,6 +27,7 @@ export default function Page() {
                     redirect('/')
                 }
                 if(res.status == 200) {
+                    console.log(await res.data)
                     setCartItems(await res.data.data)
                 }
             } catch(err) {
@@ -132,7 +133,7 @@ export default function Page() {
 
                             {
                                 cartItems ?
-                                cartItems.map((item, index) => (
+                                cartItems.map((item:any, index:number) => (
                                     <React.Fragment key={`cart-item-${index}`}>
                                         <tr 
                                             onClick={() => {
@@ -143,7 +144,7 @@ export default function Page() {
                                         >
                                             
                                             <td>
-                                                <Link href={""} title={item.data.name} className='cursor-pointer flex items-center sm:gap-4 gap-2 py-5 group'>
+                                                <Link href={""} title={item.data?.name} className='cursor-pointer flex items-center sm:gap-4 gap-2 py-5 group'>
                                                     <span className='flex rounded-xl !h-fit p-1 sm:!w-[220px] w-[190px] overflow-hidden'>
                                                         <Image src={item.data.imgURL[0]} className='w-full h-full object-cover' alt='pikachu' width={400} height={400} />
 

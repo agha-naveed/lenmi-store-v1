@@ -15,7 +15,7 @@ export async function GET() {
     const user_id = cookie.get("u_obj_i")?.value
 
     if(user_id) {
-        const originalId = jwt.verify(user_id ?? "", process.env.JWT_CODE) as { obj_id: string }
+        const originalId = jwt.verify(user_id ?? "", process.env.JWT_CODE ?? "") as { obj_id: string }
 
         const objdata = await Cart.findOne({ userId: originalId.obj_id })
         
