@@ -65,7 +65,7 @@ export default function Page() {
       }
     })
 
-    const res = await axios.post(`/buy/item/${param.id}/api`)
+    const res = await axios.post(`/buy/item/${param.id}/api`, {district: data.district, address: data.address})
 } 
 
   useEffect(() => {

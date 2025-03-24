@@ -1,18 +1,18 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
+interface IAddress extends Document {
+    full_address: string;
+    district: string;
+}
 interface IUser extends Document {
     first_name: string;
     last_name: string;
-    phone_number: number;
+    phone_number: string;
     email: string;
     password: string;
     account_type: 'personal' | 'business';
     profile_pic: string;
     address: IAddress;
-}
-interface IAddress extends Document {
-    full_address: string;
-    district: string;
 }
 
 const addressSchema: Schema<IAddress> = new mongoose.Schema({
@@ -33,7 +33,7 @@ const userSchema: Schema<IUser> = new mongoose.Schema({
         required: true
     },
     phone_number: {
-        type: Number,
+        type: String,
         required: true
     },
     email: {
@@ -46,7 +46,7 @@ const userSchema: Schema<IUser> = new mongoose.Schema({
         type: String,
         required: true
     },
-    address: {addressSchema},
+    address: addressSchema,
     account_type: {
         type: String,
         enum: ['personal', 'business'],

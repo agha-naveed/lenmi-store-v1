@@ -60,18 +60,16 @@ export async function POST(req:NextRequest) {
     await dbConnection()
 
     const { district, address } = await req.json()
-
+    console.log(district+address)
     const cookie = await cookies()
     const user_id = cookie.get("u_obj_i")?.value
-    console.log("\n\nmyobject id: "+user_id)
     if(user_id) {
         const originalId = jwt.verify(user_id ?? "", process.env.JWT_CODE ?? "") as { obj_id: string }
-        const data = await User.findByIdAndUpdate(
-            originalId,
-            {
-                address: {
-                    district,
-                    full_address: address
+        console.log("\n\nmyobject id: "+JSON.stringify(originalId))
+        const data = await User.findByIdAndUpdate(originalId.obj_id, {
+                $set: {
+                    'address.district': district,
+                    'address.full_address': address
                 }
             }
         )
