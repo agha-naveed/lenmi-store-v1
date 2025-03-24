@@ -8,9 +8,21 @@ interface IUser extends Document {
     password: string;
     account_type: 'personal' | 'business';
     profile_pic: string;
-    address: string;
+    address: IAddress;
+}
+interface IAddress extends Document {
+    full_address: string;
+    district: string;
 }
 
+const addressSchema: Schema<IAddress> = new mongoose.Schema({
+    district: {
+        type: String
+    },
+    full_address: {
+        type: String
+    }
+})
 const userSchema: Schema<IUser> = new mongoose.Schema({
     first_name: {
         type: String,
@@ -34,9 +46,7 @@ const userSchema: Schema<IUser> = new mongoose.Schema({
         type: String,
         required: true
     },
-    address: {
-        type: String
-    },
+    address: {addressSchema},
     account_type: {
         type: String,
         enum: ['personal', 'business'],
@@ -46,6 +56,7 @@ const userSchema: Schema<IUser> = new mongoose.Schema({
         type: String
     }
 }, { timestamps: true });
+
 
 const User = mongoose.models.User || mongoose.model('User', userSchema);
 

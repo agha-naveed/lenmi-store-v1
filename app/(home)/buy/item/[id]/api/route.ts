@@ -59,7 +59,7 @@ export async function GET(req:NextRequest, { params }: { params: Promise<{ id: s
 export async function POST(req:NextRequest) {
     await dbConnection()
 
-    const { productId, recipients_name, phone_number, district, address, userId, itemQuantity } = await req.json()
+    const { district, address } = await req.json()
 
     const cookie = await cookies()
     const user_id = cookie.get("u_obj_i")?.value
@@ -67,9 +67,14 @@ export async function POST(req:NextRequest) {
 
 
     await User.findByIdAndUpdate(
-        
+        originalId,
+        {
+            address: {
+                district,
+                full_address: address
+            }
+        }
     )
-
 
     return NextResponse.json({ 
         message: "done"
