@@ -14,7 +14,7 @@ export async function POST(req:NextRequest) {
     const isExist = await Buy.findOne({ userId: buyData.userId })
 
     if(!isExist) {
-        const A = await Buy.insertMany([
+        const response = await Buy.insertMany([
             {
                 userId: buyData.userId,
                 items: {
@@ -36,7 +36,17 @@ export async function POST(req:NextRequest) {
                 }
             }
         ])
-        console.log(A)
+        console.log(response)
+        if(response) {
+            return NextResponse.json({
+                message: "ok"
+            }, { status: 201 })
+        }
+        else {
+            return NextResponse.json({
+                message: "error",
+            }, { status: 400 })
+        }
     }
 
     else {

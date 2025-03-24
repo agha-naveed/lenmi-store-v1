@@ -33,7 +33,7 @@ export default function Page() {
   
   useEffect(() => {
     const fetchData = async () => {
-      try {
+    try {
       const res = await axios.get(`/buy/item/${param.id}/api`);
 
         if(res.status == 200) {
@@ -42,9 +42,9 @@ export default function Page() {
         else {
             redirect("/")
         }
-      } catch(err) {
-        console.log(err)
-      }
+    } catch(err) {
+      console.log(err)
+    }
     };
     fetchData();
   }, []);
@@ -65,7 +65,7 @@ export default function Page() {
       }
     })
 
-    // const res = await axios.post("")
+    const res = await axios.post(`/buy/item/${param.id}/api`)
 } 
 
   useEffect(() => {
