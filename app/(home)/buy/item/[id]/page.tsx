@@ -202,21 +202,31 @@ export default function Page() {
                         <input type="number" min={11} className="border h-9 px-3 rounded-lg" {...register("phone_number")} required />
                     </div>
 
-                    <div className="grid gap-1 md:w-44 w-full">
-                      <label htmlFor="">District</label>
-                      <select {...register("district")} required className="h-9 px-2 rounded-lg cursor-pointer">
-                          <option value="">-- select --</option>
-                          <option value="Ghanche">Ghanche</option>
-                          <option value="Rondu">Rondu</option>
-                          <option value="Shigar">Shigar</option>
-                          <option value="Kharmang">Kharmang</option>
-                          <option value="Gilgit">Gilgit</option>
-                          <option value="Astore">Astore</option>
-                          <option value="Ghizer">Ghizer</option>
-                          <option value="Nagar">Nagar</option>
-                          <option value="Hunza">Hunza</option>
-                      </select>
-                    </div>
+
+                    {
+                      productDetails?.address ?
+                        <div className="grid gap-1 md:w-44 w-full">
+                          <label htmlFor="">District</label>
+                          <select {...register("district")} required className="h-9 px-2 rounded-lg cursor-pointer">
+                            <option value="">-- select --</option>
+                            <option value="Ghanche">Ghanche</option>
+                            <option value="Rondu">Rondu</option>
+                            <option value="Shigar">Shigar</option>
+                            <option value="Kharmang">Kharmang</option>
+                            <option value="Gilgit">Gilgit</option>
+                            <option value="Astore">Astore</option>
+                            <option value="Ghizer">Ghizer</option>
+                            <option value="Nagar">Nagar</option>
+                            <option value="Hunza">Hunza</option>
+                        </select>
+                      </div>
+                      :
+                      <div className="grid gap-1 md:w-44 w-full">
+                        <label htmlFor="">District</label>
+                        <input type="text" readOnly value={productDetails?.address?.district} {...register("district")} required className="h-9 px-2 rounded-lg cursor-pointer" />
+                      </div>
+                    }
+                    
                         
                   </div>
 
