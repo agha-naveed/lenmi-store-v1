@@ -26,6 +26,7 @@ export default function Page() {
 
   const { register, handleSubmit } = useForm<IFormInputs>();
  
+  const [oldAddress, setOldAddress] = useState(false)
   const param = useParams()
   const [productDetails, setProductDetails] = useState<any>();
 
@@ -36,6 +37,7 @@ export default function Page() {
     try {
       const res = await axios.get(`/buy/item/${param.id}/api`);
 
+        console.log(await res.data.data)
         if(res.status == 200) {
             setProductDetails(await res.data.data);
         }
@@ -185,6 +187,15 @@ export default function Page() {
             <div className="lg:w-[80%] w-full h-full mt-5 rounded-2xl shadow-xl bg-white md:p-7 px-4 py-9">
                 <h4 className="mb-5 text-[18px] font-semibold">Delivery Details</h4>
                 
+                <div
+                onClick={() => setOldAddress(!oldAddress)}
+                className={`border cursor-pointer py-2 px-4 rounded-md mt-2 mb-8
+                ${oldAddress ? "border-orangeClr" : "border-gray-400/40"}
+                `}>
+                  <label htmlFor="">Want to use this Address:</label>
+                  <p><b>District: </b>Ghanche</p>
+                  <p><b>Full Address: </b>Mehdi Colony, near clifton pull hargisa skardu</p>
+                </div>
                 <Form action={""} onSubmit={handleSubmit(onSubmit)}>
                   <div className="flex flex-wrap gap-3 mb-3">
                     <div className="grid gap-1 md:w-fit w-full">
@@ -202,37 +213,28 @@ export default function Page() {
                         <input type="number" min={11} className="border h-9 px-3 rounded-lg" {...register("phone_number")} required />
                     </div>
 
-
-                    {
-                      productDetails?.address ?
-                        <div className="grid gap-1 md:w-44 w-full">
-                          <label htmlFor="">District</label>
-                          <select {...register("district")} required className="h-9 px-2 rounded-lg cursor-pointer">
-                            <option value="">-- select --</option>
-                            <option value="Ghanche">Ghanche</option>
-                            <option value="Rondu">Rondu</option>
-                            <option value="Shigar">Shigar</option>
-                            <option value="Kharmang">Kharmang</option>
-                            <option value="Gilgit">Gilgit</option>
-                            <option value="Astore">Astore</option>
-                            <option value="Ghizer">Ghizer</option>
-                            <option value="Nagar">Nagar</option>
-                            <option value="Hunza">Hunza</option>
-                        </select>
-                      </div>
-                      :
-                      <div className="grid gap-1 md:w-44 w-full">
-                        <label htmlFor="">District</label>
-                        <input type="text" readOnly value={productDetails?.address?.district} {...register("district")} required className="h-9 px-2 rounded-lg cursor-pointer" />
-                      </div>
-                    }
+                    <div className="grid gap-1 md:w-44 w-full">
+                      <label htmlFor="">District</label>
+                      <select {...register("district")} required className={`h-9 px-2 rounded-lg cursor-pointer`} disabled={oldAddress}>
+                        <option value="">-- select --</option>
+                        <option value="Ghanche">Ghanche</option>
+                        <option value="Rondu">Rondu</option>
+                        <option value="Shigar">Shigar</option>
+                        <option value="Kharmang">Kharmang</option>
+                        <option value="Gilgit">Gilgit</option>
+                        <option value="Astore">Astore</option>
+                        <option value="Ghizer">Ghizer</option>
+                        <option value="Nagar">Nagar</option>
+                        <option value="Hunza">Hunza</option>
+                      </select>
+                    </div>
                     
                         
                   </div>
 
                   <div className="grid gap-1 md:w-fit w-full">
                     <label htmlFor="">Full Address</label>
-                    <textarea {...register("address")} required className="border border-zinc-400 rounded-lg md:w-[658px] w-full h-20 py-2 px-3"></textarea>
+                    <textarea {...register("address")} disabled={oldAddress} required className="border border-zinc-400 rounded-lg md:w-[658px] w-full h-20 py-2 px-3"></textarea>
                   </div>
                   <button type="submit"
                     className="bg-slate-800
