@@ -19,6 +19,7 @@ export default {
 		},
 		boxShadow: {
 			'custom-light': '1px 10px 15px rgba(43, 43, 43, 0.438)',
+			'custom-zero': "0 0 20px #fa9a1ca6"
 		},
   		fontFamily: {
   			opensans: ['opensans']

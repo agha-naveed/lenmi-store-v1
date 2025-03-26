@@ -31,11 +31,10 @@ export default function Page() {
     // if(buyData.userId == 0) {
     //   redirect("/cart")
     // }
-    console.log(buyData)
+    console.log(JSON.stringify(buyData))
   }, [])
 
   const onSubmit = async (data: IFormInputs | string) => {
-    console.log("Submitted")
     const obj = {
       buyData,
       paymentData: data
