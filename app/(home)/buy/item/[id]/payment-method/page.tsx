@@ -9,7 +9,7 @@ import card from "@/images/payment-methods/Credit_or_Debit_Card.png";
 import Form from "next/form";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useParams } from "next/navigation";
+import { redirect, useParams } from "next/navigation";
 
 
 interface IFormInputs {
@@ -28,10 +28,12 @@ export default function Page() {
   const { buyData } = useBuyContext();
   
   useEffect(() => {
-    // if(buyData.userId == 0) {
-    //   redirect("/cart")
-    // }
-    console.log(JSON.stringify(buyData))
+    async function checkLogin() {
+      const res = await axios.get(`/buy/item/${param.id}/payment-method/api`)
+      if(await res.data.message != "ok")
+        redirect("/")
+    }
+    checkLogin()
   }, [])
 
   const onSubmit = async (data: IFormInputs | string) => {

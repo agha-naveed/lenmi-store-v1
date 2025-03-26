@@ -106,9 +106,5 @@ export async function GET() {
     const cookie = await cookies()
     const userIdCookie = cookie.get("u_obj_i")?.value
 
-    if(!userIdCookie) {
-        return NextResponse.json({ message: 'you are logged out' })
-    }
-    else
-        return NextResponse.json({ message: "ok" })
+    return userIdCookie ? NextResponse.json({ message: "ok" }) : NextResponse.json({ message: 'you are logged out' })
 }
