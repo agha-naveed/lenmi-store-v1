@@ -1,6 +1,8 @@
 import dbConnection from "@/lib/database/dbConnection";
 import Buy from "@/lib/database/model/buy";
+import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
+import jwt from 'jsonwebtoken'
 
 export async function POST(req:NextRequest) {
     await dbConnection()
@@ -37,7 +39,6 @@ export async function POST(req:NextRequest) {
                 }
             }
         ])
-        console.log(response)
         if(response) {
             return NextResponse.json({
                 message: "ok"
@@ -99,4 +100,15 @@ export async function POST(req:NextRequest) {
         }
     }, { status: 201 })
     
+}
+
+export async function GET() {
+    const cookie = await cookies()
+    const userIdCookie = cookie.get("u_obj_i")?.value
+
+    if(!userIdCookie) {
+        return NextResponse.json({ message: 'you are logged out' })
+    }
+    else
+        return NextResponse.json({ message: "ok" })
 }

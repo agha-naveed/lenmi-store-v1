@@ -37,7 +37,6 @@ export default function Page() {
     try {
       const res = await axios.get(`/buy/item/${param.id}/api`);
 
-        console.log(await res.data.data)
         if(res.status == 200) {
             setProductDetails(await res.data.data);
         }
