@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "../globals.css";
 import Navbar from '@/components/Navbar'
+import LoadingProvider from "@/app/components/LoadingContext";
 import { Suspense } from "react";
 import Loader from "../components/Loading";
 import { LoginProvider } from "../components/LoginContext";
@@ -36,22 +37,24 @@ export default function RootLayout(props: {
 }) {
   return (
     <html lang="en">
-      <LoginProvider>
-        <CartProvider>
-          <SearchProvider>
-            <body>
-                <Suspense fallback={<Loader />}>
-                  <Navbar />
+      <LoadingProvider>
+        <LoginProvider>
+          <CartProvider>
+            <SearchProvider>
+              <body>
                   <Suspense fallback={<Loader />}>
-                    {props.children}
-                    {props.modal}
+                    <Navbar />
+                    <Suspense fallback={<Loader />}>
+                      {props.children}
+                      {props.modal}
+                    </Suspense>
+                    <Footer />
                   </Suspense>
-                  <Footer />
-                </Suspense>
-            </body>
-          </SearchProvider>
-        </CartProvider>
-      </LoginProvider>
+              </body>
+            </SearchProvider>
+          </CartProvider>
+        </LoginProvider>
+      </LoadingProvider>
     </html>
   );
 }

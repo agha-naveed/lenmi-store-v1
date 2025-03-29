@@ -253,3 +253,8 @@ input[type="number"] {
   background: #555;
   cursor: pointer;
 }
+
+#nprogress .bar {
+  background: #f08a06 !important;
+  height: 4px;
+}
