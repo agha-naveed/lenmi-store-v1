@@ -37,6 +37,7 @@ export default function Page() {
   }, [])
 
   const onSubmit = async (data: IFormInputs | string) => {
+    console.log(data, buyData)
     const obj = {
       buyData,
       paymentData: data

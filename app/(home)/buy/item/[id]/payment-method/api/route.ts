@@ -3,6 +3,7 @@ import Buy from "@/lib/database/model/buy";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import jwt from 'jsonwebtoken'
+import Product from "@/lib/database/model/product";
 
 export async function POST(req:NextRequest) {
     await dbConnection()
@@ -40,9 +41,24 @@ export async function POST(req:NextRequest) {
             }
         ])
         if(response) {
-            return NextResponse.json({
-                message: "ok"
-            }, { status: 201 })
+            const upd_p = await Product.updateOne({
+                _id: buyData.productId
+            }, {
+                $inc: {
+                    stock: buyData.quantity
+                }
+            })
+            if(upd_p) {
+                return NextResponse.json({
+                    message: "ok"
+                }, { status: 201 })
+            }
+            else {
+
+                return NextResponse.json({
+                    message: "error"
+                }, { status: 400 })
+            }
         }
         else {
             return NextResponse.json({
