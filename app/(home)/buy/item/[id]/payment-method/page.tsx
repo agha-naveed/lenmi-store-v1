@@ -37,7 +37,6 @@ export default function Page() {
   }, [])
 
   const onSubmit = async (data: IFormInputs | string) => {
-    console.log(data, buyData)
     const obj = {
       buyData,
       paymentData: data
@@ -48,7 +47,7 @@ export default function Page() {
     const res = await axios.post(`/buy/item/${param.id}/payment-method/api`, obj)
 
     if(res.status == 201) {
-      redirect("/")
+      console.log(await res.data)
     }
     else {
       alert("Some Error Occurred!")

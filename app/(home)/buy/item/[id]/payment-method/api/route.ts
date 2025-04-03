@@ -2,7 +2,6 @@ import dbConnection from "@/lib/database/dbConnection";
 import Buy from "@/lib/database/model/buy";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import jwt from 'jsonwebtoken'
 import Product from "@/lib/database/model/product";
 
 export async function POST(req:NextRequest) {
@@ -17,12 +16,16 @@ export async function POST(req:NextRequest) {
     const isExist = await Buy.findOne({ userId: buyData.userId })
     console.log(isExist)
 
+    const pOwner = await Product.findById(buyData.productId)
+    console.log("owner details: "+pOwner)
+
     if(!isExist) {
         const response = await Buy.insertMany([
             {
                 userId: buyData.userId,
                 items: {
                     productId: buyData.productId,
+                    productOwner: pOwner.userId,
                     quantity: buyData.quantity,
                     deliveryAddress: {
                         recipientName: delivery_address.recipientName,
@@ -76,6 +79,7 @@ export async function POST(req:NextRequest) {
             $addToSet: {
                 items: {
                     productId: buyData.productId,
+                    productOwner: pOwner.userId,
                     quantity: buyData.quantity,
                     deliveryAddress: {
                         recipientName: delivery_address.recipientName,
@@ -100,6 +104,7 @@ export async function POST(req:NextRequest) {
         message: "done",
         data: {
             productId: buyData.productId,
+            productOwner: pOwner.userId,
             quantity: buyData.quantity,
             deliveryAddress: {
                 recipientName: delivery_address.recipientName,

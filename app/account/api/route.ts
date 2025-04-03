@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcrypt'
 import { cookies } from 'next/headers';
 import jwt from 'jsonwebtoken'
+import Buy from '@/lib/database/model/buy';
 
 export async function POST(req: NextRequest) {
     
@@ -22,7 +23,14 @@ export async function POST(req: NextRequest) {
                 const token = jwt.sign({obj_id: isExist._id}, "user_object_id")
                 cookie.set("u_obj_i", token, {secure: true, httpOnly: true})
                 cookie.set("email", email, {secure: true, httpOnly: true})
-                return NextResponse.json(isExist)
+                console.log("\n\nisExist: "+isExist+"\n\n")
+
+                if(isExist.account_type == "business") {
+                    // await Buy.find({"items."})
+                }
+                else {
+                    return NextResponse.json(isExist)
+                }
             }
             else {
                 return NextResponse.json({error: "error"}, { status: 401 })
