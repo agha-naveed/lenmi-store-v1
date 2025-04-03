@@ -14,10 +14,10 @@ export async function POST(req:NextRequest) {
     const delivery_address = buyData.deliveryAddress;
     
     const isExist = await Buy.findOne({ userId: buyData.userId })
-    console.log(isExist)
-
+    
     const pOwner = await Product.findById(buyData.productId)
-    console.log("owner details: "+pOwner)
+    console.log(pOwner.userId)
+    
 
     if(!isExist) {
         const response = await Buy.insertMany([

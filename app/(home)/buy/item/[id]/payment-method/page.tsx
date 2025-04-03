@@ -47,7 +47,7 @@ export default function Page() {
     const res = await axios.post(`/buy/item/${param.id}/payment-method/api`, obj)
 
     if(res.status == 201) {
-      console.log(await res.data)
+      redirect("/")
     }
     else {
       alert("Some Error Occurred!")
