@@ -45,8 +45,9 @@ export async function POST(req:NextRequest) {
                 _id: buyData.productId
             }, {
                 $inc: {
-                    stock: -buyData.quantity
-                }
+                    stock: -buyData.quantity,
+                    sold: buyData.quantity
+                },
             })
             if(upd_p) {
                 return NextResponse.json({
