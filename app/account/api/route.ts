@@ -25,12 +25,12 @@ export async function POST(req: NextRequest) {
                 cookie.set("email", email, {secure: true, httpOnly: true})
                 console.log("\n\nisExist: "+isExist+"\n\n")
 
-                if(isExist.account_type == "business") {
+                // if(isExist.account_type == "business") {
                     // await Buy.find({"items."})
-                }
-                else {
+                // }
+                // else {
                     return NextResponse.json(isExist)
-                }
+                // }
             }
             else {
                 return NextResponse.json({error: "error"}, { status: 401 })

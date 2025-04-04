@@ -6,6 +6,7 @@ interface IBuyItems {
     deliveryAddress: object;
     paymentMethod: any;
     paymentDetails: any;
+    ownerId: Schema.Types.ObjectId;
 }
   
 interface IBuy extends Document {
@@ -15,6 +16,7 @@ interface IBuy extends Document {
 
 const buyItemSchema = new Schema<IBuyItems>({
     productId: { type: Schema.Types.ObjectId, ref: 'Buy', required: true },
+    ownerId: { type: Schema.Types.ObjectId, ref: 'Product', required: true },
     quantity: { type: Number, required: true },
     deliveryAddress: {
         recipientName: {
