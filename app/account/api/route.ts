@@ -25,12 +25,17 @@ export async function POST(req: NextRequest) {
                 cookie.set("email", email, {secure: true, httpOnly: true})
                 console.log("\n\nisExist: "+isExist+"\n\n")
 
-                // if(isExist.account_type == "business") {
-                    // await Buy.find({"items."})
-                // }
-                // else {
+                if(isExist.account_type == "business") {
+                    const b_acc = await Buy.find({"items.ownerId": "u_obj_i"})
+                    console.log("\n\n\nTotal Message: "+b_acc+"\n\n\n")
+                    return NextResponse.json({
+                        isExist,
+                        totalMessages : b_acc
+                    })
+                }
+                else {
                     return NextResponse.json(isExist)
-                // }
+                }
             }
             else {
                 return NextResponse.json({error: "error"}, { status: 401 })
