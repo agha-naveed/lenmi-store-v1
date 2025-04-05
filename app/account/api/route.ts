@@ -24,34 +24,7 @@ export async function POST(req: NextRequest) {
                 cookie.set("u_obj_i", token, {secure: true, httpOnly: true})
                 cookie.set("email", email, {secure: true, httpOnly: true})
 
-                if(isExist.account_type == "business") {
-
-                    const b_acc = await Buy.aggregate([
-                        {
-                          $unwind: "$items"
-                        },
-                        {
-                          $match: {
-                            "items.ownerId": isExist._id
-                          }
-                        },
-                        {
-                          $project: {
-                            userId: 1,
-                            _id: 1,
-                            items: [ "$items" ]
-                          }
-                        }
-                      ])
-
-                    return NextResponse.json({
-                        isExist,
-                        totalMessages : b_acc
-                    })
-                }
-                else {
-                    return NextResponse.json(isExist)
-                }
+                return NextResponse.json(isExist, { status: 200 })
             }
             else {
                 return NextResponse.json({error: "error"}, { status: 401 })
@@ -70,9 +43,36 @@ export async function GET(req: NextRequest) {
     
     const cookie = await cookies()
     
+    
     if(cookie) {
-        const datafromCookie_DB = await User.findOne({email: cookie.get("email")?.value})
-        return NextResponse.json(datafromCookie_DB)
+        const isExist = await User.findOne({email: cookie.get("email")?.value})
+        if(isExist.account_type == "business") {
+            const b_acc = await Buy.aggregate([
+                {
+                  $unwind: "$items"
+                },
+                {
+                  $match: {
+                    "items.ownerId": isExist._id
+                  }
+                },
+                {
+                  $project: {
+                    userId: 1,
+                    _id: 1,
+                    items: [ "$items" ]
+                  }
+                }
+            ])
+
+            return NextResponse.json({
+                isExist,
+                totalMessages : b_acc
+            }, { status: 200 })
+        }
+        else {
+            return NextResponse.json(isExist, { status: 200 })
+        }
     }
     else {
         return NextResponse.json(null)

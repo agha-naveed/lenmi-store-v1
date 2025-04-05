@@ -17,11 +17,18 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useSearchQuery } from './SearchContext';
 import { useLoginData } from './LoginContext';
 
-interface ApiResponse {
+interface AS {
     first_name: string;
     last_name: string;
     account_type: string;
 }
+interface ApiResponse {
+    isExist: AS;
+    first_name: string;
+    last_name: string;
+    account_type: string;
+}
+
 
 
 export default function Navbar() {
@@ -32,7 +39,9 @@ export default function Navbar() {
 
     const { length, setLength } = useCart()
     const [message, setMessage] = useState<ApiResponse | null>(null);
-    
+
+    const [totalBuy, setTotalBuy] = useState()
+
     const [searchInput, setSearchInput] = useState<string>('')
     const [logOut, setLogOut] = useState(false)
 
@@ -51,8 +60,9 @@ export default function Navbar() {
                     withCredentials: true
                 })
 
-                if(fetchData != null) {
+                if(fetchData.status == 200) {
                     const Data = await fetchData.data
+                    console.log("\n\nData: "+JSON.stringify(Data))
                     setMessage(Data)
                     setLoggedin(true)
                 }
@@ -150,7 +160,7 @@ export default function Navbar() {
                                 <MdOutlineAccountCircle className='account text-[38px]' title='Account' />
                                 <div className='grid content-center leading-[17px]'>
                                     <span className='text-[13px] font-opensans font-medium'>Welcome</span>
-                                    <span className='font-opensans font-semibold text-[14px]'>{message?.first_name ?? "Login / Signup"}</span>
+                                    <span className='font-opensans font-semibold text-[14px]'>{message?.isExist?.first_name ?? "Login / Signup"}</span>
                                 </div>
                             </div>
                             
@@ -159,7 +169,7 @@ export default function Navbar() {
                                     message != null ? 
                                     <div>
                                         <div>
-                                            <p className='font-opensans font-medium leading-[1.2] p-2 grid text-[14px]'>Welcome: <span className='text-[16px]'> {message.first_name} {message.last_name}</span></p>
+                                            <p className='font-opensans font-medium leading-[1.2] p-2 grid text-[14px]'>Welcome: <span className='text-[16px]'> {message?.isExist?.first_name} {message?.isExist?.last_name}</span></p>
                                         </div>
 
                                         <div className='font-opensans font-medium'>
