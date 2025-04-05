@@ -44,10 +44,6 @@ export async function POST(req: NextRequest) {
                         }
                       ])
 
-                    console.log("\n\n\nTotal Message: "+JSON.stringify(b_acc)+"\n\n\n")
-
-
-
                     return NextResponse.json({
                         isExist,
                         totalMessages : b_acc
