@@ -15,36 +15,56 @@ export async function POST(req: NextRequest) {
 
     const cookie = await cookies()
 
-    // try {
+    try {
         if(isExist) {
             const result = await bcrypt.compare(password, isExist.password)
 
             if(result) {
-                const token = jwt.sign({obj_id: isExist._id}, "user_object_id")
+                const token = jwt.sign({obj_id: isExist._id}, process.env.JWT_CODE)
                 cookie.set("u_obj_i", token, {secure: true, httpOnly: true})
                 cookie.set("email", email, {secure: true, httpOnly: true})
 
-                // if(isExist.account_type == "business") {
-                    // const b_acc = await Buy.find({"items.ownerId": "u_obj_i"})
-                    // console.log("\n\n\nTotal Message: "+b_acc+"\n\n\n")
-                    // return NextResponse.json({
-                    //     isExist,
-                    //     totalMessages : b_acc
-                    // })
-                // }
-                // else {
+                if(isExist.account_type == "business") {
+
+                    const b_acc = await Buy.aggregate([
+                        {
+                          $unwind: "$items"
+                        },
+                        {
+                          $match: {
+                            "items.ownerId": isExist._id
+                          }
+                        },
+                        {
+                          $project: {
+                            userId: 1,
+                            _id: 1,
+                            items: [ "$items" ]
+                          }
+                        }
+                      ])
+
+                    console.log("\n\n\nTotal Message: "+JSON.stringify(b_acc)+"\n\n\n")
+
+
+
+                    return NextResponse.json({
+                        isExist,
+                        totalMessages : b_acc
+                    })
+                }
+                else {
                     return NextResponse.json(isExist)
-                // }
+                }
             }
             else {
                 return NextResponse.json({error: "error"}, { status: 401 })
             }
         }
         else return NextResponse.json({error: "error"}, { status: 404 })
-    // } catch(e) {
-    //     console.log("catch wala chala\n\n")
-    //     return NextResponse.json({ error: "Server error" }, { status: 500 })
-    // }
+    } catch(e) {
+        return NextResponse.json({ error: "Server error" }, { status: 500 })
+    }
 }
 
 
