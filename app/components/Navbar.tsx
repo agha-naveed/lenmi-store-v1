@@ -58,7 +58,6 @@ export default function Navbar() {
 
                 if(fetchData.status == 200) {
                     const Data = await fetchData.data
-                    console.log("\n\nData: "+JSON.stringify(Data))
                     setMessage(Data)
                     setLoggedin(true)
                 }
