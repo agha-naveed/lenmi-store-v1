@@ -17,16 +17,14 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useSearchQuery } from './SearchContext';
 import { useLoginData } from './LoginContext';
 
-interface AS {
+interface Isexist {
     first_name: string;
     last_name: string;
     account_type: string;
 }
 interface ApiResponse {
-    isExist: AS;
-    first_name: string;
-    last_name: string;
-    account_type: string;
+    isExist: Isexist;
+    totalMessages: any;
 }
 
 
@@ -39,8 +37,6 @@ export default function Navbar() {
 
     const { length, setLength } = useCart()
     const [message, setMessage] = useState<ApiResponse | null>(null);
-
-    const [totalBuy, setTotalBuy] = useState()
 
     const [searchInput, setSearchInput] = useState<string>('')
     const [logOut, setLogOut] = useState(false)
@@ -166,7 +162,7 @@ export default function Navbar() {
                             
                             <div className='login-signup-popup scale-y-0 group-hover:scale-y-100 transition_1 absolute -left-10 top-11 z-10 w-56 px-[6px] py-2 rounded-[10px] bg-white text-black grid gap-2 shadow-xl'>
                                 {
-                                    message != null ? 
+                                    message != null ?
                                     <div>
                                         <div>
                                             <p className='font-opensans font-medium leading-[1.2] p-2 grid text-[14px]'>Welcome: <span className='text-[16px]'> {message?.isExist?.first_name} {message?.isExist?.last_name}</span></p>
@@ -179,7 +175,8 @@ export default function Navbar() {
                                                     <GoChecklist className='text-[18px]' />Orders
                                                 </li>
                                                 <li className='p-[10px] rounded-lg hover:bg-gray-200 cursor-pointer transition-all flex items-center gap-2 text-[16px]'>
-                                                    <TbMessageDots className='text-[18px]' />Messages
+                                                    <TbMessageDots className='text-[18px]' />
+                                                    Messages ({message.totalMessages.length})
                                                 </li>
                                                 <li>
                                                     <Link href={"/setting"} className='p-[10px] rounded-lg hover:bg-gray-200 cursor-pointer transition-all flex items-center gap-2 text-[16px]'>
@@ -257,7 +254,7 @@ export default function Navbar() {
                             <Link href={"/"} className='py-2 px-4 transition-all underline-offset-0 hover:underline  hover:underline-offset-8'>Super Deals</Link>
                         </li>
                         {
-                            message?.account_type == 'business' ?
+                            message?.isExist?.account_type == 'business' ?
                             <li className='flex'>
                                 <Link href={"/add-product"} className='py-2 px-4 transition-all underline-offset-0 hover:underline  hover:underline-offset-8'>Sell</Link>
                             </li>
