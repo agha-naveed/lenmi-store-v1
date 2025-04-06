@@ -173,9 +173,11 @@ export default function Navbar() {
                                                 <li className='p-[10px] rounded-lg hover:bg-gray-200 cursor-pointer transition-all flex items-center gap-2 text-[16px]'>
                                                     <GoChecklist className='text-[18px]' />Orders
                                                 </li>
-                                                <li className='p-[10px] rounded-lg hover:bg-gray-200 cursor-pointer transition-all flex items-center gap-2 text-[16px]'>
-                                                    <TbMessageDots className='text-[18px]' />
-                                                    Messages ({message.totalMessages.length})
+                                                <li>
+                                                    <Link href={"/setting/message"} className='p-[10px] rounded-lg hover:bg-gray-200 cursor-pointer transition-all flex items-center gap-2 text-[16px]'>
+                                                        <TbMessageDots className='text-[18px]' />
+                                                        Messages ({message.totalMessages.length})
+                                                    </Link>
                                                 </li>
                                                 <li>
                                                     <Link href={"/setting"} className='p-[10px] rounded-lg hover:bg-gray-200 cursor-pointer transition-all flex items-center gap-2 text-[16px]'>
