@@ -17,14 +17,11 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useSearchQuery } from './SearchContext';
 import { useLoginData } from './LoginContext';
 
-interface Isexist {
+
+interface ApiResponse {
     first_name: string;
     last_name: string;
     account_type: string;
-}
-interface ApiResponse {
-    isExist: Isexist;
-    totalMessages: any;
 }
 
 
@@ -37,6 +34,8 @@ export default function Navbar() {
 
     const { length, setLength } = useCart()
     const [message, setMessage] = useState<ApiResponse | null>(null);
+    const [notifications, setNotifications] = useState(0);
+    
 
     const [searchInput, setSearchInput] = useState<string>('')
     const [logOut, setLogOut] = useState(false)
@@ -55,10 +54,12 @@ export default function Navbar() {
                 const fetchData = await axios.get("/account/api", {
                     withCredentials: true
                 })
+                const fetchMessage = await axios.get("/setting/message/api")
 
                 if(fetchData.status == 200) {
                     const Data = await fetchData.data
                     setMessage(Data)
+                    setNotifications(await fetchMessage.data.totalMessages.length)
                     setLoggedin(true)
                 }
                 else {
@@ -152,7 +153,7 @@ export default function Navbar() {
                                 <MdOutlineAccountCircle className='account text-[38px]' title='Account' />
                                 <div className='grid content-center leading-[17px]'>
                                     <span className='text-[13px] font-opensans font-medium'>Welcome</span>
-                                    <span className='font-opensans font-semibold text-[14px]'>{message?.isExist?.first_name ?? "Login / Signup"}</span>
+                                    <span className='font-opensans font-semibold text-[14px]'>{message?.first_name ?? "Login / Signup"}</span>
                                 </div>
                             </div>
                             
@@ -161,7 +162,7 @@ export default function Navbar() {
                                     message != null ?
                                     <div>
                                         <div>
-                                            <p className='font-opensans font-medium leading-[1.2] p-2 grid text-[14px]'>Welcome: <span className='text-[16px]'> {message?.isExist?.first_name} {message?.isExist?.last_name}</span></p>
+                                            <p className='font-opensans font-medium leading-[1.2] p-2 grid text-[14px]'>Welcome: <span className='text-[16px]'> {message?.first_name} {message?.last_name}</span></p>
                                         </div>
 
                                         <div className='font-opensans font-medium'>
@@ -173,7 +174,7 @@ export default function Navbar() {
                                                 <li>
                                                     <Link href={"/setting/message"} className='p-[10px] rounded-lg hover:bg-gray-200 cursor-pointer transition-all flex items-center gap-2 text-[16px]'>
                                                         <TbMessageDots className='text-[18px]' />
-                                                        Messages ({message.totalMessages})
+                                                        Messages ({notifications})
                                                     </Link>
                                                 </li>
                                                 <li>
@@ -252,7 +253,7 @@ export default function Navbar() {
                             <Link href={"/"} className='py-2 px-4 transition-all underline-offset-0 hover:underline  hover:underline-offset-8'>Super Deals</Link>
                         </li>
                         {
-                            message?.isExist?.account_type == 'business' ?
+                            message?.account_type == 'business' ?
                             <li className='flex'>
                                 <Link href={"/add-product"} className='py-2 px-4 transition-all underline-offset-0 hover:underline  hover:underline-offset-8'>Sell</Link>
                             </li>
