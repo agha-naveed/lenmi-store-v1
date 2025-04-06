@@ -5,6 +5,7 @@ import bcrypt from 'bcrypt'
 import { cookies } from 'next/headers';
 import jwt from 'jsonwebtoken'
 import Buy from '@/lib/database/model/buy';
+import Product from '@/lib/database/model/product';
 
 export async function GET(req: NextRequest) {
     
@@ -33,6 +34,14 @@ export async function GET(req: NextRequest) {
                   }
                 }
             ])
+
+            for(let i=0; i<b_acc.length; i++) {
+              var data = await Product.findById(b_acc[i].items[0].productId)
+
+              b_acc[i].items[0].productName = data.name
+              b_acc[i].items[0].productPrice = data.price
+              b_acc[i].items[0].imgURL = data.imgURL[0]
+            }
 
             return NextResponse.json({
                 isExist,
