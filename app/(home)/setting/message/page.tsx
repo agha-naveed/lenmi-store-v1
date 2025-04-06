@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios"
 import Image from "next/image"
+import { MdCancelScheduleSend } from "react-icons/md";
+import { FaArrowRight } from "react-icons/fa6";
 
 interface Delivery_Address {
     recipientName: string;
@@ -56,7 +58,7 @@ export default function Page() {
                                 Quantity: <b>{i?.items[0].quantity}</b>
                             </p>
 
-                            <div className="py-2 hidden group-hover:block">
+                            <div className="py-2 hidden group-hover:flex justify-between">
                                 <div>
                                     <div className="flex flex-col">
                                         <span>
@@ -85,7 +87,17 @@ export default function Page() {
                                         </span>
                                     </div>
                                 </div>
-                                <div></div>
+
+                                <div className="flex gap-2 self-end">
+                                    <button className="flex transition-all items-center gap-2 bg-orangeClr hover:bg-orange-500 text-white py-2 px-4 rounded-md h-fit">
+                                        <MdCancelScheduleSend className="text-[18px]" />
+                                        <span>Cancel</span>
+                                    </button>
+                                    <button className="flex transition-all items-center gap-2 bg-slate-800 hover:bg-slate-900 text-white py-2 px-4 rounded-md h-fit">
+                                        <FaArrowRight />
+                                        <span>Continue</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
