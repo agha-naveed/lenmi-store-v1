@@ -35,8 +35,9 @@ export async function GET(req: NextRequest) {
                 }
             ])
 
+            let data;
             for(let i=0; i<b_acc.length; i++) {
-              var data = await Product.findById(b_acc[i].items[0].productId)
+              data = await Product.findById(b_acc[i].items[0].productId)
 
               b_acc[i].items[0].productName = data.name
               b_acc[i].items[0].productPrice = data.price

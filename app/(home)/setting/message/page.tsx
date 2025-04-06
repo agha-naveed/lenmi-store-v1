@@ -10,7 +10,7 @@ interface APIResponse {
     items: APIItems[];
 }
 
-export default function page() {
+export default function Page() {
     const [message, setMessage] = useState<APIResponse[]>()
     useEffect(() => {
         async function getData() {
