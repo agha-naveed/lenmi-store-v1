@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import axios from "axios"
 import Image from "next/image"
 
@@ -11,7 +11,7 @@ interface APIResponse {
 }
 
 export default function page() {
-    const [message, setMessage] = useState<APIResponse>()
+    const [message, setMessage] = useState<APIResponse[]>()
     useEffect(() => {
         async function getData() {
             const res = await axios.get("/setting/message/api")
@@ -26,13 +26,20 @@ export default function page() {
 
     return (
         <div>
-            <div className="w-[150px] h-[150px] rounded-lg outline ring-offset-2 overflow-hidden">
-                {
-                    message?.[0] ?
-                    <Image src={message[0]?.items[0].imgURL} className="w-full h-full object-cover" alt="" width={200} height={200}/>
-                    : ""
-                }
-            </div>
+            {
+                message?.[0] ?
+                message.map((i, idx) => (
+                    <React.Fragment key={`seller-notification-${idx}`}>
+                        <div className="w-[120px] h-[120px] mb-10 border-b border-b-lightGray rounded-lg outline outline-1 overflow-hidden">
+                            <Image src={i?.items[0].imgURL} className="w-full h-full object-cover" alt="" width={200} height={200}/>
+                        </div>
+                        <div>
+                            <h3>
+                            </h3>
+                        </div>
+                    </React.Fragment>
+                )) : ""
+            }
         </div>
     )
 }
