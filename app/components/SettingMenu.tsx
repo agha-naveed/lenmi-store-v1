@@ -21,7 +21,7 @@ export default function SettingMenu() {
       </Link>
       <Link href={'/setting/message'} onClick={() => setActiveMenu("/message")} className={`${activeMenu === "/setting/message" ? "bg-gray-200" : ""} h-[60px] flex gap-2 w-[225px] md:px-5 px-4 items-center border-t transition-all hover:bg-gray-100 cursor-pointer`} title='Manage Account'>
         <TbMessageDots className='text-[25px]' />
-        <span className='md:block hidden'>Message</span>
+        <span className='md:block hidden'>Messages</span>
       </Link>
     </div>
   )

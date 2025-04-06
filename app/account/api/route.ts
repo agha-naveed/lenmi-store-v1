@@ -46,33 +46,7 @@ export async function GET(req: NextRequest) {
     
     if(cookie) {
         const isExist = await User.findOne({email: cookie.get("email")?.value})
-        if(isExist.account_type == "business") {
-            const b_acc = await Buy.aggregate([
-                {
-                  $unwind: "$items"
-                },
-                {
-                  $match: {
-                    "items.ownerId": isExist._id
-                  }
-                },
-                {
-                  $project: {
-                    userId: 1,
-                    _id: 1,
-                    items: [ "$items" ]
-                  }
-                }
-            ])
-
-            return NextResponse.json({
-                isExist,
-                totalMessages : b_acc
-            }, { status: 200 })
-        }
-        else {
-            return NextResponse.json(isExist, { status: 200 })
-        }
+        return NextResponse.json(isExist, { status: 200 })
     }
     else {
         return NextResponse.json(null)

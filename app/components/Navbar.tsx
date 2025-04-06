@@ -89,9 +89,6 @@ export default function Navbar() {
                 if(res.status == 201) {
                     setLength(await res.data.data)
                 }
-                else {
-                    
-                }
             }
             catch(err) {
                 console.log("Error" + err)
@@ -176,7 +173,7 @@ export default function Navbar() {
                                                 <li>
                                                     <Link href={"/setting/message"} className='p-[10px] rounded-lg hover:bg-gray-200 cursor-pointer transition-all flex items-center gap-2 text-[16px]'>
                                                         <TbMessageDots className='text-[18px]' />
-                                                        Messages ({message.totalMessages.length})
+                                                        Messages ({message.totalMessages})
                                                     </Link>
                                                 </li>
                                                 <li>
