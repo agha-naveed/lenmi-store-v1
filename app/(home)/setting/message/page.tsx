@@ -43,7 +43,7 @@ export default function Page() {
             {
                 message?.[0] ?
                 message.map((i, idx) => (
-                    <div className="p-5 flex gap-5 border-b border-b-lightGray hover:bg-lightGray transition-all cursor-pointer group" key={`seller-notification-${idx}`}>
+                    <div className="p-5 flex gap-5 border-b border-b-lightGray hover:bg-lightGray rounded-lg  transition-all cursor-pointer group" key={`seller-notification-${idx}`}>
                         <div className="!w-[120px] h-[120px] border-b border-b-lightGray rounded-lg outline outline-1 overflow-hidden">
                             <Image src={i?.items[0].imgURL} className="w-full h-full object-cover" alt="" width={200} height={200}/>
                         </div>
