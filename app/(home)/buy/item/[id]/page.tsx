@@ -254,7 +254,7 @@ export default function Page() {
 
               <div className="grid gap-1 md:w-fit w-full">
                 <label htmlFor="">Full Address</label>
-                <textarea {...register("address")} disabled={oldAddress} required className={`border border-zinc-400 rounded-lg md:w-[658px] min-h-20 max-h-40 w-full h-20 py-2 px-3 ${oldAddress ? "bg-zinc-200" : ""}`} value={oldAddress ? "disable" : ""}></textarea>
+                <textarea {...register("address")} disabled={oldAddress} required className={`border border-zinc-400 rounded-lg md:w-[658px] min-h-20 max-h-40 w-full h-20 py-2 px-3 ${oldAddress ? "bg-zinc-200" : ""}`} value={oldAddress ? "disable" : undefined}></textarea>
               </div>
               <button type="submit"
                 className="bg-slate-800

@@ -38,6 +38,10 @@ export default function Page() {
         getData()
     }, [])
 
+    const confirmOrder = async () => {
+        
+    }
+
     return (
         <div>
             {
@@ -93,7 +97,7 @@ export default function Page() {
                                         <MdCancelScheduleSend className="text-[18px]" />
                                         <span>Cancel</span>
                                     </button>
-                                    <button className="flex transition-all items-center gap-2 bg-slate-800 hover:bg-slate-900 text-white py-2 px-4 rounded-md h-fit">
+                                    <button className="flex transition-all items-center gap-2 bg-slate-800 hover:bg-slate-900 text-white py-2 px-4 rounded-md h-fit" onClick={() => confirmOrder()}>
                                         <FaArrowRight />
                                         <span>Continue</span>
                                     </button>
