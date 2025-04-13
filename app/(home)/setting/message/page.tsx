@@ -4,6 +4,7 @@ import axios from "axios"
 import Image from "next/image"
 import { MdCancelScheduleSend } from "react-icons/md";
 import { FaArrowRight } from "react-icons/fa6";
+import { redirect } from "next/navigation";
 
 interface Delivery_Address {
     recipientName: string;
@@ -13,6 +14,7 @@ interface Delivery_Address {
 }
 interface APIItems {
     imgURL: string;
+    productId: string;
     productName: string;
     productPrice: string;
     quantity: string;
@@ -28,17 +30,23 @@ export default function Page() {
     const [message, setMessage] = useState<APIResponse[]>()
     useEffect(() => {
         async function getData() {
-            const res = await axios.get("/setting/message/api")
-            const restr = await res.data
-            if(restr.isExist.email.length > 0) {
-                console.log(await res.data.totalMessages)
-                setMessage(await res.data.totalMessages)
+            try {
+                const res = await axios.get("/setting/message/api")
+                const restr = await res.data
+                if(restr.isExist.email.length > 0) {
+                    console.log(await res.data.totalMessages)
+                    setMessage(await res.data.totalMessages)
+                }
+            } catch(err) {
+                alert("You are not logged in!")
+                redirect("/")
             }
         }
         getData()
     }, [])
 
-    const confirmOrder = async () => {
+    const confirmOrder = async (data: string) => {
+        const res = await axios.post("/setting/message/api", data)
         
     }
 
@@ -97,7 +105,7 @@ export default function Page() {
                                         <MdCancelScheduleSend className="text-[18px]" />
                                         <span>Cancel</span>
                                     </button>
-                                    <button className="flex transition-all items-center gap-2 bg-slate-800 hover:bg-slate-900 text-white py-2 px-4 rounded-md h-fit" onClick={() => confirmOrder()}>
+                                    <button className="flex transition-all items-center gap-2 bg-slate-800 hover:bg-slate-900 text-white py-2 px-4 rounded-md h-fit" onClick={() => confirmOrder(i?.items[0].productId)}>
                                         <FaArrowRight />
                                         <span>Continue</span>
                                     </button>
