@@ -62,7 +62,7 @@ export default function Page() {
                                 <div>
                                     <div className="flex flex-col">
                                         <span>
-                                            Recipient's Name: <b>
+                                            Recipient{"\'"}s Name: <b>
                                                 {i?.items[0].deliveryAddress.recipientName}
                                             </b>
                                         </span>
