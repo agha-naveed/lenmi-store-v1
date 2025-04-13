@@ -1,7 +1,6 @@
 import dbConnection from '@/lib/database/dbConnection'
 import User from '@/lib/database/model/user'
 import { NextRequest, NextResponse } from 'next/server';
-import bcrypt from 'bcrypt'
 import { cookies } from 'next/headers';
 import jwt from 'jsonwebtoken'
 import Buy from '@/lib/database/model/buy';
@@ -48,6 +47,10 @@ export async function GET(req: NextRequest) {
                 isExist,
                 totalMessages : b_acc
             }, { status: 200 })
+        }
+
+        if(isExist.account_type == 'personal') {
+          
         }
         else {
             return NextResponse.json(isExist, { status: 200 })

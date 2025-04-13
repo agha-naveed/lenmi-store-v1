@@ -59,7 +59,7 @@ export default function Navbar() {
                 if(fetchData.status == 200) {
                     const Data = await fetchData.data
                     setMessage(Data)
-                    setNotifications(await fetchMessage.data.totalMessages.length)
+                    setNotifications(await fetchMessage?.data?.totalMessages?.length ?? 0)
                     setLoggedin(true)
                 }
                 else {

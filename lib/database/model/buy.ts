@@ -7,6 +7,7 @@ interface IBuyItems {
     paymentMethod: any;
     paymentDetails: any;
     ownerId: Schema.Types.ObjectId;
+    status: string;
 }
   
 interface IBuy extends Document {
@@ -41,6 +42,11 @@ const buyItemSchema = new Schema<IBuyItems>({
         cardNumber: { type: String },
         cvv: { type: String },
         expiryDate: { type: String }
+    },
+    status: {
+        type: String,
+        enum: ['pending', 'confirmed'],
+        default: "pending"
     }
 }, { _id: false });
   
