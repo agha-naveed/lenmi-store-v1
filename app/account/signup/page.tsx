@@ -28,7 +28,7 @@ export default function Signup() {
         
         if(data.email.includes(".com") || data.email.includes(".net") || data.email.includes(".org")) {
             setEmailError("")
-            const res = await fetch("/api/account/signup", {
+            const res = await fetch("/account/signup/api", {
                 method: "POST",
                 body: JSON.stringify(data)
             })
@@ -41,7 +41,7 @@ export default function Signup() {
 
             
             if(message != "error") {
-                redirect("/account")
+                // redirect("/account")
             }
             else {
                 alert("Invalid Email or Password")
