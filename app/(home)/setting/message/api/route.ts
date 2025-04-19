@@ -2,7 +2,6 @@ import dbConnection from '@/lib/database/dbConnection'
 import User from '@/lib/database/model/user'
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
-import jwt from 'jsonwebtoken'
 import Buy from '@/lib/database/model/buy';
 import Product from '@/lib/database/model/product';
 
@@ -60,4 +59,9 @@ export async function GET(req: NextRequest) {
     else {
         return NextResponse.json(null)
     }
+}
+
+export async function POST(req:NextRequest) {
+  const data = await req.json()
+  console.log("Data: "+data)
 }

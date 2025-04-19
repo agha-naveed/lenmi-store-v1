@@ -4,7 +4,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcrypt'
 import { cookies } from 'next/headers';
 import jwt from 'jsonwebtoken'
-import Buy from '@/lib/database/model/buy';
 
 export async function POST(req: NextRequest) {
     

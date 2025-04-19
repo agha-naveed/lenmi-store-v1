@@ -46,7 +46,13 @@ export default function Page() {
     }, [])
 
     const confirmOrder = async (data: string) => {
-        const res = await axios.post("/setting/message/api", data)
+        const res = await fetch("/setting/message/api", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
         
     }
 
