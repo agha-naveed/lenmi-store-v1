@@ -62,6 +62,8 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req:NextRequest) {
-  const data = await req.json()
-  console.log("Data: "+data)
+  const { pId, cId } = await req.json()
+  const findUser = await Buy.findByIdAndUpdate({
+    cId
+  })
 }

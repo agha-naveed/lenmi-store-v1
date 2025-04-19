@@ -25,7 +25,10 @@ interface APIResponse {
     items: APIItems[];
     userId: string;
 }
-
+interface ConfirmDetail {
+    pId: string;
+    cId: string;
+}
 export default function Page() {
     const [message, setMessage] = useState<APIResponse[]>()
     useEffect(() => {
@@ -45,7 +48,7 @@ export default function Page() {
         getData()
     }, [])
 
-    const confirmOrder = async (data: string) => {
+    const confirmOrder = async (data: ConfirmDetail) => {
         const res = await fetch("/setting/message/api", {
             method: "POST",
             headers: {
@@ -111,7 +114,12 @@ export default function Page() {
                                         <MdCancelScheduleSend className="text-[18px]" />
                                         <span>Cancel</span>
                                     </button>
-                                    <button className="flex transition-all items-center gap-2 bg-slate-800 hover:bg-slate-900 text-white py-2 px-4 rounded-md h-fit" onClick={() => confirmOrder(i?.items[0].productId)}>
+                                    <button className="flex transition-all items-center gap-2 bg-slate-800 hover:bg-slate-900 text-white py-2 px-4 rounded-md h-fit" onClick={() => {
+                                        confirmOrder({
+                                            pId: i?.items[0].productId,
+                                            cId: i?.userId
+                                        })
+                                    }}>
                                         <FaArrowRight />
                                         <span>Continue</span>
                                     </button>
