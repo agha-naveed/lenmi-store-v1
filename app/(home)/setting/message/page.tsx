@@ -28,6 +28,7 @@ interface APIResponse {
 interface ConfirmDetail {
     pId: string;
     cId: string;
+    status: string;
 }
 export default function Page() {
     const [message, setMessage] = useState<APIResponse[]>()
@@ -48,7 +49,7 @@ export default function Page() {
         getData()
     }, [])
 
-    const confirmOrder = async (data: ConfirmDetail) => {
+    const orderStatus = async (data: ConfirmDetail) => {
         const res = await fetch("/setting/message/api", {
             method: "POST",
             headers: {
@@ -56,7 +57,6 @@ export default function Page() {
             },
             body: JSON.stringify(data)
         })
-        
     }
 
     return (
@@ -110,14 +110,21 @@ export default function Page() {
                                 </div>
 
                                 <div className="flex gap-2 self-end">
-                                    <button className="flex transition-all items-center gap-2 bg-orangeClr hover:bg-orange-500 text-white py-2 px-4 rounded-md h-fit">
+                                    <button className="flex transition-all items-center gap-2 bg-orangeClr hover:bg-orange-500 text-white py-2 px-4 rounded-md h-fit" onClick={() => {
+                                        orderStatus({
+                                            pId: i?.items[0].productId,
+                                            cId: i?.userId,
+                                            status: "cancel"
+                                        })
+                                    }}>
                                         <MdCancelScheduleSend className="text-[18px]" />
                                         <span>Cancel</span>
                                     </button>
                                     <button className="flex transition-all items-center gap-2 bg-slate-800 hover:bg-slate-900 text-white py-2 px-4 rounded-md h-fit" onClick={() => {
-                                        confirmOrder({
+                                        orderStatus({
                                             pId: i?.items[0].productId,
-                                            cId: i?.userId
+                                            cId: i?.userId,
+                                            status: "confirmed"
                                         })
                                     }}>
                                         <FaArrowRight />

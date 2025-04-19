@@ -62,14 +62,14 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req:NextRequest) {
-  const { pId, cId } = await req.json()
+  const { pId, cId, status } = await req.json()
   const findUser = await Buy.updateOne(
     {
       userId: cId
     },
     {
       $set: {
-        "items.$[elem].status": "confirmed"
+        "items.$[elem].status": status
       }
     },
     {

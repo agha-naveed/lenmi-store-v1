@@ -45,7 +45,7 @@ const buyItemSchema = new Schema<IBuyItems>({
     },
     status: {
         type: String,
-        enum: ['pending', 'confirmed'],
+        enum: ['pending', 'confirmed', 'cancel'],
         default: "pending"
     }
 }, { _id: false });
