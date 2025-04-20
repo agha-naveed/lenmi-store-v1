@@ -55,7 +55,6 @@ export async function GET(req: NextRequest) {
 
 
 export async function PATCH(req: NextRequest) {
-    
     const cookie = await cookies()
     cookie.delete("u_obj_i")
     cookie.delete("email")
