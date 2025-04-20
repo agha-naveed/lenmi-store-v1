@@ -37,12 +37,8 @@ export async function POST(req: NextRequest) {
 
 
 export async function GET() {
-    
     await dbConnection()
-    
     const cookie = await cookies()
-    
-    
     if(cookie) {
         const isExist = await User.findOne({email: cookie.get("email")?.value})
         return NextResponse.json(isExist, { status: 200 })
