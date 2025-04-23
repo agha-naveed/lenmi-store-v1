@@ -49,11 +49,12 @@ export async function GET(req: NextRequest) {
         }
 
         if(isExist.account_type == 'personal') {
-          const data = await req.json()
-          console.log("data: "+data)
+          // const data = await req.json()
+          // console.log("data: "+data)
+          return NextResponse.json({isExist}, { status: 200 })
         }
         else {
-            return NextResponse.json(isExist, { status: 200 })
+          return NextResponse.json(isExist, { status: 200 })
         }
     }
     else {
