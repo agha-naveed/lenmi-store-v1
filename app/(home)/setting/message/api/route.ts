@@ -50,25 +50,30 @@ export async function GET(req: NextRequest) {
 
         if(isExist.account_type == 'personal') {
           const b_acc = await Buy.aggregate([
-              {
-                $unwind: "$items"
-              },
+              // {
+              //   $unwind: "$items"
+              // },
               {
                 $match: {
-                  "userId": isExist._id,
-                  "items.status": {
-                    $in: ["confirmed", "cancel"]
-                  }
+                  userId : isExist._id,
                 }
               },
               {
                 $project: {
                   userId: 1,
-                  _id: 1,
-                  items: [ "$items" ]
+                  items: {
+                    $filter: {
+                      input: "$items",
+                      as: "item",
+                      cond: {
+                        $in: ["$$item.status", ["confirmed", "cancel"]]
+                      }
+                    }
+                  }
                 }
               }
           ])
+          console.log(isExist)
           return NextResponse.json({
             isExist,
             totalMessages: b_acc

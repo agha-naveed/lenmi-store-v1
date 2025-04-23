@@ -38,7 +38,7 @@ export default function Page() {
                 const res = await axios.get("/setting/message/api")
                 const restr = await res.data
                 if(restr.isExist.email.length > 0) {
-                    console.log(await res.data.totalMessages)
+                    console.log(await res.data)
                     setMessage(await res.data.totalMessages)
                 }
             } catch(err) {

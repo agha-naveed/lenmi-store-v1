@@ -55,7 +55,6 @@ export default function Navbar() {
                     withCredentials: true
                 })
                 const fetchMessage = await axios.get("/setting/message/api")
-                console.log(await fetchData.data)
 
                 if(fetchData.status == 200) {
                     const Data = await fetchData.data
