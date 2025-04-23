@@ -44,7 +44,8 @@ export async function GET(req: NextRequest) {
 
             return NextResponse.json({
                 isExist,
-                totalMessages : b_acc
+                totalMessages : b_acc,
+                account: "business"
             }, { status: 200 })
         }
 
@@ -70,7 +71,8 @@ export async function GET(req: NextRequest) {
           console.log(b_acc)
           return NextResponse.json({
             isExist,
-            totalMessages: b_acc
+            totalMessages: b_acc,
+            account: "personal"
           }, { status: 200 })
         }
         else {

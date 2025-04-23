@@ -32,11 +32,13 @@ interface ConfirmDetail {
 }
 export default function Page() {
     const [message, setMessage] = useState<APIResponse[]>()
+    const [account, setAccount] = useState()
     useEffect(() => {
         async function getData() {
             try {
                 const res = await axios.get("/setting/message/api")
                 const restr = await res.data
+                setAccount(restr.account)
                 if(restr.isExist.email.length > 0) {
                     console.log(await res.data)
                     setMessage(await res.data.totalMessages)
@@ -62,6 +64,9 @@ export default function Page() {
     return (
         <div>
             {
+                account == "personal" ?
+                <div></div>
+                :
                 message?.[0] ?
                 message.map((i, idx) => (
                     <div className="p-5 flex gap-5 border-b border-b-lightGray hover:bg-lightGray rounded-lg  transition-all cursor-pointer group" key={`seller-notification-${idx}`}>
