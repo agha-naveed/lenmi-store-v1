@@ -68,6 +68,16 @@ export async function GET(req: NextRequest) {
               $replaceRoot: { newRoot: "$items" }  // Output only the item itself
             }
           ])
+
+          let data;
+          for(let i=0; i<b_acc.length; i++) {
+            data = await Product.findById(b_acc[i].productId)
+
+            b_acc[i].productName = data.name
+            b_acc[i].productPrice = data.price
+            b_acc[i].imgURL = data.imgURL[0]
+          }
+
           console.log(b_acc)
           return NextResponse.json({
             isExist,
