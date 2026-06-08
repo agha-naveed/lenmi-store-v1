@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
 
     await Product.insertMany([
       {
-        userId: decodedData?.obj_id,
+        userId: new mongoose.Types.ObjectId(decodedData.obj_id),
         name,
         price,
         discounted_price,
