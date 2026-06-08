@@ -4,15 +4,15 @@ interface IProduct extends Document {
     userId: Types.ObjectId;
     name: string;
     price: number;
-    discounted_price: number;
+    discounted_price?: number;
     description?: string;
     category: string;
-    rating: number;
-    color: string[];
-    sold: number;
-    imgURL : string[];
-    stock: number;
-    pay_method: string;
+    rating?: number;
+    color?: string[];
+    sold?: number;
+    imgURL: string[];
+    stock?: number;
+    pay_method?: string[];
 }
 
 const productSchema = new Schema<IProduct>({
