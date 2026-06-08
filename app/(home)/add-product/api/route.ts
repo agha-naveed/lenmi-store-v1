@@ -3,6 +3,7 @@ import Product from "@/lib/database/model/product";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
+import mongoose from "mongoose"
 
 export async function POST(req: NextRequest) {
   
