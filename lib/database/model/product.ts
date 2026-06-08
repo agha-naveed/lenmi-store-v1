@@ -10,7 +10,7 @@ interface IProduct extends Document {
     rating: number;
     color: [string];
     sold: number;
-    imgURL : string;
+    imgURL : [string];
     stock: number;
     pay_method: [string];
 }
