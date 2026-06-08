@@ -1,7 +1,7 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
 interface IProduct extends Document {
-    userId: Schema.Types.ObjectId;
+    userId: ???;
     name: string;
     price: number;
     discounted_price: number;
