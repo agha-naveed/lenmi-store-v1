@@ -8,11 +8,11 @@ interface IProduct extends Document {
     description?: string;
     category: string;
     rating: number;
-    color: [string];
+    color: string[];
     sold: number;
-    imgURL : [string];
+    imgURL : string[];
     stock: number;
-    pay_method: [string];
+    pay_method: string[];
 }
 
 const productSchema = new Schema<IProduct>({
