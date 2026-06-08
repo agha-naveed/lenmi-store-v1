@@ -3,7 +3,7 @@ import Product from "@/lib/database/model/product";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import mongoose from "mongoose"
+import { Types } from "mongoose"
 
 export async function POST(req: NextRequest) {
   
@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
 
     await Product.insertMany([
       {
-        userId: new mongoose.Types.ObjectId(decodedData.obj_id),
+        userId: new Types.ObjectId(decodedData.obj_id),
         name,
         price,
         discounted_price,
