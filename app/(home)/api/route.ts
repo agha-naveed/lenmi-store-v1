@@ -14,11 +14,19 @@ export async function GET() {
             message: "ok",
             trending,
             data: response,
-        }, { status: 200 })
+        }, { status: 200, headers: {
+            'Access-Control-Allow-Origin': '*', // Allows your Electron app to connect
+              'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+              'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        } })
     }
     else {
         return NextResponse.json({
             message: "some problem occurred!",
-        }, { status: 404 })
+        }, { status: 404, headers: {
+            'Access-Control-Allow-Origin': '*', // Allows your Electron app to connect
+              'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+              'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        } })
     }
 }
