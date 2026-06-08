@@ -39,12 +39,12 @@ export async function POST(req: NextRequest) {
       {
         userId: new Types.ObjectId(decodedData.obj_id),
         name,
-        price,
-        discounted_price,
+        price: +price,
+        discounted_price: +discounted_price,
         description,
         category,
         color,
-        stock,
+        stock: +stock,
         imgURL: imageURL,
         pay_method: paymentMethod
       }
