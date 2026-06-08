@@ -1,7 +1,7 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import mongoose, { Document, Schema, Types } from 'mongoose';
 
 interface IProduct extends Document {
-    userId: ???;
+    userId: Types.ObjectId;
     name: string;
     price: number;
     discounted_price: number;
