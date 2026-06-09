@@ -23,12 +23,10 @@ export async function POST(req: NextRequest) {
     const paymentMethod = formData.get("payment_method") as string
     const discounted_price = formData.get("discounted_price") as string
 
-
     if (!imageURL) {
       return NextResponse.json({ message: "No file uploaded" }, { status: 400 });
     }
 
-    // Get User Object  
     const cookie = await cookies()
 
     const objId = cookie.get("u_obj_i")?.value
