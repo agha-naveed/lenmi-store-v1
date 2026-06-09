@@ -1,6 +1,6 @@
 import mongoose, { Document, Schema, Types } from 'mongoose';
 
-interface IProduct extends Document {
+interface IProduct {
     userId: Types.ObjectId;
     name: string;
     price: number;
