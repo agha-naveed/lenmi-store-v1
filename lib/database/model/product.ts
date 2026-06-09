@@ -61,7 +61,9 @@ const productSchema = new Schema<IProduct>({
 
 productSchema.index({ name: 'text' });
 
-const Product = mongoose.models.Product || mongoose.model<IProduct>('Product', productSchema);
+const Product =
+  (mongoose.models.Product as mongoose.Model<IProduct>) ||
+  mongoose.model<IProduct>('Product', productSchema);
 
 Product.createIndexes()
   .then(() => {
